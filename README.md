@@ -1,9 +1,9 @@
-# PrimeNG
-Sample application to provide an example setup of an PrimeNG project with Webpack.
+# SAGA
+Sistema de Administración y Gestión de Aulas de la Universidad Nacional de Río Negro.
 
-![alt text](http://www.primefaces.org/images/primeng.png "PrimeNG")
+![alt text](http://www.unrn.edu.ar/images/Logos/LogoVerticalUNRN.jpg "UNRN")
 
-Execute the following commands to run the sample. Open a browser window and navigate to http:\\\\localhost:8080 to access the app.
+Instrucciones
 
 ```
 npm install
