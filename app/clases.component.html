@@ -1,0 +1,14 @@
+<button (click)="prevDay()">Anterior</button>
+<button (click)="nextDay()">Siguiente</button>
+<h4>Clases</h4>
+<ul>
+    <li *ngFor="let clase of clases | async">
+        {{clase.hora_inicio + " - " + clase.hora_fin}}
+    </li>
+</ul>
+<h4>Aulas</h4>
+<ul>
+    <li *ngFor="let aula of aulas">
+        {{aula.nombre}}
+    </li>
+</ul>

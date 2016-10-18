@@ -1,0 +1,2032 @@
+[
+  {
+    "id": "1",
+    "nombre": "COMISI\u00d3N A",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "1"
+  },
+  {
+    "id": "2",
+    "nombre": "COMISI\u00d3N B",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "1"
+  },
+  {
+    "id": "3",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "2"
+  },
+  {
+    "id": "4",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "4"
+  },
+  {
+    "id": "5",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "4"
+  },
+  {
+    "id": "6",
+    "nombre": "COMISI\u00d3N 3",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "4"
+  },
+  {
+    "id": "7",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "6"
+  },
+  {
+    "id": "8",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "6"
+  },
+  {
+    "id": "9",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "10",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "11",
+    "nombre": "COMISI\u00d3N 3",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "12",
+    "nombre": "COMISI\u00d3N 4",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "13",
+    "nombre": "(PR\u00c1CTICOS) COMISI\u00d3N 1",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "10"
+  },
+  {
+    "id": "14",
+    "nombre": "(PR\u00c1CTICOS) COMISI\u00d3N 2",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "10"
+  },
+  {
+    "id": "15",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "11"
+  },
+  {
+    "id": "16",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "13"
+  },
+  {
+    "id": "17",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "12"
+  },
+  {
+    "id": "18",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "8"
+  },
+  {
+    "id": "19",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "17"
+  },
+  {
+    "id": "20",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "18"
+  },
+  {
+    "id": "21",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "19"
+  },
+  {
+    "id": "22",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "14"
+  },
+  {
+    "id": "23",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "25"
+  },
+  {
+    "id": "24",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "26"
+  },
+  {
+    "id": "25",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "20"
+  },
+  {
+    "id": "26",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "3"
+  },
+  {
+    "id": "27",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "21"
+  },
+  {
+    "id": "28",
+    "nombre": "1C",
+    "Periodo_id": "1",
+    "Docente_id": "1",
+    "Asignatura_id": "42"
+  },
+  {
+    "id": "29",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "40"
+  },
+  {
+    "id": "30",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "38"
+  },
+  {
+    "id": "31",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "39"
+  },
+  {
+    "id": "32",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "50"
+  },
+  {
+    "id": "33",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "49"
+  },
+  {
+    "id": "34",
+    "nombre": "1C",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "56"
+  },
+  {
+    "id": "35",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "48"
+  },
+  {
+    "id": "36",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "51"
+  },
+  {
+    "id": "37",
+    "nombre": "1C",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "62"
+  },
+  {
+    "id": "38",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "59"
+  },
+  {
+    "id": "39",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "60"
+  },
+  {
+    "id": "40",
+    "nombre": "1C",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "61"
+  },
+  {
+    "id": "41",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "58"
+  },
+  {
+    "id": "42",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "66"
+  },
+  {
+    "id": "43",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "57"
+  },
+  {
+    "id": "44",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "77"
+  },
+  {
+    "id": "45",
+    "nombre": "1C",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "78"
+  },
+  {
+    "id": "46",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "23"
+  },
+  {
+    "id": "47",
+    "nombre": "CAMPA\u00d1AS POL\u00cdTICAS",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "72"
+  },
+  {
+    "id": "48",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "70"
+  },
+  {
+    "id": "49",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "71"
+  },
+  {
+    "id": "50",
+    "nombre": "(GRUPO 1)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "79"
+  },
+  {
+    "id": "51",
+    "nombre": "(GRUPO 1)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "241"
+  },
+  {
+    "id": "52",
+    "nombre": "(GRUPO 2)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "241"
+  },
+  {
+    "id": "53",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "81"
+  },
+  {
+    "id": "54",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "84"
+  },
+  {
+    "id": "55",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "86"
+  },
+  {
+    "id": "56",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "89"
+  },
+  {
+    "id": "57",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "91"
+  },
+  {
+    "id": "58",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "94"
+  },
+  {
+    "id": "59",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "95"
+  },
+  {
+    "id": "60",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "99"
+  },
+  {
+    "id": "61",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "96"
+  },
+  {
+    "id": "62",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "100"
+  },
+  {
+    "id": "63",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "104"
+  },
+  {
+    "id": "64",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "105"
+  },
+  {
+    "id": "65",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "101"
+  },
+  {
+    "id": "66",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "107"
+  },
+  {
+    "id": "67",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "108"
+  },
+  {
+    "id": "68",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "243"
+  },
+  {
+    "id": "69",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "242"
+  },
+  {
+    "id": "70",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "112"
+  },
+  {
+    "id": "71",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "119"
+  },
+  {
+    "id": "72",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "114"
+  },
+  {
+    "id": "73",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "120"
+  },
+  {
+    "id": "75",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "124"
+  },
+  {
+    "id": "76",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "129"
+  },
+  {
+    "id": "77",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "128"
+  },
+  {
+    "id": "78",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "130"
+  },
+  {
+    "id": "79",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "131"
+  },
+  {
+    "id": "80",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "135"
+  },
+  {
+    "id": "81",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "126"
+  },
+  {
+    "id": "82",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "136"
+  },
+  {
+    "id": "83",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "137"
+  },
+  {
+    "id": "84",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "138"
+  },
+  {
+    "id": "85",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "139"
+  },
+  {
+    "id": "86",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "144"
+  },
+  {
+    "id": "87",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "145"
+  },
+  {
+    "id": "88",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "149"
+  },
+  {
+    "id": "89",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "150"
+  },
+  {
+    "id": "90",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "151"
+  },
+  {
+    "id": "91",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "152"
+  },
+  {
+    "id": "92",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "153"
+  },
+  {
+    "id": "93",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "124"
+  },
+  {
+    "id": "94",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "159"
+  },
+  {
+    "id": "95",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "160"
+  },
+  {
+    "id": "96",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "121"
+  },
+  {
+    "id": "97",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "164"
+  },
+  {
+    "id": "98",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "168"
+  },
+  {
+    "id": "99",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "169"
+  },
+  {
+    "id": "100",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "170"
+  },
+  {
+    "id": "101",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "171"
+  },
+  {
+    "id": "102",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "172"
+  },
+  {
+    "id": "103",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "178"
+  },
+  {
+    "id": "104",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "179"
+  },
+  {
+    "id": "105",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "180"
+  },
+  {
+    "id": "106",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "181"
+  },
+  {
+    "id": "107",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "182"
+  },
+  {
+    "id": "108",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "183"
+  },
+  {
+    "id": "109",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "190"
+  },
+  {
+    "id": "110",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "191"
+  },
+  {
+    "id": "111",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "195"
+  },
+  {
+    "id": "112",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "192"
+  },
+  {
+    "id": "114",
+    "nombre": "(OTERO)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "196"
+  },
+  {
+    "id": "115",
+    "nombre": "(BOHMER)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "196"
+  },
+  {
+    "id": "116",
+    "nombre": "(TORRES)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "197"
+  },
+  {
+    "id": "117",
+    "nombre": "(RULLI)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "197"
+  },
+  {
+    "id": "118",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "198"
+  },
+  {
+    "id": "119",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "198"
+  },
+  {
+    "id": "120",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "205"
+  },
+  {
+    "id": "121",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "206"
+  },
+  {
+    "id": "122",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "207"
+  },
+  {
+    "id": "123",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "208"
+  },
+  {
+    "id": "124",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "209"
+  },
+  {
+    "id": "125",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "214"
+  },
+  {
+    "id": "126",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "220"
+  },
+  {
+    "id": "127",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "216"
+  },
+  {
+    "id": "128",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "217"
+  },
+  {
+    "id": "129",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "218"
+  },
+  {
+    "id": "130",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "223"
+  },
+  {
+    "id": "131",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "224"
+  },
+  {
+    "id": "132",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "225"
+  },
+  {
+    "id": "133",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "226"
+  },
+  {
+    "id": "134",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "232"
+  },
+  {
+    "id": "135",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "233"
+  },
+  {
+    "id": "136",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "234"
+  },
+  {
+    "id": "137",
+    "nombre": "METODOLOG\u00cdA DE LA INVESTIGACI\u00d3N DE LAS CIENCI",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "222"
+  },
+  {
+    "id": "138",
+    "nombre": "MEDIOS, POL\u00cdTICA Y PODER",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "227"
+  },
+  {
+    "id": "139",
+    "nombre": "COMUNICACI\u00d3N Y POL\u00cdTICA",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "231"
+  },
+  {
+    "id": "140",
+    "nombre": "AN\u00c1LISIS DEL DISCURSO",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "235"
+  },
+  {
+    "id": "141",
+    "nombre": "(GRUPO 2)",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "79"
+  },
+  {
+    "id": "142",
+    "nombre": "",
+    "Periodo_id": "1",
+    "Docente_id": null,
+    "Asignatura_id": "83"
+  },
+  {
+    "id": "143",
+    "nombre": "2C",
+    "Periodo_id": "2",
+    "Docente_id": "1",
+    "Asignatura_id": "42"
+  },
+  {
+    "id": "144",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "1",
+    "Asignatura_id": "45"
+  },
+  {
+    "id": "145",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "2",
+    "Asignatura_id": "46"
+  },
+  {
+    "id": "146",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "3",
+    "Asignatura_id": "43"
+  },
+  {
+    "id": "147",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "4",
+    "Asignatura_id": "44"
+  },
+  {
+    "id": "148",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "4",
+    "Asignatura_id": "54"
+  },
+  {
+    "id": "150",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "6",
+    "Asignatura_id": "53"
+  },
+  {
+    "id": "151",
+    "nombre": "2C",
+    "Periodo_id": "2",
+    "Docente_id": "7",
+    "Asignatura_id": "56"
+  },
+  {
+    "id": "152",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "55"
+  },
+  {
+    "id": "153",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "8",
+    "Asignatura_id": "52"
+  },
+  {
+    "id": "154",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "9",
+    "Asignatura_id": "65"
+  },
+  {
+    "id": "155",
+    "nombre": "2C",
+    "Periodo_id": "2",
+    "Docente_id": "10",
+    "Asignatura_id": "62"
+  },
+  {
+    "id": "156",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "11",
+    "Asignatura_id": "63"
+  },
+  {
+    "id": "157",
+    "nombre": "2C",
+    "Periodo_id": "2",
+    "Docente_id": "12",
+    "Asignatura_id": "61"
+  },
+  {
+    "id": "158",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "13",
+    "Asignatura_id": "64"
+  },
+  {
+    "id": "159",
+    "nombre": "Periodismo Cultural",
+    "Periodo_id": "2",
+    "Docente_id": "14",
+    "Asignatura_id": "72"
+  },
+  {
+    "id": "160",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "77"
+  },
+  {
+    "id": "161",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "8",
+    "Asignatura_id": "75"
+  },
+  {
+    "id": "162",
+    "nombre": "2C",
+    "Periodo_id": "2",
+    "Docente_id": "15",
+    "Asignatura_id": "78"
+  },
+  {
+    "id": "163",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "6",
+    "Asignatura_id": "74"
+  },
+  {
+    "id": "164",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "16",
+    "Asignatura_id": "73"
+  },
+  {
+    "id": "165",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "17",
+    "Asignatura_id": "76"
+  },
+  {
+    "id": "166",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "18",
+    "Asignatura_id": "146"
+  },
+  {
+    "id": "167",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "19",
+    "Asignatura_id": "147"
+  },
+  {
+    "id": "168",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "20",
+    "Asignatura_id": "148"
+  },
+  {
+    "id": "169",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "20",
+    "Asignatura_id": "154"
+  },
+  {
+    "id": "170",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "21",
+    "Asignatura_id": "155"
+  },
+  {
+    "id": "171",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "22",
+    "Asignatura_id": "156"
+  },
+  {
+    "id": "172",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "23",
+    "Asignatura_id": "157"
+  },
+  {
+    "id": "173",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "24",
+    "Asignatura_id": "162"
+  },
+  {
+    "id": "174",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "25",
+    "Asignatura_id": "163"
+  },
+  {
+    "id": "175",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "26",
+    "Asignatura_id": "164"
+  },
+  {
+    "id": "176",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "27",
+    "Asignatura_id": "165"
+  },
+  {
+    "id": "177",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "28",
+    "Asignatura_id": "166"
+  },
+  {
+    "id": "178",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "29",
+    "Asignatura_id": "173"
+  },
+  {
+    "id": "179",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "30",
+    "Asignatura_id": "174"
+  },
+  {
+    "id": "180",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "31",
+    "Asignatura_id": "175"
+  },
+  {
+    "id": "181",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "32",
+    "Asignatura_id": "176"
+  },
+  {
+    "id": "182",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "33",
+    "Asignatura_id": "177"
+  },
+  {
+    "id": "183",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "34",
+    "Asignatura_id": "184"
+  },
+  {
+    "id": "184",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "35",
+    "Asignatura_id": "185"
+  },
+  {
+    "id": "185",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "32",
+    "Asignatura_id": "186"
+  },
+  {
+    "id": "186",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "18",
+    "Asignatura_id": "187"
+  },
+  {
+    "id": "187",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "36",
+    "Asignatura_id": "188"
+  },
+  {
+    "id": "188",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "18",
+    "Asignatura_id": "189"
+  },
+  {
+    "id": "189",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "193"
+  },
+  {
+    "id": "190",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "194"
+  },
+  {
+    "id": "191",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "195"
+  },
+  {
+    "id": "192",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "38",
+    "Asignatura_id": "113"
+  },
+  {
+    "id": "193",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "38",
+    "Asignatura_id": "122"
+  },
+  {
+    "id": "194",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "23",
+    "Asignatura_id": "118"
+  },
+  {
+    "id": "195",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "19",
+    "Asignatura_id": "116"
+  },
+  {
+    "id": "196",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "39",
+    "Asignatura_id": "117"
+  },
+  {
+    "id": "197",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "40",
+    "Asignatura_id": "114"
+  },
+  {
+    "id": "198",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "41",
+    "Asignatura_id": "123"
+  },
+  {
+    "id": "199",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "42",
+    "Asignatura_id": "125"
+  },
+  {
+    "id": "200",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "43",
+    "Asignatura_id": "127"
+  },
+  {
+    "id": "201",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "115"
+  },
+  {
+    "id": "202",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "44",
+    "Asignatura_id": "132"
+  },
+  {
+    "id": "203",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "45",
+    "Asignatura_id": "133"
+  },
+  {
+    "id": "204",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "46",
+    "Asignatura_id": "134"
+  },
+  {
+    "id": "205",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "47",
+    "Asignatura_id": "140"
+  },
+  {
+    "id": "206",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "48",
+    "Asignatura_id": "141"
+  },
+  {
+    "id": "207",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "49",
+    "Asignatura_id": "142"
+  },
+  {
+    "id": "208",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "45",
+    "Asignatura_id": "143"
+  },
+  {
+    "id": "209",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "50",
+    "Asignatura_id": "80"
+  },
+  {
+    "id": "210",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "51",
+    "Asignatura_id": "82"
+  },
+  {
+    "id": "211",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "20",
+    "Asignatura_id": "83"
+  },
+  {
+    "id": "212",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "52",
+    "Asignatura_id": "87"
+  },
+  {
+    "id": "213",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "53",
+    "Asignatura_id": "88"
+  },
+  {
+    "id": "214",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "54",
+    "Asignatura_id": "90"
+  },
+  {
+    "id": "215",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "55",
+    "Asignatura_id": "85"
+  },
+  {
+    "id": "216",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "56",
+    "Asignatura_id": "92"
+  },
+  {
+    "id": "217",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "57",
+    "Asignatura_id": "98"
+  },
+  {
+    "id": "218",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "54",
+    "Asignatura_id": "97"
+  },
+  {
+    "id": "219",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "59",
+    "Asignatura_id": "93"
+  },
+  {
+    "id": "220",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "58",
+    "Asignatura_id": "100"
+  },
+  {
+    "id": "221",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "59",
+    "Asignatura_id": "106"
+  },
+  {
+    "id": "222",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "60",
+    "Asignatura_id": "102"
+  },
+  {
+    "id": "223",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "58",
+    "Asignatura_id": "103"
+  },
+  {
+    "id": "224",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "61",
+    "Asignatura_id": "109"
+  },
+  {
+    "id": "225",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "244"
+  },
+  {
+    "id": "226",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "62",
+    "Asignatura_id": "111"
+  },
+  {
+    "id": "227",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "2",
+    "Docente_id": "63",
+    "Asignatura_id": "10"
+  },
+  {
+    "id": "228",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "2",
+    "Docente_id": "63",
+    "Asignatura_id": "10"
+  },
+  {
+    "id": "229",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "23",
+    "Asignatura_id": "11"
+  },
+  {
+    "id": "230",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "11"
+  },
+  {
+    "id": "231",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "64",
+    "Asignatura_id": "13"
+  },
+  {
+    "id": "232",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "63",
+    "Asignatura_id": "12"
+  },
+  {
+    "id": "233",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "65",
+    "Asignatura_id": "9"
+  },
+  {
+    "id": "234",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "63",
+    "Asignatura_id": "17"
+  },
+  {
+    "id": "235",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "25"
+  },
+  {
+    "id": "236",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "67",
+    "Asignatura_id": "19"
+  },
+  {
+    "id": "237",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "21",
+    "Asignatura_id": "15"
+  },
+  {
+    "id": "238",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "68",
+    "Asignatura_id": "16"
+  },
+  {
+    "id": "239",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "66",
+    "Asignatura_id": "25"
+  },
+  {
+    "id": "240",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "67",
+    "Asignatura_id": "26"
+  },
+  {
+    "id": "241",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "70",
+    "Asignatura_id": "24"
+  },
+  {
+    "id": "242",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "71",
+    "Asignatura_id": "23"
+  },
+  {
+    "id": "243",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "23",
+    "Asignatura_id": "22"
+  },
+  {
+    "id": "244",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "2",
+    "Docente_id": "72",
+    "Asignatura_id": "3"
+  },
+  {
+    "id": "245",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "2",
+    "Docente_id": "72",
+    "Asignatura_id": "3"
+  },
+  {
+    "id": "246",
+    "nombre": "COMISI\u00d3N 3",
+    "Periodo_id": "2",
+    "Docente_id": "73",
+    "Asignatura_id": "3"
+  },
+  {
+    "id": "247",
+    "nombre": "COMISI\u00d3N 4",
+    "Periodo_id": "2",
+    "Docente_id": "73",
+    "Asignatura_id": "3"
+  },
+  {
+    "id": "248",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "2",
+    "Docente_id": "74",
+    "Asignatura_id": "5"
+  },
+  {
+    "id": "249",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "2",
+    "Docente_id": "74",
+    "Asignatura_id": "5"
+  },
+  {
+    "id": "250",
+    "nombre": "COMISI\u00d3N 3",
+    "Periodo_id": "2",
+    "Docente_id": "75",
+    "Asignatura_id": "5"
+  },
+  {
+    "id": "251",
+    "nombre": "COMISI\u00d3N 1",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "252",
+    "nombre": "COMISI\u00d3N 2",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "253",
+    "nombre": "COMISI\u00d3N 3",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "254",
+    "nombre": "COMISI\u00d3N 4",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "255",
+    "nombre": "COMISI\u00d3N CONTADOR P\u00daBLICO",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "7"
+  },
+  {
+    "id": "256",
+    "nombre": "Comisi\u00f3n 1",
+    "Periodo_id": "2",
+    "Docente_id": "76",
+    "Asignatura_id": "201"
+  },
+  {
+    "id": "257",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "78",
+    "Asignatura_id": "202"
+  },
+  {
+    "id": "258",
+    "nombre": "COMISI\u00d3N A",
+    "Periodo_id": "2",
+    "Docente_id": "80",
+    "Asignatura_id": "203"
+  },
+  {
+    "id": "259",
+    "nombre": "COMISI\u00d3N B",
+    "Periodo_id": "2",
+    "Docente_id": "80",
+    "Asignatura_id": "203"
+  },
+  {
+    "id": "260",
+    "nombre": "COMISI\u00d3N A",
+    "Periodo_id": "2",
+    "Docente_id": "21",
+    "Asignatura_id": "204"
+  },
+  {
+    "id": "261",
+    "nombre": "COMISI\u00d3N B",
+    "Periodo_id": "2",
+    "Docente_id": "21",
+    "Asignatura_id": "204"
+  },
+  {
+    "id": "262",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "82",
+    "Asignatura_id": "210"
+  },
+  {
+    "id": "263",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "83",
+    "Asignatura_id": "211"
+  },
+  {
+    "id": "264",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "84",
+    "Asignatura_id": "212"
+  },
+  {
+    "id": "265",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "84",
+    "Asignatura_id": "213"
+  },
+  {
+    "id": "266",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "85",
+    "Asignatura_id": "219"
+  },
+  {
+    "id": "267",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "81",
+    "Asignatura_id": "221"
+  },
+  {
+    "id": "268",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "86",
+    "Asignatura_id": "215"
+  },
+  {
+    "id": "269",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "87",
+    "Asignatura_id": "228"
+  },
+  {
+    "id": "270",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "88",
+    "Asignatura_id": "230"
+  },
+  {
+    "id": "271",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "89",
+    "Asignatura_id": "229"
+  },
+  {
+    "id": "272",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "90",
+    "Asignatura_id": "236"
+  },
+  {
+    "id": "273",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "81",
+    "Asignatura_id": "237"
+  },
+  {
+    "id": "274",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "91",
+    "Asignatura_id": "238"
+  },
+  {
+    "id": "275",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": "92",
+    "Asignatura_id": "239"
+  },
+  {
+    "id": "276",
+    "nombre": "Sistemas Penitenciarios y Ejecuci\u00f3n Penal",
+    "Periodo_id": "2",
+    "Docente_id": "93",
+    "Asignatura_id": "227"
+  },
+  {
+    "id": "277",
+    "nombre": "Evoluci\u00f3n Institucional del derecho internaci",
+    "Periodo_id": "2",
+    "Docente_id": "78",
+    "Asignatura_id": "231"
+  },
+  {
+    "id": "278",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "245"
+  },
+  {
+    "id": "279",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "246"
+  },
+  {
+    "id": "280",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "247"
+  },
+  {
+    "id": "281",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "248"
+  },
+  {
+    "id": "282",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "249"
+  },
+  {
+    "id": "283",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "250"
+  },
+  {
+    "id": "284",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "251"
+  },
+  {
+    "id": "285",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "252"
+  },
+  {
+    "id": "286",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "253"
+  },
+  {
+    "id": "287",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "254"
+  },
+  {
+    "id": "288",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "255"
+  },
+  {
+    "id": "289",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "256"
+  },
+  {
+    "id": "290",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "257"
+  },
+  {
+    "id": "291",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "258"
+  },
+  {
+    "id": "292",
+    "nombre": "",
+    "Periodo_id": "2",
+    "Docente_id": null,
+    "Asignatura_id": "259"
+  },
+  {
+    "id": "293",
+    "nombre": "Comisi\u00f3n 2",
+    "Periodo_id": "2",
+    "Docente_id": "77",
+    "Asignatura_id": "201"
+  }
+]
