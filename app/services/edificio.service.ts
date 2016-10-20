@@ -9,8 +9,24 @@ export class EdificioService {
 
     constructor(private http: Http) { }
 
-    getAll(): Observable<Edificio[]> {
-        return this.http.get(this.url)
-            .map(res => res.json().data as Edificio[]);
+    getAll(): Promise<Edificio[]> {
+        return this.http
+            .get(this.url)
+            .toPromise()
+            .then(res => res.json().data as Edificio[])
+            .catch(this.handleError);
+    }
+
+    getById(id:number): Promise<Edificio> {
+        return this.http
+            .get(`${this.url}/${id}`)
+            .toPromise()
+            .then(res => res.json().data as Edificio)
+            .catch(this.handleError)
+    }
+
+    private handleError(error : any) : Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
 }

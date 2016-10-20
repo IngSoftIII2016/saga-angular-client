@@ -11,10 +11,12 @@ export class AulaService {
 
     constructor(private http: Http) { }
 
-    getAulas(): Observable<Aula[]> {
+    getAulas(): Promise<Aula[]> {
         return this.http
             .get(this.url)
-            .map(res => res.json().data as Aula[]);
+            .toPromise()
+            .then(res => res.json().data as Aula[])
+            .catch(this.handleError);
     }
     getAulasByEdificio(edificio: Edificio): Promise<Aula[]> {
         return this.http

@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.edificioService.getAll()
-            .toPromise()
             .then(res => {
                 this.edificios = res;
                 this.edificioSelected = this.edificios[0];
