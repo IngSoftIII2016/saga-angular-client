@@ -20,6 +20,8 @@ export class ClasesComponent implements OnInit {
     private clases: Observable<Clase[]>;
     private aulas: Aula[];
     private ratio: number;
+    private events: any[];
+    private scheduleHeader: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -37,9 +39,15 @@ export class ClasesComponent implements OnInit {
                     this.aulaService.getAulasByEdificio(edificio)
                         .then(aulas => this.aulas = aulas);
                     this.clases = this.fecha
-                        .switchMap(date => this.claseService.getClases(date));
+                        .switchMap(date => this.claseService.getClases(date, edificio));
                 });
             });
+
+        this.scheduleHeader = {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        };
     }
 
     nextDay(): void {

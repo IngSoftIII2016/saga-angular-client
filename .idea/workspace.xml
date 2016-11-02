@@ -2,171 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0cbb821-1572-4584-a321-91c4974779d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Audi-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Audi.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/BMW-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/BMW.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Fiat-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Fiat.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Ford-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Ford.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Honda-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Honda.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Jaguar-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Jaguar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Mercedes-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Mercedes.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Renault-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Renault.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/VW-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/VW.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Volvo-big.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/car/Volvo.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature10.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature11.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature12.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature5.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature6.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature7.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature8.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/nature/nature9.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos1_small.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos2_small.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos3_small.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/images/sopranos/sopranos4_small.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/MaterialIcons-Regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/MaterialIcons-Regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/MaterialIcons-Regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/MaterialIcons-Regular.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-300.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-300.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-300.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-300.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-700.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-700.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-700.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-700.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-regular.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/avatar4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dark-user-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dark-user-bg2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dashboard/map.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dashboard/md.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/landing/landing-header.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/landing/promotion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/login/login.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/login/login2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/logo2x.png.old" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/preloader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/profile-bg-dark.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/profile-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/user-bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/user-bg2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/css/fullcalendar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/cars-large.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/cars-medium.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/cars-small.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/countries.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/files.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/filesystem.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/demo/data/scheduleevents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/animate.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-blue-grey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-blue-grey.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-blue.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-blue.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-brown.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-brown.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-cyan.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-cyan.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-dark-blue.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-dark-blue.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-dark-green.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-dark-green.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-green.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-green.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-grey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-grey.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-indigo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-indigo.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-purple-amber.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-purple-amber.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-purple-cyan.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-purple-cyan.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-teal.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/css/layout-teal.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-300.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-700.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/fonts/roboto-v15-latin-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/401.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/404.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dashboard/progress.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dashboard/sales.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/dashboard/views.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/error.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/logo-ultima.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/layout/images/profile-bg.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/_fonts.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/_variables.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_compact.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_dashboard.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_exception.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_landing.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_layout.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_login.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_main.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_splash.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/layout/_utils.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/theme/_editor.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/theme/_icons.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/sass/theme/_theme.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-blue-grey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-blue-grey.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-blue.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-blue.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-brown.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-brown.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-cyan.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-cyan.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-dark-blue.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-dark-blue.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-dark-green.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-dark-green.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-green.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-green.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-grey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-grey.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-indigo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-indigo.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-purple-amber.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-purple-amber.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-purple-cyan.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-purple-cyan.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-teal.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/resources/theme/theme-teal.scss" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/services/generic.service.ts" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.component.html" afterPath="$PROJECT_DIR$/app/app.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/entities/comision.ts" afterPath="$PROJECT_DIR$/app/entities/comision.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.module.ts" afterPath="$PROJECT_DIR$/app/app.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/clases.component.html" afterPath="$PROJECT_DIR$/app/clases.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/clases.component.ts" afterPath="$PROJECT_DIR$/app/clases.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/aula.service.ts" afterPath="$PROJECT_DIR$/app/services/aula.service.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/clase.service.ts" afterPath="$PROJECT_DIR$/app/services/clase.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="primeng-quickstart-webpack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -192,33 +34,98 @@
       <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+            <state relative-caret-position="180">
+              <caret line="30" column="21" lean-forward="false" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding>
-                <element signature="e#392#498#0" expanded="true" />
+                <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#392#514#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+      <file leaf-file-name="clases.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/clases.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="2" column="60" lean-forward="false" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+            <state relative-caret-position="25">
+              <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clases.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/clases.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="102" lean-forward="false" selection-start-line="3" selection-start-column="102" selection-end-line="3" selection-end-column="102" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.component.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/app.component.html">
+      <file leaf-file-name="clase.service.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/services/clase.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="car-crud.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/car-crud.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="car-crud.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/car-crud.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="car.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/cars/car.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="carservice.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/cars/carservice.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edificio.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/entities/edificio.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-              <folding>
-                <marker date="1478037515528" expanded="true" signature="12:48" ph="{...}" />
-              </folding>
+              <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -274,18 +181,20 @@
         <option value="$PROJECT_DIR$/app/app.component.css" />
         <option value="$PROJECT_DIR$/app/services/edificio.service.ts" />
         <option value="$PROJECT_DIR$/app/app.component.ts" />
-        <option value="$PROJECT_DIR$/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/app/clases.component.html" />
         <option value="$PROJECT_DIR$/app/entities/comision.ts" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/app/services/aula.service.ts" />
         <option value="$PROJECT_DIR$/app/main.ts" />
-        <option value="$PROJECT_DIR$/app/services/clase.service.ts" />
-        <option value="$PROJECT_DIR$/app/clases.component.ts" />
         <option value="$PROJECT_DIR$/app/app.routing.ts" />
         <option value="$PROJECT_DIR$/app/app.component.html" />
         <option value="$PROJECT_DIR$/app/resources/layout/css/layout-indigo.css" />
+        <option value="$PROJECT_DIR$/app/services/aula.service.ts" />
+        <option value="$PROJECT_DIR$/app/services/clase.service.ts" />
+        <option value="$PROJECT_DIR$/app/services/generic.service.ts" />
+        <option value="$PROJECT_DIR$/app/services/evento.service,ts.ts" />
+        <option value="$PROJECT_DIR$/app/clases.component.html" />
+        <option value="$PROJECT_DIR$/app/clases.component.ts" />
+        <option value="$PROJECT_DIR$/app/app.module.ts" />
       </list>
     </option>
   </component>
@@ -322,8 +231,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -364,7 +271,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="services" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,68 +289,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saga-angular-client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saga-angular-client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saga-angular-client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saga-angular-client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="cars" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -590,12 +443,22 @@
       <workItem from="1477916499973" duration="3762000" />
       <workItem from="1477947162980" duration="4503000" />
       <workItem from="1478011789323" duration="1570000" />
-      <workItem from="1478035249618" duration="6148000" />
+      <workItem from="1478035249618" duration="6908000" />
+      <workItem from="1478097975329" duration="2136000" />
+      <workItem from="1478117878745" duration="6064000" />
     </task>
+    <task id="LOCAL-00001" summary="Se agrega la barra de navegación. Logo horrible">
+      <created>1478096518882</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1478096518882</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107189000" />
+    <option name="totallyTimeSpent" value="116149000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -608,7 +471,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="30" width="1368" height="739" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32736155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.501634" order="0" side_tool="false" content_ui="combo" />
@@ -616,15 +479,15 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33006537" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.498366" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27287582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27287582" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -682,33 +545,25 @@
         <option value="$PROJECT_DIR$/app/services/clase.service.js.map" />
         <option value="$PROJECT_DIR$/app/services/aula-in-memory-db-service.js" />
         <option value="$PROJECT_DIR$/app/services/aula-in-memory-db-service.js.map" />
+        <option value="$PROJECT_DIR$/app/services/evento.service.js.map" />
+        <option value="$PROJECT_DIR$/app/services/evento.service.js" />
       </list>
     </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se agrega la barra de navegación. Logo horrible" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrega la barra de navegación. Logo horrible" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/app.component.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/entities/edificio.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/services/clase.service.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -728,20 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/car-crud.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/car-crud.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -831,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/entities/edificio.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/entities/clase.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -849,13 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/entities/asignatura.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -929,38 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/aula.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/clase.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="44" lean-forward="false" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/cars/carservice.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/cars/car.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/main.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -983,40 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/clases.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/clases.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="e#392#498#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="60" lean-forward="false" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/resources/layout/images/logo2x.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1026,7 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1034,7 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1042,7 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,16 +808,132 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
           <caret line="911" column="12" lean-forward="true" selection-start-line="911" selection-start-column="12" selection-end-line="911" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="-4871">
           <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/entities/asignatura.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/entities/edificio.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/services/aula.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/services/generic.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="67" column="24" lean-forward="true" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="23" column="15" lean-forward="false" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="30" column="21" lean-forward="false" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
           <folding>
-            <marker date="1478037515528" expanded="true" signature="12:48" ph="{...}" />
+            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#392#514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/services/evento.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/clases.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/car-crud.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/cars/carservice.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/cars/car.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/car-crud.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/clases.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="102" lean-forward="false" selection-start-line="3" selection-start-column="102" selection-end-line="3" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/services/clase.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

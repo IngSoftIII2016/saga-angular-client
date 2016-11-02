@@ -6,7 +6,7 @@ import {Edificio} from "../entities/edificio";
 
 @Injectable()
 export class AulaService {
-    private url = 'app/aulas';
+    private url = 'http://localhost/saga/api/aulas';
     private options = new BaseRequestOptions();
 
     constructor(private http: Http) { }
@@ -20,7 +20,7 @@ export class AulaService {
     }
     getAulasByEdificio(edificio: Edificio): Promise<Aula[]> {
         return this.http
-            .get(`${this.url}?Edificio_id=${edificio.id}`)
+            .get(`${this.url}?edificio.id=${edificio.id}`)
             .toPromise()
             .then(res => res.json().data as Aula[])
             .catch(this.handleError);

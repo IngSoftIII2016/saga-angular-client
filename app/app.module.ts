@@ -7,7 +7,7 @@ import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
 //import { MaterialModule } from '@angular/material';
-import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule} from 'primeng/primeng';
+import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule} from 'primeng/primeng';
 
 import {CarCrudComponent}  from './car-crud.component';
 import {CarService} from './cars/carservice';
@@ -28,6 +28,7 @@ import {ClasesComponent} from "./clases.component";
       ButtonModule,
       DialogModule,
       DropdownModule,
+      ScheduleModule,
       InMemoryWebApiModule.forRoot(AulasInMemoryDbService, {
           passThruUnknownUrl: true
       }),
