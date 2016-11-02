@@ -1,18 +1,37 @@
 <html>
-  <head>
+<head>
     <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
     <title>Sistema de Administración y Gestión de Aulas - UNRN</title>
 
-    <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/themes/omega/theme.css" />
-    <link rel="stylesheet" type="text/css" href="app/resources/icons/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/primeng.min.css" />
-  </head>
-  <body>
-    <my-app>Loading...</my-app>
-    
-    <script src="prod/polyfills.js"></script>
-    <script src="prod/vendor.js"></script>        
-    <script src="prod/app.js"></script>
-  </body>
+    <!-- Layout CSS -->
+    <link id="theme-css" rel="stylesheet" type="text/css" href="app/resources/theme/theme-indigo.css">
+    <link rel="stylesheet" type="text/css" href="app/resources/layout/css/animate.css">
+    <link id="layout-css" rel="stylesheet" type="text/css" href="app/resources/layout/css/layout-indigo.css">
+
+    <!-- PrimeNG CSS -->
+    <link rel="stylesheet" type="text/css" href="app/resources/demo/css/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/primeng.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="app/resources/icons/css/font-awesome.min.css"/>
+
+    <!-- 1. Load libraries -->
+    <script src="app/resources/demo/js/jquery.deps.js"></script>    <!-- Calendar -->
+    <script src="app/resources/layout/js/layout.js"></script>       <!-- Menu -->
+    <script src="app/resources/demo/js/charts.min.js"></script>     <!-- Charts -->
+    <script src="app/resources/demo/js/moment.js"></script>         <!-- Schedule -->
+    <script src="app/resources/demo/js/fullcalendar.js"></script>   <!-- Schedule -->
+    <script src="app/resources/demo/js/quill.min.js"></script>      <!-- Editor -->
+</head>
+<body>
+<my-app>Loading...</my-app>
+
+<script src="prod/polyfills.js"></script>
+<script src="prod/vendor.js"></script>
+<script src="prod/app.js"></script>
+</body>
 
 </html>

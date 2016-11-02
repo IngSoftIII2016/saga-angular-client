@@ -18,6 +18,7 @@ export class ClaseService {
         let formatFecha = new DatePipe('es').transform(fecha, 'yyyy-MM-dd');
         let params = new URLSearchParams();
         params.set('fecha', formatFecha);
+        params.set('include', 'aula.edificio');
         return this.http
             .get(this.options.url, this.options.merge({search: params}))
             .map((r: Response) => r.json().data as Clase[]);

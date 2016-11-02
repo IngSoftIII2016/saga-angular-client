@@ -5,6 +5,6 @@ export interface Comision {
     id: number;
     nombre: string;
     asignatura: Asignatura;
-    docente: Docente;
+    docente: Docente[];
 
 }
