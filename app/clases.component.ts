@@ -21,6 +21,7 @@ export class ClasesComponent implements OnInit {
     private aulas: Aula[];
     private ratio: number;
     private events: any[];
+    private resources: any[];
     private scheduleHeader: any;
 
     constructor(
@@ -43,10 +44,24 @@ export class ClasesComponent implements OnInit {
                 });
             });
 
+
+        this.resources = [
+            { id: '1', title: 'Aula 1' },
+            { id: '2', title: 'Aula 2' },
+            { id: '3', title: 'Aula 3' },
+            { id: '4', title: 'Aula 4' }
+        ];
+        let TODAY = new Date().getUTCDate();
+
+        this.events = [
+            { id: '1', resourceId: '1', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
+            { id: '2', resourceId: '2', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' }
+        ];
+
         this.scheduleHeader = {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'timelineDay,agendaWeek,agendaDay'
         };
     }
 
