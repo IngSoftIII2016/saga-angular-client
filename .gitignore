@@ -1,5 +1,6 @@
 node_modules
 !webpack.config.js
+!app/resources/**/*.js
 *.js
 *.log
 *.map
@@ -7,6 +8,6 @@ node_modules
 *.DS_Store
 typings
 .idea/
+.idea
 prod/
-!resources/
 npm-debug.log.687267340
