@@ -14,6 +14,7 @@ import {CarService} from './cars/carservice';
 import {AulasInMemoryDbService} from "./services/aula-in-memory-db-service";
 import {AppComponent} from "./app.component";
 import {ClasesComponent} from "./clases.component";
+import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {ClasesComponent} from "./clases.component";
   declarations: [
       AppComponent,
       CarCrudComponent,
-      ClasesComponent
+      ClasesComponent,
+      TimelineDaySchedule
   ],
   bootstrap:    [AppComponent],
   providers:    [

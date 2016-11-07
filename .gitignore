@@ -1,5 +1,4 @@
 node_modules
-*.js
 !webpack.config.js
 *.log
 *.map
@@ -9,3 +8,6 @@ typings
 .idea/vcs.xml
 .idea/
 prod/
+app/resources/demo/js/
+app/resources/layout/js/
+npm-debug.log.687267340

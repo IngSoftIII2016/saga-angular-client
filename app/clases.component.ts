@@ -51,7 +51,8 @@ export class ClasesComponent implements OnInit {
             { id: '3', title: 'Aula 3' },
             { id: '4', title: 'Aula 4' }
         ];
-        let TODAY = new Date().getUTCDate();
+        let TODAY = new Date();
+        TODAY.setHours(0,0,0,0);
 
         this.events = [
             { id: '1', resourceId: '1', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
@@ -61,7 +62,7 @@ export class ClasesComponent implements OnInit {
         this.scheduleHeader = {
             left: 'prev,next today',
             center: 'title',
-            right: 'timelineDay,agendaWeek,agendaDay'
+            right: 'timelineDay'
         };
     }
 
@@ -76,8 +77,5 @@ export class ClasesComponent implements OnInit {
         d.setDate(d.getDate() - 1);
         this.fecha.next(d);
     }
-
-
-
 
 }
