@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0cbb821-1572-4584-a321-91c4974779d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/entities/evento.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/timeline-day-schedule.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.module.ts" afterPath="$PROJECT_DIR$/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/clases.component.html" afterPath="$PROJECT_DIR$/app/clases.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/clases.component.ts" afterPath="$PROJECT_DIR$/app/clases.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/aula.service.ts" afterPath="$PROJECT_DIR$/app/services/aula.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/evento.service.ts" afterPath="$PROJECT_DIR$/app/services/evento.service.ts" />
     </list>
     <ignored path="primeng-quickstart-webpack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +73,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+            <state relative-caret-position="150">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -420,7 +413,7 @@
       <workItem from="1478097975329" duration="2136000" />
       <workItem from="1478117878745" duration="11891000" />
       <workItem from="1478180069481" duration="1707000" />
-      <workItem from="1478479453933" duration="9534000" />
+      <workItem from="1478479453933" duration="9678000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega la barra de navegación. Logo horrible">
       <created>1478096518882</created>
@@ -436,11 +429,18 @@
       <option name="project" value="LOCAL" />
       <updated>1478124758547</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se agrega el componente schedule.">
+      <created>1478528306327</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1478528306327</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133217000" />
+    <option name="totallyTimeSpent" value="133361000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -928,8 +928,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>

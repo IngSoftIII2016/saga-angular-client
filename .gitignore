@@ -8,6 +8,4 @@ typings
 .idea/vcs.xml
 .idea/
 prod/
-app/resources/demo/js/
-app/resources/layout/js/
 npm-debug.log.687267340
