@@ -1,13 +1,13 @@
 node_modules
 !webpack.config.js
-!app/resources/**/*.js
 *.js
+!app/resources/**/*.js
 *.log
 *.map
 *.d.ts
 *.DS_Store
 typings
-.idea/
 .idea
+.idea/
 prod/
 npm-debug.log.687267340
