@@ -7,7 +7,7 @@ node_modules
 *.d.ts
 *.DS_Store
 typings
-.idea
-.idea/
+
+
 prod/
 npm-debug.log.687267340
