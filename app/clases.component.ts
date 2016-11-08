@@ -7,6 +7,9 @@ import {Clase} from "./entities/clase";
 import {EdificioService} from "./services/edificio.service";
 import {AulaService} from "./services/aula.service";
 import {ClaseService} from "./services/clase.service";
+import {Evento} from "./entities/evento";
+
+declare var moment: any;
 
 @Component({
     selector: 'clases',
@@ -18,8 +21,8 @@ export class ClasesComponent implements OnInit {
     edificio: Edificio;
     private fecha = new BehaviorSubject<Date>(new Date());
     private clases: Observable<Clase[]>;
+    private eventos: Observable<Evento[]>;
     private aulas: Aula[];
-    private ratio: number;
     private events: any[];
     private resources: any[];
     private scheduleHeader: any;
@@ -39,8 +42,6 @@ export class ClasesComponent implements OnInit {
                     this.edificio = edificio;
                     this.aulaService.getAulasByEdificio(edificio)
                         .then(aulas => this.aulas = aulas);
-                    this.clases = this.fecha
-                        .switchMap(date => this.claseService.getClases(date, edificio));
                 });
             });
 
@@ -51,8 +52,7 @@ export class ClasesComponent implements OnInit {
             { id: '3', title: 'Aula 3' },
             { id: '4', title: 'Aula 4' }
         ];
-        let TODAY = new Date();
-        TODAY.setHours(0,0,0,0);
+        let TODAY = new Date().toISOString().substr(10);
 
         this.events = [
             { id: '1', resourceId: '1', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
@@ -62,8 +62,17 @@ export class ClasesComponent implements OnInit {
         this.scheduleHeader = {
             left: 'prev,next today',
             center: 'title',
-            right: 'timelineDay'
+            right: ''
         };
+    }
+
+    getEvents(event) {
+        this.claseService.getClases(event.day, this.edificio)
+            .map(function (clase) {
+                return {
+                    'start': moment(clase)
+                }
+            });
     }
 
     nextDay(): void {

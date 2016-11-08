@@ -7,7 +7,6 @@ import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions, URLSearchParams, Response} from "@angular/http";
 import {Edificio} from "../entities/edificio";
 import {Observable} from "rxjs";
-import {Clase} from "../entities/clase";
 import {DatePipe} from "@angular/common";
 import {Evento} from "../entities/evento";
 @Injectable()

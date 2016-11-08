@@ -112,6 +112,8 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     @Output() viewRender: EventEmitter<any> = new EventEmitter();
 
+    @Output() onDayChanged: EventEmitter<any> = new EventEmitter();
+
     initialized: boolean;
 
     stopNgOnChangesPropagation: boolean;
@@ -162,9 +164,14 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventConstraint: this.eventConstraint,
             eventRender: this.eventRender,
             resources: this.resources,
+            locale: 'es',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
                 callback(this.events);
+                /*this.onDayChanged.emit({
+                    'day': start.toDate(),
+                    'callback': callback
+                });*/
             },
             dayClick: (date, jsEvent, view) => {
                 this.onDayClick.emit({
