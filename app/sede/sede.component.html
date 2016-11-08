@@ -1,0 +1,35 @@
+<div class="ContentSideSections">
+    <div class="Content100 overHidden TextShadow">
+        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">PrimeNG Sample with Webpack</span>
+        <span class="defaultText dispTable">This sample demonstrates a sample setup using Webpack.</span>
+    </div>
+</div>
+
+<div class="ContentSideSections Implementation">
+    <p-dataTable [value]="sedes" selectionMode="single" [(selection)]="selectedSede" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+        <header>CRUD de Sedes</header>
+        <p-column field="id" header="Id" [sortable]="true"></p-column>
+        <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
+        <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
+    </p-dataTable>
+
+    <p-dialog header="Sede Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="sede">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="id">Id</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="id" [(ngModel)]="sede.id" /></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="sede.nombre" /></div>
+            </div>
+            
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+                <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            </div>
+        </footer>
+    </p-dialog>
+</div>

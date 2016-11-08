@@ -1,11 +1,12 @@
 node_modules
-*.js
 !webpack.config.js
+*.js
+!app/resources/**/*.js
 *.log
 *.map
 *.d.ts
 *.DS_Store
 typings
-.idea/vcs.xml
-.idea/
+.idea
 prod/
+npm-debug.log.687267340
