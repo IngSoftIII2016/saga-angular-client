@@ -56,7 +56,8 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 	  NotFoundComponent,
 	  LoginComponent,
 	  DocenteComponent,
-	  SedeComponent
+	  SedeComponent,
+      TimelineDaySchedule
 	  //CarreraComponent,
 	  //PeriodoComponent
 
