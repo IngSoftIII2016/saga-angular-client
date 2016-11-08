@@ -1,12 +1,24 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
 import {Params, ActivatedRoute} from "@angular/router";
+<<<<<<< HEAD
 import {Edificio} from "./_entities/edificio";
 import {Aula} from "./_entities/aula";
 import {Clase} from "./_entities/clase";
 import {EdificioService} from "./_services/edificio.service";
 import {AulaService} from "./_services/aula.service";
 import {ClaseService} from "./_services/clase.service";
+=======
+import {Edificio} from "./entities/edificio";
+import {Aula} from "./entities/aula";
+import {Clase} from "./entities/clase";
+import {EdificioService} from "./services/edificio.service";
+import {AulaService} from "./services/aula.service";
+import {ClaseService} from "./services/clase.service";
+import {Evento} from "./entities/evento";
+
+declare var moment: any;
+>>>>>>> bed8b552092a8a02b3907efe61ac8b67074f1ab2
 
 @Component({
     selector: 'clases',
@@ -18,8 +30,8 @@ export class ClasesComponent implements OnInit {
     edificio: Edificio;
     private fecha = new BehaviorSubject<Date>(new Date());
     private clases: Observable<Clase[]>;
+    private eventos: Observable<Evento[]>;
     private aulas: Aula[];
-    private ratio: number;
     private events: any[];
     private resources: any[];
     private scheduleHeader: any;
@@ -39,8 +51,6 @@ export class ClasesComponent implements OnInit {
                     this.edificio = edificio;
                     this.aulaService.getAulasByEdificio(edificio)
                         .then(aulas => this.aulas = aulas);
-                    this.clases = this.fecha
-                        .switchMap(date => this.claseService.getClases(date, edificio));
                 });
             });
 
@@ -51,7 +61,7 @@ export class ClasesComponent implements OnInit {
             { id: '3', title: 'Aula 3' },
             { id: '4', title: 'Aula 4' }
         ];
-        let TODAY = new Date().getUTCDate();
+        let TODAY = new Date().toISOString().substr(10);
 
         this.events = [
             { id: '1', resourceId: '1', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
@@ -61,8 +71,17 @@ export class ClasesComponent implements OnInit {
         this.scheduleHeader = {
             left: 'prev,next today',
             center: 'title',
-            right: 'timelineDay,agendaWeek,agendaDay'
+            right: ''
         };
+    }
+
+    getEvents(event) {
+        this.claseService.getClases(event.day, this.edificio)
+            .map(function (clase) {
+                return {
+                    'start': moment(clase)
+                }
+            });
     }
 
     nextDay(): void {
@@ -76,8 +95,5 @@ export class ClasesComponent implements OnInit {
         d.setDate(d.getDate() - 1);
         this.fecha.next(d);
     }
-
-
-
 
 }

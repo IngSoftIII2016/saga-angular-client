@@ -1,6 +1,11 @@
 <div class="ui-g-12">
     <div class="card card-w-title">
         <h1>Schedule</h1>
-        <p-schedule [events]="events" defaultDate="2016-01-12" [header]="scheduleHeader"></p-schedule>
+        <timeline-day-schedule
+                [header]="scheduleHeader"
+                [events]="events"
+                [resources]="resources"
+                (onDayChanged)="getEvents($event)" >
+        </timeline-day-schedule>
     </div>
 </div>

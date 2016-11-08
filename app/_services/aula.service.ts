@@ -1,6 +1,10 @@
 import {Injectable} from "@angular/core";
+<<<<<<< HEAD:app/_services/aula.service.ts
 import {Observable} from "rxjs";
 import {Aula} from "../_entities/aula";
+=======
+import {Aula} from "../entities/aula";
+>>>>>>> bed8b552092a8a02b3907efe61ac8b67074f1ab2:app/services/aula.service.ts
 import {Http, BaseRequestOptions, URLSearchParams, RequestOptions} from "@angular/http";
 import {Edificio} from "../_entities/edificio";
 
