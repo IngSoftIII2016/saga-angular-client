@@ -14,7 +14,6 @@ import {CarService} from './cars/carservice';
 import {AulasInMemoryDbService} from "./_services/aula-in-memory-db-service";
 import {AppComponent} from "./app.component";
 import {ClasesComponent} from "./clases.component";
-<<<<<<< HEAD
 import {GrupoComponent} from "./grupo/index";
 import {GrupoService} from './_services/grupo.service';
 import {LoginComponent} from "./_login/index";
@@ -28,9 +27,8 @@ import {SedeComponent} from "./sede/index";
 
 
 
-=======
+
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
->>>>>>> bed8b552092a8a02b3907efe61ac8b67074f1ab2
 
 
 @NgModule({
@@ -54,7 +52,6 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       AppComponent,
       CarCrudComponent,
       ClasesComponent,
-<<<<<<< HEAD
 	  GrupoComponent,
 	  NotFoundComponent,
 	  LoginComponent,
@@ -63,10 +60,7 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 	  //CarreraComponent,
 	  //PeriodoComponent
 
-	  
-=======
-      TimelineDaySchedule
->>>>>>> bed8b552092a8a02b3907efe61ac8b67074f1ab2
+
   ],
   bootstrap:    [AppComponent],
   providers:    [
