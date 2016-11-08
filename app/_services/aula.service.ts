@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 
 import {Observable} from "rxjs";
 import {Aula} from "../_entities/aula";
-import {Aula} from "../entities/aula";
 import {Http, BaseRequestOptions, URLSearchParams, RequestOptions} from "@angular/http";
 import {Edificio} from "../_entities/edificio";
 

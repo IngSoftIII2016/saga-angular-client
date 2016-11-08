@@ -7,13 +7,7 @@ import {Clase} from "./_entities/clase";
 import {EdificioService} from "./_services/edificio.service";
 import {AulaService} from "./_services/aula.service";
 import {ClaseService} from "./_services/clase.service";
-import {Edificio} from "./entities/edificio";
-import {Aula} from "./entities/aula";
-import {Clase} from "./entities/clase";
-import {EdificioService} from "./services/edificio.service";
-import {AulaService} from "./services/aula.service";
-import {ClaseService} from "./services/clase.service";
-import {Evento} from "./entities/evento";
+import {Evento} from "./_entities/evento";
 
 declare var moment: any;
 
