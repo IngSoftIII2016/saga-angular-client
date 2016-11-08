@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {Edificio} from "./entities/edificio";
-import {EdificioService} from "./services/edificio.service";
+import {Edificio} from "./_entities/edificio";
+import {EdificioService} from "./_services/edificio.service";
 
 
 @Component({

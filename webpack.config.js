@@ -14,5 +14,10 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'vendor', 'polyfills']
         })
-    ]
+    ],
+	devServer: {
+    historyApiFallback: true,
+    stats: 'minimal'
+	}	
 };
+

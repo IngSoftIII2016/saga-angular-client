@@ -1,12 +1,12 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
 import {Params, ActivatedRoute} from "@angular/router";
-import {Edificio} from "./entities/edificio";
-import {Aula} from "./entities/aula";
-import {Clase} from "./entities/clase";
-import {EdificioService} from "./services/edificio.service";
-import {AulaService} from "./services/aula.service";
-import {ClaseService} from "./services/clase.service";
+import {Edificio} from "./_entities/edificio";
+import {Aula} from "./_entities/aula";
+import {Clase} from "./_entities/clase";
+import {EdificioService} from "./_services/edificio.service";
+import {AulaService} from "./_services/aula.service";
+import {ClaseService} from "./_services/clase.service";
 
 @Component({
     selector: 'clases',
