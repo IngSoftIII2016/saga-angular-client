@@ -7,7 +7,7 @@ import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
 //import { MaterialModule } from '@angular/material';
-import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule} from 'primeng/primeng';
+import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule} from 'primeng/primeng';
 
 import {CarCrudComponent}  from './car-crud.component';
 import {CarService} from './cars/carservice';
@@ -22,9 +22,8 @@ import {AuthGuard} from './_guards/index';
 import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./docente/index";
 import {SedeComponent} from "./sede/index";
-//import {PeriodoComponent} from "./periodo/index";
+import {PeriodoComponent} from "./periodo/index";
 //import {CarreraComponent} from "./carrera/index";
-
 
 
 
@@ -44,6 +43,7 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       DialogModule,
       DropdownModule,
       ScheduleModule,
+      CalendarModule,
       InMemoryWebApiModule.forRoot(AulasInMemoryDbService, {
           passThruUnknownUrl: true
       }),
@@ -57,9 +57,9 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 	  LoginComponent,
 	  DocenteComponent,
 	  SedeComponent,
-      TimelineDaySchedule
+      TimelineDaySchedule,
 	  //CarreraComponent,
-	  //PeriodoComponent
+	  PeriodoComponent
 
 
   ],

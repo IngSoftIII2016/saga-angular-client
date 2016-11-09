@@ -8,7 +8,7 @@ import { AuthGuard } from './_guards/index';
 import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./docente/index";
 import {SedeComponent} from "./sede/index";
-//import {PeriodoComponent} from "./periodo/index";
+import {PeriodoComponent} from "./periodo/index";
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -36,6 +36,10 @@ const appRoutes: Routes = [
 	, {
         path: 'sedes',
         component: SedeComponent , canActivate: [AuthGuard]
+    }
+    , {
+        path: 'periodos',
+        component: PeriodoComponent , canActivate: [AuthGuard]
     }
 	, {
         path: 'login',
