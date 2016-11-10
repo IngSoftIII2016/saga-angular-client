@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs";
-import {Edificio} from "../_entities/edificio";
+import {Edificio} from "../entities/edificio";
 import {Localidad} from "../entities/localidad";
 
 @Injectable()
