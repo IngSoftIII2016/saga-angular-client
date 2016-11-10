@@ -9,3 +9,11 @@
     background-color: #00ce21 !important;;
     color: white !important;
 }
+.eliminar:hover {
+    background-color: #8a0707 !important;
+    color: white !important;;
+}
+.guardar:hover{
+    background-color: #009b1e !important;;
+    color: white !important;
+}

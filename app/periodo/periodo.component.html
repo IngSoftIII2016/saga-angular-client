@@ -12,8 +12,7 @@
     </div>
     <p-dataTable [value]="periodos" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedPeriodo" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Periodos</header>
-        <p-column field="id" header="Id" [sortable]="true"></p-column>
-        <p-column field="descripcion" header="Descripcion" [sortable]="true"></p-column>
+        <p-column field="descripcion" header="Descripciòn" [sortable]="true"></p-column>
         <p-column field="fecha_inicio" header="Fecha Inicio" [sortable]="true"></p-column>
         <p-column field="fecha_fin" header="Fecha Fin" [sortable]="true"></p-column>
         <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
@@ -22,7 +21,7 @@
     <p-dialog header="Periodo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="periodo">
            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="descripcion">Descripcion</label></div>
+                <div class="ui-grid-col-4"><label for="descripcion">Descripción</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="periodo.descripcion" /></div>
             </div>
             <div class="ui-grid-row">
