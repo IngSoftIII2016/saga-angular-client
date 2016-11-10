@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     }
 	,
 	{
-        path: '404',
+        path: '**',
         component: NotFoundComponent 
     }
 ];
