@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Grupo} from '../_entities/grupo';
-import {GrupoService} from '../_services/grupo.service';
+import {Grupo} from '../entities/grupo';
+import {GrupoService} from '../services/grupo.service';
 
 class PrimeGrupo implements Grupo {
     constructor(public id?, public nombre?, public descripcion?) {}

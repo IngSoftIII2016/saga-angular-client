@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Periodo} from '../../app/_entities/periodo';
+import {Periodo} from '../entities/periodo';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'

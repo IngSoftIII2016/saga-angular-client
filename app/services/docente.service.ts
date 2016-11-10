@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Sede} from '../../app/_entities/Sede';
+import {Docente} from '../entities/docente';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class SedeService {
+export class DocenteService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private sedeUrl = 'http://localhost/saga/api/sedes';
+	private docenteUrl = 'http://localhost/saga/api/docentes';
     constructor(private http: Http) {}
 
-		getSedesMedium() {
-			return this.http.get(this.sedeUrl)
+		getDocentesMedium() {
+			return this.http.get(this.docenteUrl)
 						.toPromise()
-						.then(res => <Sede[]> res.json().data)
+						.then(res => <Docente[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.sedeUrl}/${id}`;
+		const url = `${this.docenteUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(nombre: string): Observable<Sede> {
-		return this.http.post(this.sedeUrl, JSON.stringify({data: {nombre: nombre,id:""}}), {headers: this.headers})
+	  create(nombre: string, apellido:string): Observable<Docente> {
+		return this.http.post(this.docenteUrl, JSON.stringify({data: {nombre: nombre , apellido: apellido ,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class SedeService {
 		  return body.data||{};
 		  
 	  }
-	  update(sede: Sede): Promise<Sede> {
-		const url = `${this.sedeUrl}`;
+	  update(docente: Docente): Promise<Docente> {
+		const url = `${this.docenteUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {nombre:sede.nombre , id:sede.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {nombre: docente.nombre , apellido: docente.apellido ,id :docente.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => sede)
+		  .then(() => docente)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

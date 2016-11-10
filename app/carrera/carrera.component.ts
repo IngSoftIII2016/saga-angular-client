@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Carrera} from '../_entities/carrera';
-import {CarreraService} from '../_services/carrera.service';
+import {Carrera} from '../entities/carrera';
+import {CarreraService} from '../services/carrera.service';
 
 class PrimeCarrera implements Carrera {
     constructor(public id?, public nombre?) {}

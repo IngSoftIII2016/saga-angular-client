@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Carrera} from '../../app/_entities/carrera';
+import {Grupo} from '../entities/grupo';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class CarreraService {
+export class GrupoService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private carreraUrl = 'http://localhost/saga/api/carreras';
+	private grupoUrl = 'http://localhost/saga/api/grupos';
     constructor(private http: Http) {}
 
-		getCarrerasMedium() {
-			return this.http.get(this.carreraUrl)
+		getGruposMedium() {
+			return this.http.get(this.grupoUrl)
 						.toPromise()
-						.then(res => <Carrera[]> res.json().data)
+						.then(res => <Grupo[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.carreraUrl}/${id}`;
+		const url = `${this.grupoUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(nombre: string): Observable<Carrera> {
-		return this.http.post(this.carreraUrl, JSON.stringify({data: {nombre: nombre ,id:""}}), {headers: this.headers})
+	  create(nombre: string, descripcion:string): Observable<Grupo> {
+		return this.http.post(this.grupoUrl, JSON.stringify({data: {nombre: nombre , descripcion: descripcion ,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class CarreraService {
 		  return body.data||{};
 		  
 	  }
-	  update(carrera: Carrera): Promise<Carrera> {
-		const url = `${this.carreraUrl}`;
+	  update(grupo: Grupo): Promise<Grupo> {
+		const url = `${this.grupoUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {nombre: carrera.nombre ,id :carrera.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {nombre: grupo.nombre , descripcion: grupo.descripcion ,id:grupo.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => carrera)
+		  .then(() => grupo)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

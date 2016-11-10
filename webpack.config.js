@@ -16,8 +16,8 @@ module.exports = {
         })
     ],
 	devServer: {
-    historyApiFallback: true,
-    stats: 'minimal'
+        historyApiFallback: true,
+        stats: 'minimal'
 	}	
 };
 

@@ -2,13 +2,13 @@ import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ClasesComponent} from "./clases.component";
 import {CarCrudComponent} from "./car-crud.component";
-import {GrupoComponent} from "./grupo/index";
-import {LoginComponent} from "./_login/index";
-import { AuthGuard } from './_guards/index';
+import {GrupoComponent} from "./grupo/grupo.component";
+import {LoginComponent} from "./login/login.component";
+import { AuthGuard } from './guards/auth.guard';
 import {NotFoundComponent} from "./notfound.component";
-import {DocenteComponent} from "./docente/index";
-import {SedeComponent} from "./sede/index";
-import {PeriodoComponent} from "./periodo/index";
+import {DocenteComponent} from "./docente/docente.component";
+import {SedeComponent} from "./sede/sede.component";
+import {PeriodoComponent} from "./periodo/periodo.component";
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     }
 	,
 	{
-        path: '404',
+        path: '**',
         component: NotFoundComponent 
     }
 ];
