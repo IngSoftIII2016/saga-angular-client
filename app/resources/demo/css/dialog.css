@@ -1,0 +1,11 @@
+::-webkit-input-placeholder {
+    color: white;
+}
+.eliminar {
+    background-color: #ce0707 !important;
+    color: white !important;;
+}
+.guardar{
+    background-color: #00ce21 !important;;
+    color: white !important;
+}

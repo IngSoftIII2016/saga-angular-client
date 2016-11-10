@@ -8,6 +8,7 @@ class PrimePeriodo implements Periodo {
 
 @Component({
 	templateUrl: './app/periodo/periodo.component.html',
+    styleUrls: ['./app/resources/demo/css/dialog.css'],
 	selector: 'periodo',
 	providers:[PeriodoService]
 })
@@ -35,13 +36,13 @@ export class PeriodoComponent {
         this.displayDialog = true;
     }
 
-	add(fecha_inicio:Date, fecha_fin:Date, descripcion:string): void {
+	add(fecha_inicio:string, fecha_fin:string, descripcion:string): void {
 		descripcion = descripcion.trim();
 		if (!descripcion) { return; }
 		this.periodoService.create(fecha_inicio, fecha_fin,descripcion).subscribe(periodo => {
                 this.periodo = periodo;
-				this.periodos.push(periodo);
-				this.selectedPeriodo = null;
+                this.periodos.push(periodo);
+                this.selectedPeriodo= null;
 
             }
 		 );

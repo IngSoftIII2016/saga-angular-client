@@ -25,9 +25,9 @@ export class PeriodoService {
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(fecha_inicio: Date, fecha_fin:Date, descripcion:string): Observable<Periodo> {
-		return this.http.post(this.periodoUrl, JSON.stringify({data: {fecha_inicio: fecha_inicio, fecha_fin:fecha_fin , descripcion: descripcion ,id:""}}), {headers: this.headers})
-		            .map(this.extractData).catch(this.handleError);
+	  create(fecha_inicio: string, fecha_fin:string, descripcion:string): Observable<Periodo> {
+		return this.http.post(this.periodoUrl, JSON.stringify({data: {fecha_inicio: fecha_inicio, fecha_fin:fecha_fin, descripcion: descripcion, id: ""}}), {headers: this.headers})
+            .map(this.extractData).catch(this.handleError);
 
 	  }
 	  private extractData(res: Response){
