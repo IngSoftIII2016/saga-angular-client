@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Grupo} from '../../app/_entities/Grupo';
+import {Periodo} from '../entities/periodo';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class GrupoService {
+export class PeriodoService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private grupoUrl = 'http://localhost/saga/api/grupos';
+	private periodoUrl = 'http://localhost/saga/api/periodos';
     constructor(private http: Http) {}
 
-		getGruposMedium() {
-			return this.http.get(this.grupoUrl)
+		getPeriodosMedium() {
+			return this.http.get(this.periodoUrl)
 						.toPromise()
-						.then(res => <Grupo[]> res.json().data)
+						.then(res => <Periodo[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.grupoUrl}/${id}`;
+		const url = `${this.periodoUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(nombre: string, descripcion:string): Observable<Grupo> {
-		return this.http.post(this.grupoUrl, JSON.stringify({data: {nombre: nombre , descripcion: descripcion ,id:""}}), {headers: this.headers})
+	  create(fecha_inicio: Date, fecha_fin:Date, descripcion:string): Observable<Periodo> {
+		return this.http.post(this.periodoUrl, JSON.stringify({data: {fecha_inicio: fecha_inicio, fecha_fin:fecha_fin , descripcion: descripcion ,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class GrupoService {
 		  return body.data||{};
 		  
 	  }
-	  update(grupo: Grupo): Promise<Grupo> {
-		const url = `${this.grupoUrl}`;
+	  update(periodo: Periodo): Promise<Periodo> {
+		const url = `${this.periodoUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {nombre: grupo.nombre , descripcion: grupo.descripcion ,id:grupo.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {fecha_inicio:periodo.fecha_inicio , fecha_fin:periodo.fecha_fin , descripcion:periodo.descripcion, id :periodo.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => grupo)
+		  .then(() => periodo)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

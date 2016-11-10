@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Sede} from '../_entities/sede';
-import {SedeService} from '../_services/sede.service';
+import {Sede} from '../entities/sede';
+import {SedeService} from '../services/sede.service';
 
 class PrimeSede implements Sede {
     constructor(public id?, public nombre?) {}

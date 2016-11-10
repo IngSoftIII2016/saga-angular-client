@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs";
-import {Edificio} from "../_entities/edificio";
+import {Edificio} from "../entities/edificio";
 
 @Injectable()
 export class EdificioService {
-    url = 'app/edificios';
+    url = 'http://localhost/saga/api/edificios';
 
     constructor(private http: Http) { }
 

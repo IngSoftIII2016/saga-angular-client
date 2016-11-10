@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Carrera} from '../../app/_entities/carrera';
+import {Sede} from '../entities/sede';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class CarreraService {
+export class SedeService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private carreraUrl = 'http://localhost/saga/api/carreras';
+	private sedeUrl = 'http://localhost/saga/api/sedes';
     constructor(private http: Http) {}
 
-		getCarrerasMedium() {
-			return this.http.get(this.carreraUrl)
+		getSedesMedium() {
+			return this.http.get(this.sedeUrl)
 						.toPromise()
-						.then(res => <Carrera[]> res.json().data)
+						.then(res => <Sede[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.carreraUrl}/${id}`;
+		const url = `${this.sedeUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(nombre: string): Observable<Carrera> {
-		return this.http.post(this.carreraUrl, JSON.stringify({data: {nombre: nombre ,id:""}}), {headers: this.headers})
+	  create(nombre: string): Observable<Sede> {
+		return this.http.post(this.sedeUrl, JSON.stringify({data: {nombre: nombre,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class CarreraService {
 		  return body.data||{};
 		  
 	  }
-	  update(carrera: Carrera): Promise<Carrera> {
-		const url = `${this.carreraUrl}`;
+	  update(sede: Sede): Promise<Sede> {
+		const url = `${this.sedeUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {nombre: carrera.nombre ,id :carrera.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {nombre:sede.nombre , id:sede.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => carrera)
+		  .then(() => sede)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

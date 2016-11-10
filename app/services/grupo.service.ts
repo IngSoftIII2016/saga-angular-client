@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Sede} from '../../app/_entities/Sede';
+import {Grupo} from '../entities/grupo';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class SedeService {
+export class GrupoService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private sedeUrl = 'http://localhost/saga/api/sedes';
+	private grupoUrl = 'http://localhost/saga/api/grupos';
     constructor(private http: Http) {}
 
-		getSedesMedium() {
-			return this.http.get(this.sedeUrl)
+		getGruposMedium() {
+			return this.http.get(this.grupoUrl)
 						.toPromise()
-						.then(res => <Sede[]> res.json().data)
+						.then(res => <Grupo[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.sedeUrl}/${id}`;
+		const url = `${this.grupoUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(nombre: string): Observable<Sede> {
-		return this.http.post(this.sedeUrl, JSON.stringify({data: {nombre: nombre,id:""}}), {headers: this.headers})
+	  create(nombre: string, descripcion:string): Observable<Grupo> {
+		return this.http.post(this.grupoUrl, JSON.stringify({data: {nombre: nombre , descripcion: descripcion ,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class SedeService {
 		  return body.data||{};
 		  
 	  }
-	  update(sede: Sede): Promise<Sede> {
-		const url = `${this.sedeUrl}`;
+	  update(grupo: Grupo): Promise<Grupo> {
+		const url = `${this.grupoUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {nombre:sede.nombre , id:sede.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {nombre: grupo.nombre , descripcion: grupo.descripcion ,id:grupo.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => sede)
+		  .then(() => grupo)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

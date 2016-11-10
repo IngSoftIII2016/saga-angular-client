@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, URLSearchParams, Response} from "@angular/http";
 import {Observable} from "rxjs";
-import {Clase} from "../_entities/clase";
+import {Clase} from "../entities/clase";
 import {DatePipe} from "@angular/common";
-import {Edificio} from "../_entities/edificio";
+import {Edificio} from "../entities/edificio";
 
 @Injectable()
 export class ClaseService {

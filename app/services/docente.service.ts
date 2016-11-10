@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Periodo} from '../../app/_entities/periodo';
+import {Docente} from '../entities/docente';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class PeriodoService {
+export class DocenteService {
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private periodoUrl = 'http://localhost/saga/api/periodos';
+	private docenteUrl = 'http://localhost/saga/api/docentes';
     constructor(private http: Http) {}
 
-		getPeriodosMedium() {
-			return this.http.get(this.periodoUrl)
+		getDocentesMedium() {
+			return this.http.get(this.docenteUrl)
 						.toPromise()
-						.then(res => <Periodo[]> res.json().data)
+						.then(res => <Docente[]> res.json().data)
 						.then(data => { return data; });
 		}
 	  
 	  delete(id: number): Promise<void> {
-		const url = `${this.periodoUrl}/${id}`;
+		const url = `${this.docenteUrl}/${id}`;
 		return this.http.delete(url, {headers: this.headers})
 		  .toPromise()
 		  .then(() => null)
 		  .catch(this.handleError);
 	  }
-	  create(fecha_inicio: Date, fecha_fin:Date, descripcion:string): Observable<Periodo> {
-		return this.http.post(this.periodoUrl, JSON.stringify({data: {fecha_inicio: fecha_inicio, fecha_fin:fecha_fin , descripcion: descripcion ,id:""}}), {headers: this.headers})
+	  create(nombre: string, apellido:string): Observable<Docente> {
+		return this.http.post(this.docenteUrl, JSON.stringify({data: {nombre: nombre , apellido: apellido ,id:""}}), {headers: this.headers})
 		            .map(this.extractData).catch(this.handleError);
 
 	  }
@@ -36,12 +36,12 @@ export class PeriodoService {
 		  return body.data||{};
 		  
 	  }
-	  update(periodo: Periodo): Promise<Periodo> {
-		const url = `${this.periodoUrl}`;
+	  update(docente: Docente): Promise<Docente> {
+		const url = `${this.docenteUrl}`;
 		return this.http
-		  .put(url, JSON.stringify({data: {fecha_inicio:periodo.fecha_inicio , fecha_fin:periodo.fecha_fin , descripcion:periodo.descripcion, id :periodo.id}}), {headers: this.headers})
+		  .put(url, JSON.stringify({data: {nombre: docente.nombre , apellido: docente.apellido ,id :docente.id}}), {headers: this.headers})
 		  .toPromise()
-		  .then(() => periodo)
+		  .then(() => docente)
 		  .catch(this.handleError);
 	  }
 		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 

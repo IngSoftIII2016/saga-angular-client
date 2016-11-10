@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Periodo} from '../_entities/periodo';
-import {PeriodoService} from '../_services/periodo.service';
+import {Periodo} from '../entities/periodo';
+import {PeriodoService} from '../services/periodo.service';
 
 class PrimePeriodo implements Periodo {
     constructor(public id?, public fecha_inicio?, public fecha_fin?, public descripcion?) {}
