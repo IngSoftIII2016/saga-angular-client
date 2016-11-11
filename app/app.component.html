@@ -1,6 +1,6 @@
 <div class="layout-wrapper layout-compact">
 
-    <div [ngClass]="displayText" class="layout-container menu-layout-static ">
+    <div [ngClass]="displayMenu" class="layout-container menu-layout-static ">
     <!-- Top Bar -->
     <div class="topbar clearfix">
         <div class="topbar-left">
@@ -8,7 +8,7 @@
         </div>
 
         <div class="topbar-right">
-            <a id="menu-button"  (click)="toggle()">
+            <a id="menu-button"  (click)="toggle()" [ngClass]="displayButton">
                 <i></i>
             </a>
 

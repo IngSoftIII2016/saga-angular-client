@@ -13,10 +13,12 @@ export class AppComponent implements OnInit {
 
     private edificios: Edificio[];
     private edificioSelected: Edificio;
-    private displayText: string;
+    private displayMenu: string;
+    private displayButton: string;
     private visible: boolean;
     constructor(private edificioService: EdificioService) {
-        this.displayText = 'layout-menu-static-inactive';
+        this.displayMenu = 'layout-menu-static-inactive';
+        this.displayButton = 'menu-button-rotate';
         this.visible = true;
     }
 
@@ -31,7 +33,8 @@ export class AppComponent implements OnInit {
 
     toggle() {
         this.visible = !this.visible;
-        this.displayText = this.visible ? 'layout-menu-static-inactive' : '';
+        this.displayMenu = this.visible ? 'layout-menu-static-inactive' : '';
+        this.displayButton = this.visible ? 'menu-button-rotate' : '';
     }
 
 }
