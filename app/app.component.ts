@@ -13,8 +13,13 @@ export class AppComponent implements OnInit {
 
     private edificios: Edificio[];
     private edificioSelected: Edificio;
+    private displayText: string;
+    private visible: boolean;
+    constructor(private edificioService: EdificioService) {
+        this.displayText = 'layout-menu-static-inactive';
+        this.visible = true;
+    }
 
-    constructor(private edificioService: EdificioService) { }
 
     ngOnInit(): void {
         this.edificioService.getAll()
@@ -23,8 +28,10 @@ export class AppComponent implements OnInit {
                 this.edificioSelected = this.edificios[0];
             });
     }
-    clicked(event) {
-        alert(event.toString() + "Falta agregar una funcion que esconda el menu");
 
+    toggle() {
+        this.visible = !this.visible;
+        this.displayText = this.visible ? 'layout-menu-static-inactive' : '';
     }
+
 }
