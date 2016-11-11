@@ -23,4 +23,8 @@ export class AppComponent implements OnInit {
                 this.edificioSelected = this.edificios[0];
             });
     }
+    clicked(event) {
+        alert(event.toString() + "Falta agregar una funcion que esconda el menu");
+
+    }
 }

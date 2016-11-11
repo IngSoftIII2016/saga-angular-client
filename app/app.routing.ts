@@ -9,6 +9,7 @@ import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./docente/docente.component";
 import {SedeComponent} from "./sede/sede.component";
 import {PeriodoComponent} from "./periodo/periodo.component";
+import {EdificioComponent} from "./edificio/edificio.component";
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -40,6 +41,10 @@ const appRoutes: Routes = [
     , {
         path: 'periodos',
         component: PeriodoComponent , canActivate: [AuthGuard]
+    }
+    , {
+        path: 'edificios',
+        component: EdificioComponent , canActivate: [AuthGuard]
     }
 	, {
         path: 'login',

@@ -7,14 +7,14 @@ import {Localidad} from "../entities/localidad";
 @Injectable()
 export class EdificioService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private edificioUrl = 'http://localhost/saga/api/edificios';
+    private edificioUrl = 'http://localhost/saga/api/edificios?include=localidad';
     constructor(private http: Http) {}
 
-    getEdificiosMedium() {
-        return this.http.get(this.edificioUrl)
+    getEdificiosMedium(): Promise<Edificio[]>  {
+        return Promise.resolve(this.http.get(this.edificioUrl)
             .toPromise()
-            .then(res => <Edificio[]> res.json().data)
-            .then(data => { return data; });
+            .then(res => res.json().data as Edificio[])
+            .then(data => { return data; }));
     }
 
     delete(id: number): Promise<void> {
@@ -25,7 +25,7 @@ export class EdificioService {
             .catch(this.handleError);
     }
     create(nombre: string, localidad:Localidad): Observable<Edificio> {
-        return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad,id:""}}), {headers: this.headers})
+        return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad.id, id:""}}), {headers: this.headers})
             .map(this.extractData).catch(this.handleError);
 
     }

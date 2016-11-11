@@ -9,6 +9,7 @@ class PrimeEdificio implements Edificio {
 
 @Component({
 	templateUrl: './app/edificio/edificio.component.html',
+    styleUrls: ['./app/resources/demo/css/dialog.css'],
 	selector: 'edificio',
 	providers:[EdificioService]
 })
@@ -27,6 +28,7 @@ export class EdificioComponent {
     constructor(private edificioService: EdificioService) { }
 
     ngOnInit() {
+
         this.edificioService.getEdificiosMedium().then(edificios => this.edificios= edificios);
     }
 

@@ -21,6 +21,7 @@ import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./docente/index";
 import {SedeComponent} from "./sede/index";
 import {PeriodoComponent} from "./periodo/index";
+import {EdificioComponent} from "./edificio/index";
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -53,7 +54,8 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 	  SedeComponent,
       TimelineDaySchedule,
 	  //CarreraComponent,
-	  PeriodoComponent
+	  PeriodoComponent,
+      EdificioComponent
 
 
   ],
