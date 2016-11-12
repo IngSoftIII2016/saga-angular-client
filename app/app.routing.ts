@@ -10,6 +10,7 @@ import {DocenteComponent} from "./docente/docente.component";
 import {SedeComponent} from "./sede/sede.component";
 import {PeriodoComponent} from "./periodo/periodo.component";
 import {EdificioComponent} from "./edificio/edificio.component";
+import {AsignaturaComponent} from "./asignatura/asignatura.component";
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -45,6 +46,10 @@ const appRoutes: Routes = [
     , {
         path: 'edificios',
         component: EdificioComponent , canActivate: [AuthGuard]
+    }
+    , {
+        path: 'asignaturas',
+        component: AsignaturaComponent, canActivate: [AuthGuard]
     }
 	, {
         path: 'login',

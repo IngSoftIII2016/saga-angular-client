@@ -14,7 +14,7 @@ export class GrupoService {
 		getGruposMedium() {
 			return this.http.get(this.grupoUrl)
 						.toPromise()
-						.then(res => <Grupo[]> res.json().data)
+                .then(res => res.json().data as Grupo[])
 						.then(data => { return data; });
 		}
 	  

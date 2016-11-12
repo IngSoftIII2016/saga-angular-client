@@ -9,7 +9,6 @@ import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModul
 
 import {CarCrudComponent}  from './car-crud.component';
 import {CarService} from './cars/carservice';
-
 import {AppComponent} from "./app.component";
 import {ClasesComponent} from "./clases.component";
 import {GrupoComponent} from "./grupo/index";
@@ -22,6 +21,7 @@ import {DocenteComponent} from "./docente/index";
 import {SedeComponent} from "./sede/index";
 import {PeriodoComponent} from "./periodo/index";
 import {EdificioComponent} from "./edificio/index";
+import {AsignaturaComponent} from "./asignatura/index"
 //import {CarreraComponent} from "./carrera/index";
 
 
@@ -55,8 +55,8 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       TimelineDaySchedule,
 	  //CarreraComponent,
 	  PeriodoComponent,
+      AsignaturaComponent,
       EdificioComponent
-
 
   ],
   bootstrap:    [AppComponent],

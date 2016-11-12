@@ -1,6 +1,6 @@
 import {Carrera} from "./carrera";
 
-export interface Asignatura {
+export class Asignatura {
     id: number;
     nombre: string;
     carreras: Carrera[];
