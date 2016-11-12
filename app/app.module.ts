@@ -27,6 +27,7 @@ import {AsignaturaComponent} from "./asignatura/index"
 
 
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
+import {LocalidadComponent} from "./localidad/localidad.component";
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       TimelineDaySchedule,
 	  //CarreraComponent,
 	  PeriodoComponent,
+      LocalidadComponent,
       AsignaturaComponent,
       EdificioComponent
 

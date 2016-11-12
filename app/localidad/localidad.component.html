@@ -1,4 +1,4 @@
-<script src="asignatura.component.ts"></script>
+<script src="localidad.component.ts"></script>
 <div class="ContentSideSections">
 
 </div>
@@ -11,9 +11,9 @@
         <input #gb type="text" pInputText class="ui-grid-col-3" size="50" style="float:left; color:white;"
                placeholder="Buscar">
     </div>
-    <p-dataTable [value]="asignaturas" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedAsignatura"
+    <p-dataTable [value]="localidades" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedLocalidad"
                  (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
-        <header>Asignaturas</header>
+        <header>Localidades</header>
         <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
@@ -23,11 +23,11 @@
         </footer>
     </p-dataTable>
 
-    <p-dialog header="Asignatura" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="asignatura">
+    <p-dialog header="Localida" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="localidad">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="asignatura.nombre"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="localidad.nombre"/></div>
             </div>
 
         </div>
