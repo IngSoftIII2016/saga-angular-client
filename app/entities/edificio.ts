@@ -1,7 +1,8 @@
 import {Localidad} from "./localidad";
-export interface Edificio {
-    id?;
-    nombre?;
-    localidad?;
+export class Edificio {
+    id: number;
+    nombre: string;
+    localidad: Localidad;
 
+    
 }

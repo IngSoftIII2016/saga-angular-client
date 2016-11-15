@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {Localidad} from '../entities/localidad';
-import {Edificio} from '../entities/edificio';
-import {EdificioService} from '../services/edificio.service';
 
-class PrimeEdificio implements Edificio {
+import {EdificioService} from '../services/edificio.service';
+import {Edificio} from "../entities/edificio";
+
+/*class PrimeEdificio implements Edificio {
     constructor(public id?, public nombre?, public localidad?) {}
-}
+}*/
 
 @Component({
 	templateUrl: './app/edificio/edificio.component.html',
@@ -17,7 +18,7 @@ export class EdificioComponent {
 
 	displayDialog: boolean;
 
-    edificio: Edificio = new PrimeEdificio();
+    edificio: Edificio = new Edificio();
 
     selectedEdificio: Edificio;
 
@@ -32,9 +33,9 @@ export class EdificioComponent {
         this.edificioService.getEdificiosMedium().then(edificios => this.edificios= edificios);
     }
 
-    showDialogToAdd() {
+    showDialogToAdd(){
         this.newEdificio = true;
-        this.edificio = new PrimeEdificio();
+        this.edificio = new Edificio();
         this.displayDialog = true;
     }
 
@@ -68,7 +69,6 @@ export class EdificioComponent {
 	
     delete() {
 		this.edificioService.delete(this.edificio.id);
-		
         this.edificios.splice(this.findSelectedEdificioIndex(), 1);
         this.edificio = null;
         this.displayDialog = false;
@@ -81,7 +81,7 @@ export class EdificioComponent {
     }
 
     cloneEdificio(e: Edificio): Edificio {
-        let edificio = new PrimeEdificio();
+        let edificio = new Edificio();
         for(let prop in e) {
             edificio[prop] = e[prop];
         }

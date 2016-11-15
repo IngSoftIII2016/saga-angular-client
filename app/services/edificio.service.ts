@@ -7,14 +7,15 @@ import {Localidad} from "../entities/localidad";
 @Injectable()
 export class EdificioService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private edificioUrl = 'http://localhost/saga/api/edificios?include=localidad';
+    private edificioUrl = 'http://localhost/saga/api/edificios';
     constructor(private http: Http) {}
 
     getEdificiosMedium(): Promise<Edificio[]>  {
-        return Promise.resolve(this.http.get(this.edificioUrl)
+        return Promise.resolve(this.http.get(this.edificioUrl + '?include=localidad')
             .toPromise()
-            .then(res => res.json().data as Edificio[])
-            .then(data => { return data; }));
+            .then(res => res.json().data as Edificio[] )
+            .then(data => { return data; })
+            .catch(this.handleError));
     }
 
     delete(id: number): Promise<void> {
@@ -27,13 +28,11 @@ export class EdificioService {
     create(nombre: string, localidad:Localidad): Observable<Edificio> {
         return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad.id, id:""}}), {headers: this.headers})
             .map(this.extractData).catch(this.handleError);
-
     }
     private extractData(res: Response){
         console.log(res);
         let body = res.json();
         return body.data||{};
-
     }
     update(edificio: Edificio): Promise<Edificio> {
         const url = `${this.edificioUrl}`;
