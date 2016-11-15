@@ -3,6 +3,7 @@ import {RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptio
 /**
  * Created by juan on 12/11/16.
  */
+
 export class QueryOptions {
     filters: Object[] = [];
     includes: string[] = [];
@@ -43,8 +44,8 @@ export abstract class GenericService<T> {
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Get;
 
-        reqOptions.search.set('size', this.size.toString());
-        reqOptions.search.set('page', this.page.toString());
+        reqOptions.search.set('size', queryOptions.size.toString());
+        reqOptions.search.set('page', queryOptions.page.toString());
         for(var key in queryOptions.filters)
             if (queryOptions.filters.hasOwnProperty(key))
                 reqOptions.search.set(key, queryOptions.filters[key].toString());
@@ -63,5 +64,5 @@ export abstract class GenericService<T> {
         return this.http.request(req).map(res => res.json().data as T[]);
     }
 
-    public get()
+    //public create()
 }
