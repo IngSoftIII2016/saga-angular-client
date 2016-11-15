@@ -2,9 +2,6 @@ import {Component} from '@angular/core';
 import {Periodo} from '../entities/periodo';
 import {PeriodoService} from '../services/periodo.service';
 
-class PrimePeriodo implements Periodo {
-    constructor(public id?, public fecha_inicio?, public fecha_fin?, public descripcion?) {}
-}
 
 @Component({
 	templateUrl: './app/periodo/periodo.component.html',
@@ -16,7 +13,7 @@ export class PeriodoComponent {
 
 	displayDialog: boolean;
 
-    periodo: Periodo= new PrimePeriodo();
+    periodo: Periodo = new Periodo();
 
     selectedPeriodo: Periodo;
 
@@ -32,7 +29,7 @@ export class PeriodoComponent {
 
     showDialogToAdd() {
         this.newPeriodo = true;
-        this.periodo = new PrimePeriodo();
+        this.periodo = new Periodo();
         this.displayDialog = true;
     }
 
@@ -79,7 +76,7 @@ export class PeriodoComponent {
     }
 
     clonePeriodo(p: Periodo): Periodo{
-        let periodo = new PrimePeriodo();
+        let periodo = new Periodo();
         for(let prop in p) {
             periodo[prop] = p[prop];
         }

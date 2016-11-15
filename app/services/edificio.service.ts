@@ -7,27 +7,27 @@ import {Localidad} from "../entities/localidad";
 @Injectable()
 export class EdificioService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private edificioUrl = 'http://localhost/saga/api/edificios?include=localidad';
+    private edificioUrl = 'http://localhost/saga/api/edificios';
     constructor(private http: Http) {}
 
-    getEdificiosMedium(): Promise<Edificio[]>  {
-        return Promise.resolve(this.http.get(this.edificioUrl)
+    getEdificios() {
+        return this.http.get(this.edificioUrl)
             .toPromise()
             .then(res => res.json().data as Edificio[])
-            .then(data => { return data; }));
+            .then(data => { return data; });
     }
 
-    delete(id: number): Promise<void> {
+    create(edificio: Edificio): Observable<Edificio> {
+        return this.http.post(this.edificioUrl, JSON.stringify({data: edificio}), {headers: this.headers})
+            .map(this.extractData).catch(this.handleError);
+
+    }
+    delete(id: number): Promise<Edificio> {
         const url = `${this.edificioUrl}/${id}`;
         return this.http.delete(url, {headers: this.headers})
             .toPromise()
-            .then(() => null)
+            .then((res) => res.json().data as Edificio)
             .catch(this.handleError);
-    }
-    create(nombre: string, localidad:Localidad): Observable<Edificio> {
-        return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad.id, id:""}}), {headers: this.headers})
-            .map(this.extractData).catch(this.handleError);
-
     }
     private extractData(res: Response){
         console.log(res);
@@ -38,7 +38,7 @@ export class EdificioService {
     update(edificio: Edificio): Promise<Edificio> {
         const url = `${this.edificioUrl}`;
         return this.http
-            .put(url, JSON.stringify({data: {nombre: edificio.nombre , localidad: edificio.localidad, id :edificio.id}}), {headers: this.headers})
+            .put(url, JSON.stringify({data: edificio}), {headers: this.headers})
             .toPromise()
             .then(() => edificio)
             .catch(this.handleError);

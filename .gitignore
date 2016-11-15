@@ -7,5 +7,5 @@ node_modules
 *.d.ts
 *.DS_Store
 typings
-.idea
+.idea/
 prod/

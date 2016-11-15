@@ -3,13 +3,8 @@ import {Localidad} from '../entities/localidad';
 import {Edificio} from '../entities/edificio';
 import {EdificioService} from '../services/edificio.service';
 
-class PrimeEdificio implements Edificio {
-    constructor(public id?, public nombre?, public localidad?) {}
-}
-
 @Component({
 	templateUrl: './app/edificio/edificio.component.html',
-    styleUrls: ['./app/resources/demo/css/dialog.css'],
 	selector: 'edificio',
 	providers:[EdificioService]
 })
@@ -17,9 +12,9 @@ export class EdificioComponent {
 
 	displayDialog: boolean;
 
-    edificio: Edificio = new PrimeEdificio();
+    edificio: Edificio = new Edificio();
 
-    selectedEdificio: Edificio;
+    selectedEdificio: Edificio = null;
 
     newEdificio: boolean;
 
@@ -28,24 +23,26 @@ export class EdificioComponent {
     constructor(private edificioService: EdificioService) { }
 
     ngOnInit() {
+        this.edificioService.getEdificios().then(edificios => this.edificios = edificios);
+    }
 
-        this.edificioService.getEdificiosMedium().then(edificios => this.edificios= edificios);
+    load() {
+
     }
 
     showDialogToAdd() {
         this.newEdificio = true;
-        this.edificio = new PrimeEdificio();
+        this.edificio = new Edificio();
         this.displayDialog = true;
     }
 
 	add(nombre: string, localidad: Localidad): void {
 		nombre = nombre.trim();
 		if (!nombre) { return; }
-		this.edificioService.create(nombre, localidad).subscribe(edificio => {
+		this.edificioService.create(this.edificio).subscribe(edificio => {
                 this.edificio = edificio;
 				this.edificios.push(edificio);
 				this.selectedEdificio = null;
-
             }
 		 );
 	}
@@ -53,7 +50,12 @@ export class EdificioComponent {
     save() {
 		//insert
         if(this.newEdificio){
-			this.add(this.edificio.nombre, this.edificio.localidad);
+            this.edificioService.create(this.edificio).subscribe(edificio => {
+                    this.edificio = edificio;
+                    this.edificios.push(edificio);
+                    this.selectedEdificio = null;
+                }
+            );
 		}
 		//update
         else{
@@ -81,7 +83,7 @@ export class EdificioComponent {
     }
 
     cloneEdificio(e: Edificio): Edificio {
-        let edificio = new PrimeEdificio();
+        let edificio = new Edificio();
         for(let prop in e) {
             edificio[prop] = e[prop];
         }
