@@ -10,35 +10,34 @@ export class EdificioService {
     private edificioUrl = 'http://localhost/saga/api/edificios';
     constructor(private http: Http) {}
 
-    getEdificios() {
-        return this.http.get(this.edificioUrl)
+    getEdificiosMedium(): Promise<Edificio[]>  {
+        return Promise.resolve(this.http.get(this.edificioUrl + '?include=localidad')
             .toPromise()
-            .then(res => res.json().data as Edificio[])
-            .then(data => { return data; });
+            .then(res => res.json().data as Edificio[] )
+            .then(data => { return data; })
+            .catch(this.handleError));
     }
 
-    create(edificio: Edificio): Observable<Edificio> {
-        return this.http.post(this.edificioUrl, JSON.stringify({data: edificio}), {headers: this.headers})
-            .map(this.extractData).catch(this.handleError);
-
-    }
-    delete(id: number): Promise<Edificio> {
+    delete(id: number): Promise<void> {
         const url = `${this.edificioUrl}/${id}`;
         return this.http.delete(url, {headers: this.headers})
             .toPromise()
-            .then((res) => res.json().data as Edificio)
+            .then(() => null)
             .catch(this.handleError);
+    }
+    create(nombre: string, localidad:Localidad): Observable<Edificio> {
+        return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad.id, id:""}}), {headers: this.headers})
+            .map(this.extractData).catch(this.handleError);
     }
     private extractData(res: Response){
         console.log(res);
         let body = res.json();
         return body.data||{};
-
     }
     update(edificio: Edificio): Promise<Edificio> {
         const url = `${this.edificioUrl}`;
         return this.http
-            .put(url, JSON.stringify({data: edificio}), {headers: this.headers})
+            .put(url, JSON.stringify({data: {nombre: edificio.nombre , localidad: edificio.localidad, id :edificio.id}}), {headers: this.headers})
             .toPromise()
             .then(() => edificio)
             .catch(this.handleError);
