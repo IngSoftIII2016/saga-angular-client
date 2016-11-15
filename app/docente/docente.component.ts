@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {Docente} from '../entities/docente';
 import {DocenteService} from '../services/docente.service';
 
-class PrimeDocente implements Docente {
+/*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
 }
-
+*/
 @Component({
 	templateUrl: './app/docente/docente.component.html',
 	selector: 'docente',
@@ -15,7 +15,7 @@ export class DocenteComponent {
 
 	displayDialog: boolean;
 
-    docente: Docente = new PrimeDocente();
+    docente: Docente = new Docente();
 
     selectedDocente: Docente;
 
@@ -31,7 +31,7 @@ export class DocenteComponent {
 
     showDialogToAdd() {
         this.newDocente = true;
-        this.docente = new PrimeDocente();
+        this.docente = new Docente();
         this.displayDialog = true;
     }
 
@@ -78,7 +78,7 @@ export class DocenteComponent {
     }
 
     cloneDocente(d: Docente): Docente {
-        let docente = new PrimeDocente();
+        let docente = new Docente();
         for(let prop in d) {
             docente[prop] = d[prop];
         }
