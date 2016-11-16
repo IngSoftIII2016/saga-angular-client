@@ -1,5 +1,8 @@
 import {Observable} from "rxjs";
-import {RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http} from "@angular/http";
+import {
+    RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http,
+    URLSearchParams
+} from "@angular/http";
 /**
  * Created by juan on 12/11/16.
  */
@@ -9,7 +12,7 @@ export class QueryOptions {
     includes: string[] = [];
     sorts: Object[] = [];
     page: number = 1;
-    size: number = 20;
+    size: number = 10;
 
     constructor(values : Object = {} ) {
         Object.assign(this, values);
@@ -18,7 +21,6 @@ export class QueryOptions {
     nextPage() {
 
     }
-
 }
 
 
@@ -27,8 +29,9 @@ export abstract class GenericService<T> {
 
     protected baseUrl: string = 'http://localhost/saga/api/';
 
-
-    constructor(private http: Http) {
+    private _http;
+    constructor(http: Http) {
+        this._http = http;
     }
 
     protected abstract getResourcePath() : string;
@@ -37,11 +40,13 @@ export abstract class GenericService<T> {
         var reqOptions = new BaseRequestOptions();
         reqOptions.url = this.baseUrl + this.getResourcePath();
         reqOptions.headers.set('Content-Type', 'application/json');
+        reqOptions.search = new URLSearchParams();
         return reqOptions;
     }
 
     protected getQueryRequestOptions(queryOptions : QueryOptions) : RequestOptions {
         var reqOptions = this.getBaseRequestOptions();
+        console.log(reqOptions);
         reqOptions.method = RequestMethod.Get;
 
         reqOptions.search.set('size', queryOptions.size.toString());
@@ -61,8 +66,33 @@ export abstract class GenericService<T> {
     public query(queryOptions: QueryOptions) : Observable<T[]>{
         var reqOptions = this.getQueryRequestOptions(queryOptions);
         var req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T[]);
+        return this._http.request(req).map(res => res.json().data as T[]);
     }
 
-    //public create()
+    public create(t : T) : Observable<T> {
+
+        var reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Post;
+        reqOptions.body = JSON.stringify( {'data' : t} );
+        var req = new Request(reqOptions);
+        return this._http.request(req).map(res => res.json().data as T);
+    }
+
+    public update(t : T) : Observable<T> {
+
+        var reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Put;
+        reqOptions.body = JSON.stringify( {'data' : t} );
+        var req = new Request(reqOptions);
+        return this._http.request(req).map(res => res.json().data as T);
+    }
+
+    public delete(t : T) : Observable<T> {
+
+        var reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Delete;
+        reqOptions.body = JSON.stringify( {'data' : t} );
+        var req = new Request(reqOptions);
+        return this._http.request(req).map(res => res.json().data as T);
+    }
 }

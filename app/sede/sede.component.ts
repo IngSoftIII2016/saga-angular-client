@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {Sede} from '../entities/sede';
 import {SedeService} from '../services/sede.service';
+import {QueryOptions} from "../services/generic.service";
 
-class PrimeSede implements Sede {
-    constructor(public id?, public nombre?) {}
-}
 
 @Component({
 	templateUrl: './app/sede/sede.component.html',
@@ -13,9 +11,11 @@ class PrimeSede implements Sede {
 })
 export class SedeComponent {
 
+    queryOptions : QueryOptions = new QueryOptions();
+
 	displayDialog: boolean;
 
-    sede: Sede = new PrimeSede();
+    sede: Sede = new Sede();
 
     selectedSede: Sede;
 
@@ -26,19 +26,19 @@ export class SedeComponent {
     constructor(private sedeService: SedeService) { }
 
     ngOnInit() {
-        this.sedeService.getSedesMedium().then(sedes => this.sedes = sedes);
+        this.sedeService.query(this.queryOptions).subscribe(sedes => this.sedes = sedes);
     }
 
     showDialogToAdd() {
         this.newSede = true;
-        this.sede = new PrimeSede();
+        this.sede = new Sede();
         this.displayDialog = true;
     }
 
-	add(nombre: string): void {
-		nombre = nombre.trim();
-		if (!nombre) { return; }
-		this.sedeService.create(nombre).subscribe(sede => {
+	add(sede: Sede): void {
+
+
+		this.sedeService.create(sede).subscribe(sede => {
                 this.sede = sede;
 				this.sedes.push(sede);
 				this.selectedSede = null;
@@ -50,21 +50,21 @@ export class SedeComponent {
     save() {
 		//insert
         if(this.newSede){
-			this.add(this.sede.nombre);
+			this.add(this.sede);
 		}
 		//update
         else{
-			this.sedeService.update(this.sede).then(sede => {
+			this.sedeService.update(this.sede).subscribe(sede => {
             this.sedes[this.findSelectedSedeIndex()] = sede;
 		});
 		}
         this.sede = null;
         this.displayDialog = false;
     }
-	
+
 	
     delete() {
-		this.sedeService.delete(this.sede.id);
+		this.sedeService.delete(this.sede);
 		
         this.sedes.splice(this.findSelectedSedeIndex(), 1);
         this.sede = null;
@@ -78,7 +78,7 @@ export class SedeComponent {
     }
 
     cloneSede(s: Sede): Sede {
-        let sede = new PrimeSede();
+        let sede = new Sede();
         for(let prop in s) {
             sede[prop] = s[prop];
         }

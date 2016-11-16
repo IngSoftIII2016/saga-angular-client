@@ -23,7 +23,7 @@ export class EdificioComponent {
     constructor(private edificioService: EdificioService) { }
 
     ngOnInit() {
-        this.edificioService.getEdificios().then(edificios => this.edificios = edificios);
+        this.edificioService.getEdificiosMedium().then(edificios => this.edificios = edificios);
     }
 
     load() {
@@ -39,7 +39,7 @@ export class EdificioComponent {
 	add(nombre: string, localidad: Localidad): void {
 		nombre = nombre.trim();
 		if (!nombre) { return; }
-		this.edificioService.create(this.edificio).subscribe(edificio => {
+		this.edificioService.create(this.edificio.nombre, this.edificio.localidad).subscribe(edificio => {
                 this.edificio = edificio;
 				this.edificios.push(edificio);
 				this.selectedEdificio = null;
@@ -50,7 +50,7 @@ export class EdificioComponent {
     save() {
 		//insert
         if(this.newEdificio){
-            this.edificioService.create(this.edificio).subscribe(edificio => {
+            this.edificioService.create(this.edificio.nombre, this.edificio.localidad).subscribe(edificio => {
                     this.edificio = edificio;
                     this.edificios.push(edificio);
                     this.selectedEdificio = null;
