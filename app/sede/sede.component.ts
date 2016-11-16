@@ -64,8 +64,8 @@ export class SedeComponent {
 
 	
     delete() {
-		this.sedeService.delete(this.sede);
-		
+		this.sedeService.delete(this.sede).subscribe(sede => console.log(sede));
+
         this.sedes.splice(this.findSelectedSedeIndex(), 1);
         this.sede = null;
         this.displayDialog = false;

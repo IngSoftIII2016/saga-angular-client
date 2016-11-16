@@ -2,9 +2,6 @@ import {Component} from '@angular/core';
 import {Grupo} from '../entities/grupo';
 import {GrupoService} from '../services/grupo.service';
 
-class PrimeGrupo implements Grupo {
-    constructor(public id?, public nombre?, public descripcion?) {}
-}
 
 @Component({
 	templateUrl: './app/grupo/grupo.component.html',
@@ -15,7 +12,7 @@ export class GrupoComponent {
 
 	displayDialog: boolean;
 
-    grupo: Grupo = new PrimeGrupo();
+    grupo: Grupo = new Grupo();
 
     selectedGrupo: Grupo;
 
@@ -31,7 +28,7 @@ export class GrupoComponent {
 
     showDialogToAdd() {
         this.newGrupo = true;
-        this.grupo = new PrimeGrupo();
+        this.grupo = new Grupo();
         this.displayDialog = true;
     }
 
@@ -78,7 +75,7 @@ export class GrupoComponent {
     }
 
     cloneGrupo(g: Grupo): Grupo {
-        let grupo = new PrimeGrupo();
+        let grupo = new Grupo();
         for(let prop in g) {
             grupo[prop] = g[prop];
         }

@@ -1,4 +1,5 @@
-export class Sede {
+import {Entity} from "./Entity";
+export class Sede implements Entity {
     id : number = null;
     nombre : string = '';
 

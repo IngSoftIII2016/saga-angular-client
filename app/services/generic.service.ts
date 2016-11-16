@@ -3,6 +3,8 @@ import {
     RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http,
     URLSearchParams
 } from "@angular/http";
+import {Inject, Injectable} from "@angular/core";
+import {Entity} from "../entities/Entity";
 /**
  * Created by juan on 12/11/16.
  */
@@ -17,21 +19,16 @@ export class QueryOptions {
     constructor(values : Object = {} ) {
         Object.assign(this, values);
     }
-
-    nextPage() {
-
-    }
 }
 
 
-
-export abstract class GenericService<T> {
+@Injectable()
+export abstract class GenericService<T extends Entity> {
 
     protected baseUrl: string = 'http://localhost/saga/api/';
 
-    private _http;
-    constructor(http: Http) {
-        this._http = http;
+    constructor(protected http: Http) {
+
     }
 
     protected abstract getResourcePath() : string;
@@ -66,33 +63,33 @@ export abstract class GenericService<T> {
     public query(queryOptions: QueryOptions) : Observable<T[]>{
         var reqOptions = this.getQueryRequestOptions(queryOptions);
         var req = new Request(reqOptions);
-        return this._http.request(req).map(res => res.json().data as T[]);
+        return this.http.request(req).map(res => res.json().data as T[]);
     }
 
     public create(t : T) : Observable<T> {
 
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Post;
-        reqOptions.body = JSON.stringify( {'data' : t} );
+        reqOptions.body = JSON.stringify( {data : t} );
         var req = new Request(reqOptions);
-        return this._http.request(req).map(res => res.json().data as T);
+        return this.http.request(req).map(res => res.json().data as T);
     }
 
     public update(t : T) : Observable<T> {
 
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Put;
-        reqOptions.body = JSON.stringify( {'data' : t} );
+        reqOptions.body = JSON.stringify( {data : t} );
         var req = new Request(reqOptions);
-        return this._http.request(req).map(res => res.json().data as T);
+        return this.http.request(req).map(res => res.json().data as T);
     }
 
     public delete(t : T) : Observable<T> {
 
         var reqOptions = this.getBaseRequestOptions();
+        reqOptions.url += '/' + t.id;
         reqOptions.method = RequestMethod.Delete;
-        reqOptions.body = JSON.stringify( {'data' : t} );
         var req = new Request(reqOptions);
-        return this._http.request(req).map(res => res.json().data as T);
+        return this.http.request(req).map(res => res.json().data as T);
     }
 }

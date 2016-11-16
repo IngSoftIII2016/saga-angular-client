@@ -2,9 +2,6 @@ import {Component} from '@angular/core';
 import {Carrera} from '../entities/carrera';
 import {CarreraService} from '../services/carrera.service';
 
-class PrimeCarrera implements Carrera {
-    constructor(public id?, public nombre?) {}
-}
 
 @Component({
 	templateUrl: './app/carrera/carrera.component.html',
@@ -15,7 +12,7 @@ export class CarreraComponent {
 
 	displayDialog: boolean;
 
-    carrera: Carrera = new PrimeCarrera();
+    carrera: Carrera = new Carrera();
 
     selectedCarrera: Carrera;
 
@@ -31,7 +28,7 @@ export class CarreraComponent {
 
     showDialogToAdd() {
         this.newCarrera = true;
-        this.carrera = new PrimeCarrera();
+        this.carrera = new Carrera();
         this.displayDialog = true;
     }
 
@@ -78,7 +75,7 @@ export class CarreraComponent {
     }
 
     cloneCarrera(c: Carrera): Carrera {
-        let carrera = new PrimeCarrera();
+        let carrera = new Carrera();
         for(let prop in c) {
             carrera[prop] = c[prop];
         }
