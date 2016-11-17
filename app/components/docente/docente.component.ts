@@ -9,6 +9,7 @@ import {QueryOptions} from "../../services/generic.service";
 */
 @Component({
 	templateUrl: 'app/components/docente/docente.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'docente',
 	providers:[DocenteService]
 })

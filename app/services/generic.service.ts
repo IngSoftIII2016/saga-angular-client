@@ -63,7 +63,9 @@ export abstract class GenericService<T extends Entity> {
         var reqOptions = this.getQueryRequestOptions(queryOptions);
         reqOptions.url =  this.baseUrl + this.getResourcePath() ;
         var req = new Request(reqOptions);
+        console.log(req);
         return this.http.request(req).map(res => res.json().data as T[]);
+
     }
 
 

@@ -13,7 +13,7 @@ import {Aula} from "../../entities/aula";
 })
 export class AulaComponent {
 
-    queryOptions: QueryOptions = new QueryOptions();
+    queryOptions: QueryOptions = new QueryOptions({includes : ['edificio']});
 
     displayDialog: boolean;
 
@@ -58,7 +58,7 @@ export class AulaComponent {
                 this.aula[this.findSelectedAulaIndex()] = aula;
             });
         }
-        this.aulas = null;
+        this.aula = null;
         this.displayDialog = false;
     }
 
@@ -79,7 +79,7 @@ export class AulaComponent {
     cloneAula(a: Aula): Aula {
         let aula = new Aula();
         for (let prop in a) {
-            Aula[prop] = a[prop];
+            aula[prop] = a[prop];
         }
         return aula;
     }

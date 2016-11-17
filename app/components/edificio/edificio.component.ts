@@ -6,12 +6,13 @@ import {QueryOptions} from "../../services/generic.service";
 
 @Component({
 	templateUrl: 'app/components/edificio/edificio.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'edificio',
 	providers:[EdificioService]
 })
 export class EdificioComponent {
 
-    queryOptions: QueryOptions = new QueryOptions();
+    queryOptions: QueryOptions = new QueryOptions({includes : ['localidad']});
 
 	displayDialog: boolean;
 

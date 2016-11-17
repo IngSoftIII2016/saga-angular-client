@@ -5,7 +5,7 @@ export class Aula implements Entity {
     nombre: string;
     capacidad: number;
     ubicacion: number;
-    edificio: Edificio = new Edificio;
+    edificio: Edificio = new Edificio();
 
     constructor(value : Object = {}) {
         Object.assign(this, value);

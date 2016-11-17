@@ -12,7 +12,7 @@ import {Evento} from "../../entities/evento";
 })
 export class EventoComponent {
 
-    queryOptions : QueryOptions = new QueryOptions();
+    queryOptions : QueryOptions = new QueryOptions({includes : ['aula']});
 
     displayDialog: boolean;
 

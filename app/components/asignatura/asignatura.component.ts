@@ -79,7 +79,7 @@ export class AsignaturaComponent {
     cloneAsignatura(p: Asignatura): Asignatura {
         let asignatura = new Asignatura();
         for (let prop in p) {
-            Asignatura[prop] = p[prop];
+            asignatura[prop] = p[prop];
         }
         return asignatura;
     }

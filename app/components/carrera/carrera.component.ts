@@ -6,6 +6,7 @@ import {QueryOptions} from "../../services/generic.service";
 
 @Component({
 	templateUrl: 'app/components/carrera/carrera.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'carrera',
 	providers:[CarreraService]
 })
