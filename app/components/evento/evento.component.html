@@ -1,0 +1,57 @@
+<div class="ContentSideSections">
+
+</div>
+<div class="ContentSideSections Implementation">
+    <div class="ui-widget-header ui-helper-clearfix " style="padding:4px 10px;border-bottom: 0 none">
+        <input #gb type="text" pInputText class="ui-grid-col-3" size="50" style="float:left; color:white;"
+               placeholder="Buscar">
+    </div>
+    <p-dataTable [value]="eventos" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedEvento"
+                 (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+        <header>Eventos</header>
+        <p-column field="aula.nombre" header="Aula" [sortable]="true"></p-column>
+        <p-column field="fecha" header="Fecha" [sortable]="true"></p-column>
+        <p-column field="hora_inicio" header="Hora Inicio" [sortable]="true"></p-column>
+        <p-column field="hora_fin" header="Hora Fin" [sortable]="true"></p-column>
+        <p-column field="motivo" header="Motivo" [sortable]="true"></p-column>
+        <footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
+                        label="Agregar"></button>
+            </div>
+        </footer>
+    </p-dataTable>
+
+    <p-dialog header="Evento" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="evento">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="evento.aula.nombre"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="fecha">Capacidad</label></div>
+                <div class="ui-grid-col-8"><input type="date" id="fecha" [(ngModel)]="evento.fecha"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="evento.hora_inicio"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin</label></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_fin" [(ngModel)]="evento.hora_fin"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="motivo">Motivo</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="evento.motivo"/></div>
+            </div>
+
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+                <button type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
+                        label="Eliminar"></button>
+            </div>
+        </footer>
+    </p-dialog>
+</div>
