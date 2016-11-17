@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Car} from './cars/car';
-import {CarService} from './cars/carservice';
+import {Car} from './components/cars/car';
+import {CarService} from './components/cars/carservice';
 
 class PrimeCar implements Car {
     constructor(public vin?, public year?, public brand?, public color?) {}

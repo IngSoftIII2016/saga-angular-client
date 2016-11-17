@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {Carrera} from '../entities/carrera';
-import {CarreraService} from '../services/carrera.service';
+import {Carrera} from '../../entities/carrera';
+import {CarreraService} from '../../services/carrera.service';
 
 
 @Component({
-	templateUrl: './app/carrera/carrera.component.html',
+	templateUrl: 'app/components/carrera/carrera.component.html',
 	selector: 'carrera',
 	providers:[CarreraService]
 })

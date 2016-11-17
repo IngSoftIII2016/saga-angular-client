@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {Docente} from '../entities/docente';
-import {DocenteService} from '../services/docente.service';
+import {Docente} from '../../entities/docente';
+import {DocenteService} from '../../services/docente.service';
 
 /*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
 }
 */
 @Component({
-	templateUrl: './app/docente/docente.component.html',
+	templateUrl: 'app/components/docente/docente.component.html',
 	selector: 'docente',
 	providers:[DocenteService]
 })

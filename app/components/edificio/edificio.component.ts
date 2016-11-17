@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {Localidad} from '../entities/localidad';
-import {Edificio} from '../entities/edificio';
-import {EdificioService} from '../services/edificio.service';
+import {Localidad} from '../../entities/localidad';
+import {Edificio} from '../../entities/edificio';
+import {EdificioService} from "../../services/edificio.service";
 
 @Component({
-	templateUrl: './app/edificio/edificio.component.html',
+	templateUrl: 'app/components/edificio/edificio.component.html',
 	selector: 'edificio',
 	providers:[EdificioService]
 })

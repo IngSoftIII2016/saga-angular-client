@@ -1,12 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {Edificio} from "./entities/edificio";
-import {EdificioService} from "./services/edificio.service";
+import {Edificio} from "../entities/edificio";
+import {EdificioService} from "../services/edificio.service";
 
 
 @Component({
     selector: 'my-app',
-    templateUrl: './app/app.component.html',
-    styleUrls: ['./app/app.component.css'],
+    templateUrl: 'app/components/app.component.html',
+    styleUrls: ['app/components/app.component.css'],
+
     providers: [EdificioService]
 })
 export class AppComponent implements OnInit {

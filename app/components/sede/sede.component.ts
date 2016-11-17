@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {Sede} from '../entities/sede';
-import {SedeService} from '../services/sede.service';
-import {QueryOptions} from "../services/generic.service";
+import {Sede} from '../../entities/sede';
+import {SedeService} from '../../services/sede.service';
+import {QueryOptions} from "../../services/generic.service";
 
 
 @Component({
-	templateUrl: './app/sede/sede.component.html',
+	templateUrl: 'app/components/sede/sede.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'sede',
 	providers:[SedeService]
 })

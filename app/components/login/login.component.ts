@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {ButtonModule,PasswordModule,InputTextModule} from 'primeng/primeng';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'login-component',
-    templateUrl: 'app/login/login.component.html'
+    templateUrl: 'app/components/login/login.component.html'
 
 })
 export class LoginComponent implements OnInit {

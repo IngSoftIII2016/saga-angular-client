@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {Grupo} from '../entities/grupo';
-import {GrupoService} from '../services/grupo.service';
+import {Grupo} from '../../entities/grupo';
+import {GrupoService} from '../../services/grupo.service';
 
 
 @Component({
-	templateUrl: './app/grupo/grupo.component.html',
+	templateUrl: 'app/components/grupo/grupo.component.html',
 	selector: 'grupo',
 	providers:[GrupoService]
 })

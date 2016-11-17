@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {Localidad} from "../entities/localidad";
-import {LocalidadService} from "../services/localidad.service";
+import {Localidad} from "../../entities/localidad";
+import {LocalidadService} from "../../services/localidad.service";
 
 //class PrimeAsignatura implements Asignatura {
 //    constructor(public id?, public nombre?, public carrera?) {}
 //}
 
 @Component({
-    templateUrl: './app/localidad/localidad.component.html',
-    styleUrls: ['./app/resources/demo/css/dialog.css'],
+    templateUrl: 'app/components/localidad/localidad.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'localidad',
     providers: [LocalidadService]
 })

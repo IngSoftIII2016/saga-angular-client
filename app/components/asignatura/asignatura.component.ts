@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {Asignatura} from "../entities/asignatura";
-import {AsignaturaService} from "../services/asignatura.service";
+import {Asignatura} from "../../entities/asignatura";
+import {AsignaturaService} from "../../services/asignatura.service";
 
 //class PrimeAsignatura implements Asignatura {
 //    constructor(public id?, public nombre?, public carrera?) {}
 //}
 
 @Component({
-    templateUrl: './app/asignatura/asignatura.component.html',
-    styleUrls: ['./app/resources/demo/css/dialog.css'],
+    templateUrl: 'app/components/asignatura/asignatura.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'asignatura',
     providers: [AsignaturaService]
 })

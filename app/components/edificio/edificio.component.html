@@ -7,7 +7,7 @@
         <header>Sedes</header>
         <p-column field="id" header="Id" [sortable]="true"></p-column>
         <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
-        <p-column field="localidad" header="Localidad" [sortable]="true"></p-column>
+        <p-column field="localidad.nombre" header="Localidad" [sortable]="true"></p-column>
         <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
     </p-dataTable>
 

@@ -7,27 +7,27 @@ import { LOCALE_ID } from '@angular/core';
 
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule} from 'primeng/primeng';
 
+import {AppComponent} from "./components/app.component";
 import {CarCrudComponent}  from './car-crud.component';
-import {CarService} from './cars/carservice';
-import {AppComponent} from "./app.component";
+import {CarService} from './components/cars/carservice';
 import {ClasesComponent} from "./clases.component";
-import {GrupoComponent} from "./grupo/index";
+import {GrupoComponent} from "./components/grupo/index";
 import {GrupoService} from './services/grupo.service';
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from "./components/login/login.component";
 import {AuthenticationService} from './services/authentication.service';
 import {AuthGuard} from './guards/index';
 import {NotFoundComponent} from "./notfound.component";
-import {DocenteComponent} from "./docente/index";
-import {SedeComponent} from "./sede/index";
-import {PeriodoComponent} from "./periodo/index";
-import {EdificioComponent} from "./edificio/index";
-import {AsignaturaComponent} from "./asignatura/index"
+import {DocenteComponent} from "./components/docente/index";
+import {SedeComponent} from "./components/sede/index";
+import {PeriodoComponent} from "./components/periodo/index";
+import {EdificioComponent} from "./components/edificio/index";
+import {AsignaturaComponent} from "./components/asignatura/index"
 //import {CarreraComponent} from "./carrera/index";
 
 
 
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
-import {LocalidadComponent} from "./localidad/localidad.component";
+import {LocalidadComponent} from "./components/localidad/localidad.component";
 
 
 @NgModule({
@@ -64,7 +64,7 @@ import {LocalidadComponent} from "./localidad/localidad.component";
   bootstrap:    [AppComponent],
   providers:    [
       AuthGuard,
-	 // GrupoService,
+	//  GrupoService,
       CarService,
 	  AuthenticationService,
       { provide: LOCALE_ID, useValue: "es" }

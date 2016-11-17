@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {Periodo} from '../entities/periodo';
-import {PeriodoService} from '../services/periodo.service';
+import {Periodo} from '../../entities/periodo';
+import {PeriodoService} from '../../services/periodo.service';
 
 
 @Component({
-	templateUrl: './app/periodo/periodo.component.html',
-    styleUrls: ['./app/resources/demo/css/dialog.css'],
+	templateUrl: 'app/components/periodo/periodo.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'periodo',
 	providers:[PeriodoService]
 })

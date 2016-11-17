@@ -2,16 +2,16 @@ import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ClasesComponent} from "./clases.component";
 import {CarCrudComponent} from "./car-crud.component";
-import {GrupoComponent} from "./grupo/grupo.component";
-import {LoginComponent} from "./login/login.component";
+import {GrupoComponent} from "./components/grupo/grupo.component";
+import {LoginComponent} from "./components/login/login.component";
 import { AuthGuard } from './guards/auth.guard';
 import {NotFoundComponent} from "./notfound.component";
-import {DocenteComponent} from "./docente/docente.component";
-import {SedeComponent} from "./sede/sede.component";
-import {PeriodoComponent} from "./periodo/periodo.component";
-import {EdificioComponent} from "./edificio/edificio.component";
-import {AsignaturaComponent} from "./asignatura/asignatura.component";
-import {LocalidadComponent} from "./localidad/localidad.component";
+import {DocenteComponent} from "./components/docente/docente.component";
+import {SedeComponent} from "./components/sede/sede.component";
+import {PeriodoComponent} from "./components/periodo/periodo.component";
+import {EdificioComponent} from "./components/edificio/edificio.component";
+import {AsignaturaComponent} from "./components/asignatura/asignatura.component";
+import {LocalidadComponent} from "./components/localidad/localidad.component";
 //import {CarreraComponent} from "./carrera/index";
 
 
