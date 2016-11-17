@@ -5,6 +5,7 @@ import {CarCrudComponent} from "./car-crud.component";
 import {GrupoComponent} from "./components/grupo/grupo.component";
 import {LoginComponent} from "./components/login/login.component";
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./components/docente/docente.component";
 import {SedeComponent} from "./components/sede/sede.component";
@@ -64,7 +65,7 @@ const appRoutes: Routes = [
     }
 	, {
         path: 'login',
-        component: LoginComponent 
+        component: LoginComponent , canActivate: [LoginGuard]
     }
     , {
         path: 'aulas',
@@ -75,10 +76,10 @@ const appRoutes: Routes = [
         component: EventoComponent, canActivate: [AuthGuard]
     }
 	,
-	{
-        path: '**',
-        component: NotFoundComponent 
-    }
+
+    {path: '404', component: NotFoundComponent},
+
+    {path: '**', redirectTo: '404'}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
