@@ -10,7 +10,7 @@
                  (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Eventos</header>
         <p-column field="aula.nombre" header="Aula" [sortable]="true"></p-column>
-        <p-column field="fecha" header="Fecha" [sortable]="true"></p-column>
+        <p-column field="fecha | date:es" header="Fecha" [sortable]="true"></p-column>
         <p-column field="hora_inicio" header="Hora Inicio" [sortable]="true"></p-column>
         <p-column field="hora_fin" header="Hora Fin" [sortable]="true"></p-column>
         <p-column field="motivo" header="Motivo" [sortable]="true"></p-column>

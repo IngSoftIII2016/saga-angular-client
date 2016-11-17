@@ -1,6 +1,6 @@
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ClasesComponent} from "./clases.component";
+import {ClasesComponent} from "./grilla.component";
 import {CarCrudComponent} from "./car-crud.component";
 import {GrupoComponent} from "./components/grupo/grupo.component";
 import {LoginComponent} from "./components/login/login.component";

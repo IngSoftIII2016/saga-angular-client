@@ -10,7 +10,7 @@ import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModul
 import {AppComponent} from "./components/app.component";
 import {CarCrudComponent}  from './car-crud.component';
 import {CarService} from './components/cars/carservice';
-import {ClasesComponent} from "./clases.component";
+import {ClasesComponent} from "./grilla.component";
 import {GrupoComponent} from "./components/grupo/index";
 import {GrupoService} from './services/grupo.service';
 import {LoginComponent} from "./components/login/login.component";

@@ -13,7 +13,7 @@ declare var moment: any;
 
 @Component({
     selector: 'clases',
-    templateUrl: './app/clases.component.html',
+    templateUrl: 'grilla.component.html',
     providers: [EdificioService, AulaService, ClaseService]
 })
 export class ClasesComponent implements OnInit {

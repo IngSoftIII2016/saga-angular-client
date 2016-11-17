@@ -40,8 +40,7 @@ export class EventoComponent {
         this.eventoService.create(evento).subscribe(evento => {
                 this.evento = evento;
                 this.eventos.push(evento);
-                this.selectedEvento= null;
-
+                this.selectedEvento = null;
             }
         );
     }
@@ -63,7 +62,7 @@ export class EventoComponent {
 
 
     delete() {
-        this.eventoService.delete(this.evento);
+        this.eventoService.delete(this.selectedEvento);
 
         this.eventos.splice(this.findSelectedEventoIndex(), 1);
         this.evento = null;
@@ -87,7 +86,8 @@ export class EventoComponent {
     findSelectedEventoIndex(): number {
         return this.eventos.indexOf(this.selectedEvento);
     }
-}	/**
+}
+/**
  * Created by Federico on 17/11/2016.
  */
 /**

@@ -13,6 +13,7 @@ export class QueryOptions {
     filters: Object[] = [];
     includes: string[] = [];
     sorts: Object[] = [];
+    likes: Object[] = [];
     page: number = 1;
     size: number = 10;
 
@@ -28,7 +29,6 @@ export abstract class GenericService<T extends Entity> {
     protected baseUrl: string = 'http://localhost/saga/api/';
 
     constructor(protected http: Http) {
-
     }
 
     protected abstract getResourcePath() : string;

@@ -13,6 +13,6 @@ export abstract class GenericStore<T extends Entity> {
     items : BehaviorSubject<T>;
 
     protected abstract getService() : GenericService<T>
-
+    
 
 }
