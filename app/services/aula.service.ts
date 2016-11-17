@@ -18,11 +18,7 @@ export class AulaService extends GenericService<Aula> {
         return 'aulas';
     }
 
-    protected getInclude(): string{
-        return '?include=edificio';
-    }
-
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 

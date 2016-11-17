@@ -13,9 +13,6 @@ export class LocalidadService extends GenericService<Localidad> {
         return 'localidades';
     }
 
-    protected getInclude(): string{
-        return '';
-    }
 
     constructor(private http: Http) {
         super(http);

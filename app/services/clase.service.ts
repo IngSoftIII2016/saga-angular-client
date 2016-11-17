@@ -20,11 +20,8 @@ export class ClaseService extends GenericService<Clase> {
         return 'clases';
     }
 
-    protected getInclude(): string{
-        return '';
-    }
 
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 

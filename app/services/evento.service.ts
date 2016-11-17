@@ -13,9 +13,6 @@ export class EventoService extends GenericService<Evento> {
         return 'eventos';
     }
 
-    protected getInclude(): string{
-        return '';
-    }
     constructor(private http: Http) {
         super(http);
     }
