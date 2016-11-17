@@ -13,11 +13,7 @@ export class GrupoService extends GenericService<Grupo> {
 		return 'grupos';
 	}
 
-	protected getInclude(): string{
-		return '';
-	}
-
-	constructor(private http: Http) {
+	constructor(http: Http) {
 		super(http);
 	}
 

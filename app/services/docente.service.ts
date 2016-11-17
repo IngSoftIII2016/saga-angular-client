@@ -13,11 +13,8 @@ export class DocenteService extends GenericService<Docente> {
 		return 'docentes';
 	}
 
-	protected getInclude(): string{
-		return '';
-	}
 
-	constructor(private http: Http) {
+	constructor(http: Http) {
 		super(http);
 	}
 

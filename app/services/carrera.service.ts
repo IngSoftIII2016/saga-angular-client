@@ -12,11 +12,8 @@ export class CarreraService extends GenericService<Carrera> {
 	protected getResourcePath(): string {
 		return 'carreras';
 	}
-	protected getInclude(): string{
-		return '';
-	}
 
-	constructor(private http: Http) {
+	constructor(http: Http) {
 		super(http);
 	}
 

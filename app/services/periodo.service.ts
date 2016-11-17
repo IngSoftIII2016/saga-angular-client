@@ -12,9 +12,6 @@ export class PeriodoService extends GenericService<Periodo> {
 		return 'periodos';
 	}
 
-	protected getInclude(): string{
-		return '';
-	}
 	constructor(private http: Http) {
 		super(http);
 	}

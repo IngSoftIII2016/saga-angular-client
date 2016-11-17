@@ -14,10 +14,6 @@ export class EdificioService extends GenericService<Edificio> {
         return 'edificios';
     }
 
-    protected getInclude(): string{
-        return '';
-    }
-
     constructor(private http: Http) {
         super(http);
     }
