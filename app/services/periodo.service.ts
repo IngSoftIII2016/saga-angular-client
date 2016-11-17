@@ -12,7 +12,7 @@ export class PeriodoService extends GenericService<Periodo> {
 		return 'periodos';
 	}
 
-	constructor(private http: Http) {
+	constructor(http: Http) {
 		super(http);
 	}
 

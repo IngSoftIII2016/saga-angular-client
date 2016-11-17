@@ -27,7 +27,6 @@ import {AulaComponent} from "./components/aula/index";
 //import {ClaseComponent} from "./components/clase/index";
 import {EventoComponent} from "./components/evento/index";
 import {LocalidadComponent} from "./components/localidad/localidad.component";
-
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 
 

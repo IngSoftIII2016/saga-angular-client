@@ -14,7 +14,7 @@ export class EdificioService extends GenericService<Edificio> {
         return 'edificios';
     }
 
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 

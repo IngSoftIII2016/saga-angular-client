@@ -14,7 +14,7 @@ export class LocalidadService extends GenericService<Localidad> {
     }
 
 
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 

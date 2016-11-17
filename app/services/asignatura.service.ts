@@ -14,7 +14,7 @@ export class AsignaturaService extends GenericService<Asignatura> {
     }
 
 
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 

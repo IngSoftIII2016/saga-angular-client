@@ -13,7 +13,7 @@ export class EventoService extends GenericService<Evento> {
         return 'eventos';
     }
 
-    constructor(private http: Http) {
+    constructor(http: Http) {
         super(http);
     }
 
