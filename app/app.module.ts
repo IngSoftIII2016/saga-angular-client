@@ -16,6 +16,7 @@ import {GrupoService} from './services/grupo.service';
 import {LoginComponent} from "./components/login/login.component";
 import {AuthenticationService} from './services/authentication.service';
 import {AuthGuard} from './guards/index';
+import {LoginGuard} from './guards/login.guard';
 import {NotFoundComponent} from "./notfound.component";
 import {DocenteComponent} from "./components/docente/index";
 import {SedeComponent} from "./components/sede/index";
@@ -66,8 +67,8 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
   bootstrap:    [AppComponent],
   providers:    [
       AuthGuard,
-	//  GrupoService,
-      CarService,
+	  LoginGuard,
+	  CarService,
 	  AuthenticationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

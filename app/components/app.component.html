@@ -2,7 +2,7 @@
 
     <div [ngClass]="displayMenu" class="layout-container menu-layout-static ">
     <!-- Top Bar -->
-    <div class="topbar clearfix">
+    <div *ngIf="mostrar()" class="topbar clearfix">
         <div class="topbar-left">
             <div class="logo"></div>
         </div>
@@ -15,11 +15,17 @@
             <a id="topbar-menu-button" >
                 <i class="material-icons">menu</i>
             </a>
-          </div>
+            <div class="topbar-items fadeInDown"  >
+                 <li class="profile-item" >
+                     <button  type="button"    pButton  label="Salir" icon="fa ui-icon-exit-to-app" (click)="logout()"></button>
+                 </li>
+            </div>
+        </div>
+
     </div>
 
     <!-- Menu -->
-        <div class="layout-menu">
+        <div *ngIf="mostrar()" class="layout-menu">
             <div class="nano has-scrollbar">
                 <div class="nano-content menu-scroll-content" tabindex="0" style="margin-right: -17px;">
                    <ul class="ultima-menu clearfix" id="main-menu">
@@ -42,10 +48,10 @@
                 <div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 206px; transform: translate(0px, 0px);"></div></div></div>
         </div>
 
-    <div class="layout-main">
+    <div [ngClass]="displayLayout">
         <router-outlet></router-outlet>
 
-        <div class="footer" >
+        <div *ngIf="mostrar()" class="footer" >
             <div class="card clearfix">
                 <span class="footer-text-left">SAGA</span>
                 <span class="footer-text-right"><span class="ui-icon ui-icon-copyright"></span>  <span>Todos los derechos reservados</span></span>

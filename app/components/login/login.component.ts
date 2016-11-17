@@ -11,17 +11,18 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 })
 export class LoginComponent implements OnInit {
-    model: any = {};
+	model: any = {};
     loading = false;
     error = '';
-
+	public isNotLogin;
     constructor(
+		 
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService) {this.isNotLogin = false; }
 
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
+       // this.authenticationService.logout();
     }
 
     login() {
