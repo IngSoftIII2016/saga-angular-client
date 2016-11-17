@@ -1,6 +1,6 @@
 import {Entity} from "./Entity";
 export class Grupo implements Entity {
-    id: number;
+    id: number = null;
     nombre: string;
 	descripcion: string;
 

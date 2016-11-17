@@ -4,12 +4,12 @@ import {Entity} from "./Entity";
 
 export class Clase implements Entity {
 
-    id: number;
+    id: number = null;
     fecha: string;
     hora_inicio: string;
     hora_fin: string;
-    horario: Horario;
-    aula: Aula;
+    horario: Horario = new Horario();
+    aula: Aula = new Aula();
     comentario: string;
 
     constructor(value : Object = {}) {

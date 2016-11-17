@@ -5,11 +5,11 @@ import {Entity} from "./Entity";
  */
 
 export class Evento implements Entity {
-    id: number;
+    id: number = null;
     fecha: string;
     hora_inicio: string;
     hora_fin: string;
-    aula: Aula;
+    aula: Aula = new Aula();
     motivo: string;
 
     constructor(value: Object = {}) {

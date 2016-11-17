@@ -1,6 +1,6 @@
 import {Entity} from "./Entity";
 export class Periodo implements Entity {
-    id: number;
+    id: number = null;
     fecha_inicio : string;
     fecha_fin : string ;
 	descripcion: string;

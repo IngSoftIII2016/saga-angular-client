@@ -1,6 +1,6 @@
 import {Entity} from "./Entity";
 export class Localidad implements Entity{
-    id: number;
+    id: number = null;
     nombre: string;
 
     constructor(value: Object = {}) {
