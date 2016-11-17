@@ -13,6 +13,8 @@ import {EdificioComponent} from "./components/edificio/edificio.component";
 import {AsignaturaComponent} from "./components/asignatura/asignatura.component";
 import {LocalidadComponent} from "./components/localidad/localidad.component";
 import {CarreraComponent} from "./components/carrera/index";
+import {AulaComponent} from "./components/aula/aula.component";
+import {EventoComponent} from "./components/evento/evento.component";
 
 
 
@@ -63,6 +65,14 @@ const appRoutes: Routes = [
 	, {
         path: 'login',
         component: LoginComponent 
+    }
+    , {
+        path: 'aulas',
+        component: AulaComponent, canActivate: [AuthGuard]
+    }
+    , {
+        path: 'eventos',
+        component: EventoComponent, canActivate: [AuthGuard]
     }
 	,
 	{

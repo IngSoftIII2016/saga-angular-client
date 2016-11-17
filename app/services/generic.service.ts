@@ -33,7 +33,6 @@ export abstract class GenericService<T extends Entity> {
 
     protected abstract getResourcePath() : string;
 
-    protected  abstract  getInclude() : string
 
     protected getBaseRequestOptions() : RequestOptions {
         var reqOptions = new BaseRequestOptions();
@@ -62,7 +61,7 @@ export abstract class GenericService<T extends Entity> {
 
     public query(queryOptions: QueryOptions) : Observable<T[]>{
         var reqOptions = this.getQueryRequestOptions(queryOptions);
-        reqOptions.url =  this.baseUrl + this.getResourcePath() + this.getInclude();
+        reqOptions.url =  this.baseUrl + this.getResourcePath() ;
         var req = new Request(reqOptions);
         return this.http.request(req).map(res => res.json().data as T[]);
     }
@@ -73,7 +72,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Post;
         reqOptions.body = JSON.stringify( {data : t} );
         var req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.http.request(req).map(res => res.json().data as T );
     }
 
     public update(t : T) : Observable<T> {

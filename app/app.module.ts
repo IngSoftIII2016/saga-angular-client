@@ -23,11 +23,12 @@ import {PeriodoComponent} from "./components/periodo/index";
 import {EdificioComponent} from "./components/edificio/index";
 import {AsignaturaComponent} from "./components/asignatura/index"
 import {CarreraComponent} from "./components/carrera/index";
-
-
+import {AulaComponent} from "./components/aula/index";
+//import {ClaseComponent} from "./components/clase/index";
+import {EventoComponent} from "./components/evento/index";
+import {LocalidadComponent} from "./components/localidad/localidad.component";
 
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
-import {LocalidadComponent} from "./components/localidad/localidad.component";
 
 
 @NgModule({
@@ -58,7 +59,9 @@ import {LocalidadComponent} from "./components/localidad/localidad.component";
 	  PeriodoComponent,
       LocalidadComponent,
       AsignaturaComponent,
-      EdificioComponent
+      EdificioComponent,
+      AulaComponent,
+      EventoComponent
 
   ],
   bootstrap:    [AppComponent],

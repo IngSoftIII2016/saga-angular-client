@@ -14,7 +14,7 @@ export class AsignaturaService extends GenericService<Asignatura> {
     }
 
     protected getInclude(): string{
-        return '';
+        return '?include=edificio';
     }
 
     constructor(private http: Http) {
