@@ -1,1 +1,1 @@
-﻿export * from './docente.component';
+﻿﻿export * from './docente.component';

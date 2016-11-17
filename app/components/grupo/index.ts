@@ -1,1 +1,1 @@
-﻿export * from './grupo.component';
+﻿﻿export * from './grupo.component';

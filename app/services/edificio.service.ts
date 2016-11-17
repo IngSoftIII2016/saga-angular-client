@@ -1,47 +1,27 @@
-import {Injectable} from "@angular/core";
-import {Http, Response, Headers} from "@angular/http";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
+
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map'
+import {GenericService} from "./generic.service";
 import {Edificio} from "../entities/edificio";
-import {Localidad} from "../entities/localidad";
 
 @Injectable()
-export class EdificioService {
-    private headers = new Headers({'Content-Type': 'application/json'});
+export class EdificioService extends GenericService<Edificio> {
+
     private edificioUrl = 'http://localhost/saga/api/edificios';
-    constructor(private http: Http) {}
-
-    getEdificiosMedium(): Promise<Edificio[]>  {
-        return Promise.resolve(this.http.get(this.edificioUrl + '?include=localidad')
-            .toPromise()
-            .then(res => res.json().data as Edificio[] )
-            .then(data => { return data; })
-            .catch(this.handleError));
+    protected getResourcePath(): string {
+        return 'edificios';
     }
 
-    delete(id: number): Promise<void> {
-        const url = `${this.edificioUrl}/${id}`;
-        return this.http.delete(url, {headers: this.headers})
-            .toPromise()
-            .then(() => null)
-            .catch(this.handleError);
+    protected getInclude(): string{
+        return '';
     }
-    create(nombre: string, localidad:Localidad): Observable<Edificio> {
-        return this.http.post(this.edificioUrl, JSON.stringify({data: {nombre: nombre , localidad: localidad.id, id:""}}), {headers: this.headers})
-            .map(this.extractData).catch(this.handleError);
+
+    constructor(private http: Http) {
+        super(http);
     }
-    private extractData(res: Response){
-        console.log(res);
-        let body = res.json();
-        return body.data||{};
-    }
-    update(edificio: Edificio): Promise<Edificio> {
-        const url = `${this.edificioUrl}`;
-        return this.http
-            .put(url, JSON.stringify({data: {nombre: edificio.nombre , localidad: edificio.localidad, id :edificio.id}}), {headers: this.headers})
-            .toPromise()
-            .then(() => edificio)
-            .catch(this.handleError);
-    }
+
     private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
@@ -68,4 +48,5 @@ export class EdificioService {
             .then(res => res.json().data as Edificio)
             .catch(this.handleError)
     }
+
 }

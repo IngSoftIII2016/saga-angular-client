@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Localidad} from "../../entities/localidad";
 import {LocalidadService} from "../../services/localidad.service";
+import {QueryOptions} from "../../services/generic.service";
 
 //class PrimeAsignatura implements Asignatura {
 //    constructor(public id?, public nombre?, public carrera?) {}
@@ -14,6 +15,8 @@ import {LocalidadService} from "../../services/localidad.service";
 })
 
 export class LocalidadComponent {
+
+    queryOptions: QueryOptions = new QueryOptions();
 
     displayDialog: boolean;
 
@@ -29,7 +32,7 @@ export class LocalidadComponent {
     }
 
     ngOnInit() {
-        this.localidadService.getLocalidadMedium().then(localidades => this.localidades = localidades);
+        this.localidadService.query(this.queryOptions).subscribe(localidades => this.localidades = localidades);
     }
 
     showDialogToAdd() {
@@ -38,14 +41,11 @@ export class LocalidadComponent {
         this.displayDialog = true;
     }
 
-    add(nombre: string): void {
-        nombre = nombre.trim();
-        if (!nombre) {
-            return;
-        }
-        this.localidadService.create(nombre).subscribe(asignatura => {
-                this.localidad.nombre = nombre;
-                this.localidades.push(asignatura);
+    add(localidad : Localidad): void {
+
+        this.localidadService.create(localidad).subscribe(localidad => {
+                this.localidad = localidad;
+                this.localidades.push(localidad);
                 this.selectedLocalidad = null;
             }
         );
@@ -54,12 +54,12 @@ export class LocalidadComponent {
     save() {
         //insert
         if (this.newLocalidad) {
-            this.add(this.localidad.nombre);
+            this.add(this.localidad);
         }
         //update
         else {
-            this.localidadService.update(this.localidad).then(localidad => {
-                this.localidades[this.findSelectedAsignaturaIndex()] = localidad;
+            this.localidadService.update(this.localidad).subscribe(localidad => {
+                this.localidades[this.findSelectedLocalidadIndex()] = localidad;
             });
         }
         this.localidades = null;
@@ -68,9 +68,9 @@ export class LocalidadComponent {
 
 
     delete() {
-        this.localidadService.delete(this.localidad.id);
+        this.localidadService.delete(this.localidad);
 
-        this.localidades.splice(this.findSelectedAsignaturaIndex(), 1);
+        this.localidades.splice(this.findSelectedLocalidadIndex(), 1);
         this.localidad = null;
         this.displayDialog = false;
     }
@@ -89,7 +89,7 @@ export class LocalidadComponent {
         return localidad;
     }
 
-    findSelectedAsignaturaIndex(): number {
+    findSelectedLocalidadIndex(): number {
         return this.localidades.indexOf(this.selectedLocalidad);
     }
 

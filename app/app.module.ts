@@ -22,7 +22,7 @@ import {SedeComponent} from "./components/sede/index";
 import {PeriodoComponent} from "./components/periodo/index";
 import {EdificioComponent} from "./components/edificio/index";
 import {AsignaturaComponent} from "./components/asignatura/index"
-//import {CarreraComponent} from "./carrera/index";
+import {CarreraComponent} from "./components/carrera/index";
 
 
 
@@ -54,7 +54,7 @@ import {LocalidadComponent} from "./components/localidad/localidad.component";
 	  DocenteComponent,
 	  SedeComponent,
       TimelineDaySchedule,
-	  //CarreraComponent,
+	  CarreraComponent,
 	  PeriodoComponent,
       LocalidadComponent,
       AsignaturaComponent,

@@ -33,9 +33,11 @@ export abstract class GenericService<T extends Entity> {
 
     protected abstract getResourcePath() : string;
 
+    protected  abstract  getInclude() : string
+
     protected getBaseRequestOptions() : RequestOptions {
         var reqOptions = new BaseRequestOptions();
-        reqOptions.url = this.baseUrl + this.getResourcePath();
+        reqOptions.url = this.baseUrl + this.getResourcePath() ;
         reqOptions.headers.set('Content-Type', 'application/json');
         reqOptions.search = new URLSearchParams();
         return reqOptions;
@@ -43,9 +45,7 @@ export abstract class GenericService<T extends Entity> {
 
     protected getQueryRequestOptions(queryOptions : QueryOptions) : RequestOptions {
         var reqOptions = this.getBaseRequestOptions();
-        console.log(reqOptions);
         reqOptions.method = RequestMethod.Get;
-
         reqOptions.search.set('size', queryOptions.size.toString());
         reqOptions.search.set('page', queryOptions.page.toString());
         for(var key in queryOptions.filters)
@@ -62,6 +62,7 @@ export abstract class GenericService<T extends Entity> {
 
     public query(queryOptions: QueryOptions) : Observable<T[]>{
         var reqOptions = this.getQueryRequestOptions(queryOptions);
+        reqOptions.url =  this.baseUrl + this.getResourcePath() + this.getInclude();
         var req = new Request(reqOptions);
         return this.http.request(req).map(res => res.json().data as T[]);
     }

@@ -1,1 +1,1 @@
-﻿export * from './localidad.component';
+﻿﻿export * from './localidad.component';

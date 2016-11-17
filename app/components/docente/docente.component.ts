@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Docente} from '../../entities/docente';
 import {DocenteService} from '../../services/docente.service';
+import {QueryOptions} from "../../services/generic.service";
 
 /*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
@@ -12,6 +13,8 @@ import {DocenteService} from '../../services/docente.service';
 	providers:[DocenteService]
 })
 export class DocenteComponent {
+
+    queryOptions: QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
@@ -26,7 +29,7 @@ export class DocenteComponent {
     constructor(private docenteService: DocenteService) { }
 
     ngOnInit() {
-        this.docenteService.getDocentesMedium().then(docentes => this.docentes = docentes);
+        this.docenteService.query(this.queryOptions).subscribe(docentes => this.docentes = docentes);
     }
 
     showDialogToAdd() {
@@ -35,10 +38,8 @@ export class DocenteComponent {
         this.displayDialog = true;
     }
 
-	add(nombre: string, apellido:string): void {
-		nombre = nombre.trim();
-		if (!nombre) { return; }
-		this.docenteService.create(nombre, apellido).subscribe(docente => {
+	add(docente : Docente): void {
+		this.docenteService.create(docente).subscribe(docente => {
                 this.docente = docente;
 				this.docentes.push(docente);
 				this.selectedDocente = null;
@@ -50,11 +51,11 @@ export class DocenteComponent {
     save() {
 		//insert
         if(this.newDocente){
-			this.add(this.docente.nombre,this.docente.apellido);
+			this.add(this.docente);
 		}
 		//update
         else{
-			this.docenteService.update(this.docente).then(docente => {
+			this.docenteService.update(this.docente).subscribe(docente => {
             this.docentes[this.findSelectedDocenteIndex()] = docente;
 		});
 		}
@@ -64,7 +65,7 @@ export class DocenteComponent {
 	
 	
     delete() {
-		this.docenteService.delete(this.docente.id);
+		this.docenteService.delete(this.docente);
 		
         this.docentes.splice(this.findSelectedDocenteIndex(), 1);
         this.docente = null;

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Grupo} from '../../entities/grupo';
 import {GrupoService} from '../../services/grupo.service';
+import {QueryOptions} from "../../services/generic.service";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {GrupoService} from '../../services/grupo.service';
 	providers:[GrupoService]
 })
 export class GrupoComponent {
+    queryOptions: QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
@@ -23,7 +25,7 @@ export class GrupoComponent {
     constructor(private grupoService: GrupoService) { }
 
     ngOnInit() {
-        this.grupoService.getGruposMedium().then(grupos => this.grupos = grupos);
+        this.grupoService.query(this.queryOptions).subscribe(grupos => this.grupos = grupos);
     }
 
     showDialogToAdd() {
@@ -32,10 +34,8 @@ export class GrupoComponent {
         this.displayDialog = true;
     }
 
-	add(nombre: string, descripcion:string): void {
-		nombre = nombre.trim();
-		if (!nombre) { return; }
-		this.grupoService.create(nombre, descripcion).subscribe(grupo => {
+	add(grupo: Grupo): void {
+		this.grupoService.create(grupo).subscribe(grupo => {
                 this.grupo = grupo;
 				this.grupos.push(grupo);
 				this.selectedGrupo = null;
@@ -47,11 +47,11 @@ export class GrupoComponent {
     save() {
 		//insert
         if(this.newGrupo){
-			this.add(this.grupo.nombre,this.grupo.descripcion);
+			this.add(this.grupo);
 		}
 		//update
         else{
-			this.grupoService.update(this.grupo).then(grupo => {
+			this.grupoService.update(this.grupo).subscribe(grupo => {
             this.grupos[this.findSelectedGrupoIndex()] = grupo;
 		});
 		}
@@ -61,7 +61,7 @@ export class GrupoComponent {
 	
 	
     delete() {
-		this.grupoService.delete(this.grupo.id);
+		this.grupoService.delete(this.grupo);
 		
         this.grupos.splice(this.findSelectedGrupoIndex(), 1);
         this.grupo = null;

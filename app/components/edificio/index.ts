@@ -1,1 +1,1 @@
-﻿export * from './edificio.component';
+﻿﻿export * from './edificio.component';

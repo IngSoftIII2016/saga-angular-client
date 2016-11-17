@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Periodo} from '../../entities/periodo';
 import {PeriodoService} from '../../services/periodo.service';
+import {QueryOptions} from "../../services/generic.service";
 
 
 @Component({
@@ -10,6 +11,8 @@ import {PeriodoService} from '../../services/periodo.service';
 	providers:[PeriodoService]
 })
 export class PeriodoComponent {
+
+    queryOptions : QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
@@ -24,7 +27,7 @@ export class PeriodoComponent {
     constructor(private periodoService: PeriodoService) { }
 
     ngOnInit() {
-        this.periodoService.getPeriodosMedium().then(periodos => this.periodos = periodos);
+        this.periodoService.query(this.queryOptions).subscribe(periodos => this.periodos = periodos);
     }
 
     showDialogToAdd() {
@@ -33,10 +36,8 @@ export class PeriodoComponent {
         this.displayDialog = true;
     }
 
-	add(fecha_inicio:string, fecha_fin:string, descripcion:string): void {
-		descripcion = descripcion.trim();
-		if (!descripcion) { return; }
-		this.periodoService.create(fecha_inicio, fecha_fin,descripcion).subscribe(periodo => {
+	add(periodo: Periodo): void {
+		this.periodoService.create(periodo).subscribe(periodo => {
                 this.periodo = periodo;
                 this.periodos.push(periodo);
                 this.selectedPeriodo= null;
@@ -48,11 +49,11 @@ export class PeriodoComponent {
     save() {
 		//insert
         if(this.newPeriodo){
-			this.add(this.periodo.fecha_inicio, this.periodo.fecha_fin, this.periodo.descripcion);
+			this.add(this.periodo);
 		}
 		//update
         else{
-			this.periodoService.update(this.periodo).then(periodo => {
+			this.periodoService.update(this.periodo).subscribe(periodo => {
             this.periodos[this.findSelectedPeriodoIndex()] = periodo;
 		});
 		}
@@ -62,7 +63,7 @@ export class PeriodoComponent {
 	
 	
     delete() {
-		this.periodoService.delete(this.periodo.id);
+		this.periodoService.delete(this.periodo);
 		
         this.periodos.splice(this.findSelectedPeriodoIndex(), 1);
         this.periodo = null;

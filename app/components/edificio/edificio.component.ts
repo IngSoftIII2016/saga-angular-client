@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Localidad} from '../../entities/localidad';
 import {Edificio} from '../../entities/edificio';
 import {EdificioService} from "../../services/edificio.service";
+import {QueryOptions} from "../../services/generic.service";
 
 @Component({
 	templateUrl: 'app/components/edificio/edificio.component.html',
@@ -9,6 +10,8 @@ import {EdificioService} from "../../services/edificio.service";
 	providers:[EdificioService]
 })
 export class EdificioComponent {
+
+    queryOptions: QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
@@ -23,7 +26,7 @@ export class EdificioComponent {
     constructor(private edificioService: EdificioService) { }
 
     ngOnInit() {
-        this.edificioService.getEdificiosMedium().then(edificios => this.edificios = edificios);
+        this.edificioService.query(this.queryOptions).subscribe(edificios => this.edificios = edificios);
     }
 
     load() {
@@ -36,10 +39,8 @@ export class EdificioComponent {
         this.displayDialog = true;
     }
 
-	add(nombre: string, localidad: Localidad): void {
-		nombre = nombre.trim();
-		if (!nombre) { return; }
-		this.edificioService.create(this.edificio.nombre, this.edificio.localidad).subscribe(edificio => {
+	add(edificio: Edificio): void {
+		this.edificioService.create(edificio).subscribe(edificio => {
                 this.edificio = edificio;
 				this.edificios.push(edificio);
 				this.selectedEdificio = null;
@@ -50,16 +51,12 @@ export class EdificioComponent {
     save() {
 		//insert
         if(this.newEdificio){
-            this.edificioService.create(this.edificio.nombre, this.edificio.localidad).subscribe(edificio => {
-                    this.edificio = edificio;
-                    this.edificios.push(edificio);
-                    this.selectedEdificio = null;
-                }
-            );
+            this.add(this.edificio);
+
 		}
 		//update
         else{
-			this.edificioService.update(this.edificio).then(edificio => {
+			this.edificioService.update(this.edificio).subscribe(edificio => {
             this.edificios[this.findSelectedEdificioIndex()] = edificio;
 		});
 		}
@@ -69,7 +66,7 @@ export class EdificioComponent {
 	
 	
     delete() {
-		this.edificioService.delete(this.edificio.id);
+		this.edificioService.delete(this.edificio);
 		
         this.edificios.splice(this.findSelectedEdificioIndex(), 1);
         this.edificio = null;

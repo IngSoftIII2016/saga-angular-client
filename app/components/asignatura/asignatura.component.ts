@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import {Asignatura} from "../../entities/asignatura";
 import {AsignaturaService} from "../../services/asignatura.service";
+import {QueryOptions} from "../../services/generic.service";
 
-//class PrimeAsignatura implements Asignatura {
-//    constructor(public id?, public nombre?, public carrera?) {}
-//}
+
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -13,6 +12,8 @@ import {AsignaturaService} from "../../services/asignatura.service";
     providers: [AsignaturaService]
 })
 export class AsignaturaComponent {
+
+    queryOptions: QueryOptions = new QueryOptions();
 
     displayDialog: boolean;
 
@@ -28,7 +29,7 @@ export class AsignaturaComponent {
     }
 
     ngOnInit() {
-        this.asignaturaService.getAsignaturaMedium().then(asignaturas => this.asignaturas = asignaturas);
+        this.asignaturaService.query(this.queryOptions).subscribe(asignaturas => this.asignaturas = asignaturas);
     }
 
     showDialogToAdd() {
@@ -37,13 +38,9 @@ export class AsignaturaComponent {
         this.displayDialog = true;
     }
 
-    add(nombre: string): void {
-        nombre = nombre.trim();
-        if (!nombre) {
-            return;
-        }
-        this.asignaturaService.create(nombre).subscribe(asignatura => {
-                this.asignatura.nombre = nombre;
+    add(asignatura: Asignatura): void {
+        this.asignaturaService.create(asignatura).subscribe(asignatura => {
+                this.asignatura = asignatura;
                 this.asignaturas.push(asignatura);
                 this.selectedAsignatura = null;
             }
@@ -53,11 +50,11 @@ export class AsignaturaComponent {
     save() {
         //insert
         if (this.newAsignatura) {
-            this.add(this.asignatura.nombre);
+            this.add(this.asignatura);
         }
         //update
         else {
-            this.asignaturaService.update(this.asignatura).then(asignatura => {
+            this.asignaturaService.update(this.asignatura).subscribe(asignatura => {
                 this.asignaturas[this.findSelectedAsignaturaIndex()] = asignatura;
             });
         }
@@ -67,8 +64,7 @@ export class AsignaturaComponent {
 
 
     delete() {
-        this.asignaturaService.delete(this.asignatura.id);
-
+        this.asignaturaService.delete(this.asignatura);
         this.asignaturas.splice(this.findSelectedAsignaturaIndex(), 1);
         this.asignatura = null;
         this.displayDialog = false;

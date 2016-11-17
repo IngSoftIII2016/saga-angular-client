@@ -1,63 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {Grupo} from '../entities/grupo';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
+import {GenericService} from "./generic.service";
+import {Grupo} from "../entities/grupo";
 
 @Injectable()
-export class GrupoService {
-	private headers = new Headers({'Content-Type': 'application/json'});
-	private grupoUrl = 'http://localhost/saga/api/grupos';
-    constructor(private http: Http) {}
+export class GrupoService extends GenericService<Grupo> {
 
-		getGruposMedium() {
-			return this.http.get(this.grupoUrl)
-						.toPromise()
-                .then(res => res.json().data as Grupo[])
-						.then(data => { return data; });
-		}
-	  
-	  delete(id: number): Promise<void> {
-		const url = `${this.grupoUrl}/${id}`;
-		return this.http.delete(url, {headers: this.headers})
-		  .toPromise()
-		  .then(() => null)
-		  .catch(this.handleError);
-	  }
-	  create(nombre: string, descripcion:string): Observable<Grupo> {
-		return this.http.post(this.grupoUrl, JSON.stringify({data: {nombre: nombre , descripcion: descripcion ,id:""}}), {headers: this.headers})
-		            .map(this.extractData).catch(this.handleError);
-
-	  }
-	  private extractData(res: Response){
-		   console.log(res);
-		  let body = res.json();
-		  return body.data||{};
-		  
-	  }
-	  update(grupo: Grupo): Promise<Grupo> {
-		const url = `${this.grupoUrl}`;
-		return this.http
-		  .put(url, JSON.stringify({data: {nombre: grupo.nombre , descripcion: grupo.descripcion ,id:grupo.id}}), {headers: this.headers})
-		  .toPromise()
-		  .then(() => grupo)
-		  .catch(this.handleError);
-	  }
-		private handleError (error: Response | any) { // In a real world app, we might use a remote logging infrastructure 
-			 let errMsg: string;
-			 if (error instanceof Response) { 
-				 const body = error.json() || ''; 
-				 const err = body.error || JSON.stringify(body);
-				 errMsg = `${error.status} - ${error.statusText || ''} ${err}`; 
-			 }
-			else { errMsg = error.message ? error.message : error.toString(); } 
-			console.error(errMsg); return Observable.throw(errMsg);
-		} 
-	 /*  
-	  private handleError(error: any): Promise<any> {
-		  console.error('An error occurred', error); 
-		  return Promise.reject(error.message || error);
+	protected getResourcePath(): string {
+		return 'grupos';
 	}
-	*/
+
+	protected getInclude(): string{
+		return '';
+	}
+
+	constructor(private http: Http) {
+		super(http);
+	}
+
 }

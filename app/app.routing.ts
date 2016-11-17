@@ -12,7 +12,7 @@ import {PeriodoComponent} from "./components/periodo/periodo.component";
 import {EdificioComponent} from "./components/edificio/edificio.component";
 import {AsignaturaComponent} from "./components/asignatura/asignatura.component";
 import {LocalidadComponent} from "./components/localidad/localidad.component";
-//import {CarreraComponent} from "./carrera/index";
+import {CarreraComponent} from "./components/carrera/index";
 
 
 
@@ -51,6 +51,10 @@ const appRoutes: Routes = [
     , {
         path: 'asignaturas',
         component: AsignaturaComponent, canActivate: [AuthGuard]
+    }
+    , {
+        path: 'carreras',
+        component: CarreraComponent, canActivate: [AuthGuard]
     }
     , {
         path: 'localidades',

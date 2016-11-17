@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Carrera} from '../../entities/carrera';
 import {CarreraService} from '../../services/carrera.service';
+import {QueryOptions} from "../../services/generic.service";
 
 
 @Component({
@@ -9,6 +10,8 @@ import {CarreraService} from '../../services/carrera.service';
 	providers:[CarreraService]
 })
 export class CarreraComponent {
+
+    queryOptions: QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
@@ -23,7 +26,7 @@ export class CarreraComponent {
     constructor(private carreraService: CarreraService) { }
 
     ngOnInit() {
-        this.carreraService.getCarrerasMedium().then(carreras => this.carreras = carreras);
+        this.carreraService.query(this.queryOptions).subscribe(carreras => this.carreras = carreras);
     }
 
     showDialogToAdd() {
@@ -32,10 +35,8 @@ export class CarreraComponent {
         this.displayDialog = true;
     }
 
-	add(nombre: string): void {
-		nombre = nombre.trim();
-		if (!nombre) { return; }
-		this.carreraService.create(nombre).subscribe(carrera => {
+	add(carrera: Carrera): void {
+		this.carreraService.create(carrera).subscribe(carrera => {
                 this.carrera = carrera;
 				this.carreras.push(carrera);
 				this.selectedCarrera = null;
@@ -47,11 +48,11 @@ export class CarreraComponent {
     save() {
 		//insert
         if(this.newCarrera){
-			this.add(this.carrera.nombre);
+			this.add(this.carrera);
 		}
 		//update
         else{
-			this.carreraService.update(this.carrera).then(carrera => {
+			this.carreraService.update(this.carrera).subscribe(carrera => {
             this.carreras[this.findSelectedCarreraIndex()] = carrera;
 		});
 		}
@@ -61,7 +62,7 @@ export class CarreraComponent {
 	
 	
     delete() {
-		this.carreraService.delete(this.carrera.id);
+		this.carreraService.delete(this.carrera);
 		
         this.carreras.splice(this.findSelectedCarreraIndex(), 1);
         this.carrera = null;
