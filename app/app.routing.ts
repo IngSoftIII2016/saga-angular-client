@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     {
         path: '',
         redirectTo: 'clases/1',
-        //pathMatch: 'full'
+        pathMatch: 'full'
     }, {
         path: 'grilla/:id',
         component: GrillaComponent, canActivate: [AuthGuard]

@@ -1,13 +1,12 @@
 <div class="ContentSideSections">
-
+    <p-growl [value]="msgs" sticky="sticky"></p-growl>
 </div>
-
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix " style="padding:4px 10px;border-bottom: 0 none">
         <input #gb type="text" pInputText class="ui-grid-col-3" size="50" style="float:left; color:white;"
                placeholder="Buscar">
     </div>
-    <p-dataTable [value]="sedes" selectionMode="single" [(selection)]="selectedSede" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable [value]="sedeStore.items | async" selectionMode="single" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Sedes</header>
         <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
         <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
@@ -25,8 +24,7 @@
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                <button type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
-                        label="Eliminar"></button>
+                <button *ngIf="!isNew" type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()" label="Eliminar"></button>
             </div>
         </footer>
     </p-dialog>

@@ -1,92 +1,80 @@
 import {Component} from '@angular/core';
 import {Sede} from '../../entities/sede';
-import {SedeService} from '../../services/sede.service';
-import {QueryOptions} from "../../services/generic.service";
+import {SedeStore} from "../../services/sede.store";
+import {Message} from "primeng/components/common/api";
 
 
 @Component({
 	templateUrl: 'app/components/sede/sede.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'sede',
-	providers:[SedeService]
+	providers:[SedeStore]
 })
 export class SedeComponent {
-
-    queryOptions : QueryOptions = new QueryOptions();
 
 	displayDialog: boolean;
 
     sede: Sede = new Sede();
 
-    selectedSede: Sede;
+    isNew = false;
 
-    newSede: boolean;
+    msgs: Message[] = [];
 
-    sedes: Sede[];
-
-    constructor(private sedeService: SedeService) { }
-
-    ngOnInit() {
-        this.sedeService.query(this.queryOptions).subscribe(sedes => this.sedes = sedes);
-    }
+    constructor(private sedeStore: SedeStore) { }
 
     showDialogToAdd() {
-        this.newSede = true;
+        this.isNew = true;
         this.sede = new Sede();
         this.displayDialog = true;
     }
 
-	add(sede: Sede): void {
+    onRowSelect(event) {
+        this.isNew = false;
+        this.sede = new Sede(event.data);
+        this.displayDialog = true;
+    }
 
-
-		this.sedeService.create(sede).subscribe(sede => {
-                this.sede = sede;
-				this.sedes.push(sede);
-				this.selectedSede = null;
-
-            }
-		 );
-	}
-	
     save() {
-		//insert
-        if(this.newSede){
-			this.add(this.sede);
-		}
-		//update
-        else{
-			this.sedeService.update(this.sede).subscribe(sede => {
-            this.sedes[this.findSelectedSedeIndex()] = sede;
-		});
-		}
-        this.sede = null;
-        this.displayDialog = false;
+        this.sedeStore.save(this.sede).subscribe(
+            guardada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Guardado',
+                        detail:'Se ha guardado la sede '+ guardada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido guardar la sede:\n' + error
+                    });
+            });
     }
 
 	
     delete() {
-		this.sedeService.delete(this.sede).subscribe(sede => console.log(sede));
-
-        this.sedes.splice(this.findSelectedSedeIndex(), 1);
-        this.sede = null;
-        this.displayDialog = false;
-    }
-
-    onRowSelect(event) {
-        this.newSede = false;
-        this.sede = this.cloneSede(event.data);
-        this.displayDialog = true;
-    }
-
-    cloneSede(s: Sede): Sede {
-        let sede = new Sede();
-        for(let prop in s) {
-            sede[prop] = s[prop];
-        }
-        return sede;
-    }
-
-    findSelectedSedeIndex(): number {
-        return this.sedes.indexOf(this.selectedSede);
+        this.sedeStore.delete(this.sede).subscribe(
+            borrada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Exito',
+                        detail:'Se ha borrado la sede '+ borrada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido eliminar la sede:\n' + error
+                    });
+            }
+        );
     }
 }	

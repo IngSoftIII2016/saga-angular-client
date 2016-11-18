@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {Observable, BehaviorSubject} from "rxjs";
 import {
     RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http,
     URLSearchParams
@@ -17,7 +17,11 @@ export class QueryOptions {
     page: number = 1;
     size: number = 10;
 
-    constructor(values : Object = {} ) {
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
+
+    merge(values: Object = {}) {
         Object.assign(this, values);
     }
 }
@@ -26,90 +30,91 @@ export class QueryOptions {
 @Injectable()
 export abstract class GenericService<T extends Entity> {
 
+    public totalRows: Observable<number>;
+
     protected baseUrl: string = 'http://localhost/saga/api/';
 
-    private totalRows: Observable<number> = null;
+    private rowCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
     constructor(protected http: Http) {
-        this.totalRows = new Observable<number>(observer => observer.next())
+        this.getRowsCount()
+            .subscribe(rows =>
+                    this.rowCount = new BehaviorSubject<number>(rows),
+                err => console.error(err)
+            );
+        this.totalRows = this.rowCount.asObservable();
     }
 
-    protected abstract getResourcePath() : string;
+    protected abstract getResourcePath(): string;
 
 
-    protected getBaseRequestOptions() : RequestOptions {
-        var reqOptions = new BaseRequestOptions();
-        reqOptions.url = this.baseUrl + this.getResourcePath() ;
-        reqOptions.headers.set('Content-Type', 'application/json');
-        reqOptions.search = new URLSearchParams();
-        return reqOptions;
-    }
-
-    protected getQueryRequestOptions(queryOptions : QueryOptions) : RequestOptions {
-        var reqOptions = this.getBaseRequestOptions();
-        reqOptions.method = RequestMethod.Get;
-        reqOptions.search.set('size', queryOptions.size.toString());
-        reqOptions.search.set('page', queryOptions.page.toString());
-        for(var key in queryOptions.filters)
-            if (queryOptions.filters.hasOwnProperty(key))
-                reqOptions.search.set(key, queryOptions.filters[key].toString());
-        if(queryOptions.includes.length > 0)
-            reqOptions.search.set('include', queryOptions.includes.join(','));
-        for(var key in queryOptions.sorts)
-            if (queryOptions.sorts.hasOwnProperty(key))
-                reqOptions.search.set(key, queryOptions.sorts.join(','));
-
-        return reqOptions;
-    }
-
-    public query(queryOptions: QueryOptions) : Observable<T[]>{
+    public query(queryOptions: QueryOptions): Observable<T[]> {
         var reqOptions = this.getQueryRequestOptions(queryOptions);
-        reqOptions.url =  this.baseUrl + this.getResourcePath() ;
+        reqOptions.url = this.baseUrl + this.getResourcePath();
         var req = new Request(reqOptions);
-        console.log(req);
-        return this.http.request(req).map(res => res.json().data as T[]);
-
+        var obs = this.http.request(req).map(res => res.json());
+        obs.subscribe(json => this.rowCount.next(json.rowCount));
+        return obs.map(json => json.data);
     }
 
-    private getTotalRows() : Observable<number> {
-        if(this.totalRows == null) {
-            let reqOptions = this.getBaseRequestOptions();
-            reqOptions.url += '/0';
-            var req = new Request(reqOptions);
-            let obs = this.http.request(req).map(res => res.json().data);
-            obs.subscribe(val => this.totalRows = val);
-            return obs;
-        }
-
-
-
+    private getRowsCount(): Observable<number> {
+        let reqOptions = this.getBaseRequestOptions();
+        reqOptions.url += '/0';
+        var req = new Request(reqOptions);
+        return this.http.request(req).map(res => res.json().data as number);
     }
 
-
-    public create(t : T) : Observable<T> {
-
+    public create(t: T): Observable<T> {
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Post;
-        reqOptions.body = JSON.stringify( {data : t} );
+        reqOptions.body = JSON.stringify({data: t});
         var req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T );
+        console.log(req);
+        return this.http.request(req).map(res => res.json().data as T);
     }
 
-    public update(t : T) : Observable<T> {
+    public update(t: T): Observable<T> {
 
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Put;
-        reqOptions.body = JSON.stringify( {data : t} );
+        reqOptions.body = JSON.stringify({data: t});
         var req = new Request(reqOptions);
         return this.http.request(req).map(res => res.json().data as T);
     }
 
-    public delete(t : T) : Observable<T> {
-
+    public delete(t: T): Observable<T> {
         var reqOptions = this.getBaseRequestOptions();
         reqOptions.url += '/' + t.id;
         reqOptions.method = RequestMethod.Delete;
         var req = new Request(reqOptions);
         return this.http.request(req).map(res => res.json().data as T);
+    }
+
+    protected getBaseRequestOptions(): RequestOptions {
+        var reqOptions = new BaseRequestOptions();
+        reqOptions.url = this.baseUrl + this.getResourcePath();
+        reqOptions.headers.set('Content-Type', 'application/this.isNew = true;json');
+        reqOptions.search = new URLSearchParams();
+        return reqOptions;
+    }
+
+    protected getQueryRequestOptions(queryOptions: QueryOptions): RequestOptions {
+        var reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Get;
+        reqOptions.search.set('size', queryOptions.size.toString());
+        reqOptions.search.set('page', queryOptions.page.toString());
+        for (var key in queryOptions.filters)
+            if (queryOptions.filters.hasOwnProperty(key))
+                reqOptions.search.set(key, queryOptions.filters[key].toString());
+        if (queryOptions.includes.length > 0)
+            reqOptions.search.set('include', queryOptions.includes.join(','));
+        for (var key in queryOptions.sorts)
+            if (queryOptions.sorts.hasOwnProperty(key))
+                reqOptions.search.set('sort', queryOptions.sorts.join(','));
+        for (var key in queryOptions.likes)
+            if (queryOptions.likes.hasOwnProperty(key))
+                reqOptions.search.set('like', queryOptions.sorts.join(','));
+
+        return reqOptions;
     }
 }

@@ -27,6 +27,7 @@ import {AulaComponent} from "./components/aula/index";
 import {EventoComponent} from "./components/evento/index";
 import {LocalidadComponent} from "./components/localidad/localidad.component";
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
+import {SedeService} from "./services/sede.service";
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       AuthGuard,
 	  LoginGuard,
 	  AuthenticationService,
+      SedeService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
