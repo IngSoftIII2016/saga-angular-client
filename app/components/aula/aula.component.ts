@@ -48,31 +48,36 @@ export class AulaComponent {
                 this.selectedAula= null;
             }
         );
-        this.msgs = [];
-        this.msgs.push({severity:'success', summary:'Success Message', detail:'Aula agregada con exito!'});
+
     }
 
     save() {
         //insert
+        var evento: string;
         if (this.newAula) {
             this.add(this.aula);
+            evento = 'agregada'
         }
         //update
         else {
             this.aulaService.update(this.aula).subscribe(aula => {
-                this.aula[this.findSelectedAulaIndex()] = aula;
+                this.aulas[this.findSelectedAulaIndex()] = aula;
             });
+            evento = 'modificada'
         }
         this.aula = null;
         this.displayDialog = false;
+        this.message(evento);
     }
 
 
     delete() {
+        var evento: string = 'eliminada';
         this.aulaService.delete(this.aula);
         this.aulas.splice(this.findSelectedAulaIndex(), 1);
         this.aula = null;
         this.displayDialog = false;
+        this.message(evento);
     }
 
     onRowSelect(event) {
@@ -92,9 +97,9 @@ export class AulaComponent {
     findSelectedAulaIndex(): number {
         return this.aulas.indexOf(this.selectedAula);
     }
-    showInfo() {
+    message(evento : string) {
         this.msgs = [];
-        this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+        this.msgs.push({severity:'success', summary:'Exito', detail:'Aula ' +  evento + ' con exito!'});
     }
 
 }	/**
