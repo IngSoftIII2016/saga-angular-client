@@ -62,7 +62,11 @@ export class EventoComponent {
 
 
     delete() {
-        this.eventoService.delete(this.selectedEvento);
+        this.eventoService.delete(this.selectedEvento)
+            .subscribe(res => {
+                console.log(res);
+            }
+        );
 
         this.eventos.splice(this.findSelectedEventoIndex(), 1);
         this.evento = null;
@@ -70,6 +74,7 @@ export class EventoComponent {
     }
 
     onRowSelect(event) {
+        console.log(this.selectedEvento as Evento);
         this.newEvento = false;
         this.evento = this.cloneEvento(event.data);
         this.displayDialog = true;

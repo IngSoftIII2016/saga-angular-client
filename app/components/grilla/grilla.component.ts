@@ -1,19 +1,19 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
 import {Params, ActivatedRoute} from "@angular/router";
-import {Edificio} from "./entities/edificio";
-import {Aula} from "./entities/aula";
-import {Clase} from "./entities/clase";
-import {EdificioService} from "./services/edificio.service";
-import {AulaService} from "./services/aula.service";
-import {ClaseService} from "./services/clase.service";
-import {Evento} from "./entities/evento";
+import {Edificio} from "../../entities/edificio";
+import {Aula} from "../../entities/aula";
+import {Clase} from "../../entities/clase";
+import {EdificioService} from "../../services/edificio.service";
+import {AulaService} from "../../services/aula.service";
+import {ClaseService} from "../../services/clase.service";
+import {Evento} from "../../entities/evento";
 
 declare var moment: any;
 
 @Component({
-    selector: 'clases',
-    templateUrl: 'app/grilla.component.html',
+    selector: 'grilla',
+    templateUrl: 'app/components/grilla/grilla.component.html',
     providers: [EdificioService, AulaService, ClaseService]
 })
 export class GrillaComponent implements OnInit {

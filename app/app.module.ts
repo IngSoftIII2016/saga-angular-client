@@ -8,9 +8,8 @@ import { LOCALE_ID } from '@angular/core';
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule, GrowlModule} from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
-import {CarCrudComponent}  from './car-crud.component';
-import {CarService} from './components/cars/carservice';
-import {GrillaComponent} from "./grilla.component";
+
+import {GrillaComponent} from "./components/grilla/grilla.component";
 import {GrupoComponent} from "./components/grupo/index";
 import {GrupoService} from './services/grupo.service';
 import {LoginComponent} from "./components/login/login.component";
@@ -25,11 +24,9 @@ import {EdificioComponent} from "./components/edificio/index";
 import {AsignaturaComponent} from "./components/asignatura/index"
 import {CarreraComponent} from "./components/carrera/index";
 import {AulaComponent} from "./components/aula/index";
-//import {ClaseComponent} from "./components/clase/index";
 import {EventoComponent} from "./components/evento/index";
 import {LocalidadComponent} from "./components/localidad/localidad.component";
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
-
 
 @NgModule({
   imports: [
@@ -48,7 +45,6 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
   ],
   declarations: [
       AppComponent,
-      CarCrudComponent,
       GrillaComponent,
 	  GrupoComponent,
 	  NotFoundComponent,
@@ -65,11 +61,10 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       EventoComponent
 
   ],
-  bootstrap:    [AppComponent],
-  providers:    [
+  bootstrap: [AppComponent],
+  providers: [
       AuthGuard,
 	  LoginGuard,
-	  CarService,
 	  AuthenticationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

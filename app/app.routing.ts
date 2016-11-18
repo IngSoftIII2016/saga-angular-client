@@ -1,7 +1,6 @@
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
-import {CarCrudComponent} from "./car-crud.component";
+import {GrillaComponent} from "./components/grilla/grilla.component";
 import {GrupoComponent} from "./components/grupo/grupo.component";
 import {LoginComponent} from "./components/login/login.component";
 import { AuthGuard } from './guards/auth.guard';
@@ -16,23 +15,19 @@ import {LocalidadComponent} from "./components/localidad/localidad.component";
 import {CarreraComponent} from "./components/carrera/index";
 import {AulaComponent} from "./components/aula/aula.component";
 import {EventoComponent} from "./components/evento/evento.component";
-import {GrillaComponent} from "./grilla.component";
 
 
 
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'grilla/1',
-        pathMatch: 'full'
+        redirectTo: 'clases/1',
+        //pathMatch: 'full'
     }, {
         path: 'grilla/:id',
         component: GrillaComponent, canActivate: [AuthGuard]
-    }, {
-        path: 'cars',
-        component: CarCrudComponent , canActivate: [AuthGuard]
-    }
-	, {
+    },
+    {
         path: 'grupos',
         component: GrupoComponent , canActivate: [AuthGuard]
     }

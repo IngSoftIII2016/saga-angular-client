@@ -28,7 +28,10 @@ export abstract class GenericService<T extends Entity> {
 
     protected baseUrl: string = 'http://localhost/saga/api/';
 
+    private totalRows: Observable<number> = null;
+
     constructor(protected http: Http) {
+        this.totalRows = new Observable<number>(observer => observer.next())
     }
 
     protected abstract getResourcePath() : string;
@@ -65,6 +68,20 @@ export abstract class GenericService<T extends Entity> {
         var req = new Request(reqOptions);
         console.log(req);
         return this.http.request(req).map(res => res.json().data as T[]);
+
+    }
+
+    private getTotalRows() : Observable<number> {
+        if(this.totalRows == null) {
+            let reqOptions = this.getBaseRequestOptions();
+            reqOptions.url += '/0';
+            var req = new Request(reqOptions);
+            let obs = this.http.request(req).map(res => res.json().data);
+            obs.subscribe(val => this.totalRows = val);
+            return obs;
+        }
+
+
 
     }
 
