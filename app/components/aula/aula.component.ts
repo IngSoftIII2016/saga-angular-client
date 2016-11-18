@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {QueryOptions} from "../../services/generic.service";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
+import {Message} from "primeng/components/common/api";
 
 
 
@@ -12,6 +13,8 @@ import {Aula} from "../../entities/aula";
     providers: [AulaService]
 })
 export class AulaComponent {
+
+    msgs: Message[] = [];
 
     queryOptions: QueryOptions = new QueryOptions({includes : ['edificio']});
 
@@ -45,6 +48,8 @@ export class AulaComponent {
                 this.selectedAula= null;
             }
         );
+        this.msgs = [];
+        this.msgs.push({severity:'success', summary:'Success Message', detail:'Aula agregada con exito!'});
     }
 
     save() {
@@ -86,6 +91,10 @@ export class AulaComponent {
 
     findSelectedAulaIndex(): number {
         return this.aulas.indexOf(this.selectedAula);
+    }
+    showInfo() {
+        this.msgs = [];
+        this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
     }
 
 }	/**

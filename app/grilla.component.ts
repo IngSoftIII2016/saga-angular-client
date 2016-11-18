@@ -13,10 +13,10 @@ declare var moment: any;
 
 @Component({
     selector: 'clases',
-    templateUrl: 'grilla.component.html',
+    templateUrl: 'app/grilla.component.html',
     providers: [EdificioService, AulaService, ClaseService]
 })
-export class ClasesComponent implements OnInit {
+export class GrillaComponent implements OnInit {
 
     edificio: Edificio;
     private fecha = new BehaviorSubject<Date>(new Date());

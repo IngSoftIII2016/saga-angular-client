@@ -5,12 +5,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
-import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule} from 'primeng/primeng';
+import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule, MessagesModule} from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
 import {CarCrudComponent}  from './car-crud.component';
 import {CarService} from './components/cars/carservice';
-import {ClasesComponent} from "./grilla.component";
+import {GrillaComponent} from "./grilla.component";
 import {GrupoComponent} from "./components/grupo/index";
 import {GrupoService} from './services/grupo.service';
 import {LoginComponent} from "./components/login/login.component";
@@ -43,12 +43,13 @@ import {TimelineDaySchedule} from "./timeline-day-schedule.component";
       DialogModule,
       DropdownModule,
       ScheduleModule,
-      CalendarModule
+      CalendarModule,
+      MessagesModule
   ],
   declarations: [
       AppComponent,
       CarCrudComponent,
-      ClasesComponent,
+      GrillaComponent,
 	  GrupoComponent,
 	  NotFoundComponent,
 	  LoginComponent,
