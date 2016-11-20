@@ -5,6 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
+
+
 import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule, GrowlModule} from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";

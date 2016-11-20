@@ -13,4 +13,5 @@ export class SedeStore extends GenericStore<Sede, SedeService> {
         super(sedeService);
     }
 
+
 }

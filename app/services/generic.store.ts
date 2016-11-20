@@ -1,4 +1,5 @@
 import {Observable, BehaviorSubject, Subject} from "rxjs";
+import 'rxjs/add/operator/do'
 import {QueryOptions} from "./generic.service";
 import {GenericService} from "./generic.service";
 import {Entity} from "../entities/Entity";
@@ -15,12 +16,11 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
     itemsSub : BehaviorSubject<E[]> = new BehaviorSubject([]);
     lastPageSub : BehaviorSubject<number> = new BehaviorSubject(0);
 
-    private service;
+    private service: S;
 
     constructor(service : S) {
         this.service = service;
         this.queryOptionsSub
-            .distinct()
             .subscribe(qo => {
                 this.service.query(qo)
                     .subscribe(items =>
@@ -71,35 +71,33 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
     public prevPage() : boolean{
         let qo = this.queryOptionsSub.getValue();
         let lastPage = this.lastPageSub.getValue();
-        if(qo.page <= 0) return false;
-        this.lastPageSub.next(qo.page++);
+        if(qo.page = 0) return false;
+        this.lastPageSub.next(qo.page--);
     }
 
     public save(entity : E) : Observable<E> {
-        let obs : Observable<E>;
-        if(entity.id) {
-            obs = this.service.update(entity);
-            obs.share().subscribe(modificado => { if(modificado) this.updateItems() });
-            return obs;
-        }else {
-            console.log(entity);
-            obs = this.service.create(entity);
-            obs.share().subscribe(nuevo => { if(nuevo) this.updateItems() })
-            return obs;
-        }
+        return entity.id ? this.update(entity) : this.create(entity);
+    }
+
+    public create(entity : E) : Observable<E> {
+        return this.service.create(entity)
+            .do(nuevo => this.updateItems());
+
+    }
+
+    public update(entity : E) : Observable<E> {
+        return this.service.update(entity)
+            .do(modificado => this.updateItems());
     }
 
     public delete(entity : E) : Observable<E> {
-        let obs : Observable<E> = this.service.delete(entity);
-        obs.share().subscribe(borrado => { if (borrado) this.updateItems() });
-        return obs;
+        return this.service.delete(entity)
+            .do(borrado => this.updateItems());
     }
 
     private updateItems() {
-        this.service.query(this.queryOptionsSub.getValue())
-            .subscribe(items =>
-                this.itemsSub.next(items)
-            );
+        this.queryOptionsSub.next(this.queryOptionsSub.getValue());
+
     }
 
 }
