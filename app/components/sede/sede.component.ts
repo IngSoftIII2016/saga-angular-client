@@ -12,13 +12,13 @@ import {Message} from "primeng/components/common/api";
 })
 export class SedeComponent {
 
-	displayDialog: boolean;
-
     sede: Sede = new Sede();
+
+    msgs: Message[] = [];
 
     isNew = false;
 
-    msgs: Message[] = [];
+    displayDialog: boolean;
 
     constructor(private sedeStore: SedeStore) { }
 

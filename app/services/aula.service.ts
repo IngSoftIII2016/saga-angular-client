@@ -25,12 +25,8 @@ export class AulaService extends GenericService<Aula> {
 
     queryByEdificio(edificio: Edificio): Observable<Aula[]> {
         return this.query(new QueryOptions({
-            filters: [{}]
+            filters: {'edificio.id': edificio.id}
         }))
-    }
-    private handleError(error : any) : Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
     }
 
 }

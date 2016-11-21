@@ -45,6 +45,7 @@ import {AuthenticationService} from "./services/authentication.service";
 
 import {TimelineDaySchedule} from "./components/timeline-day-schedule.component";
 import {SedeService} from "./services/sede.service";
+import {AulaService} from "./services/aula.service";
 
 
 
@@ -88,6 +89,7 @@ import {SedeService} from "./services/sede.service";
       AuthGuard,
 	  LoginGuard,
 	  AuthenticationService,
+      AulaService,
       SedeService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
