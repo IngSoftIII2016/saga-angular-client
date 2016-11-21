@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Docente} from '../../entities/docente';
-import {DocenteService} from '../../services/docente.service';
-import {QueryOptions} from "../../services/generic.service";
+import {DocenteStore} from "../../services/docente.sotre";
+import {Message, ConfirmationService} from "primeng/components/common/api";
 
 /*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
@@ -11,83 +11,98 @@ import {QueryOptions} from "../../services/generic.service";
 	templateUrl: 'app/components/docente/docente.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'docente',
-	providers:[DocenteService]
+	providers:[DocenteStore, ConfirmationService]
 })
 export class DocenteComponent {
 
-    queryOptions: QueryOptions = new QueryOptions();
-
-	displayDialog: boolean;
-
     docente: Docente = new Docente();
 
-    selectedDocente: Docente;
+    msgs: Message[] = [];
 
-    newDocente: boolean;
+    isNew = false;
 
-    docentes: Docente[];
+    displayDialog: boolean;
 
-    constructor(private docenteService: DocenteService) { }
+    constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) { }
 
-    ngOnInit() {
-        this.docenteService.query(this.queryOptions).subscribe(docentes => this.docentes = docentes);
-    }
+
 
     showDialogToAdd() {
-        this.newDocente = true;
+        this.isNew = true;
         this.docente = new Docente();
         this.displayDialog = true;
     }
 
-	add(docente : Docente): void {
-		this.docenteService.create(docente).subscribe(docente => {
-                this.docente = docente;
-				this.docentes.push(docente);
-				this.selectedDocente = null;
-
-            }
-		 );
-	}
-	
-    save() {
-		//insert
-        if(this.newDocente){
-			this.add(this.docente);
-		}
-		//update
-        else{
-			this.docenteService.update(this.docente).subscribe(docente => {
-            this.docentes[this.findSelectedDocenteIndex()] = docente;
-		});
-		}
-        this.docente = null;
-        this.displayDialog = false;
-    }
-	
-	
-    delete() {
-		this.docenteService.delete(this.docente);
-		
-        this.docentes.splice(this.findSelectedDocenteIndex(), 1);
-        this.docente = null;
-        this.displayDialog = false;
-    }
-
     onRowSelect(event) {
-        this.newDocente = false;
-        this.docente = this.cloneDocente(event.data);
+        this.isNew = false;
+        this.docente =new Docente(event.data);
         this.displayDialog = true;
     }
 
-    cloneDocente(d: Docente): Docente {
-        let docente = new Docente();
-        for(let prop in d) {
-            docente[prop] = d[prop];
-        }
-        return docente;
+    save() {
+        this.docenteStore.save(this.docente).subscribe(
+            guardada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Guardado',
+                        detail:'Se ha guardado el docente '+ guardada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido guardar el docente:\n' + error
+                    });
+            });
     }
 
-    findSelectedDocenteIndex(): number {
-        return this.docentes.indexOf(this.selectedDocente);
+
+    delete() {
+        this.confirmationService.confirm({
+            message: 'Estas seguro que desea eliminar el docente?',
+            header: 'Confirmar eliminacion',
+            icon: 'fa fa-trash',
+            accept: () => {
+                this.docenteStore.delete(this.docente).subscribe(
+                    borrada => {
+                        this.displayDialog = false;
+                        this.msgs.push(
+                            {
+                                severity:'success',
+                                summary:'Exito',
+                                detail:'Se ha borrado el docente '+ borrada.nombre + ' con exito!'
+                            })
+                    },
+                    error => {
+                        this.msgs.push(
+                            {
+                                severity:'error',
+                                summary:'Error',
+                                detail:'No se ha podido eliminar el docente:\n' + error
+                            });
+                    }
+                );
+            }
+        });
     }
+
+    pageChange(event) {
+        let qo = {
+            size: event.rows,
+            page: event.page + 1
+        };
+        console.log(qo);
+
+        this.docenteStore.mergeQueryOptions(qo);
+    }
+
+    sort(event) {
+        this.docenteStore.setSorts([event]);
+    }
+
+
 }	

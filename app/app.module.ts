@@ -48,6 +48,8 @@ import {AuthenticationService} from "./services/authentication.service";
 import {TimelineDaySchedule} from "./components/timeline-day-schedule.component";
 import {SedeService} from "./services/sede.service";
 import {AulaService} from "./services/aula.service";
+import {CarreraService} from "./services/carrera.service";
+import {DocenteService} from "./services/docente.service";
 
 
 
@@ -94,6 +96,8 @@ import {AulaService} from "./services/aula.service";
 	  AuthenticationService,
       AulaService,
       SedeService,
+      CarreraService,
+      DocenteService,
       ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

@@ -1,90 +1,101 @@
 import {Component} from '@angular/core';
 import {Carrera} from '../../entities/carrera';
-import {CarreraService} from '../../services/carrera.service';
-import {QueryOptions} from "../../services/generic.service";
+import {CarreraStore} from "../../services/carrera.store";
+import {Message, ConfirmationService} from "primeng/components/common/api";
 
 
 @Component({
 	templateUrl: 'app/components/carrera/carrera.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'carrera',
-	providers:[CarreraService]
+	providers:[CarreraStore,ConfirmationService]
 })
 export class CarreraComponent {
 
-    queryOptions: QueryOptions = new QueryOptions();
-
-	displayDialog: boolean;
-
     carrera: Carrera = new Carrera();
 
-    selectedCarrera: Carrera;
+    msgs: Message[] = [];
 
-    newCarrera: boolean;
+    isNew = false;
 
-    carreras: Carrera[];
+    displayDialog: boolean;
 
-    constructor(private carreraService: CarreraService) { }
-
-    ngOnInit() {
-        this.carreraService.query(this.queryOptions).subscribe(carreras => this.carreras = carreras);
-    }
+    constructor(private carreraStore: CarreraStore,  private confirmationService : ConfirmationService) { }
 
     showDialogToAdd() {
-        this.newCarrera = true;
+        this.isNew = true;
         this.carrera = new Carrera();
         this.displayDialog = true;
     }
 
-	add(carrera: Carrera): void {
-		this.carreraService.create(carrera).subscribe(carrera => {
-                this.carrera = carrera;
-				this.carreras.push(carrera);
-				this.selectedCarrera = null;
-
-            }
-		 );
-	}
-	
-    save() {
-		//insert
-        if(this.newCarrera){
-			this.add(this.carrera);
-		}
-		//update
-        else{
-			this.carreraService.update(this.carrera).subscribe(carrera => {
-            this.carreras[this.findSelectedCarreraIndex()] = carrera;
-		});
-		}
-        this.carrera = null;
-        this.displayDialog = false;
-    }
-	
-	
-    delete() {
-		this.carreraService.delete(this.carrera);
-		
-        this.carreras.splice(this.findSelectedCarreraIndex(), 1);
-        this.carrera = null;
-        this.displayDialog = false;
-    }
-
     onRowSelect(event) {
-        this.newCarrera = false;
-        this.carrera = this.cloneCarrera(event.data);
+        this.isNew = false;
+        this.carrera = new Carrera(event.data);
         this.displayDialog = true;
     }
 
-    cloneCarrera(c: Carrera): Carrera {
-        let carrera = new Carrera();
-        for(let prop in c) {
-            carrera[prop] = c[prop];
-        }
-        return carrera;
+    save() {
+        this.carreraStore.save(this.carrera).subscribe(
+            guardada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Guardado',
+                        detail:'Se ha guardado la carrera '+ guardada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido guardar la carrera:\n' + error
+                    });
+            });
     }
 
-    findSelectedCarreraIndex(): number {
-        return this.carreras.indexOf(this.selectedCarrera);
+
+    delete() {
+        this.confirmationService.confirm({
+            message: 'Estas seguro que desea eliminar la carrera?',
+            header: 'Confirmar eliminacion',
+            icon: 'fa fa-trash',
+            accept: () => {
+                this.carreraStore.delete(this.carrera).subscribe(
+                    borrada => {
+                        this.displayDialog = false;
+                        this.msgs.push(
+                            {
+                                severity:'success',
+                                summary:'Exito',
+                                detail:'Se ha borrado la carrera '+ borrada.nombre + ' con exito!'
+                            })
+                    },
+                    error => {
+                        this.msgs.push(
+                            {
+                                severity:'error',
+                                summary:'Error',
+                                detail:'No se ha podido eliminar la carrera:\n' + error
+                            });
+                    }
+                );
+            }
+    });
+    }
+
+    pageChange(event) {
+        let qo = {
+            size: event.rows,
+            page: event.page + 1
+        };
+        console.log(qo);
+
+        this.carreraStore.mergeQueryOptions(qo);
+    }
+
+    sort(event) {
+        this.carreraStore.setSorts([event]);
     }
 }	
