@@ -24,7 +24,10 @@ export class AulaComponent {
 
     edificios: Observable<Edificio[]>;
 
-    constructor(private aulaStore: AulaStore, private edificioService: EdificioService) {
+    constructor(
+        private aulaStore: AulaStore,
+        private edificioService: EdificioService,
+        private confirmationService : ConfirmationService) {
     }
 
     ngOnInit(){
@@ -97,7 +100,8 @@ export class AulaComponent {
                                     detail: 'No se ha podido guardar el aula:\n' + error
                                 });
                         });
-                });
+                }
+            });
 
     }
 

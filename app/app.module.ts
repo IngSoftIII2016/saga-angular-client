@@ -94,7 +94,7 @@ import {AulaService} from "./services/aula.service";
 	  AuthenticationService,
       AulaService,
       SedeService,
-      ConfirmationService
+      ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
