@@ -16,7 +16,9 @@ import {
     ScheduleModule,
     CalendarModule,
     GrowlModule,
-    PaginatorModule
+    PaginatorModule,
+    ConfirmDialogModule,
+    ConfirmationService
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
@@ -63,7 +65,8 @@ import {AulaService} from "./services/aula.service";
       ScheduleModule,
       CalendarModule,
       GrowlModule,
-      PaginatorModule
+      PaginatorModule,
+      ConfirmDialogModule
   ],
   declarations: [
       AppComponent,
@@ -91,6 +94,7 @@ import {AulaService} from "./services/aula.service";
 	  AuthenticationService,
       AulaService,
       SedeService,
+      ConfirmationService
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
