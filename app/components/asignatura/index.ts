@@ -1,1 +1,1 @@
-﻿﻿export * from './asignatura.component';
+﻿export * from './asignatura.component';

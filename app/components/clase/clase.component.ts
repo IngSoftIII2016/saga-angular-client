@@ -18,6 +18,8 @@ export class ClaseComponent {
 
     clase: Clase= new Clase();
 
+    fecha: Date = new Date();
+
     selectedClase: Clase;
 
     newClase: boolean;
@@ -47,6 +49,7 @@ export class ClaseComponent {
     }
 
     save() {
+        this.clase.setFecha(this.fecha);
         //insert
         if(this.newClase){
             this.add(this.clase);
@@ -72,6 +75,7 @@ export class ClaseComponent {
     onRowSelect(event) {
         this.newClase = false;
         this.clase = this.cloneClase(event.data);
+        this.fecha = this.clase.getFecha();
         this.displayDialog = true;
     }
 

@@ -12,13 +12,13 @@ import {Message} from "primeng/components/common/api";
 })
 export class SedeComponent {
 
-	displayDialog: boolean;
-
     sede: Sede = new Sede();
+
+    msgs: Message[] = [];
 
     isNew = false;
 
-    msgs: Message[] = [];
+    displayDialog: boolean;
 
     constructor(private sedeStore: SedeStore) { }
 
@@ -76,5 +76,23 @@ export class SedeComponent {
                     });
             }
         );
+    }
+
+    pageChange(event) {
+        let qo = {
+            size: event.rows,
+            page: event.page + 1
+        };
+        console.log(qo);
+
+        this.sedeStore.mergeQueryOptions(qo);
+        //event.first = Index of the first record
+        //event.rows = Number of rows to display in new page
+        //event.page = Index of the new page
+        //event.pageCount = Total number of pages
+    }
+
+    sort(event) {
+        this.sedeStore.setSorts([event]);
     }
 }	

@@ -5,7 +5,7 @@ import {Evento} from "../../entities/evento";
 
 
 @Component({
-    templateUrl: '/app/components/evento/evento.component.html',
+    templateUrl: 'app/components/evento/evento.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'evento',
     providers:[EventoService]

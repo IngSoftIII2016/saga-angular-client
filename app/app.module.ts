@@ -5,29 +5,49 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
-import {InputTextModule,DataTableModule,ButtonModule,DialogModule, DropdownModule, ScheduleModule, CalendarModule, GrowlModule} from 'primeng/primeng';
+
+
+import {
+    InputTextModule,
+    DataTableModule,
+    ButtonModule,
+    DialogModule,
+    DropdownModule,
+    ScheduleModule,
+    CalendarModule,
+    GrowlModule,
+    PaginatorModule
+} from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
 
-import {GrillaComponent} from "./components/grilla/grilla.component";
-import {GrupoComponent} from "./components/grupo/index";
+import {
+    GrillaComponent,
+    GrupoComponent,
+    LoginComponent,
+    DocenteComponent,
+    SedeComponent,
+    PeriodoComponent,
+    EdificioComponent,
+    AsignaturaComponent,
+    CarreraComponent,
+    AulaComponent,
+    EventoComponent,
+    LocalidadComponent,
+    NotFoundComponent,
+    ClaseComponent
+} from "./components";
+
 import {GrupoService} from './services/grupo.service';
-import {LoginComponent} from "./components/login/login.component";
-import {AuthenticationService} from './services/authentication.service';
-import {AuthGuard} from './guards/index';
-import {LoginGuard} from './guards/login.guard';
-import {NotFoundComponent} from "./notfound.component";
-import {DocenteComponent} from "./components/docente/index";
-import {SedeComponent} from "./components/sede/index";
-import {PeriodoComponent} from "./components/periodo/index";
-import {EdificioComponent} from "./components/edificio/index";
-import {AsignaturaComponent} from "./components/asignatura/index"
-import {CarreraComponent} from "./components/carrera/index";
-import {AulaComponent} from "./components/aula/index";
-import {EventoComponent} from "./components/evento/index";
-import {LocalidadComponent} from "./components/localidad/localidad.component";
-import {TimelineDaySchedule} from "./timeline-day-schedule.component";
+import {AuthGuard} from "./guards/auth.guard";
+import {LoginGuard} from "./guards/login.guard";
+import {AuthenticationService} from "./services/authentication.service";
+
+import {TimelineDaySchedule} from "./components/timeline-day-schedule.component";
 import {SedeService} from "./services/sede.service";
+import {AulaService} from "./services/aula.service";
+
+
 
 @NgModule({
   imports: [
@@ -42,7 +62,8 @@ import {SedeService} from "./services/sede.service";
       DropdownModule,
       ScheduleModule,
       CalendarModule,
-      GrowlModule
+      GrowlModule,
+      PaginatorModule
   ],
   declarations: [
       AppComponent,
@@ -59,7 +80,8 @@ import {SedeService} from "./services/sede.service";
       AsignaturaComponent,
       EdificioComponent,
       AulaComponent,
-      EventoComponent
+      EventoComponent,
+      ClaseComponent
 
   ],
   bootstrap: [AppComponent],
@@ -67,6 +89,7 @@ import {SedeService} from "./services/sede.service";
       AuthGuard,
 	  LoginGuard,
 	  AuthenticationService,
+      AulaService,
       SedeService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

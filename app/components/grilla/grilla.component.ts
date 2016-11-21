@@ -40,8 +40,8 @@ export class GrillaComponent implements OnInit {
             this.edificioService.getById(id)
                 .then(edificio => {
                     this.edificio = edificio;
-                    this.aulaService.getAulasByEdificio(edificio)
-                        .then(aulas => this.aulas = aulas);
+                    this.aulaService.queryByEdificio(edificio)
+                        .subscribe(aulas => this.aulas = aulas);
                 });
             });
 
@@ -67,12 +67,12 @@ export class GrillaComponent implements OnInit {
     }
 
     getEvents(event) {
-        this.claseService.getClases(event.day, this.edificio)
+        /*this.claseService.getClases(event.day, this.edificio)
             .map(function (clase) {
                 return {
                     'start': moment(clase)
                 }
-            });
+            })*/
     }
 
     nextDay(): void {

@@ -1,105 +1,124 @@
 import {Component} from '@angular/core';
-import {QueryOptions} from "../../services/generic.service";
-import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
 import {Message} from "primeng/components/common/api";
-
-
+import {AulaStore} from "../../services/aula.store";
 
 @Component({
     templateUrl: 'app/components/aula/aula.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'aula',
-    providers: [AulaService]
+    providers: [AulaStore]
 })
 export class AulaComponent {
 
     msgs: Message[] = [];
 
-    queryOptions: QueryOptions = new QueryOptions({includes : ['edificio']});
-
     displayDialog: boolean;
 
     aula: Aula = new Aula();
 
-    selectedAula: Aula;
+    isNew: boolean;
 
-    newAula: boolean;
-
-    aulas: Aula[];
-
-    constructor(private aulaService: AulaService) {
+    constructor(private aulaStore: AulaStore) {
     }
 
-    ngOnInit() {
-        this.aulaService.query(this.queryOptions).subscribe(aulas => this.aulas = aulas);
-    }
 
     showDialogToAdd() {
-        this.newAula = true;
+        this.isNew = true;
         this.aula = new Aula();
         this.displayDialog = true;
     }
 
-    add(aula: Aula): void {
-        this.aulaService.create(aula).subscribe(aula => {
-                this.aula = aula;
-                this.aulas.push(aula);
-                this.selectedAula= null;
-            }
-        );
-
+    onRowSelect(event) {
+        this.isNew = false;
+        this.aula = new Aula(event.data);
+        this.displayDialog = true;
     }
 
     save() {
-        //insert
-        var evento: string;
-        if (this.newAula) {
-            this.add(this.aula);
-            evento = 'agregada'
+        if (this.isNew) {
+            this.aulaStore.create(this.aula).subscribe(
+                creada => {
+                    this.displayDialog = false;
+                    this.msgs.push(
+                        {
+                            severity:'success',
+                            summary:'Creada',
+                            detail:'Se ha agregado el aula '+ creada.nombre + ' con exito!'
+                        })
+                },
+                error => {
+                    this.msgs.push(
+                        {
+                            severity:'error',
+                            summary:'Error',
+                            detail:'No se ha podido crear el aula:\n' + error
+                        });
+                });
         }
         //update
-        else {
-            this.aulaService.update(this.aula).subscribe(aula => {
-                this.aulas[this.findSelectedAulaIndex()] = aula;
-            });
-            evento = 'modificada'
-        }
-        this.aula = null;
-        this.displayDialog = false;
-        this.message(evento);
+        else
+            this.aulaStore.update(this.aula).subscribe(
+                guardada => {
+                    this.displayDialog = false;
+                    this.msgs.push(
+                        {
+                            severity:'success',
+                            summary:'Guardada',
+                            detail:'Se han guardado los cambios a '+ guardada.nombre + ' con exito!'
+                        })
+                },
+                error => {
+                    this.msgs.push(
+                        {
+                            severity:'error',
+                            summary:'Error',
+                            detail:'No se ha podido guardar el aula:\n' + error
+                        });
+                });
+
     }
 
 
     delete() {
-        var evento: string = 'eliminada';
-        this.aulaService.delete(this.aula);
-        this.aulas.splice(this.findSelectedAulaIndex(), 1);
-        this.aula = null;
-        this.displayDialog = false;
-        this.message(evento);
+        this.aulaStore.delete(this.aula).subscribe(
+            borrada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Borrado',
+                        detail:'Se ha borrado el '+ borrada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido eliminar el aula:\n' + error
+                    });
+            }
+        );
     }
 
-    onRowSelect(event) {
-        this.newAula = false;
-        this.aula = this.cloneAula(event.data);
-        this.displayDialog = true;
-    }
-
-    cloneAula(a: Aula): Aula {
-        let aula = new Aula();
-        for (let prop in a) {
-            aula[prop] = a[prop];
-        }
-        return aula;
-    }
-
-    findSelectedAulaIndex(): number {
-        return this.aulas.indexOf(this.selectedAula);
-    }
     message(evento : string) {
         this.msgs = [];
         this.msgs.push({severity:'success', summary:'Exito', detail:'Aula ' +  evento + ' con exito!'});
+    }
+
+    pageChange(event) {
+        let qo = {
+            size: event.rows,
+            page: event.page + 1
+        };
+        console.log(qo);
+
+        this.aulaStore.mergeQueryOptions(qo);
+    }
+
+    sort(event) {
+        this.aulaStore.setSorts([event]);
     }
 
 }	/**
