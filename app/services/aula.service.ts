@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 import {GenericService} from "./generic.service";
 import {Aula} from "../entities/aula";
 import {Edificio} from "../entities/edificio";
+import {QueryOptions} from "./generic.service";
 
 @Injectable()
 export class AulaService extends GenericService<Aula> {
@@ -22,12 +23,10 @@ export class AulaService extends GenericService<Aula> {
         super(http);
     }
 
-    getAulasByEdificio(edificio: Edificio): Promise<Aula[]> {
-        return this.http
-            .get(`${this.url}?edificio.id=${edificio.id}`)
-            .toPromise()
-            .then(res => res.json().data as Aula[])
-            .catch(this.handleError);
+    queryByEdificio(edificio: Edificio): Observable<Aula[]> {
+        return this.query(new QueryOptions({
+            filters: [{}]
+        }))
     }
     private handleError(error : any) : Promise<any> {
         console.error('An error occurred', error);

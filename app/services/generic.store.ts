@@ -1,5 +1,6 @@
 import {Observable, BehaviorSubject, Subject} from "rxjs";
 import 'rxjs/add/operator/do'
+import 'rxjs/add/observable/zip'
 import {QueryOptions} from "./generic.service";
 import {GenericService} from "./generic.service";
 import {Entity} from "../entities/Entity";
@@ -9,95 +10,108 @@ import {Entity} from "../entities/Entity";
 
 export abstract class GenericStore<E extends Entity, S extends GenericService<E>> {
 
-    public items : Observable<E[]>;
-    public lastPage : Observable<number>;
+    public items: Observable<E[]>;
 
-    queryOptionsSub: BehaviorSubject<QueryOptions> = new BehaviorSubject(new QueryOptions());
-    itemsSub : BehaviorSubject<E[]> = new BehaviorSubject([]);
-    lastPageSub : BehaviorSubject<number> = new BehaviorSubject(0);
+    queryOptions: BehaviorSubject<QueryOptions>;
 
-    private service: S;
+    public service: S;
 
-    constructor(service : S) {
+    protected abstract getDefaultQueryOptions() : QueryOptions;
+
+    constructor(service: S) {
         this.service = service;
-        this.queryOptionsSub
-            .subscribe(qo => {
-                this.service.query(qo)
-                    .subscribe(items =>
-                        this.itemsSub.next(items)
-                    );
-            });
-        this.queryOptionsSub
-            .map(qo => qo.size)
-            .distinct()
-            .subscribe(size =>
-                this.service.totalRows
-                    .subscribe(rows =>
-                        this.lastPageSub.next(Math.ceil(rows / size))
-                    )
-            );
 
+        this.queryOptions = new BehaviorSubject(this.getDefaultQueryOptions());
 
-        this.items = this.itemsSub.asObservable();
-        this.lastPage = this.lastPageSub.asObservable();
+        this.items = this.queryOptions
+            .flatMap(qo => this.service.query(qo));
     }
 
-  //  protected abstract getService(): S;
+    private updateItems() {
+        this.queryOptions.next(this.queryOptions.getValue());
 
-    public updateQueryOptions(options : Object = {}) {
-        let qo = this.queryOptionsSub.getValue();
+    }
+
+    public mergeQueryOptions(options: Object = {}) {
+        let qo = this.queryOptions.getValue();
         qo.merge(options);
-        this.queryOptionsSub.next(qo);
+        console.log(qo);
+        this.setQueryOptions(qo);
     }
 
-    public gotoPage(page: number) : boolean {
-        let qo = this.queryOptionsSub.getValue();
-        let lastPage = this.lastPageSub.getValue();
-
-        if(page > 0 && page <= lastPage) {
-            qo.page = page;
-            this.queryOptionsSub.next(qo);
-            return true;
-        }else return false;
-    }
-
-    public nextPage() : boolean{
-        let qo = this.queryOptionsSub.getValue();
-        let lastPage = this.lastPageSub.getValue();
-        if(qo.page >= lastPage) return false;
-        this.lastPageSub.next(qo.page++);
-    }
-
-    public prevPage() : boolean{
-        let qo = this.queryOptionsSub.getValue();
-        let lastPage = this.lastPageSub.getValue();
-        if(qo.page = 0) return false;
-        this.lastPageSub.next(qo.page--);
-    }
-
-    public save(entity : E) : Observable<E> {
-        return entity.id ? this.update(entity) : this.create(entity);
-    }
-
-    public create(entity : E) : Observable<E> {
+    public create(entity: E): Observable<E> {
         return this.service.create(entity)
             .do(nuevo => this.updateItems());
 
     }
 
-    public update(entity : E) : Observable<E> {
+    public save(entity: E): Observable<E> {
+        return entity.id ? this.update(entity) : this.create(entity);
+    }
+
+    public update(entity: E): Observable<E> {
         return this.service.update(entity)
             .do(modificado => this.updateItems());
     }
 
-    public delete(entity : E) : Observable<E> {
+    public delete(entity: E): Observable<E> {
         return this.service.delete(entity)
             .do(borrado => this.updateItems());
     }
 
-    private updateItems() {
-        this.queryOptionsSub.next(this.queryOptionsSub.getValue());
-
+    public getQueryOptions() : QueryOptions {
+        return this.queryOptions.getValue();
     }
 
+    public setQueryOptions(qo: QueryOptions = this.getDefaultQueryOptions()) {
+        this.queryOptions.next(qo);
+    }
+
+    public getFilters() : Object {
+        return this.getQueryOptions().filters;
+    }
+
+    public setFilters(filters: Object = {}) {
+        this.mergeQueryOptions({filters : filters });
+    }
+
+    public getSorts() : Object[] {
+        return this.getQueryOptions().sorts;
+    }
+
+    public setSorts(sorts: Object[] = []) {
+        this.mergeQueryOptions({ sorts : sorts});
+    }
+
+    public getIncludes() : string[] {
+        return this.getQueryOptions().includes;
+    }
+
+    public setIncludes(includes: string[] = []) {
+        this.mergeQueryOptions({ includes : includes});
+    }
+
+    public getLikes() : Object {
+        return this.getQueryOptions().likes;
+    }
+
+    public setLikes(likes: Object) {
+        this.mergeQueryOptions({ likes: likes });
+    }
+
+    public getSize() : number {
+        return this.getQueryOptions().size;
+    }
+
+    public setSize(size : number) {
+        this.mergeQueryOptions({ size : size});
+    }
+
+    public getPage() : number {
+        return this.getQueryOptions().page;
+    }
+
+    public setPage(page: number) {
+        this.mergeQueryOptions({ page : page});
+    }
 }

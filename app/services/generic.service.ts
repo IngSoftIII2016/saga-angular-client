@@ -10,10 +10,10 @@ import {Entity} from "../entities/Entity";
  */
 
 export class QueryOptions {
-    filters: Object[] = [];
     includes: string[] = [];
+    filters: Object = {};
+    likes: Object = {};
     sorts: Object[] = [];
-    likes: Object[] = [];
     page: number = 1;
     size: number = 10;
 
@@ -37,24 +37,27 @@ export abstract class GenericService<T extends Entity> {
     private rowCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
     constructor(protected http: Http) {
+        this.totalRows = this.rowCount.asObservable().distinctUntilChanged();
+/*
         this.getRowsCount()
-            .subscribe(rows =>
-                    this.rowCount = new BehaviorSubject<number>(rows),
-                err => console.error(err)
-            );
-        this.totalRows = this.rowCount.asObservable();
+            .subscribe(rows => {
+                this.rowCount.next(rows)
+            });
+        */
+
+
     }
 
     protected abstract getResourcePath(): string;
-
 
     public query(queryOptions: QueryOptions): Observable<T[]> {
         let reqOptions = this.getQueryRequestOptions(queryOptions);
         reqOptions.url = this.baseUrl + this.getResourcePath();
         let req = new Request(reqOptions);
-        let obs = this.http.request(req).map(res => res.json());
-        obs.do(json => this.rowCount.next(json.rowCount));
-        return obs.map(json => json.data);
+        return this.http.request(req)
+            .map(res => res.json())
+            .do(json => this.rowCount.next(json.rowCount))
+            .map(json => json.data);
     }
 
     private getRowsCount(): Observable<number> {
@@ -69,12 +72,10 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Post;
         reqOptions.body = JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        console.log(req);
         return this.http.request(req).map(res => res.json().data as T);
     }
 
     public update(t: T): Observable<T> {
-
         let reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Put;
         reqOptions.body = JSON.stringify({data: t});
@@ -101,19 +102,39 @@ export abstract class GenericService<T extends Entity> {
     protected getQueryRequestOptions(queryOptions: QueryOptions): RequestOptions {
         let reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Get;
+
         reqOptions.search.set('size', queryOptions.size.toString());
+
         reqOptions.search.set('page', queryOptions.page.toString());
+
         for (let key in queryOptions.filters)
             if (queryOptions.filters.hasOwnProperty(key))
                 reqOptions.search.set(key, queryOptions.filters[key].toString());
+
         if (queryOptions.includes.length > 0)
             reqOptions.search.set('include', queryOptions.includes.join(','));
-        for (let key in queryOptions.sorts)
-            if (queryOptions.sorts.hasOwnProperty(key))
-                reqOptions.search.set('sort', queryOptions.sorts.join(','));
+
+        if (queryOptions.sorts.length > 0) {
+            let sorts: string[] = [];
+            for (let key in queryOptions.sorts) {
+                let sortOrder: number = queryOptions.sorts[key]['order'];
+                let sortField = queryOptions.sorts[key]['field'];
+                if (sortOrder < 0)
+                    sortField = '-' + sortField;
+                sorts.push(sortField)
+            }
+            reqOptions.search.set('sort', sorts.join(','));
+        }
+
+        let likes: string[] = [];
         for (let key in queryOptions.likes)
-            if (queryOptions.likes.hasOwnProperty(key))
-                reqOptions.search.set('like', queryOptions.sorts.join(','));
+            if (queryOptions.likes.hasOwnProperty(key)) {
+                let likeValue = queryOptions.likes[key];
+                let likeField = key.toString();
+                likes.push(likeField + ':' + likeValue);
+            }
+        if (likes.length > 0)
+            reqOptions.search.set('like', likes.join(','));
 
         return reqOptions;
     }

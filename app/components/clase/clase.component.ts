@@ -10,13 +10,15 @@ import {Clase} from "../../entities/clase";
     selector: 'clase',
     providers:[ClaseService]
 })
-export class PeriodoComponent {
+export class ClaseComponent {
 
     queryOptions : QueryOptions = new QueryOptions();
 
     displayDialog: boolean;
 
     clase: Clase= new Clase();
+
+    fecha: Date = new Date();
 
     selectedClase: Clase;
 
@@ -47,6 +49,7 @@ export class PeriodoComponent {
     }
 
     save() {
+        this.clase.setFecha(this.fecha);
         //insert
         if(this.newClase){
             this.add(this.clase);
@@ -73,6 +76,7 @@ export class PeriodoComponent {
     onRowSelect(event) {
         this.newClase = false;
         this.clase = this.cloneClase(event.data);
+        this.fecha = this.clase.getFecha();
         this.displayDialog = true;
     }
 

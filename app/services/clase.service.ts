@@ -10,21 +10,14 @@ import {Edificio} from "../entities/edificio";
 @Injectable()
 export class ClaseService extends GenericService<Clase> {
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-
-    private options = new RequestOptions({
-        url: 'http://localhost/saga/api/clases',
-        headers: this.headers
-    });
     protected getResourcePath(): string {
         return 'clases';
     }
 
-
     constructor(http: Http) {
         super(http);
     }
-
+/*
     getClases(fecha: Date, edificio : Edificio) : Observable<Clase[]> {
         let formatFecha = new DatePipe('es').transform(fecha, 'yyyy-MM-dd');
         let params = new URLSearchParams();
@@ -35,5 +28,5 @@ export class ClaseService extends GenericService<Clase> {
             .get(this.options.url, this.options.merge({search: params}))
             .map((r: Response) => r.json().data as Clase[]);
     }
-
+*/
 }

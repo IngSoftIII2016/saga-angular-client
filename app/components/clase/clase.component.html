@@ -11,6 +11,7 @@
         <header>Clases</header>
         <p-column field="aula.nombre" header="Aula" [sortable]="true"></p-column>
         <p-column field="fecha" header="Fecha" [sortable]="true"></p-column>
+
         <p-column field="hora_inicio" header="Hora Inicio" [sortable]="true"></p-column>
         <p-column field="hora_fin" header="Hora Fin" [sortable]="true"></p-column>
         <p-column field="comentario" header="Comentario" [sortable]="true"></p-column>
@@ -29,8 +30,13 @@
                 <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="clase.aula.nombre"/></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha">Capacidad</label></div>
-                <div class="ui-grid-col-8"><input type="date" id="fecha" [(ngModel)]="aula.fecha"/></div>
+                <div class="ui-grid-col-4">
+                    <label for="fecha">Capacidad</label>
+                </div>
+                <div class="ui-grid-col-8">
+                    <!--<input type="date" id="fecha" [(ngModel)]="aula.fecha"/>-->
+                    <p-calendar id="fecha" [(ngModel)]="fecha " [locale]="es" dateFormat="dd/mm/yy"></p-calendar>
+                </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
