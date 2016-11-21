@@ -28,11 +28,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.edificioService.getAll()
-            .then(res => {
-                this.edificios = res;
-                this.edificioSelected = this.edificios[0];
-            });
+
     }
 
     mostrar(): boolean{

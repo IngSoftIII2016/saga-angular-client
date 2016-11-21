@@ -15,13 +15,5 @@ export class AulaStore extends GenericStore<Aula, AulaService> {
     constructor(private aulaService: AulaService) {
         super(aulaService);
     }
-    protected getDefaultQueryOptions() : QueryOptions {
-        return new QueryOptions(
-            {
-                includes: ['edificio'],
-                sorts: [
-                    {field : 'edificio.id', order: 1},
-                    {field : 'nombre', order : 1}]
-            })
-    }
+
 }

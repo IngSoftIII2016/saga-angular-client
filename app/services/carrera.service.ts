@@ -3,18 +3,25 @@ import {Headers, Http, Response} from '@angular/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-import {GenericService} from "./generic.service";
+import {GenericService, QueryOptions} from "./generic.service";
 import {Carrera} from "../entities/carrera";
 
 @Injectable()
 export class CarreraService extends GenericService<Carrera> {
 
+	constructor(http: Http) {
+		super(http);
+	}
+
 	protected getResourcePath(): string {
 		return 'carreras';
 	}
 
-	constructor(http: Http) {
-		super(http);
-	}
+    public getDefaultQueryOptions() : QueryOptions {
+	    return new QueryOptions();
+    }
+
+
+
 
 }

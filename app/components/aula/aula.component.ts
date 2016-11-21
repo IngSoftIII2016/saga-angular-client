@@ -2,12 +2,15 @@ import {Component} from '@angular/core';
 import {Aula} from "../../entities/aula";
 import {Message} from "primeng/components/common/api";
 import {AulaStore} from "../../services/aula.store";
+import {EdificioService} from "../../services/edificio.service";
+import {Edificio} from "../../entities/edificio";
+import {Observable} from "rxjs";
 
 @Component({
     templateUrl: 'app/components/aula/aula.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'aula',
-    providers: [AulaStore]
+    providers: [AulaStore, EdificioService]
 })
 export class AulaComponent {
 
@@ -19,7 +22,13 @@ export class AulaComponent {
 
     isNew: boolean;
 
-    constructor(private aulaStore: AulaStore) {
+    edificios: Observable<Edificio[]>;
+
+    constructor(private aulaStore: AulaStore, private edificioService: EdificioService) {
+    }
+
+    ngOnInit(){
+        this.edificios = this.edificioService.getAll();
     }
 
 

@@ -14,13 +14,22 @@ export class AulaService extends GenericService<Aula> {
     private url = 'http://localhost/saga/api/aulas';
     private options = new BaseRequestOptions();
 
+    constructor(http: Http) {
+        super(http);
+    }
 
     protected getResourcePath(): string {
         return 'aulas';
     }
 
-    constructor(http: Http) {
-        super(http);
+    public getDefaultQueryOptions() : QueryOptions {
+        return new QueryOptions(
+            {
+                includes: ['edificio'],
+                sorts: [
+                    {field : 'edificio.id', order: 1},
+                    {field : 'nombre', order : 1}]
+            })
     }
 
     queryByEdificio(edificio: Edificio): Observable<Aula[]> {

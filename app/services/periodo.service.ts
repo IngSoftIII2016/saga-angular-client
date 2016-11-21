@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService} from "./generic.service";
 import {Periodo} from "../entities/periodo";
+import {QueryOptions} from "./generic.service";
 
 @Injectable()
 export class PeriodoService extends GenericService<Periodo> {
@@ -14,6 +15,10 @@ export class PeriodoService extends GenericService<Periodo> {
 
 	constructor(http: Http) {
 		super(http);
+	}
+
+	public getDefaultQueryOptions() : QueryOptions {
+		return new QueryOptions();
 	}
 
 }

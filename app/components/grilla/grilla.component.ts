@@ -37,8 +37,8 @@ export class GrillaComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.edificioService.getById(id)
-                .then(edificio => {
+            this.edificioService.get(id)
+                .subscribe(edificio => {
                     this.edificio = edificio;
                     this.aulaService.queryByEdificio(edificio)
                         .subscribe(aulas => this.aulas = aulas);

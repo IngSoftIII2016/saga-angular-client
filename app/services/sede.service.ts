@@ -5,6 +5,7 @@ import {Sede} from '../entities/sede';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService} from "./generic.service";
+import {QueryOptions} from "./generic.service";
 
 @Injectable()
 export class SedeService extends GenericService<Sede> {
@@ -16,4 +17,8 @@ export class SedeService extends GenericService<Sede> {
     protected getResourcePath(): string {
 		return 'sedes';
 	}
+
+    public getDefaultQueryOptions() : QueryOptions {
+        return new QueryOptions();
+    }
 }

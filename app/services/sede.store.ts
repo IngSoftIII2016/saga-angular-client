@@ -14,9 +14,4 @@ export class SedeStore extends GenericStore<Sede, SedeService> {
         super(sedeService);
     }
 
-    protected getDefaultQueryOptions(): QueryOptions {
-        return new QueryOptions({})
-    }
-
-
 }

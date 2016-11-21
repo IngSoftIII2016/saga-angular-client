@@ -38,19 +38,13 @@ export abstract class GenericService<T extends Entity> {
 
     constructor(protected http: Http) {
         this.totalRows = this.rowCount.asObservable().distinctUntilChanged();
-/*
-        this.getRowsCount()
-            .subscribe(rows => {
-                this.rowCount.next(rows)
-            });
-        */
-
-
     }
 
     protected abstract getResourcePath(): string;
 
-    public query(queryOptions: QueryOptions): Observable<T[]> {
+    public abstract getDefaultQueryOptions() : QueryOptions;
+
+    public query(queryOptions: QueryOptions = this.getDefaultQueryOptions()): Observable<T[]> {
         let reqOptions = this.getQueryRequestOptions(queryOptions);
         reqOptions.url = this.baseUrl + this.getResourcePath();
         let req = new Request(reqOptions);
@@ -58,6 +52,19 @@ export abstract class GenericService<T extends Entity> {
             .map(res => res.json())
             .do(json => this.rowCount.next(json.rowCount))
             .map(json => json.data);
+    }
+
+    public getAll(qo : QueryOptions = new QueryOptions()) : Observable<T[]> {
+        qo.merge({page : -1});
+        return this.query(qo);
+    }
+
+    public get(id : number, qo : QueryOptions = this.getDefaultQueryOptions()) : Observable<T> {
+        let reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Get;
+        reqOptions.url += '/' + id.toString();
+        let req = new Request(reqOptions);
+        return this.http.request(req).map(res => res.json().data as T);
     }
 
     private getRowsCount(): Observable<number> {

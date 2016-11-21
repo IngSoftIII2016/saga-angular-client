@@ -16,12 +16,10 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
 
     public service: S;
 
-    protected abstract getDefaultQueryOptions() : QueryOptions;
-
     constructor(service: S) {
         this.service = service;
 
-        this.queryOptions = new BehaviorSubject(this.getDefaultQueryOptions());
+        this.queryOptions = new BehaviorSubject(this.service.getDefaultQueryOptions());
 
         this.items = this.queryOptions
             .flatMap(qo => this.service.query(qo));
@@ -63,7 +61,7 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
         return this.queryOptions.getValue();
     }
 
-    public setQueryOptions(qo: QueryOptions = this.getDefaultQueryOptions()) {
+    public setQueryOptions(qo: QueryOptions = this.service.getDefaultQueryOptions()) {
         this.queryOptions.next(qo);
     }
 
