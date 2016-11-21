@@ -10,7 +10,7 @@
                  (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Eventos</header>
         <p-column field="aula.nombre" header="Aula" [sortable]="true"></p-column>
-        <p-column field="fecha | date:es" header="Fecha" [sortable]="true"></p-column>
+        <p-column field="fecha" header="Fecha" [sortable]="true"></p-column>
         <p-column field="hora_inicio" header="Hora Inicio" [sortable]="true"></p-column>
         <p-column field="hora_fin" header="Hora Fin" [sortable]="true"></p-column>
         <p-column field="motivo" header="Motivo" [sortable]="true"></p-column>
@@ -29,7 +29,7 @@
                 <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="evento.aula.nombre"/></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha">Capacidad</label></div>
+                <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
                 <div class="ui-grid-col-8"><input type="date" id="fecha" [(ngModel)]="evento.fecha"/></div>
             </div>
             <div class="ui-grid-row">

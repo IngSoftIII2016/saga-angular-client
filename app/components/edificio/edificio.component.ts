@@ -3,16 +3,19 @@ import {Localidad} from '../../entities/localidad';
 import {Edificio} from '../../entities/edificio';
 import {EdificioService} from "../../services/edificio.service";
 import {QueryOptions} from "../../services/generic.service";
+import {LocalidadService} from "../../services/localidad.service";
 
 @Component({
 	templateUrl: 'app/components/edificio/edificio.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'edificio',
-	providers:[EdificioService]
+	providers:[EdificioService, LocalidadService]
 })
 export class EdificioComponent {
 
     queryOptions: QueryOptions = new QueryOptions({includes : ['localidad']});
+
+    queryOptionsLocalidad: QueryOptions = new QueryOptions({size : -1});
 
 	displayDialog: boolean;
 
@@ -24,7 +27,12 @@ export class EdificioComponent {
 
     edificios: Edificio[];
 
-    constructor(private edificioService: EdificioService) { }
+
+    localidades: Localidad[];
+
+
+
+    constructor(private edificioService: EdificioService, private localidadService : LocalidadService) { }
 
     ngOnInit() {
         this.edificioService.query(this.queryOptions).subscribe(edificios => this.edificios = edificios);
@@ -90,5 +98,23 @@ export class EdificioComponent {
 
     findSelectedEdificioIndex(): number {
         return this.edificios.indexOf(this.selectedEdificio);
+    }
+
+    filterLocalidadSingle(event) {
+        let query = event.query;
+        this.localidadService.query(this.queryOptionsLocalidad).subscribe(localidades=> {
+            this.localidades = this.filterLocalidad(query, localidades);
+        });
+    }
+
+    filterLocalidad(query, localidades: any[]):any[] {
+        let filtered : any[] = [];
+        for(let i = 0; i < localidades.length; i++) {
+            let localidad = localidades[i];
+            if(localidad.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(localidad.nombre);
+            }
+        }
+        return filtered;
     }
 }	
