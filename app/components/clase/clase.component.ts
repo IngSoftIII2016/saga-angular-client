@@ -10,9 +10,9 @@ import {Clase} from "../../entities/clase";
     selector: 'clase',
     providers:[ClaseService]
 })
-export class PeriodoComponent {
+export class ClaseComponent {
 
-    queryOptions : QueryOptions = new QueryOptions();
+    queryOptions : QueryOptions = new QueryOptions({includes : ['aula', 'horario']});
 
     displayDialog: boolean;
 
@@ -64,7 +64,6 @@ export class PeriodoComponent {
 
     delete() {
         this.claseService.delete(this.clase);
-
         this.clases.splice(this.findSelectedClaseIndex(), 1);
         this.clase = null;
         this.displayDialog = false;

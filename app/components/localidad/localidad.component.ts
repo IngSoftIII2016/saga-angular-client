@@ -16,7 +16,7 @@ import {QueryOptions} from "../../services/generic.service";
 
 export class LocalidadComponent {
 
-    queryOptions: QueryOptions = new QueryOptions();
+    queryOptions: QueryOptions = new QueryOptions({includes : ['sede']});
 
     displayDialog: boolean;
 
@@ -62,7 +62,7 @@ export class LocalidadComponent {
                 this.localidades[this.findSelectedLocalidadIndex()] = localidad;
             });
         }
-        this.localidades = null;
+        this.localidad = null;
         this.displayDialog = false;
     }
 
@@ -81,10 +81,10 @@ export class LocalidadComponent {
         this.displayDialog = true;
     }
 
-    cloneLocalidad(p: Localidad): Localidad {
+    cloneLocalidad(l: Localidad): Localidad {
         let localidad = new Localidad();
-        for (let prop in p) {
-            Localidad[prop] = p[prop];
+        for (let prop in l) {
+            localidad[prop] = l[prop];
         }
         return localidad;
     }
