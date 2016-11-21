@@ -1,33 +1,36 @@
-<div class="layout-wrapper ">
+<div class="layout-wrapper layout-compact">
 
-    <div [ngClass]="displayMenu" class="layout-container menu-layout-static">
+     <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
+            'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
     <!-- Top Bar -->
-    <div *ngIf="mostrar()" class="topbar clearfix">
+	<div *ngIf="mostrar()" >
+
+    <div  class="topbar clearfix">
         <div class="topbar-left">
-            <div class="logo"></div>
+            <a [routerLink]="['/']" class="logo"></a>
         </div>
 
         <div class="topbar-right">
-            <a id="menu-button"  (click)="toggle()" [ngClass]="displayButton">
-                <i></i>
-            </a>
+             <a id="menu-button" href="#">
+                    <i></i>
+             </a>
 
-            <a id="topbar-menu-button" >
+            <a href="#" id="topbar-menu-button" >
                 <i class="material-icons">menu</i>
             </a>
-            <div class="topbar-items fadeInDown"  >
+            <ul class="topbar-items fadeInDown animated topbar-items-visible" >
                  <li class="profile-item" >
-                     <button  type="button"    pButton  label="Salir" icon="fa ui-icon-exit-to-app" (click)="logout()"></button>
+                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-exit-to-app" (click)="logout()"></button>
                  </li>
-            </div>
+            </ul>
         </div>
 
     </div>
 
     <!-- Menu -->
-        <div *ngIf="mostrar()" class="layout-menu">
-            <div class="nano has-scrollbar">
-                <div class="nano-content menu-scroll-content" tabindex="0" style="margin-right: -17px;">
+        <div  class="layout-menu">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
                    <ul class="ultima-menu clearfix" id="main-menu">
                         <li role="menuitem"><a href="#/periodos"><i class="material-icons">Periodos</i><span>Periodos</span></a></li>
                         <li role="menuitem"><a href="#/usuarios"><i class="material-icons">Usuarios</i><span>Usuarios</span></a></li>
@@ -45,8 +48,9 @@
                         <li role="menuitem"><a href="#/localidades"><i class="material-icons">Localidad</i><span>Localidad</span></a></li>
                     </ul>
                 </div>
-                <div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 206px; transform: translate(0px, 0px);"></div></div></div>
+			</div>
         </div>
+    </div>
 
     <div [ngClass]="displayLayout">
         <router-outlet></router-outlet>
