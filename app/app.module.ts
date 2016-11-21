@@ -5,8 +5,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
-
-
 import {
     InputTextModule,
     DataTableModule,
@@ -50,8 +48,12 @@ import {SedeService} from "./services/sede.service";
 import {AulaService} from "./services/aula.service";
 import {CarreraService} from "./services/carrera.service";
 import {DocenteService} from "./services/docente.service";
-
-
+import {AsignaturaService} from "./services/asignatura.service";
+import {ClaseService} from "./services/clase.service";
+import {PeriodoService} from "./services/periodo.service";
+import {LocalidadService} from "./services/localidad.service";
+import {EventoService} from "./services/evento.service";
+import {EdificioService} from "./services/edificio.service";
 
 @NgModule({
   imports: [
@@ -94,12 +96,20 @@ import {DocenteService} from "./services/docente.service";
       AuthGuard,
 	  LoginGuard,
 	  AuthenticationService,
+      AsignaturaService,
       AulaService,
-      SedeService,
       CarreraService,
+      ClaseService,
       DocenteService,
+      EdificioService,
+      EventoService,
+      GrupoService,
+      LocalidadService,
+      PeriodoService,
+      SedeService,
       ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
+
 export class AppModule { }

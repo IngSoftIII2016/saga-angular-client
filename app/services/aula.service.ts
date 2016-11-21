@@ -34,7 +34,8 @@ export class AulaService extends GenericService<Aula> {
 
     queryByEdificio(edificio: Edificio): Observable<Aula[]> {
         return this.query(new QueryOptions({
-            filters: {'edificio.id': edificio.id}
+            filters: {'edificio.id': edificio.id},
+            page: -1
         }))
     }
 
