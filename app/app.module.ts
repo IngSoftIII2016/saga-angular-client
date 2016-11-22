@@ -50,6 +50,9 @@ import {SedeService} from "./services/sede.service";
 import {AulaService} from "./services/aula.service";
 import {CarreraService} from "./services/carrera.service";
 import {DocenteService} from "./services/docente.service";
+import {EventoService} from "./services/evento.service";
+import {ClaseService} from "./services/clase.service";
+import {AsignaturaService} from "./services/asignatura.service";
 
 
 
@@ -98,6 +101,9 @@ import {DocenteService} from "./services/docente.service";
       SedeService,
       CarreraService,
       DocenteService,
+      EventoService
+      ClaseService,
+      AsignaturaService
       ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

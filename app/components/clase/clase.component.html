@@ -1,20 +1,22 @@
 <div class="ContentSideSections">
-
+    <p-growl [value]="msgs"></p-growl>
+    <p-confirmDialog width="425">
+        <i class="fa fa-search"></i>
+    </p-confirmDialog>
 </div>
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix " style="padding:4px 10px;border-bottom: 0 none">
         <input #gb type="text" pInputText class="ui-grid-col-3" size="50" style="float:left; color:white;"
                placeholder="Buscar">
     </div>
-    <p-dataTable [value]="clases" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedClase"
-                 (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable [value]="claseStore.items | async" [globalFilter]="gb" selectionMode="single"
+                 (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Clases</header>
-        <p-column field="aula.nombre" header="Aula" [sortable]="true"></p-column>
-        <p-column field="fecha" header="Fecha" [sortable]="true"></p-column>
-
-        <p-column field="hora_inicio" header="Hora Inicio" [sortable]="true"></p-column>
-        <p-column field="hora_fin" header="Hora Fin" [sortable]="true"></p-column>
-        <p-column field="comentario" header="Comentario" [sortable]="true"></p-column>
+        <p-column field="aula.nombre" header="Aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="fecha" header="Fecha" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="hora_fin" header="Hora Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="comentario" header="Comentario" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
@@ -22,6 +24,14 @@
             </div>
         </footer>
     </p-dataTable>
+    <p-paginator
+            styleClass="ui-paginator-bottom"
+            rows="10"
+            totalRecords="{{claseStore.service.totalRows | async}}"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="pageChange($event)">
+    </p-paginator>
+
 
     <p-dialog header="Clase" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="clase">
@@ -34,21 +44,20 @@
                     <label for="fecha">Capacidad</label>
                 </div>
                 <div class="ui-grid-col-8">
-                    <!--<input type="date" id="fecha" [(ngModel)]="aula.fecha"/>-->
-                    <p-calendar id="fecha" [(ngModel)]="fecha " [locale]="es" dateFormat="dd/mm/yy"></p-calendar>
+                    <input type="date" id="fecha" [(ngModel)]="clase.fecha"/>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
-                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="aula.hora_inicio"/></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="clase.hora_inicio"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin</label></div>
-                <div class="ui-grid-col-8"><input type="time" id="hora_fin" [(ngModel)]="aula.hora_fin"/></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_fin" [(ngModel)]="clase.hora_fin"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="comentario">Comentario</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="comentario" [(ngModel)]="aula.comentario"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="comentario" [(ngModel)]="clase.comentario"/></div>
             </div>
 
         </div>
