@@ -12,13 +12,13 @@ import {
     DataTableModule,
     ButtonModule,
     DialogModule,
-    DropdownModule,
     ScheduleModule,
     CalendarModule,
     GrowlModule,
     PaginatorModule,
     ConfirmDialogModule,
     ConfirmationService
+
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
@@ -53,6 +53,8 @@ import {DocenteService} from "./services/docente.service";
 import {EventoService} from "./services/evento.service";
 import {ClaseService} from "./services/clase.service";
 import {AsignaturaService} from "./services/asignatura.service";
+import {EdificioService} from "./services/edificio.service";
+import {DropdownModule} from "primeng/components/dropdown/dropdown";
 
 
 
@@ -98,12 +100,13 @@ import {AsignaturaService} from "./services/asignatura.service";
 	  LoginGuard,
 	  AuthenticationService,
       AulaService,
+      EdificioService,
       SedeService,
       CarreraService,
       DocenteService,
-      EventoService
+      EventoService,
       ClaseService,
-      AsignaturaService
+      AsignaturaService,
       ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
