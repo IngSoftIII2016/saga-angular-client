@@ -5,6 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from "./app.routing";
 import { LOCALE_ID } from '@angular/core';
 
+
+
 import {
     InputTextModule,
     DataTableModule,
@@ -98,6 +100,7 @@ import {EdificioService} from "./services/edificio.service";
 	  AuthenticationService,
       AsignaturaService,
       AulaService,
+      SedeService,
       CarreraService,
       ClaseService,
       DocenteService,
@@ -111,5 +114,4 @@ import {EdificioService} from "./services/edificio.service";
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
-
 export class AppModule { }

@@ -1,39 +1,35 @@
-import {Component, OnInit} from "@angular/core";
-import {Edificio} from "../entities/edificio";
-import {EdificioService} from "../services/edificio.service";
+import {Component, ElementRef} from "@angular/core";
 import {Router} from '@angular/router';
+declare var Ultima: any;
 
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/components/app.component.html',
-    styleUrls: ['app/components/app.component.css'],
+    styleUrls: ['app/components/app.component.css']
 
-    providers: [EdificioService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
 
-    private edificios: Edificio[];
-    private edificioSelected: Edificio;
-    private displayMenu: string;
-    private displayButton: string;
-    private displayLayout: string;
-    private visible: boolean;
+    layoutCompact: boolean = true;
 
-    constructor(private edificioService: EdificioService, private router: Router) {
-        this.displayMenu = 'layout-menu-static-inactive';
-        this.displayButton = 'menu-button-rotate';
-        this.visible = true;
-    }
+    layoutMode: string = 'static';
+    
+    darkMenu: boolean = false;
+    
+    profileMode: string = 'inline';
 
+    displayLayout:string;
 
-    ngOnInit(): void {
+    constructor(private router: Router,private el: ElementRef) {
 
     }
-
+ 
     mostrar(): boolean{
+		
         if (this.router.url != '/login' && this.router.url !='/404')
         {
+			Ultima.init(this.el.nativeElement);
             this.displayLayout='layout-main';
             return true;
         }
@@ -46,11 +42,6 @@ export class AppComponent implements OnInit {
 	logout(): void {
         localStorage.removeItem('Authorization');
         this.router.navigate(['/login']);
-    }
-    toggle() {
-        this.visible = !this.visible;
-        this.displayMenu = this.visible ? 'layout-menu-static-inactive' : '';
-        this.displayButton = this.visible ? 'menu-button-rotate' : '';
     }
 
 }
