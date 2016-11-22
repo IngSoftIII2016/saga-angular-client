@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable, BehaviorSubject} from "rxjs";
-import {Params, ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Edificio} from "../../entities/edificio";
 import {Aula} from "../../entities/aula";
 import {Clase} from "../../entities/clase";
