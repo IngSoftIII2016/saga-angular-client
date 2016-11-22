@@ -23,7 +23,7 @@ export class EdificioComponent {
 
     selectedEdificio: Edificio = null;
 
-    newEdificio: boolean;
+    isNew: boolean;
 
     edificios: Edificio[];
 
@@ -43,7 +43,7 @@ export class EdificioComponent {
     }
 
     showDialogToAdd() {
-        this.newEdificio = true;
+        this.isNew = true;
         this.edificio = new Edificio();
         this.displayDialog = true;
     }
@@ -59,7 +59,7 @@ export class EdificioComponent {
 	
     save() {
 		//insert
-        if(this.newEdificio){
+        if(this.isNew){
             this.add(this.edificio);
 
 		}
@@ -83,7 +83,7 @@ export class EdificioComponent {
     }
 
     onRowSelect(event) {
-        this.newEdificio = false;
+        this.isNew = false;
         this.edificio = this.cloneEdificio(event.data);
         this.displayDialog = true;
     }

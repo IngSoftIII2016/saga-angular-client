@@ -1,3 +1,4 @@
+
 <div class="layout-wrapper layout-compact">
 
      <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
@@ -19,12 +20,9 @@
                 <i class="material-icons">menu</i>
             </a>
             <ul class="topbar-items fadeInDown animated topbar-items-visible" >
-                 <li class="profile-item" >
-                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-exit-to-app" (click)="logout()"></button>
-                 </li>
+                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-power-settings-new" (click)="logout()"></button>
             </ul>
         </div>
-
     </div>
 
     <!-- Menu -->
@@ -53,6 +51,7 @@
     </div>
 
     <div [ngClass]="displayLayout">
+	
         <router-outlet></router-outlet>
 
         <div *ngIf="mostrar()" class="footer" >

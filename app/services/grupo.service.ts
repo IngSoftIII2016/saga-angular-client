@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "./generic.service";
 import {Grupo} from "../entities/grupo";

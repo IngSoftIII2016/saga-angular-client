@@ -37,7 +37,8 @@ import {
     EventoComponent,
     LocalidadComponent,
     NotFoundComponent,
-    ClaseComponent
+    ClaseComponent,
+    UsuarioComponent
 } from "./components";
 
 import {GrupoService} from './services/grupo.service';
@@ -56,6 +57,8 @@ import {PeriodoService} from "./services/periodo.service";
 import {LocalidadService} from "./services/localidad.service";
 import {EventoService} from "./services/evento.service";
 import {EdificioService} from "./services/edificio.service";
+
+
 
 @NgModule({
   imports: [
@@ -90,7 +93,8 @@ import {EdificioService} from "./services/edificio.service";
       EdificioComponent,
       AulaComponent,
       EventoComponent,
-      ClaseComponent
+      ClaseComponent,
+      UsuarioComponent
 
   ],
   bootstrap: [AppComponent],
