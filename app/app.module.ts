@@ -57,6 +57,8 @@ import {PeriodoService} from "./services/periodo.service";
 import {LocalidadService} from "./services/localidad.service";
 import {EventoService} from "./services/evento.service";
 import {EdificioService} from "./services/edificio.service";
+import {ComisionComponent} from "./components/comision/comision.component";
+import {ComisionService} from "./services/comision.service";
 
 
 
@@ -94,7 +96,8 @@ import {EdificioService} from "./services/edificio.service";
       AulaComponent,
       EventoComponent,
       ClaseComponent,
-      UsuarioComponent
+      UsuarioComponent,
+      ComisionComponent
 
   ],
   bootstrap: [AppComponent],
@@ -107,6 +110,7 @@ import {EdificioService} from "./services/edificio.service";
       SedeService,
       CarreraService,
       ClaseService,
+      ComisionService,
       DocenteService,
       EdificioService,
       EventoService,
