@@ -28,7 +28,6 @@ export class AppComponent {
 
     }
     ngAfterViewChecked(): void {
-        console.log('mostrar: ' + this.mostrar())
         if(this.mostrar()) {
             if (!this.ultima) {
                 console.log('Inicializando ultima')
@@ -45,7 +44,7 @@ export class AppComponent {
     mostrar(): boolean{
         return (this.router.url != '/login' && this.router.url !='/404');
     }
-    
+
 	logout(): void {
         localStorage.removeItem('Authorization');
         this.router.navigate(['/login']);

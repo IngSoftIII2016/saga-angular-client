@@ -66,7 +66,7 @@ export class GrillaComponent implements OnInit {
                 let qo = {
                     filters: {
                         'aula.edificio.id': ef.edificio.id,
-                        'fecha': ef.fecha.toTimeString().split(' ')[0]
+                        'fecha': ef.fecha.toISOString().split('T')[0]
                     },
                     page: -1
                 }
