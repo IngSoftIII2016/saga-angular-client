@@ -24,7 +24,7 @@ export class LocalidadComponent {
 
     selectedLocalidad: Localidad;
 
-    newLocalidad: boolean;
+    isNew: boolean;
 
     localidades: Localidad[];
 
@@ -36,7 +36,7 @@ export class LocalidadComponent {
     }
 
     showDialogToAdd() {
-        this.newLocalidad = true;
+        this.isNew = true;
         this.localidad = new Localidad();
         this.displayDialog = true;
     }
@@ -53,7 +53,7 @@ export class LocalidadComponent {
 
     save() {
         //insert
-        if (this.newLocalidad) {
+        if (this.isNew) {
             this.add(this.localidad);
         }
         //update
@@ -76,7 +76,7 @@ export class LocalidadComponent {
     }
 
     onRowSelect(event) {
-        this.newLocalidad = false;
+        this.isNew = false;
         this.localidad = this.cloneLocalidad(event.data);
         this.displayDialog = true;
     }

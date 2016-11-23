@@ -20,7 +20,7 @@ export class PeriodoComponent {
 
     selectedPeriodo: Periodo;
 
-    newPeriodo: boolean;
+    isNew: boolean;
 
     periodos: Periodo[];
 
@@ -31,7 +31,7 @@ export class PeriodoComponent {
     }
 
     showDialogToAdd() {
-        this.newPeriodo = true;
+        this.isNew = true;
         this.periodo = new Periodo();
         this.displayDialog = true;
     }
@@ -48,7 +48,7 @@ export class PeriodoComponent {
 	
     save() {
 		//insert
-        if(this.newPeriodo){
+        if(this.isNew){
 			this.add(this.periodo);
 		}
 		//update
@@ -71,7 +71,7 @@ export class PeriodoComponent {
     }
 
     onRowSelect(event) {
-        this.newPeriodo = false;
+        this.isNew = false;
         this.periodo = this.clonePeriodo(event.data);
         this.displayDialog = true;
     }

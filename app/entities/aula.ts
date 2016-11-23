@@ -1,5 +1,5 @@
 import {Edificio} from "./edificio";
-import {Entity} from "./Entity";
+import {Entity} from "./entity";
 export class Aula implements Entity {
     id: number = null;
     nombre: string;

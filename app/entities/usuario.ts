@@ -1,10 +1,10 @@
 import {Entity} from "./entity";
-export class Grupo implements Entity {
+export class Usuario implements Entity {
     id: number = null;
     nombre: string;
-	descripcion: string;
+    apellido: string;
 
-    constructor(value: Object = {}) {
+    constructor(value : Object = {}) {
         Object.assign(this, value);
     }
 }

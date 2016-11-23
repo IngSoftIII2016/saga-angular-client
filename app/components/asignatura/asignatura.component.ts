@@ -1,10 +1,7 @@
 import {Component} from '@angular/core';
 import {Asignatura} from "../../entities/asignatura";
-import {AsignaturaService} from "../../services/asignatura.service";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
-
-
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -23,8 +20,6 @@ export class AsignaturaComponent {
     displayDialog: boolean;
 
     constructor(private asignaturaStore: AsignaturaStore,  private confirmationService : ConfirmationService) { }
-
-
 
     showDialogToAdd() {
         this.isNew = true;
@@ -50,6 +45,7 @@ export class AsignaturaComponent {
                     })
             },
             error => {
+                console.log(error);
                 this.msgs.push(
                     {
                         severity:'error',

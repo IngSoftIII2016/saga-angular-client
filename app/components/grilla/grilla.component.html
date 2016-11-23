@@ -4,7 +4,8 @@
         <timeline-day-schedule
                 [header]="scheduleHeader"
                 [events]="events"
-                [resources]="resources"
+                [resources]="obsResources"
+                [scrollTime]="scrollTime"
                 (onDayChanged)="getEvents($event)" >
         </timeline-day-schedule>
     </div>

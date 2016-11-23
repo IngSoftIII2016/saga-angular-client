@@ -1,27 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "./generic.service";
-import {Evento} from "../entities/evento";
+import {Usuario} from "../entities/usuario";
 
 @Injectable()
-export class EventoService extends GenericService<Evento> {
-
+export class UsuarioService extends GenericService<Usuario> {
 
     constructor(http: Http) {
         super(http);
     }
 
     protected getResourcePath(): string {
-        return 'eventos';
+        return 'usuarios';
     }
 
     public getDefaultQueryOptions() : QueryOptions {
-        return new QueryOptions({
-            includes: ['aula']
-        });
+        return new QueryOptions();
     }
 
 }

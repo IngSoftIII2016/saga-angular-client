@@ -12,13 +12,13 @@ import {
     DataTableModule,
     ButtonModule,
     DialogModule,
+    DropdownModule,
     ScheduleModule,
     CalendarModule,
     GrowlModule,
     PaginatorModule,
     ConfirmDialogModule,
     ConfirmationService
-
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
@@ -37,7 +37,8 @@ import {
     EventoComponent,
     LocalidadComponent,
     NotFoundComponent,
-    ClaseComponent
+    ClaseComponent,
+    UsuarioComponent
 } from "./components";
 
 import {GrupoService} from './services/grupo.service';
@@ -45,17 +46,19 @@ import {AuthGuard} from "./guards/auth.guard";
 import {LoginGuard} from "./guards/login.guard";
 import {AuthenticationService} from "./services/authentication.service";
 
-import {TimelineDaySchedule} from "./components/timeline-day-schedule.component";
+import {TimelineDaySchedule} from "./components/commons/timeline-day-schedule.component";
 import {SedeService} from "./services/sede.service";
 import {AulaService} from "./services/aula.service";
 import {CarreraService} from "./services/carrera.service";
 import {DocenteService} from "./services/docente.service";
-import {EventoService} from "./services/evento.service";
-import {ClaseService} from "./services/clase.service";
 import {AsignaturaService} from "./services/asignatura.service";
+import {ClaseService} from "./services/clase.service";
+import {PeriodoService} from "./services/periodo.service";
+import {LocalidadService} from "./services/localidad.service";
+import {EventoService} from "./services/evento.service";
 import {EdificioService} from "./services/edificio.service";
-import {DropdownModule} from "primeng/components/dropdown/dropdown";
-
+import {ComisionComponent} from "./components/comision/comision.component";
+import {ComisionService} from "./services/comision.service";
 
 
 @NgModule({
@@ -91,7 +94,9 @@ import {DropdownModule} from "primeng/components/dropdown/dropdown";
       EdificioComponent,
       AulaComponent,
       EventoComponent,
-      ClaseComponent
+      ClaseComponent,
+      UsuarioComponent,
+      ComisionComponent
 
   ],
   bootstrap: [AppComponent],
@@ -99,14 +104,19 @@ import {DropdownModule} from "primeng/components/dropdown/dropdown";
       AuthGuard,
 	  LoginGuard,
 	  AuthenticationService,
+      AsignaturaService,
       AulaService,
-      EdificioService,
       SedeService,
       CarreraService,
-      DocenteService,
-      EventoService,
       ClaseService,
-      AsignaturaService,
+      ComisionService,
+      DocenteService,
+      EdificioService,
+      EventoService,
+      GrupoService,
+      LocalidadService,
+      PeriodoService,
+      SedeService,
       ConfirmationService,
       { provide: LOCALE_ID, useValue: "es" }
   ]

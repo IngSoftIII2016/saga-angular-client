@@ -1,6 +1,6 @@
 import {Comision} from "./comision";
 import {Aula} from "./aula";
-import {Entity} from "./Entity";
+import {Entity} from "./entity";
 
 export class Horario implements Entity {
     id: number = null;

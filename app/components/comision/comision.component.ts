@@ -1,51 +1,48 @@
 import {Component} from '@angular/core';
-import {Docente} from '../../entities/docente';
-import {DocenteStore} from "../../services/docente.sotre";
+import {Comision} from "../../entities/comision";
 import {Message, ConfirmationService} from "primeng/components/common/api";
+import {ComisionStore} from "../../services/comision.store";
 
-/*class PrimeDocente implements Docente {
-    constructor(public id?, public nombre?, public apellido?) {}
-}
-*/
+
 @Component({
-	templateUrl: 'app/components/docente/docente.component.html',
+    templateUrl: 'app/components/comision/comision.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-	selector: 'docente',
-	providers:[DocenteStore, ConfirmationService]
+    selector: 'comision',
+    providers:[ComisionStore, ConfirmationService]
 })
-export class DocenteComponent {
-
-    docente: Docente = new Docente();
+export class ComisionComponent {
 
     msgs: Message[] = [];
 
-    isNew = false;
-
     displayDialog: boolean;
 
-    constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) { }
+    comision: Comision = new Comision();
+
+    isNew: boolean;
+
+    constructor(private comisionStore: ComisionStore,  private confirmationService : ConfirmationService) { }
 
     showDialogToAdd() {
         this.isNew = true;
-        this.docente = new Docente();
+        this.comision = new Comision();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
         this.isNew = false;
-        this.docente =new Docente(event.data);
+        this.comision =new Comision(event.data);
         this.displayDialog = true;
     }
 
     save() {
-        this.docenteStore.save(this.docente).subscribe(
+        this.comisionStore.save(this.comision).subscribe(
             guardada => {
                 this.displayDialog = false;
                 this.msgs.push(
                     {
                         severity:'success',
                         summary:'Guardado',
-                        detail:'Se ha guardado el docente '+ guardada.nombre + ' con exito!'
+                        detail:'Se ha guardado la clase con exito!'
                     })
             },
             error => {
@@ -53,7 +50,7 @@ export class DocenteComponent {
                     {
                         severity:'error',
                         summary:'Error',
-                        detail:'No se ha podido guardar el docente:\n' + error
+                        detail:'No se ha podido guardar la clase:\n' + error
                     });
             });
     }
@@ -61,18 +58,18 @@ export class DocenteComponent {
 
     delete() {
         this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el docente?',
+            message: 'Estas seguro que desea eliminar la clase?',
             header: 'Confirmar eliminacion',
             icon: 'fa fa-trash',
             accept: () => {
-                this.docenteStore.delete(this.docente).subscribe(
+                this.comisionStore.delete(this.comision).subscribe(
                     borrada => {
                         this.displayDialog = false;
                         this.msgs.push(
                             {
                                 severity:'success',
                                 summary:'Exito',
-                                detail:'Se ha borrado el docente '+ borrada.nombre + ' con exito!'
+                                detail:'Se ha borrado la clase con exito!'
                             })
                     },
                     error => {
@@ -80,7 +77,7 @@ export class DocenteComponent {
                             {
                                 severity:'error',
                                 summary:'Error',
-                                detail:'No se ha podido eliminar el docente:\n' + error
+                                detail:'No se ha podido eliminar la clase:\n' + error
                             });
                     }
                 );
@@ -95,12 +92,12 @@ export class DocenteComponent {
         };
         console.log(qo);
 
-        this.docenteStore.mergeQueryOptions(qo);
+        this.comisionStore.mergeQueryOptions(qo);
     }
 
     sort(event) {
-        this.docenteStore.setSorts([event]);
+        this.comisionStore.setSorts([event]);
     }
-
-
-}	
+}	/**
+ * Created by Federico on 17/11/2016.
+ */

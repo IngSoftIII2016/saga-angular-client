@@ -1,6 +1,6 @@
 import {Horario} from "./horario";
 import {Aula} from "./aula";
-import {Entity} from "./Entity";
+import {Entity} from "./entity";
 
 export class Clase implements Entity {
 
@@ -22,10 +22,10 @@ export class Clase implements Entity {
         this.fecha = fecha.format("yyyy-mm-dd");
     }
 
-    getHoraInicio(): Date {
+    public getHoraInicio(): Date {
         return this.parseHora(this.hora_inicio);
     }
-    getHoraFin() : Date {
+    public getHoraFin() : Date {
         return this.parseHora(this.hora_fin);
     }
     public parseHora(hora : string) {

@@ -5,6 +5,7 @@ import {
     Component, Input, AfterViewInit, DoCheck, OnDestroy, ElementRef, IterableDiffers, Output,
     EventEmitter
 } from '@angular/core';
+import {Observable} from "rxjs";
 
 declare var jQuery: any;
 
@@ -16,7 +17,7 @@ declare var jQuery: any;
 })
 export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
-    @Input() resources: any[];
+    @Input() resources: Observable<any[]>;
 
     @Input() events: any[];
 
@@ -66,15 +67,15 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     @Input() snapDuration: any;
 
-    @Input() scrollTime: any = '06:00:00';
+    @Input() scrollTime: any = '09:00:00';
 
-    @Input() minTime: any = '00:00:00';
+    @Input() minTime: any = '08:00:00';
 
-    @Input() maxTime: any = '24:00:00';
+    @Input() maxTime: any = '21:30:00';
 
     @Input() slotEventOverlap: boolean = true;
 
-    @Input() nowIndicator: boolean;
+    @Input() nowIndicator: boolean = true;
 
     @Input() dragRevertDuration: number = 500;
 
@@ -120,16 +121,26 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     differ: any;
 
+    options: any;
+
     schedule: any;
 
     constructor(public el: ElementRef, differs: IterableDiffers) {
         this.differ = differs.find([]).create(null);
         this.initialized = false;
+
     }
 
     ngAfterViewInit() {
+        var self = this;
+        this.resources.subscribe(function(resources) {
+            self.initSchedule(resources);
+        })
+    }
+
+    private initSchedule(resources: any[]) {
         this.schedule = jQuery(this.el.nativeElement.children[0]);
-        let options = {
+        this.options = {
             theme: true,
             header: this.header,
             isRTL: this.rtl,
@@ -163,15 +174,14 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventOverlap: this.eventOverlap,
             eventConstraint: this.eventConstraint,
             eventRender: this.eventRender,
-            resources: this.resources,
+            resources: resources,
             locale: 'es',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
-                callback(this.events);
-                /*this.onDayChanged.emit({
-                    'day': start.toDate(),
-                    'callback': callback
-                });*/
+                 this.onDayChanged.emit({
+                 'day': start,
+                 'callback': callback
+                 });
             },
             dayClick: (date, jsEvent, view) => {
                 this.onDayClick.emit({
@@ -255,20 +265,20 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             }
         };
 
-        if(this.locale) {
-            for(var prop in this.locale) {
-                options[prop] = this.locale[prop];
+        if (this.locale) {
+            for (var prop in this.locale) {
+                this.options[prop] = this.locale[prop];
             }
         }
 
-        this.schedule.fullCalendar(options);
+        this.schedule.fullCalendar(this.options);
         this.initialized = true;
     }
 
     ngDoCheck() {
         let changes = this.differ.diff(this.events);
 
-        if(this.schedule && changes) {
+        if (this.schedule && changes) {
             this.schedule.fullCalendar('refetchEvents');
         }
     }
@@ -277,6 +287,17 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
         jQuery(this.el.nativeElement.children[0]).fullCalendar('destroy');
         this.initialized = false;
         this.schedule = null;
+    }
+
+    getOptions(): any {
+        let o = {};
+        Object.assign(o, this.options);
+        return o;
+    }
+
+    updateOptions(options: any) {
+        Object.assign(this.options, options);
+        this.schedule.fullCalendar(this.options);
     }
 
     gotoDate(date: any) {
@@ -310,6 +331,5 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     getDate() {
         return this.schedule.fullCalendar('getDate');
     }
-
 
 }

@@ -1,23 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "./generic.service";
-import {Grupo} from "../entities/grupo";
+import {Comision} from "../entities/comision";
 
 @Injectable()
-export class GrupoService extends GenericService<Grupo> {
+export class ComisionService extends GenericService<Comision> {
 
 	constructor(http: Http) {
 		super(http);
 	}
 
 	protected getResourcePath(): string {
-		return 'grupos';
+		return 'comisiones';
 	}
 
 	public getDefaultQueryOptions() : QueryOptions {
-		return new QueryOptions();
+		return new QueryOptions(
+			{
+				includes: ['periodo', 'asignatura'],
+				sorts: [
+					{field : 'asignatura.nombre', order: 1}]
+			})
 	}
 
 }

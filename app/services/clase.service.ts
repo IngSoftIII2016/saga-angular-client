@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, URLSearchParams,Response} from '@angular/http';
-import { Observable } from 'rxjs';
+import {Http} from '@angular/http';
+
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "./generic.service";
 import {Clase} from "../entities/clase";
-import {DatePipe} from "@angular/common";
-import {Edificio} from "../entities/edificio";
 
 @Injectable()
 export class ClaseService extends GenericService<Clase> {

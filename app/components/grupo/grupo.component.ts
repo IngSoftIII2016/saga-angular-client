@@ -1,88 +1,106 @@
 import {Component} from '@angular/core';
-import {Grupo} from '../../entities/grupo';
-import {GrupoService} from '../../services/grupo.service';
-import {QueryOptions} from "../../services/generic.service";
+import {Grupo} from "../../entities/grupo";
+import {GrupoService} from "../../services/grupo.service";
+import {Message, ConfirmationService} from "primeng/components/common/api";
+import {GrupoStore} from "../../services/grupo.store";
+
 
 
 @Component({
-	templateUrl: 'app/components/grupo/grupo.component.html',
-	selector: 'grupo',
-	providers:[GrupoService]
+    templateUrl: 'app/components/grupo/grupo.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
+    selector: 'grupo',
+    providers: [GrupoStore, ConfirmationService]
 })
 export class GrupoComponent {
-    queryOptions: QueryOptions = new QueryOptions();
-
-	displayDialog: boolean;
 
     grupo: Grupo = new Grupo();
 
-    selectedGrupo: Grupo;
+    msgs: Message[] = [];
 
-    newGrupo: boolean;
+    isNew = false;
 
-    grupos: Grupo[];
+    displayDialog: boolean;
 
-    constructor(private grupoService: GrupoService) { }
+    constructor(private grupoStore: GrupoStore,  private confirmationService : ConfirmationService) { }
 
-    ngOnInit() {
-        this.grupoService.query(this.queryOptions).subscribe(grupos => this.grupos = grupos);
-    }
+
 
     showDialogToAdd() {
-        this.newGrupo = true;
+        this.isNew = true;
         this.grupo = new Grupo();
         this.displayDialog = true;
     }
 
-	add(grupo: Grupo): void {
-		this.grupoService.create(grupo).subscribe(grupo => {
-                this.grupo = grupo;
-				this.grupos.push(grupo);
-				this.selectedGrupo = null;
-
-            }
-		 );
-	}
-	
-    save() {
-		//insert
-        if(this.newGrupo){
-			this.add(this.grupo);
-		}
-		//update
-        else{
-			this.grupoService.update(this.grupo).subscribe(grupo => {
-            this.grupos[this.findSelectedGrupoIndex()] = grupo;
-		});
-		}
-        this.grupo = null;
-        this.displayDialog = false;
-    }
-	
-	
-    delete() {
-		this.grupoService.delete(this.grupo);
-		
-        this.grupos.splice(this.findSelectedGrupoIndex(), 1);
-        this.grupo = null;
-        this.displayDialog = false;
-    }
-
     onRowSelect(event) {
-        this.newGrupo = false;
-        this.grupo = this.cloneGrupo(event.data);
+        this.isNew = false;
+        this.grupo =new Grupo(event.data);
         this.displayDialog = true;
     }
 
-    cloneGrupo(g: Grupo): Grupo {
-        let grupo = new Grupo();
-        for(let prop in g) {
-            grupo[prop] = g[prop];
-        }
-        return grupo;
+    save() {
+        this.grupoStore.save(this.grupo).subscribe(
+            guardada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity:'success',
+                        summary:'Guardado',
+                        detail:'Se ha guardado el grupo '+ guardada.nombre + ' con exito!'
+                    })
+            },
+            error => {
+                this.msgs.push(
+                    {
+                        severity:'error',
+                        summary:'Error',
+                        detail:'No se ha podido guardar el grupo:\n' + error
+                    });
+            });
     }
 
-    findSelectedGrupoIndex(): number {
-        return this.grupos.indexOf(this.selectedGrupo);
+
+    delete() {
+        this.confirmationService.confirm({
+            message: 'Estas seguro que desea eliminar el grupo?',
+            header: 'Confirmar eliminacion',
+            icon: 'fa fa-trash',
+            accept: () => {
+                this.grupoStore.delete(this.grupo).subscribe(
+                    borrada => {
+                        this.displayDialog = false;
+                        this.msgs.push(
+                            {
+                                severity:'success',
+                                summary:'Exito',
+                                detail:'Se ha borrado el grupo '+ borrada.nombre + ' con exito!'
+                            })
+                    },
+                    error => {
+                        this.msgs.push(
+                            {
+                                severity:'error',
+                                summary:'Error',
+                                detail:'No se ha podido eliminar el grupo:\n' + error
+                            });
+                    }
+                );
+            }
+        });
     }
-}	
+
+    pageChange(event) {
+        let qo = {
+            size: event.rows,
+            page: event.page + 1
+        };
+        console.log(qo);
+
+        this.grupoStore.mergeQueryOptions(qo);
+    }
+
+    sort(event) {
+        this.grupoStore.setSorts([event]);
+    }
+
+}

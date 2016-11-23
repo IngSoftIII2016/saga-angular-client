@@ -3,7 +3,7 @@ import 'rxjs/add/operator/do'
 import 'rxjs/add/observable/zip'
 import {QueryOptions} from "./generic.service";
 import {GenericService} from "./generic.service";
-import {Entity} from "../entities/Entity";
+import {Entity} from "../entities/entity";
 /**
  * Created by juan on 15/11/16.
  */

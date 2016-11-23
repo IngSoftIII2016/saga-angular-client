@@ -3,7 +3,7 @@
      <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
     <!-- Top Bar -->
-	<div *ngIf="mostrar()" >
+	<div *ngIf="mostrar()">
 
     <div  class="topbar clearfix">
         <div class="topbar-left">
@@ -19,12 +19,9 @@
                 <i class="material-icons">menu</i>
             </a>
             <ul class="topbar-items fadeInDown animated topbar-items-visible" >
-                 <li class="profile-item" >
-                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-exit-to-app" (click)="logout()"></button>
-                 </li>
+                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-power-settings-new" (click)="logout()"></button>
             </ul>
         </div>
-
     </div>
 
     <!-- Menu -->
@@ -53,6 +50,7 @@
     </div>
 
     <div [ngClass]="displayLayout">
+	
         <router-outlet></router-outlet>
 
         <div *ngIf="mostrar()" class="footer" >

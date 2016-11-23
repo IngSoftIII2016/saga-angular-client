@@ -1,12 +1,12 @@
 import {Asignatura} from "./asignatura";
-import {Docente} from "./docente";
-import {Entity} from "./Entity";
+import {Periodo} from "./periodo"
+import {Entity} from "./entity";
 
 export class Comision implements Entity {
     id: number = null;
     nombre: string;
     asignatura: Asignatura = new Asignatura();
-    docente: Docente[] = [];
+    periodo: Periodo = new Periodo();
 
     constructor(value: Object = {}) {
         Object.assign(this, value);
