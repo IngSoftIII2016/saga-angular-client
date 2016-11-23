@@ -56,7 +56,6 @@ export class GrillaComponent implements OnInit {
                     return {id: aula.id, title: aula.nombre}
                 }))
 
-        this.obsResources.subscribe(resources => this.resources = resources);
 /*
         this.edificio.combineLatest(
             this.fecha,

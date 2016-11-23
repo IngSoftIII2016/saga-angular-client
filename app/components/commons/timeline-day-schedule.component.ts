@@ -332,5 +332,4 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
         return this.schedule.fullCalendar('getDate');
     }
 
-
 }

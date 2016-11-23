@@ -25,8 +25,6 @@ export class DocenteComponent {
 
     constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) { }
 
-
-
     showDialogToAdd() {
         this.isNew = true;
         this.docente = new Docente();
