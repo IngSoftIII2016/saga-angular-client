@@ -1,4 +1,4 @@
-import {Entity} from "./Entity";
+import {Entity} from "./entity";
 export class Periodo implements Entity {
     id: number = null;
     fecha_inicio : string;

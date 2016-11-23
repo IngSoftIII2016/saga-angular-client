@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit, AfterViewInit} from "@angular/core";
 import {Router} from '@angular/router';
 declare var Ultima: any;
 
@@ -9,7 +9,8 @@ declare var Ultima: any;
     styleUrls: ['app/components/app.component.css']
 
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements AfterViewInit{
+
 
     layoutCompact: boolean = true;
 
@@ -24,15 +25,17 @@ export class AppComponent implements OnInit{
     constructor(private router: Router,private el: ElementRef) {
 
     }
-    ngOnInit() {
+    
+    ngAfterViewInit(): void {
         Ultima.init(this.el.nativeElement);
     }
- 
+
+
+
     mostrar(): boolean{
 		
         if (this.router.url != '/login' && this.router.url !='/404')
         {
-
             this.displayLayout='layout-main';
             return true;
         } else {

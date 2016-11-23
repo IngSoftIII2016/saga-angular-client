@@ -1,10 +1,9 @@
-
 <div class="layout-wrapper layout-compact">
 
      <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
     <!-- Top Bar -->
-	<div *ngIf="mostrar()" >
+	<div *ngIf="mostrar()">
 
     <div  class="topbar clearfix">
         <div class="topbar-left">

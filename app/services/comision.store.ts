@@ -3,7 +3,7 @@
  */
 import {Injectable} from "@angular/core";
 import {GenericStore} from "./generic.store";
-import {Comision} from "../entities/Comision";
+import {Comision} from "../entities/comision";
 import {ComisionService} from "./comision.service";
 @Injectable()
 export class ComisionStore extends GenericStore<Comision, ComisionService> {

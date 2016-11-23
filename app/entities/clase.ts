@@ -1,6 +1,6 @@
 import {Horario} from "./horario";
 import {Aula} from "./aula";
-import {Entity} from "./Entity";
+import {Entity} from "./entity";
 
 export class Clase implements Entity {
 
