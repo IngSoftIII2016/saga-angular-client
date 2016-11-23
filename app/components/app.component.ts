@@ -27,11 +27,11 @@ export class AppComponent implements AfterViewInit{
     }
     
     ngAfterViewInit(): void {
-        Ultima.init(this.el.nativeElement);
     }
 
-
-
+    ngAfterContentChecked() {
+        Ultima.init(this.el.nativeElement);
+    }
     mostrar(): boolean{
 		
         if (this.router.url != '/login' && this.router.url !='/404')
