@@ -132,10 +132,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     ngAfterViewInit() {
-        var self = this;
-        this.resources.subscribe(function(resources) {
-            self.initSchedule(resources);
-        })
+        this.resources.subscribe(this.initSchedule);
     }
 
     private initSchedule(resources: any[]) {
