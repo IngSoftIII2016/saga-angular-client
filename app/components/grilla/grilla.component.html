@@ -1,10 +1,16 @@
 <div class="ui-g-12">
-    <div class="card card-w-title">
-        <h1>Schedule</h1>
+
+    <div class="card">
+        <div class="ui-g-12">
+            <p-calendar [(ngModel)]="fechaCalendar" [locale]="es" dateFormat="dd/mm/yy" readonlyInput="readonlyInput"></p-calendar>
+        </div>
         <timeline-day-schedule
                 [header]="scheduleHeader"
                 [resources]="obsResources"
+                [editable]="true"
+                [height]="500"
                 [scrollTime]="scrollTime"
+                [hiddenDays]="[0]"
                 (onDayChanged)="getEvents($event)" >
         </timeline-day-schedule>
     </div>

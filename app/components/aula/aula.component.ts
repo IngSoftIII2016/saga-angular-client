@@ -24,13 +24,12 @@ export class AulaComponent {
 
     edificios: Observable<Edificio[]>;
 
-    constructor(
-        private aulaStore: AulaStore,
-        private edificioService: EdificioService,
-        private confirmationService : ConfirmationService) {
+    constructor(private aulaStore: AulaStore,
+                private edificioService: EdificioService,
+                private confirmationService: ConfirmationService) {
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.edificios = this.edificioService.getAll();
     }
 
@@ -49,32 +48,27 @@ export class AulaComponent {
 
     save() {
         if (this.isNew) {
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el aula?',
-                header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
-                accept: () => {
-                        this.aulaStore.create(this.aula).subscribe(
-                            creada => {
-                                this.displayDialog = false;
-                                this.msgs.push(
-                                    {
-                                        severity:'success',
-                                        summary:'Creada',
-                                        detail:'Se ha agregado el aula '+ creada.nombre + ' con exito!'
-                                    })
-                            },
-                            error => {
-                                this.msgs.push(
-                                    {
-                                        severity:'error',
-                                        summary:'Error',
-                                        detail:'No se ha podido crear el aula:\n' + error
-                                    });
+            this.aulaStore.create(this.aula)
+                .subscribe(
+                    creada => {
+                        this.displayDialog = false;
+                        this.msgs.push(
+                            {
+                                severity: 'success',
+                                summary: 'Creada',
+                                detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
+                            })
+                    },
+                    error => {
+                        this.msgs.push(
+                            {
+                                severity: 'error',
+                                summary: 'Error',
+                                detail: 'No se ha podido crear el aula:\n' + error
                             });
-                }
-            });
+                    });
         }
+
         //update
         else
             this.confirmationService.confirm({
@@ -116,17 +110,17 @@ export class AulaComponent {
                         this.displayDialog = false;
                         this.msgs.push(
                             {
-                                severity:'success',
-                                summary:'Borrado',
-                                detail:'Se ha borrado el '+ borrada.nombre + ' con exito!'
+                                severity: 'success',
+                                summary: 'Borrado',
+                                detail: 'Se ha borrado el ' + borrada.nombre + ' con exito!'
                             })
                     },
                     error => {
                         this.msgs.push(
                             {
-                                severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar el aula:\n' + error
+                                severity: 'error',
+                                summary: 'Error',
+                                detail: 'No se ha podido eliminar el aula:\n' + error
                             });
                     }
                 );
@@ -134,9 +128,9 @@ export class AulaComponent {
         });
     }
 
-    message(evento : string) {
+    message(evento: string) {
         this.msgs = [];
-        this.msgs.push({severity:'success', summary:'Exito', detail:'Aula ' +  evento + ' con exito!'});
+        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Aula ' + evento + ' con exito!'});
     }
 
     pageChange(event) {
@@ -153,6 +147,7 @@ export class AulaComponent {
         this.aulaStore.setSorts([event]);
     }
 
-}	/**
+}
+/**
  * Created by Federico on 17/11/2016.
  */

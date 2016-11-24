@@ -10,6 +10,8 @@ import {Evento} from "../../entities/evento";
 import {ClaseStore} from "../../services/clase.store";
 import {EventoStore} from "../../services/evento.store";
 
+import {CALENDAR_LOCALE_ES} from '../commons/calendar-locale-es';
+
 declare var moment: any;
 
 @Component({
@@ -28,7 +30,10 @@ export class GrillaComponent implements OnInit {
     resources: any[] = [];
     events: Observable<any[]>;
     scrollTime: string;
+    fechaCalendar: Date = new Date();
     private scheduleHeader: any;
+
+    es: any = CALENDAR_LOCALE_ES;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
