@@ -33,12 +33,13 @@
                 header="Email" 
                 [sortable]="true">
         </p-column>
-                <p-column
+           <!--     <p-column
                 field="estado"
                 header="Estado"
                 sortable="custom"
                 (sortFunction)="sort($event)">
         </p-column>
+        -->
                  <p-column 
                 field="telefono" 
                 header="Telefono" 
@@ -71,6 +72,10 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="apellido">Apellido</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="apellido" [(ngModel)]="usuario.apellido"/></div>
+            </div>
+             <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="apellido">Email</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="usuario.email"/></div>
             </div>
 
         </div>

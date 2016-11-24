@@ -62,6 +62,9 @@ import {ComisionService} from "./services/comision.service";
 import {AsignaturaCarreraService} from "./services/asignatura-carrera.service";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 import {UsuarioService} from "./services/usuario.service";
+import {UsuarioGrupoService} from "./services/usuario-grupo.service";
+import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
+
 
 
 @NgModule({
@@ -100,6 +103,7 @@ import {UsuarioService} from "./services/usuario.service";
       PeriodoComponent,
       SedeComponent,
       UsuarioComponent,
+      UsuarioGrupoComponent,
       TimelineDaySchedule
 
   ],
@@ -124,6 +128,7 @@ import {UsuarioService} from "./services/usuario.service";
       SedeService,
       ConfirmationService,
       UsuarioService,
+      UsuarioGrupoService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
