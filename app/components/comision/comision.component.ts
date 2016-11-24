@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Comision} from "../../entities/comision";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {ComisionStore} from "../../services/comision.store";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -20,7 +21,17 @@ export class ComisionComponent {
 
     isNew: boolean;
 
+    private searchTerms = new Subject<string>();
+
     constructor(private comisionStore: ComisionStore,  private confirmationService : ConfirmationService) { }
+
+    ngOnInit() {
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.comisionStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*', 'asignatura.nombre': '*'+terms+'*'} : {}))
+    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -98,6 +109,12 @@ export class ComisionComponent {
     sort(event) {
         this.comisionStore.setSorts([event]);
     }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
+    }
+
+
 }	/**
  * Created by Federico on 17/11/2016.
  */

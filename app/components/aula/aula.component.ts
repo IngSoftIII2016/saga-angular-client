@@ -50,7 +50,7 @@ export class AulaComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.aulaStore.setLikes(terms.length > 0 ? {capacidad: '*'+terms+'*', nombre: '*'+terms+'*'} : {}))
+                this.aulaStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
     }
 
     showDialogToAdd() {
