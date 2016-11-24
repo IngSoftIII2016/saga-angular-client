@@ -38,7 +38,7 @@ export class AulaComponent {
         this.edificioService.getAll().subscribe(edificios => {
             edificios.forEach(edificio => {
                     sel.edificios.push({
-                            label: edificio.nombre, value: edificio
+                            label: edificio.nombre, value: new Edificio (edificio)
                         }
                     )
                 }
@@ -82,13 +82,13 @@ export class AulaComponent {
         this.isNew = false;
         this.aula = new Aula(event.data);
         this.edificioSelected = {label: this.aula.edificio.nombre, value: new Edificio(this.aula.edificio)};
-        console.log(this.edificioSelected);
         this.displayDialog = true;
     }
 
     save() {
-        this.aula.edificio = this.edificioSelected.value
-        console.log(this.aula);
+        if (this.aula.edificio.nombre != this.edificioSelected.label){
+         this.aula.edificio = new Edificio (this.edificioSelected);
+        }
         if (this.isNew) {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el aula?',
@@ -143,8 +143,6 @@ export class AulaComponent {
                         });
                 }
             });
-
-        console.log(this.aula);
     }
 
 
