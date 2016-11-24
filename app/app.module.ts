@@ -61,6 +61,7 @@ import {ComisionComponent} from "./components/comision/comision.component";
 import {ComisionService} from "./services/comision.service";
 import {AsignaturaCarreraService} from "./services/asignatura-carrera.service";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
+import {UsuarioService} from "./services/usuario.service";
 
 
 @NgModule({
@@ -122,6 +123,7 @@ import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asigna
       PeriodoService,
       SedeService,
       ConfirmationService,
+      UsuarioService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })
