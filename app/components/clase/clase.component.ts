@@ -71,16 +71,16 @@ export class ClaseComponent {
         this.isNew = false;
         this.clase =new Clase(event.data);
         this.fecha = new Date(this.clase.fecha);
-        this.hora_inicio = new Date(this.clase.hora_inicio);
-        this.hora_fin = new Date(this.clase.hora_fin);
+        this.hora_inicio = this.clase.getHoraInicio();
+        this.hora_fin = this.clase.getHoraFin();
         this.aulaSelected = {label: this.clase.aula.nombre, value: new Aula(this.clase.aula)};
         this.displayDialog = true;
     }
 
     save() {
         this.clase.fecha = this.fecha.toISOString().split('T')[0];
-        this.clase.hora_inicio = this.hora_inicio.toTimeString().split('T')[0];
-        this.clase.hora_fin = this.hora_fin.toTimeString().split('T')[0];
+        this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
+        this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
         if (this.clase.aula.nombre != this.aulaSelected.label){
             this.clase.aula= new Aula (this.aulaSelected);
         }

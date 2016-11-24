@@ -65,13 +65,13 @@ export class EventoComponent {
     onRowSelect(event) {
         this.isNew = false;
         this.evento =new Evento(event.data);
-        this.fecha = new Date(this.clase.fecha);
+        this.fecha = new Date(this.evento.fecha);
         this.aulaSelected = {label: this.evento.aula.nombre, value: new Aula(this.evento.aula)};
         this.displayDialog = true;
     }
 
     save() {
-        this.clase.fecha = this.fecha.toISOString().split('T')[0];
+        this.evento.fecha = this.fecha.toISOString().split('T')[0];
         if (this.evento.aula.nombre != this.aulaSelected.label){
             this.evento.aula = new Aula (this.aulaSelected);
         }
