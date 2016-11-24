@@ -33,6 +33,8 @@ export class LocalidadComponent {
 
     sedeSelected: SelectItem;
 
+    sede : string;
+
     private searchTerms = new Subject<string>();
 
     constructor(private localidadStore: LocalidadStore,
@@ -62,6 +64,7 @@ export class LocalidadComponent {
         this.isNew = true;
         this.localidad = new Localidad();
         this.displayDialog = true;
+        this.sede = this.sedeSelected.label;
     }
 
     onRowSelect(event) {
@@ -69,14 +72,15 @@ export class LocalidadComponent {
         this.localidad = new Localidad(event.data);
         this.sedeSelected = {label: this.localidad.sede.nombre, value: new Sede(this.localidad.sede)};
         this.displayDialog = true;
+        this.sede = this.localidad.sede.nombre;
     }
 
     save() {
-        if (this.localidad.sede.nombre != this.sedeSelected.label){
-            this.localidad.sede = new Sede (this.sedeSelected);
-        }
         if (this.isNew) {
-            this.localidad.sede = new Sede (this.sedeSelected);
+            if(this.sedeSelected == null)
+                this.localidad.sede= this.sedes[0].value;
+            else
+                this.localidad.sede =  new Sede (this.sedeSelected.value);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la localidad?',
                 header: 'Confirmar ',
@@ -104,7 +108,11 @@ export class LocalidadComponent {
             });
         }
         //update
-        else
+        else {
+            if (this.localidad.sede.nombre == this.sedeSelected.label)
+                this.localidad.sede = new Sede(this.sedeSelected.value);
+            else
+                this.localidad.sede = new Sede(this.sedeSelected);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificarla localidad?',
                 header: 'Confirmar modificacion',
@@ -130,6 +138,7 @@ export class LocalidadComponent {
                         });
                 }
             });
+        }
     }
 
 

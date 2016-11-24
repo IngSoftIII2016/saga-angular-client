@@ -26,6 +26,8 @@ export class ClaseComponent {
 
     aulas: SelectItem[] = [];
 
+    aula : string;
+
     aulaSelected: SelectItem;
 
 
@@ -65,6 +67,7 @@ export class ClaseComponent {
         this.hora_inicio = new Date();
         this.hora_fin = new Date();
         this.displayDialog = true;
+        this.aula = this.aulaSelected.label;
     }
 
     onRowSelect(event) {
@@ -75,17 +78,18 @@ export class ClaseComponent {
         this.hora_fin = this.clase.getHoraFin();
         this.aulaSelected = {label: this.clase.aula.nombre, value: new Aula(this.clase.aula)};
         this.displayDialog = true;
+        this.aula = this.clase.aula.nombre;
     }
 
     save() {
         this.clase.fecha = this.fecha.toISOString().split('T')[0];
         this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
         this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-        if (this.clase.aula.nombre != this.aulaSelected.label){
-            this.clase.aula= new Aula (this.aulaSelected);
-        }
-        if (this.isNew) {
-            this.clase.aula= new Aula (this.aulaSelected);
+       if (this.isNew) {
+           if(this.aulaSelected == null)
+               this.clase.aula = this.aulas[0].value;
+           else
+               this.clase.aula =  new Aula (this.aulaSelected.value);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar una clase?',
                 header: 'Confirmar ',
@@ -113,32 +117,37 @@ export class ClaseComponent {
             });
         }
         //update
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar la clase?',
-                header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
-                accept: () => {
-                    this.claseStore.update(this.clase).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar la clase:\n' + error
-                                });
-                        });
-                }
-            });
+        else {
+           if (this.clase.aula.nombre == this.aulaSelected.label)
+               this.clase.aula = new Aula(this.aulaSelected.value);
+           else
+               this.clase.aula = new Aula(this.aulaSelected);
+           this.confirmationService.confirm({
+               message: 'Estas seguro que desea modificar la clase?',
+               header: 'Confirmar modificacion',
+               icon: 'fa fa-pencil-square-o',
+               accept: () => {
+                   this.claseStore.update(this.clase).subscribe(
+                       guardada => {
+                           this.displayDialog = false;
+                           this.msgs.push(
+                               {
+                                   severity: 'success',
+                                   summary: 'Guardada',
+                                   detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
+                               })
+                       },
+                       error => {
+                           this.msgs.push(
+                               {
+                                   severity: 'error',
+                                   summary: 'Error',
+                                   detail: 'No se ha podido guardar la clase:\n' + error
+                               });
+                       });
+               }
+           });
+       }
     }
 
 

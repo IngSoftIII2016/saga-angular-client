@@ -41,7 +41,11 @@
                 <div class="ui-grid-col-8"><input pInputText id="capacidad" [(ngModel)]="aula.capacidad"/></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="edificio">Edificio</label></div>
+                <div class="ui-grid-col-4"><label >Edificio Actual</label></div>
+                <div class="ui-grid-col-8">{{edificio||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="edificio">Seleccione Edificio</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="edificio" [options]="edificios" [(ngModel)]="edificioSelected" [filter]="true"></p-dropdown>
                 </div>

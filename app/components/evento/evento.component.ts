@@ -29,6 +29,8 @@ export class EventoComponent {
     aulaSelected: SelectItem;
 
     fecha: Date;
+    hora_inicio: Date;
+    hora_fin: Date;
     es: any = CALENDAR_LOCALE_ES;
 
     private searchTerms = new Subject<string>();
@@ -59,6 +61,8 @@ export class EventoComponent {
         this.isNew = true;
         this.evento = new Evento();
         this.fecha = new Date();
+        this.hora_inicio = new Date();
+        this.hora_fin = new Date();
         this.displayDialog = true;
     }
 
@@ -66,12 +70,16 @@ export class EventoComponent {
         this.isNew = false;
         this.evento =new Evento(event.data);
         this.fecha = new Date(this.evento.fecha);
+        this.hora_inicio = this.evento.getHoraInicio();
+        this.hora_fin = this.evento.getHoraFin();
         this.aulaSelected = {label: this.evento.aula.nombre, value: new Aula(this.evento.aula)};
         this.displayDialog = true;
     }
 
     save() {
         this.evento.fecha = this.fecha.toISOString().split('T')[0];
+        this.evento.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
+        this.evento.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
         if (this.evento.aula.nombre != this.aulaSelected.label){
             this.evento.aula = new Aula (this.aulaSelected);
         }

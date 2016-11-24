@@ -54,7 +54,11 @@
                 <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="localidad.nombre" /></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="sede">Sede</label></div>
+                <div class="ui-grid-col-4"><label >Sede Actual</label></div>
+                <div class="ui-grid-col-8">{{sede||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="sede">Seleccione Sede</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="sede" [options]="sedes" [(ngModel)]="sedeSelected" [filter]="true"></p-dropdown>
                 </div>

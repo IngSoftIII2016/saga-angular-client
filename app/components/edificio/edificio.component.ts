@@ -27,6 +27,8 @@ export class EdificioComponent {
 
     localidadSelected: SelectItem;
 
+    localidad : string;
+
     private searchTerms = new Subject<string>();
 
     constructor(private edificioStore: EdificioStore,
@@ -56,6 +58,7 @@ export class EdificioComponent {
         this.isNew = true;
         this.edificio = new Edificio();
         this.displayDialog = true;
+        this.localidad = this.localidadSelected.label;
     }
 
     onRowSelect(event) {
@@ -63,13 +66,15 @@ export class EdificioComponent {
         this.edificio = new Edificio(event.data);
         this.localidadSelected = {label: this.edificio.localidad.nombre, value: new Localidad(this.edificio.localidad)};
         this.displayDialog = true;
+        this.localidad = this.edificio.localidad.nombre;
     }
 
     save() {
-        if (this.edificio.localidad.nombre != this.localidadSelected.label){
-            this.edificio.localidad = new Localidad (this.localidadSelected);
-        }
         if (this.isNew) {
+            if(this.localidadSelected == null)
+                this.edificio.localidad= this.localidades[0].value;
+            else
+                this.edificio.localidad =  new Localidad (this.localidadSelected.value);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el edificio?',
                 header: 'Confirmar ',
@@ -97,7 +102,11 @@ export class EdificioComponent {
             });
         }
         //update
-        else
+        else {
+            if (this.edificio.localidad.nombre == this.localidadSelected.label)
+                this.edificio.localidad = new Localidad(this.localidadSelected.value);
+            else
+                this.edificio.localidad = new Localidad(this.localidadSelected);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el edificio?',
                 header: 'Confirmar modificacion',
@@ -123,6 +132,7 @@ export class EdificioComponent {
                         });
                 }
             });
+        }
     }
 
 

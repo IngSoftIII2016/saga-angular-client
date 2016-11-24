@@ -22,6 +22,8 @@ export class AulaComponent {
 
     aula: Aula = new Aula();
 
+    edificio : string;
+
     isNew: boolean;
 
     edificios: SelectItem[] = [];
@@ -57,21 +59,24 @@ export class AulaComponent {
         this.isNew = true;
         this.aula = new Aula();
         this.displayDialog = true;
+        this.edificio = this.edificioSelected.label;
+
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.aula = new Aula(event.data);
         this.edificioSelected = {label: this.aula.edificio.nombre, value: new Edificio(this.aula.edificio)};
+        this.edificio = this.aula.edificio.nombre;
         this.displayDialog = true;
     }
 
     save() {
-        if (this.aula.edificio.nombre != this.edificioSelected.label){
-         this.aula.edificio = new Edificio (this.edificioSelected);
-        }
         if (this.isNew) {
-            this.aula.edificio = new Edificio (this.edificioSelected);
+            if(this.edificioSelected == null)
+                this.aula.edificio = this.edificios[0].value;
+            else
+                this.aula.edificio =  new Edificio (this.edificioSelected.value);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el aula?',
                 header: 'Confirmar ',
@@ -100,8 +105,12 @@ export class AulaComponent {
             });
         }
         //update
-        else
-            this.confirmationService.confirm({
+        else {
+            if(this.aula.edificio.nombre == this.edificioSelected.label)
+                this.aula.edificio = new Edificio (this.edificioSelected.value);
+            else
+                    this.aula.edificio = new Edificio (this.edificioSelected);
+           this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el aula?',
                 header: 'Confirmar modificacion',
                 icon: 'fa fa-pencil-square-o',
@@ -126,6 +135,7 @@ export class AulaComponent {
                         });
                 }
             });
+        }
     }
 
 
