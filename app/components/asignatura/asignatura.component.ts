@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Asignatura} from "../../entities/asignatura";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
+import {Subject} from "rxjs";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -19,7 +20,17 @@ export class AsignaturaComponent {
 
     displayDialog: boolean;
 
+    private searchTerms = new Subject<string>();
+
     constructor(private asignaturaStore: AsignaturaStore,  private confirmationService : ConfirmationService) { }
+
+    ngOnInit() {
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.asignaturaStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -34,24 +45,59 @@ export class AsignaturaComponent {
     }
 
     save() {
-        this.asignaturaStore.save(this.asignatura).subscribe(
-            guardada => {
-                this.displayDialog = false;
-                this.msgs.push(
-                    {
-                        severity:'success',
-                        summary:'Guardado',
-                        detail:'Se ha guardado la asignatura '+ guardada.nombre + ' con exito!'
-                    })
-            },
-            error => {
-                console.log(error);
-                this.msgs.push(
-                    {
-                        severity:'error',
-                        summary:'Error',
-                        detail:'No se ha podido guardar la asignatura:\n' + error
-                    });
+        if (this.isNew) {
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea agregar la asignatura?',
+                header: 'Confirmar ',
+                icon: 'fa fa-plus-square',
+                accept: () => {
+                    this.asignaturaStore.create(this.asignatura).subscribe(
+                        creada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity: 'success',
+                                    summary: 'Creada',
+                                    detail: 'Se ha agregado la asignatura ' + creada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity: 'error',
+                                    summary: 'Error',
+                                    detail: 'No se ha podido crear la asignatura:\n' + error
+                                });
+                        });
+                }
+            });
+        }
+        //update
+        else
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea modificar la asignatura?',
+                header: 'Confirmar modificacion',
+                icon: 'fa fa-pencil-square-o',
+                accept: () => {
+                    this.asignaturaStore.update(this.asignatura).subscribe(
+                        guardada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity: 'success',
+                                    summary: 'Guardada',
+                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity: 'error',
+                                    summary: 'Error',
+                                    detail: 'No se ha podido guardar la asignatura:\n' + error
+                                });
+                        });
+                }
             });
     }
 
@@ -97,6 +143,10 @@ export class AsignaturaComponent {
 
     sort(event) {
         this.asignaturaStore.setSorts([event]);
+    }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 
 }	
