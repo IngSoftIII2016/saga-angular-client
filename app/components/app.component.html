@@ -1,4 +1,4 @@
-<div class="layout-wrapper layout-compact">
+<div [ngClass]="{'layout-wrapper':true,'layout-compact':layoutCompact}">
 
      <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
@@ -9,29 +9,41 @@
         <div class="topbar-left">
             <a [routerLink]="['/']" class="logo"></a>
         </div>
-
-        <div class="topbar-right">
-             <a id="menu-button" href="#">
+            <div class="topbar-right">
+                <a id="menu-button" >
                     <i></i>
-             </a>
-
-            <a href="#" id="topbar-menu-button" >
-                <i class="material-icons">menu</i>
-            </a>
-            <ul class="topbar-items fadeInDown animated topbar-items-visible" >
+                </a>
+                
+                <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
+                    <i class="material-icons">power_settings_new</i> 
+                </a>
+                <ul class="topbar-items fadeInDown animated">
+                    
+                    <li>
                      <button  type="button"  pButton  label="Salir" icon="fa ui-icon-power-settings-new" (click)="logout()"></button>
-            </ul>
-        </div>
+
+                        <ul class="ultima-menu animated">
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">power_settings_new</i>
+                                    <span (click)="logout()">Salir</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
     </div>
 
     <!-- Menu -->
-        <div  class="layout-menu">
+        <div   [ngClass]="{'layout-menu':true,'layout-menu-dark':darkMenu}">
             <div class="nano">
                 <div class="nano-content menu-scroll-content">
+                    
                    <ul class="ultima-menu clearfix" id="main-menu">
                         <li role="menuitem"><a href="#/periodos"><i class="material-icons">Periodos</i><span>Periodos</span></a></li>
                         <li role="menuitem"><a href="#/usuarios"><i class="material-icons">Usuarios</i><span>Usuarios</span></a></li>
-                        <li role="menuitem"><a href="#/grupos"><i class="material-icons">Roles</i><span>Roles</span></a></li>
+                        <li role="menuitem"><a href="#/roles"><i class="material-icons">Roles</i><span>Roles</span></a></li>
                         <li role="menuitem"><a href="#/carreras"><i class="material-icons">Carreras</i><span>Carreras</span></a></li>
                         <li role="menuitem"><a href="#/asignaturas"><i class="material-icons">Asignaturas</i><span>Asignaturas</span></a></li>
                        <li role="menuitem"><a href="#/asignatura-carrera"><i class="material-icons">Planes de Estudio</i><span>Planes de Estudio</span></a></li>
