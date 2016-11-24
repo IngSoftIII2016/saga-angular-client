@@ -33,6 +33,8 @@ export class GrillaComponent implements OnInit {
     fechaCalendar: Date = new Date();
     private scheduleHeader: any;
 
+    displayDialog: boolean = false;
+
     es: any = CALENDAR_LOCALE_ES;
 
     constructor(private route: ActivatedRoute,
@@ -117,9 +119,46 @@ export class GrillaComponent implements OnInit {
         };
     }
 
-    getEvents(event) {
+    getEvents(event): void {
         this.fecha.next(event.day);
         this.events.subscribe(events => event.callback(events))
+    }
+
+
+    onEventClick(event): void {
+        console.log(event);
+    }
+
+    onEventMouseover(event): void {
+        console.log(event);
+    }
+
+    onEventMouseout(event): void {
+        console.log(event);
+    }
+
+    onEventDragStart(event): void {
+        console.log(event);
+    }
+
+    onEventDragStop(event): void {
+        console.log(event);
+    }
+
+    onEventDrop(event): void {
+        console.log(event);
+    }
+
+    onEventResizeStart(event): void {
+        console.log(event);
+    }
+
+    onEventResizeStop(event): void {
+        console.log(event);
+    }
+
+    onEventResize(event): void {
+        console.log(event);
     }
 
     parseDate(fecha: string, hora: string): Date {

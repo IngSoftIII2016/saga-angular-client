@@ -59,6 +59,8 @@ import {EventoService} from "./services/evento.service";
 import {EdificioService} from "./services/edificio.service";
 import {ComisionComponent} from "./components/comision/comision.component";
 import {ComisionService} from "./services/comision.service";
+import {AsignaturaCarreraService} from "./services/asignatura-carrera.service";
+import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 
 
 @NgModule({
@@ -81,6 +83,7 @@ import {ComisionService} from "./services/comision.service";
   declarations: [
       AppComponent,
       AsignaturaComponent,
+      AsignaturaCarreraComponent,
       AulaComponent,
       CarreraComponent,
       ClaseComponent,
@@ -105,6 +108,7 @@ import {ComisionService} from "./services/comision.service";
 	  LoginGuard,
 	  AuthenticationService,
       AsignaturaService,
+      AsignaturaCarreraService,
       AulaService,
       SedeService,
       CarreraService,
