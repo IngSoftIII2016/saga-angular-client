@@ -1,64 +1,59 @@
+/**
+ * Created by juan on 24/11/16.
+ */
 import {Component} from '@angular/core';
-import {Periodo} from '../../entities/periodo';
-import {PeriodoStore} from "../../services/periodo.store";
-import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
-import {ConfirmationService, Message} from "primeng/components/common/api";
-
+import {Message, ConfirmationService} from "primeng/components/common/api";
+import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
+import {AsignaturaCarreraStore} from "../../services/asignatura-carrera.store";
 
 @Component({
-	templateUrl: 'app/components/periodo/periodo.component.html',
+    templateUrl: 'app/components/asignatura-carrera/asignatura-carrera.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-	selector: 'periodo',
-	providers:[PeriodoStore, ConfirmationService]
+    selector: 'asignatura-carrera',
+    providers: [AsignaturaCarreraStore, ConfirmationService]
 })
-export class PeriodoComponent {
+export class AsignaturaCarreraComponent {
 
     msgs: Message[] = [];
 
-	displayDialog: boolean = false;
+    displayDialog: boolean;
 
-    periodo: Periodo = new Periodo();
+    asignaturaCarrera: AsignaturaCarrera = new AsignaturaCarrera();
 
     isNew: boolean;
 
-    fechaInicio: Date;
-    fechaFin: Date;
+    constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
+                private confirmationService: ConfirmationService) {
+    }
 
-    es: any = CALENDAR_LOCALE_ES;
+    ngOnInit() {
 
-    constructor(
-        private periodoStore: PeriodoStore,
-        private confirmationService: ConfirmationService) { }
+    }
+
 
     showDialogToAdd() {
         this.isNew = true;
-        this.periodo = new Periodo();
-        this.fechaInicio = new Date();
-        this.fechaFin = new Date();
+        this.asignaturaCarrera = new AsignaturaCarrera();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
         this.isNew = false;
-        this.periodo = new Periodo(event.data);
-        this.fechaInicio = new Date(this.periodo.fecha_inicio);
-        this.fechaFin = new Date(this.periodo.fecha_fin)
+        this.asignaturaCarrera = new AsignaturaCarrera(event.data);
         this.displayDialog = true;
     }
-    save() {
-        this.periodo.fecha_inicio = this.fechaInicio.toISOString().split('T')[0];
-        this.periodo.fecha_fin= this.fechaFin.toISOString().split('T')[0];
 
+    save() {
         if (this.isNew) {
-            this.periodoStore.create(this.periodo)
+            this.asignaturaCarreraStore.create(this.asignaturaCarrera)
                 .subscribe(
                     creada => {
                         this.displayDialog = false;
                         this.msgs.push(
                             {
                                 severity: 'success',
-                                summary: 'Creado',
-                                detail: 'Se ha creado el periodo ' + creada.descripcion + ' con éxito!'
+                                summary: 'Creada',
+                                detail: 'Se ha agregado la asignatura ' + creada.asignatura.nombre + ' con exito!'
                             })
                     },
                     error => {
@@ -66,7 +61,7 @@ export class PeriodoComponent {
                             {
                                 severity: 'error',
                                 summary: 'Error',
-                                detail: 'No se ha podido crear el periodo:\n' + error
+                                detail: 'No se ha podido crear el aula:\n' + error
                             });
                     });
         }
@@ -74,18 +69,18 @@ export class PeriodoComponent {
         //update
         else
             this.confirmationService.confirm({
-                message: '¿esta seguro que desea modificar el periodo?',
-                header: 'Confirmar modificación',
+                message: 'Estas seguro que desea modificar el aula?',
+                header: 'Confirmar modificacion',
                 icon: 'fa fa-pencil-square-o',
                 accept: () => {
-                    this.periodoStore.update(this.periodo).subscribe(
+                    this.asignaturaCarreraStore.update(this.asignaturaCarrera).subscribe(
                         guardada => {
                             this.displayDialog = false;
                             this.msgs.push(
                                 {
                                     severity: 'success',
                                     summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.descripcion + ' con exito!'
+                                    detail: 'Se han guardado los cambios a ' + guardada.asignatura.nombre + ' con exito!'
                                 })
                         },
                         error => {
@@ -93,7 +88,7 @@ export class PeriodoComponent {
                                 {
                                     severity: 'error',
                                     summary: 'Error',
-                                    detail: 'No se ha podido guardar el periodo:\n' + error
+                                    detail: 'No se ha podido guardar la asignatura:\n' + error
                                 });
                         });
                 }
@@ -103,18 +98,18 @@ export class PeriodoComponent {
 
     delete() {
         this.confirmationService.confirm({
-            message: '¿esta seguro que desea eliminar el aula?',
+            message: 'Estas seguro que desea eliminar la asignatura?',
             header: 'Confirmar eliminacion',
             icon: 'fa fa-trash',
             accept: () => {
-                this.periodoStore.delete(this.periodo).subscribe(
+                this.asignaturaCarreraStore.delete(this.asignaturaCarrera).subscribe(
                     borrada => {
                         this.displayDialog = false;
                         this.msgs.push(
                             {
                                 severity: 'success',
                                 summary: 'Borrado',
-                                detail: 'Se ha borrado el periodo ' + borrada.descripcion + ' con exito!'
+                                detail: 'Se ha borrado ' + borrada.asignatura.nombre + ' con exito!'
                             })
                     },
                     error => {
@@ -122,12 +117,17 @@ export class PeriodoComponent {
                             {
                                 severity: 'error',
                                 summary: 'Error',
-                                detail: 'No se ha podido eliminar el periodo:\n' + error
+                                detail: 'No se ha podido eliminar:\n' + error
                             });
                     }
                 );
             }
         });
+    }
+
+    message(evento: string) {
+        this.msgs = [];
+        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Aula ' + evento + ' con exito!'});
     }
 
     pageChange(event) {
@@ -137,11 +137,11 @@ export class PeriodoComponent {
         };
         console.log(qo);
 
-        this.periodoStore.mergeQueryOptions(qo);
+        this.asignaturaCarreraStore.mergeQueryOptions(qo);
     }
 
     sort(event) {
-        this.periodoStore.setSorts([event]);
+        this.asignaturaCarreraStore.setSorts([event]);
     }
 
-}	
+}

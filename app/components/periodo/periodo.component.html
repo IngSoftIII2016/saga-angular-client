@@ -1,42 +1,67 @@
-<script src="periodo.component.ts"></script>
 <div class="ContentSideSections">
-
+    <p-growl [value]="msgs"></p-growl>
+    <p-confirmDialog width="425">
+        <i class="fa fa-search"></i>
+    </p-confirmDialog>
 </div>
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
-        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar">
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
+               placeholder="Buscar">
     </div>
-    <p-dataTable [value]="periodos" selectionMode="single" [globalFilter]="gb" [(selection)]="selectedPeriodo" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable
+            [value]="periodoStore.items | async"
+            selectionMode="single"
+            [globalFilter]="gb"
+            (onRowSelect)="onRowSelect($event)"
+            [rows]="10" [responsive]="true">
         <header>Periodos</header>
-        <p-column field="descripcion" header="Descripciòn" [sortable]="true"></p-column>
-        <p-column field="fecha_inicio" header="Fecha Inicio" [sortable]="true"></p-column>
-        <p-column field="fecha_fin" header="Fecha Fin" [sortable]="true"></p-column>
-        <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
+        <p-column field="descripcion" header="Descripción" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="fecha_inicio" header="Fecha Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="fecha_fin" header="Fecha Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
+                        label="Agregar"></button>
+            </div>
+        </footer>
     </p-dataTable>
+    <p-paginator
+            styleClass="ui-paginator-bottom"
+            rows="10"
+            totalRecords="{{periodoStore.service.totalRows | async}}"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="pageChange($event)">
+    </p-paginator>
 
     <p-dialog header="Periodo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="periodo">
-           <div class="ui-grid-row">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
+            <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="descripcion">Descripción</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="periodo.descripcion" /></div>
+                <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="periodo.descripcion"/></div>
             </div>
+
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha_inicio">Fecha Inicio</label></div>
                 <div class="ui-grid-col-8">
-                    <input type="date" id="fecha_inicio" [(ngModel)]="periodo.fecha_inicio">
-               </div>
+                    <p-calendar id="fecha_inicio" [(ngModel)]="fechaInicio" [locale]="es" dateFormat="dd/mm/yy"
+                                readonlyInput="readonlyInput"></p-calendar>
+                </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Fin</label></div>
-                <div class="ui-grid-col-8"><input type="date" id="fecha_fin" [(ngModel)]="periodo.fecha_fin"> </div>
+                <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Inicio</label></div>
+                <div class="ui-grid-col-8">
+                    <p-calendar id="fecha_fin" [(ngModel)]="fechaFin" [locale]="es" dateFormat="dd/mm/yy"
+                                readonlyInput="readonlyInput"></p-calendar>
+                </div>
             </div>
-            
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                <button *ngIf="!isNew" type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()" label="Eliminar"></button>
+                <button *ngIf="!isNew" type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
+                        label="Eliminar"></button>
             </div>
         </footer>
     </p-dialog>

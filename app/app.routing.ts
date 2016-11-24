@@ -18,6 +18,7 @@ import {EventoComponent} from "./components/evento/evento.component";
 import {ClaseComponent} from "./components/clase/clase.component";
 import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {ComisionComponent} from "./components/comision/comision.component";
+import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 
 
 
@@ -30,6 +31,10 @@ const appRoutes: Routes = [
     {
         path: 'asignaturas',
         component: AsignaturaComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'asignatura-carrera',
+        component: AsignaturaCarreraComponent, canActivate: [AuthGuard]
     },
     {
         path: 'aulas',

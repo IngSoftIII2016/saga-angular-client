@@ -1,3 +1,4 @@
+///<reference path="../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, ElementRef, OnInit, AfterViewInit} from "@angular/core";
 import {Router} from '@angular/router';
 declare var Ultima: any;
@@ -9,8 +10,7 @@ declare var Ultima: any;
     styleUrls: ['app/components/app.component.css']
 
 })
-export class AppComponent implements AfterViewInit{
-
+export class AppComponent {
 
     layoutCompact: boolean = true;
 
@@ -22,26 +22,27 @@ export class AppComponent implements AfterViewInit{
 
     displayLayout:string;
 
-    constructor(private router: Router,private el: ElementRef) {
+    ultima: boolean = false;
+
+    constructor(private router: Router, private el: ElementRef) {
 
     }
-    
-    ngAfterViewInit(): void {
-    }
-
-    ngAfterContentChecked() {
-        Ultima.init(this.el.nativeElement);
-    }
-    mostrar(): boolean{
-		
-        if (this.router.url != '/login' && this.router.url !='/404')
-        {
-            this.displayLayout='layout-main';
-            return true;
-        } else {
-            this.displayLayout='';
-            return false
+    ngAfterViewChecked(): void {
+        if(this.mostrar()) {
+            if (!this.ultima) {
+                console.log('Inicializando ultima')
+                Ultima.init(this.el.nativeElement);
+                this.ultima = true;
+            }
+        }else{
+            console.log('DesInicializando ultima')
+            this.ultima = false;
         }
+
+    }
+
+    mostrar(): boolean{
+        return (this.router.url != '/login' && this.router.url !='/404');
     }
 
 	logout(): void {

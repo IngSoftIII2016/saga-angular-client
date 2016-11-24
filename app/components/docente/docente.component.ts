@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Docente} from '../../entities/docente';
 import {DocenteStore} from "../../services/docente.sotre";
 import {Message, ConfirmationService} from "primeng/components/common/api";
+import {Subject} from "rxjs";
 
 /*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
@@ -23,7 +24,17 @@ export class DocenteComponent {
 
     displayDialog: boolean;
 
+    private searchTerms = new Subject<string>();
+
     constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) { }
+
+    ngOnInit() {
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.docenteStore.setLikes(terms.length > 0 ? {apellido: '*'+terms+'*', nombre: '*'+terms+'*'} : {}))
+    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -102,5 +113,8 @@ export class DocenteComponent {
         this.docenteStore.setSorts([event]);
     }
 
+    search(term: string): void {
+        this.searchTerms.next(term);
+    }
 
 }	

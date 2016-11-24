@@ -59,6 +59,8 @@ import {EventoService} from "./services/evento.service";
 import {EdificioService} from "./services/edificio.service";
 import {ComisionComponent} from "./components/comision/comision.component";
 import {ComisionService} from "./services/comision.service";
+import {AsignaturaCarreraService} from "./services/asignatura-carrera.service";
+import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 
 
 @NgModule({
@@ -80,23 +82,24 @@ import {ComisionService} from "./services/comision.service";
   ],
   declarations: [
       AppComponent,
-      GrillaComponent,
-	  GrupoComponent,
-	  NotFoundComponent,
-	  LoginComponent,
-	  DocenteComponent,
-	  SedeComponent,
-      TimelineDaySchedule,
-	  CarreraComponent,
-	  PeriodoComponent,
-      LocalidadComponent,
       AsignaturaComponent,
-      EdificioComponent,
+      AsignaturaCarreraComponent,
       AulaComponent,
-      EventoComponent,
+      CarreraComponent,
       ClaseComponent,
+      ComisionComponent,
+      DocenteComponent,
+      EdificioComponent,
+      EventoComponent,
+      GrillaComponent,
+      GrupoComponent,
+      LocalidadComponent,
+      LoginComponent,
+      NotFoundComponent,
+      PeriodoComponent,
+      SedeComponent,
       UsuarioComponent,
-      ComisionComponent
+      TimelineDaySchedule
 
   ],
   bootstrap: [AppComponent],
@@ -105,6 +108,7 @@ import {ComisionService} from "./services/comision.service";
 	  LoginGuard,
 	  AuthenticationService,
       AsignaturaService,
+      AsignaturaCarreraService,
       AulaService,
       SedeService,
       CarreraService,

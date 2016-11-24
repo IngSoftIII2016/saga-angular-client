@@ -10,6 +10,8 @@ import {Evento} from "../../entities/evento";
 import {ClaseStore} from "../../services/clase.store";
 import {EventoStore} from "../../services/evento.store";
 
+import {CALENDAR_LOCALE_ES} from '../commons/calendar-locale-es';
+
 declare var moment: any;
 
 @Component({
@@ -24,11 +26,18 @@ export class GrillaComponent implements OnInit {
     fecha = new BehaviorSubject<Date>(new Date());
     clases: Observable<Clase[]>;
     private eventos: Observable<Evento[]>;
-    private events: Observable<Object[]>;
     obsResources: Observable<any[]>;
     resources: any[] = [];
+    events: Observable<any[]>;
     scrollTime: string;
+    fechaCalendar: Date = new Date();
     private scheduleHeader: any;
+
+    eventSelected : any;
+
+    displayDialog: boolean = false;
+
+    es: any = CALENDAR_LOCALE_ES;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
@@ -39,13 +48,12 @@ export class GrillaComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
+        var self = this;
 
-        console.log(this.scrollTime);
+        this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
 
         this.edificio = this.route.params
             .flatMap(params => this.edificioService.get(params['id']))
-
 
         this.aulas = this.edificio
             .flatMap(edificio => this.aulaService.queryByEdificio(edificio))
@@ -56,36 +64,58 @@ export class GrillaComponent implements OnInit {
                     return {id: aula.id, title: aula.nombre}
                 }))
 
-/*
-        this.edificio.combineLatest(
-            this.fecha,
-            function (edificio, fecha) {
+        this.fecha
+            .combineLatest(
+                this.edificio,
+                function (fecha, edificio) {
+                    return {edificio: edificio, fecha: fecha}
+                })
+            .do(ef => console.log(ef))
+            .subscribe(function (ef) {
                 let qo = {
                     filters: {
-                        'aula.edificio.id': edificio.id,
-                        'fecha': fecha.format('yyyy-MM-dd')
-                    }
+                        'aula.edificio.id': ef.edificio.id,
+                        'fecha': ef.fecha.toISOString().split('T')[0]
+                    },
+                    page: -1
                 }
-                this.claseStore.mergeQueryOptions(qo);
-                this.eventoStore.mergeQueryOptions(qo);
+                self.claseStore.mergeQueryOptions(qo);
+                self.eventoStore.mergeQueryOptions(qo);
+            })
+
+        this.events = this.claseStore.items
+            .map(function (clases: Clase[]) {
+                return clases.map(function (clase: Clase) {
+                    return {
+                        id: clase.id,
+                        type: 'Clase',
+                        resourceId: clase.aula.id,
+                        aula: clase.aula,
+                        start: clase.hora_inicio,
+                        end: clase.hora_fin,
+                        title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre
+                    }
+                })
+            }).combineLatest(this.eventoStore.items
+                .map(function (eventos: Evento[]) {
+                        return eventos.map(function (evento: Evento) {
+                            return {
+                                id: evento.id,
+                                type: 'Evento',
+                                resourceId: evento.aula.id,
+                                aula: evento.aula,
+                                start: this.hora_inicio,
+                                end: this.hora_fin,
+                                title: evento.motivo
+                            }
+                        })
+                    }
+                ),
+            function (clases, eventos) {
+                return clases.concat(eventos);
             }
         );
-*/
-        /*
-         [
-         { id: '1', title: 'Aula 1' },
-         { id: '2', title: 'Aula 2' },
-         { id: '3', title: 'Aula 3' },
-         { id: '4', title: 'Aula 4' }
-         ];
 
-         let TODAY = new Date().toISOString().substr(10);
-
-         this.events = [
-         { id: '1', resourceId: '1', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
-         { id: '2', resourceId: '2', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' }
-         ];
-         */
         this.scheduleHeader = {
             left: 'prev,next today',
             center: 'title',
@@ -93,54 +123,48 @@ export class GrillaComponent implements OnInit {
         };
     }
 
-    getEvents(event) {
-        var self = this;
-        this.edificio
-            .subscribe(function (edificio) {
-                let qo = {
-                    filters: {
-                        'aula.edificio.id': edificio.id,
-                        'fecha': event.day.format('YYYY-MM-DD')
-                    },
-                    page: -1
-                }
-                self.claseStore.items
-                    .map(function (clases: Clase[]) {
-                        return clases.map(function (clase: Clase) {
-                            return {
-                                id: clase.id,
-                                type: 'Clase',
-                                resourceId: clase.aula.id,
-                                start: clase.hora_inicio,
-                                end: clase.hora_fin,
-                                title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre
-                            }
-                        })
-                    })
-                    .combineLatest(self.eventoStore.items
-                            .map(function (eventos: Evento[]) {
-                                    return eventos.map(function (evento: Evento) {
-                                        return {
-                                            id: evento.id,
-                                            type: 'Evento',
-                                            resourceId: evento.aula.id,
-                                            start: self.parseDate(evento.fecha, evento.hora_inicio).toISOString(),
-                                            end: self.parseDate(evento.fecha, evento.hora_fin).toISOString(),
-                                            title: evento.motivo
-                                        }
-                                    })
-                                }
-                            ),
-                        function (clases, eventos) {
-                            return clases.concat(eventos);
-                        }
-                    ).do(events => console.log(events))
-                    .subscribe(events => event.callback(events));
+    getEvents(event): void {
+        this.fecha.next(event.day);
+        this.events.subscribe(events => event.callback(events))
+    }
 
-                self.claseStore.mergeQueryOptions(qo);
-                self.eventoStore.mergeQueryOptions(qo);
-            })
+    onEventClick(event): void {
+        console.log(event);
+        this.eventSelected = event.calEvent;
+        this.displayDialog = true;
 
+    }
+
+    onEventMouseover(event): void {
+        //console.log(event);
+    }
+
+    onEventMouseout(event): void {
+        //console.log(event);
+    }
+
+    onEventDragStart(event): void {
+        console.log(event);
+    }
+
+    onEventDragStop(event): void {
+        console.log(event);
+    }
+
+    onEventDrop(event): void {
+        console.log(event);
+    }
+
+    onEventResizeStart(event): void {
+        console.log(event);
+    }
+
+    onEventResizeStop(event): void {
+        console.log(event);
+    }
+
+    onEventResize(event): void {
+        console.log(event);
     }
 
     parseDate(fecha: string, hora: string): Date {

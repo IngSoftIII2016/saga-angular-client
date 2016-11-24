@@ -34,7 +34,8 @@
                         <li role="menuitem"><a href="#/grupos"><i class="material-icons">Roles</i><span>Roles</span></a></li>
                         <li role="menuitem"><a href="#/carreras"><i class="material-icons">Carreras</i><span>Carreras</span></a></li>
                         <li role="menuitem"><a href="#/asignaturas"><i class="material-icons">Asignaturas</i><span>Asignaturas</span></a></li>
-                        <li role="menuitem"><a href="#/aulas"><i class="material-icons">Aulas</i><span>Aulas</span></a></li>
+                       <li role="menuitem"><a href="#/asignatura-carrera"><i class="material-icons">Planes de Estudio</i><span>Planes de Estudio</span></a></li>
+                       <li role="menuitem"><a href="#/aulas"><i class="material-icons">Aulas</i><span>Aulas</span></a></li>
                         <li role="menuitem"><a href="#/clases"><i class="material-icons">Clases</i><span>Clases</span></a></li>
                         <li role="menuitem"><a href="#/edificios"><i class="material-icons">Edificios</i><span>Edificios</span></a></li>
                         <li role="menuitem"><a href="#/sedes"><i class="material-icons">Sedes</i><span>Sedes</span></a></li>
@@ -49,8 +50,8 @@
         </div>
     </div>
 
-    <div [ngClass]="displayLayout">
-	
+    <div [ngClass]="{'layout-main': mostrar()}">
+
         <router-outlet></router-outlet>
 
         <div *ngIf="mostrar()" class="footer" >
