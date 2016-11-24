@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Carrera} from '../../entities/carrera';
 import {CarreraStore} from "../../services/carrera.store";
 import {Message, ConfirmationService} from "primeng/components/common/api";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -20,7 +21,17 @@ export class CarreraComponent {
 
     displayDialog: boolean;
 
+    private searchTerms = new Subject<string>();
+
     constructor(private carreraStore: CarreraStore,  private confirmationService : ConfirmationService) { }
+
+    ngOnInit() {
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.carreraStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -35,25 +46,62 @@ export class CarreraComponent {
     }
 
     save() {
-        this.carreraStore.save(this.carrera).subscribe(
-            guardada => {
-                this.displayDialog = false;
-                this.msgs.push(
-                    {
-                        severity:'success',
-                        summary:'Guardado',
-                        detail:'Se ha guardado la carrera '+ guardada.nombre + ' con exito!'
-                    })
-            },
-            error => {
-                this.msgs.push(
-                    {
-                        severity:'error',
-                        summary:'Error',
-                        detail:'No se ha podido guardar la carrera:\n' + error
-                    });
+        if (this.isNew) {
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea agregar la carrera?',
+                header: 'Confirmar ',
+                icon: 'fa fa-plus-square',
+                accept: () => {
+                    this.carreraStore.create(this.carrera).subscribe(
+                        creada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity: 'success',
+                                    summary: 'Creada',
+                                    detail: 'Se ha agregado la carrera ' + creada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity: 'error',
+                                    summary: 'Error',
+                                    detail: 'No se ha podido crear la carrera:\n' + error
+                                });
+                        });
+                }
+            });
+        }
+        //update
+        else
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea modificar la carrera?',
+                header: 'Confirmar modificacion',
+                icon: 'fa fa-pencil-square-o',
+                accept: () => {
+                    this.carreraStore.update(this.carrera).subscribe(
+                        guardada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity: 'success',
+                                    summary: 'Guardada',
+                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity: 'error',
+                                    summary: 'Error',
+                                    detail: 'No se ha podido guardar la carrera:\n' + error
+                                });
+                        });
+                }
             });
     }
+
 
 
     delete() {
@@ -97,5 +145,9 @@ export class CarreraComponent {
 
     sort(event) {
         this.carreraStore.setSorts([event]);
+    }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 }	

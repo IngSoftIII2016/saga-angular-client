@@ -1,18 +1,50 @@
 <div class="ContentSideSections">
-
+    <p-growl [value]="msgs" life=2000></p-growl>
+    <p-confirmDialog width="425">
+        <i class="fa fa-search"></i>
+    </p-confirmDialog>
 </div>
 
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
-        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar">
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="edificios" selectionMode="single" [(selection)]="selectedEdificio" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
-        <header>Edificio</header>
-        <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
-        <p-column field="localidad.nombre" header="Localidad" [sortable]="true"></p-column>
-        <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button></div></footer>
+    <p-dataTable
+
+            [value]="edificioStore.items | async"
+            selectionMode="single"
+            (onRowSelect)="onRowSelect($event)"
+            [responsive]="true">
+        <header>
+            Edificios
+        </header>
+        <p-column
+                field="nombre"
+                header="Nombre"
+                sortable="custom"
+                (sortFunction)="sort($event)">
+        </p-column>
+        <p-column
+                field="localidad.nombre"
+                header="Localidad"
+                sortable="custom"
+                (sortFunction)="sort($event)">
+        </p-column>
+        <footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>
+            </div>
+        </footer>
     </p-dataTable>
+    <p-paginator
+            styleClass="ui-paginator-bottom"
+            rows="10"
+            totalRecords="{{edificioStore.service.totalRows | async}}"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="pageChange($event)">
+    </p-paginator>
+
 
     <p-dialog header="Edificio" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="edificio">
@@ -23,9 +55,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="localidad">Localidad</label></div>
                 <div class="ui-grid-col-8">
-                    <!--<input pInputText id="localidad" [(ngModel)]="edificio.localidad.nombre" />
-                    <p-autoComplete [(ngModel)]="edificio.localidad" [suggestions]="localidades" (completeMethod)="filterLocalidadSingle($event)" field="nombre" [size]="30"
-                                    placeholder="Localidad" [minLength]="1"></p-autoComplete>-->
+                    <p-dropdown class="ui-grid-col-12" id="localidad" [options]="localidades" [(ngModel)]="localidadSelected" [filter]="true"></p-dropdown>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import {Message, ConfirmationService, SelectItem} from "primeng/components/commo
 import {AulaStore} from "../../services/aula.store";
 import {EdificioService} from "../../services/edificio.service";
 import {Edificio} from "../../entities/edificio";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {forEach} from "@angular/router/src/utils/collection";
 import {QueryOptions} from "../../services/generic.service";
 
@@ -28,6 +28,8 @@ export class AulaComponent {
 
     edificioSelected: SelectItem;
 
+    private searchTerms = new Subject<string>();
+
     constructor(private aulaStore: AulaStore,
                 private edificioService: EdificioService,
                 private confirmationService: ConfirmationService) {
@@ -44,33 +46,12 @@ export class AulaComponent {
                 }
             )
         });
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.aulaStore.setLikes(terms.length > 0 ? {capacidad: '*'+terms+'*', nombre: '*'+terms+'*'} : {}))
     }
-
-
- /*   filtrar(busqueda) {
-        var sel = this;
-            this.edificioService.getAll(new QueryOptions({likes : {'nombre' : '*' + busqueda + '*'}}))
-                .subscribe(edificios => sel.convertirEdificios(edificios));
-
-
-    }
-
-
-    convertirEdificios(edificios){
-        var sel = this;
-        edificios.forEach(edificio => {
-                sel.edificios = [];
-                sel.edificios.push({
-                        label: edificio.nombre, value: edificio
-                    }
-                )
-            }
-        );
-    }
-    */
-
-
-
 
     showDialogToAdd() {
         this.isNew = true;
@@ -90,11 +71,13 @@ export class AulaComponent {
          this.aula.edificio = new Edificio (this.edificioSelected);
         }
         if (this.isNew) {
+            this.aula.edificio = new Edificio (this.edificioSelected);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el aula?',
                 header: 'Confirmar ',
                 icon: 'fa fa-plus-square',
                 accept: () => {
+                    this.aula.ubicacion = 0;
                     this.aulaStore.create(this.aula).subscribe(
                         creada => {
                             this.displayDialog = false;
@@ -192,6 +175,10 @@ export class AulaComponent {
 
     sort(event) {
         this.aulaStore.setSorts([event]);
+    }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 
 }
