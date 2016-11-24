@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {SelectItem} from "primeng/components/common/api";
 import {DomHandler} from "primeng/components/dom/domhandler";
+import {SharedModule} from "primeng/components/common/shared";
 
 export const DROPDOWN_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,

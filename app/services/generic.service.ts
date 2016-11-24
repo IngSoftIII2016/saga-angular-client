@@ -104,7 +104,7 @@ export abstract class GenericService<T extends Entity> {
         let reqOptions = new BaseRequestOptions();
         reqOptions.url = this.baseUrl + this.getResourcePath();
         reqOptions.headers.set('Content-Type', 'application/json');
-        reqOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
+        //reqOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
         reqOptions.search = new URLSearchParams();
         return reqOptions;
     }

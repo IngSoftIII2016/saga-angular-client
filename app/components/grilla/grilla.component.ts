@@ -17,6 +17,7 @@ declare var moment: any;
 @Component({
     selector: 'grilla',
     templateUrl: 'app/components/grilla/grilla.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     providers: [EdificioService, AulaService, ClaseStore, EventoStore]
 })
 export class GrillaComponent implements OnInit {
@@ -33,7 +34,7 @@ export class GrillaComponent implements OnInit {
     fechaCalendar: Date = new Date();
     private scheduleHeader: any;
 
-    eventSelected : any;
+    eventSelected : any = null;
 
     displayDialog: boolean = false;
 
@@ -121,6 +122,18 @@ export class GrillaComponent implements OnInit {
             center: 'title',
             right: ''
         };
+    }
+
+    save() {
+        if(this.eventSelected.calEvent.type == 'Clase'){
+            this.claseStore.service.get(this.eventSelected.calEvent.id)
+                .subscribe(clase => {
+                    clase.aula = this.eventSelected.calEvent.aula;
+                    clase.hora_inicio = this.eventSelected.calEvent.start._d.toTimeString().split(' ')[0];
+                    clase.hora_fin = this.eventSelected.calEvent.end._d.toTimeString().split(' ')[0];
+                    console.log(clase);
+                });
+        }
     }
 
     getEvents(event): void {
