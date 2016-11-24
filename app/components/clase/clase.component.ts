@@ -4,7 +4,7 @@ import {Message, ConfirmationService, SelectItem} from "primeng/components/commo
 import {ClaseStore} from "../../services/clase.store";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
-import {Subject} from "rxjs";
+import {Subject, Timestamp} from "rxjs";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 
 
@@ -30,6 +30,8 @@ export class ClaseComponent {
 
 
     fecha: Date;
+    hora_inicio: Date;
+    hora_fin: Date;
     es: any = CALENDAR_LOCALE_ES;
 
     private searchTerms = new Subject<string>();
@@ -60,6 +62,8 @@ export class ClaseComponent {
         this.isNew = true;
         this.clase = new Clase();
         this.fecha = new Date();
+        this.hora_inicio = new Date();
+        this.hora_fin = new Date();
         this.displayDialog = true;
     }
 
@@ -67,12 +71,16 @@ export class ClaseComponent {
         this.isNew = false;
         this.clase =new Clase(event.data);
         this.fecha = new Date(this.clase.fecha);
+        this.hora_inicio = new Date(this.clase.hora_inicio);
+        this.hora_fin = new Date(this.clase.hora_fin);
         this.aulaSelected = {label: this.clase.aula.nombre, value: new Aula(this.clase.aula)};
         this.displayDialog = true;
     }
 
     save() {
         this.clase.fecha = this.fecha.toISOString().split('T')[0];
+        this.clase.hora_inicio = this.hora_inicio.toTimeString().split('T')[0];
+        this.clase.hora_fin = this.hora_fin.toTimeString().split('T')[0];
         if (this.clase.aula.nombre != this.aulaSelected.label){
             this.clase.aula= new Aula (this.aulaSelected);
         }
