@@ -50,7 +50,9 @@ export class EventoComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.evento.setLikes(terms.length > 0 ? {fecha: '*'+terms+'*', hora_inicio: '*'+terms+'*', hora_fin: '*'+terms+'*', motivo: '*'+terms+'*'} : {}))
+                this.eventoStore.setLikes(terms.length > 0 ? {
+                    motivo: '*'+terms+'*', 'aula.nombre': '*'+terms+'*'} : {})
+    )
     }
 
     showDialogToAdd() {

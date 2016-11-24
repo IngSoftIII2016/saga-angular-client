@@ -69,7 +69,7 @@ const appRoutes: Routes = [
         component: GrillaComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'grupos',
+        path: 'roles',
         component: GrupoComponent , canActivate: [AuthGuard]
     },
     {
@@ -85,7 +85,7 @@ const appRoutes: Routes = [
         component: PeriodoComponent , canActivate: [AuthGuard]
     },
       {
-        path: 'usuario',
+        path: 'usuarios',
         component: UsuarioComponent , canActivate: [AuthGuard]
     },
     {

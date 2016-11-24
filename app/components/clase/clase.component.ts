@@ -51,7 +51,10 @@ export class ClaseComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.claseStore.setLikes(terms.length > 0 ? {fecha: '*'+terms+'*', hora_inicio: '*'+terms+'*', hora_fin: '*'+terms+'*', comentario: '*'+terms+'*'} : {}))
+                this.claseStore.setLikes(terms.length > 0 ? {
+                    comentario: '*'+terms+'*',
+                    'aula.nombre' : '*'+terms+'*',
+                } : {}))
     }
     showDialogToAdd() {
         this.isNew = true;

@@ -16,8 +16,17 @@
             selectionMode="single"
             (onRowSelect)="onRowSelect($event)"
             [responsive]="true">
-        <header>Grupos</header>
-        <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
+        <header>Roles</header>
+        <p-column 
+                field="nombre" 
+                header="Nombre" 
+                [sortable]="true">
+        </p-column>
+         <p-column 
+                field="descripcion" 
+                header="Descripcion" 
+                [sortable]="true">
+        </p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>
@@ -32,11 +41,15 @@
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
-    <p-dialog header="Grupo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <p-dialog header="Rol" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="grupo">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="grupo.nombre"/></div>
+            </div>
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="descripcion">Descripción</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="grupo.descripcion"/></div>
             </div>
 
         </div>

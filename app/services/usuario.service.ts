@@ -16,8 +16,11 @@ export class UsuarioService extends GenericService<Usuario> {
         return 'usuarios';
     }
 
-    public getDefaultQueryOptions() : QueryOptions {
-        return new QueryOptions();
+     public getDefaultQueryOptions() : QueryOptions {
+        return new QueryOptions({
+            includes : ['grupo'],
+            page: -1
+        });
     }
 
 }

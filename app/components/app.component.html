@@ -11,15 +11,27 @@
         </div>
 
         <div class="topbar-right">
-             <a id="menu-button" href="#">
-                    <i></i>
-             </a>
-
-            <a href="#" id="topbar-menu-button" >
-                <i class="material-icons">menu</i>
+            <a id="menu-button" >
+                <i></i>
             </a>
-            <ul class="topbar-items fadeInDown animated topbar-items-visible" >
-                     <button  type="button"  pButton  label="Salir" icon="fa ui-icon-power-settings-new" (click)="logout()"></button>
+
+            <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
+                <i class="material-icons">power_settings_new</i>
+            </a>
+            <ul class="topbar-items fadeInDown animated">
+
+                <li>
+                    <button  type="button"  pButton  label="Salir" icon="fa ui-icon-power-settings-new" (click)="logout()"></button>
+
+                    <ul class="ultima-menu animated">
+                        <li role="menuitem">
+                            <a href="#" class="ripplelink">
+                                <i class="material-icons">power_settings_new</i>
+                                <span (click)="logout()">Salir</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -37,12 +49,11 @@
                         <li role="menuitem"><a href="#/clases"><i class="material-icons">Clases</i><span>Clases</span></a></li>
                         <li role="menuitem"><a href="#/edificios"><i class="material-icons">Edificios</i><span>Edificios</span></a></li>
                         <li role="menuitem"><a href="#/sedes"><i class="material-icons">Sedes</i><span>Sedes</span></a></li>
-                       <li role="menuitem"><a href="#/periodos"><i class="material-icons">Periodos</i><span>Periodos</span></a></li>
                        <!-- <li role="menuitem"><a href="#/comision"><i class="material-icons">Comision</i><span>Comision</span></a></li>
-
+                        <li role="menuitem"><a href="#/periodos"><i class="material-icons">Periodos</i><span>Periodos</span></a></li>
+                         -->
                         <li role="menuitem"><a href="#/usuarios"><i class="material-icons">Usuarios</i><span>Usuarios</span></a></li>
-                        <li role="menuitem"><a href="#/grupos"><i class="material-icons">Roles</i><span>Roles</span></a></li>
-                        -->
+                        <li role="menuitem"><a href="#/roles"><i class="material-icons">Roles</i><span>Roles</span></a></li>
                         <li role="menuitem"><a href="#/docentes"><i class="material-icons">Docentes</i><span>Docentes</span></a></li>
                         <li role="menuitem"><a href="#/eventos"><i class="material-icons">Eventos</i><span>Eventos</span></a></li>
                         <li role="menuitem"><a href="#/localidades"><i class="material-icons">Localidad</i><span>Localidad</span></a></li>

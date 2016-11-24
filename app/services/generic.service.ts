@@ -5,6 +5,7 @@ import {
 } from "@angular/http";
 import {Inject, Injectable} from "@angular/core";
 import {Entity} from "../entities/entity";
+
 /**
  * Created by juan on 12/11/16.
  */
@@ -35,6 +36,7 @@ export abstract class GenericService<T extends Entity> {
     protected baseUrl: string = 'http://localhost/saga/api/';
 
     private rowCount: BehaviorSubject<number> = new BehaviorSubject(0);
+
 
     constructor(protected http: Http) {
         this.totalRows = this.rowCount.asObservable().distinctUntilChanged();
@@ -102,6 +104,7 @@ export abstract class GenericService<T extends Entity> {
         let reqOptions = new BaseRequestOptions();
         reqOptions.url = this.baseUrl + this.getResourcePath();
         reqOptions.headers.set('Content-Type', 'application/json');
+        //reqOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
         reqOptions.search = new URLSearchParams();
         return reqOptions;
     }
