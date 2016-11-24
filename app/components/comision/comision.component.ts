@@ -25,11 +25,15 @@ export class ComisionComponent {
 
     isNew: boolean;
 
-    asignatura: SelectItem[] = [];
+    asignaturas: SelectItem[] = [];
 
     asignaturaSelected: SelectItem;
 
-    periodo: SelectItem[] = [];
+    periodos: SelectItem[] = [];
+
+    periodo : string;
+
+    asignatura : string;
 
     periodoSelected: SelectItem;
 
@@ -42,9 +46,9 @@ export class ComisionComponent {
 
     ngOnInit() {
         var sel = this;
-        this.asignaturaService.getAll().subscribe(asignatura => {
-            asignatura.forEach(asignatura => {
-                    sel.asignatura.push({
+        this.asignaturaService.getAll().subscribe(asignaturas => {
+            asignaturas.forEach(asignatura => {
+                    sel.asignaturas.push({
                             label: asignatura.nombre, value: new Asignatura(asignatura)
                         }
                     )
@@ -52,9 +56,9 @@ export class ComisionComponent {
             )
         });
         var sel = this;
-        this.periodoService.getAll().subscribe(periodo => {
-            periodo.forEach(periodo => {
-                    sel.periodo.push({
+        this.periodoService.getAll().subscribe(periodos => {
+            periodos.forEach(periodo => {
+                    sel.periodos.push({
                             label: periodo.descripcion, value: new Periodo(periodo)
                         }
                     )
@@ -72,6 +76,8 @@ export class ComisionComponent {
         this.isNew = true;
         this.comision = new Comision();
         this.displayDialog = true;
+        this.asignatura = this.asignaturaSelected.label;
+        this.periodo = this.periodoSelected.label;
     }
 
     onRowSelect(event) {
@@ -79,19 +85,21 @@ export class ComisionComponent {
         this.comision =new Comision(event.data);
         this.asignaturaSelected = {label: this.comision.asignatura.nombre, value: new Asignatura(this.comision.asignatura)};
         this.periodoSelected = {label: this.comision.periodo.descripcion, value: new Periodo(this.comision.periodo)};
+        this.asignatura = this.comision.asignatura.nombre;
+        this.periodo = this.comision.periodo.descripcion;
         this.displayDialog = true;
     }
 
     save() {
-        if (this.comision.asignatura.nombre != this.asignaturaSelected.label){
-            this.comision.asignatura = new Asignatura(this.asignaturaSelected);
-        }
-        if (this.comision.periodo.descripcion != this.periodoSelected.label){
-            this.comision.periodo = new Periodo(this.periodoSelected);
-        }
         if (this.isNew) {
-            this.comision.asignatura = new Asignatura(this.asignaturaSelected);
-            this.comision.periodo = new Periodo(this.periodoSelected);
+            if(this.periodoSelected == null)
+                this.comision.periodo= this.periodos[0].value;
+            else
+                this.comision.periodo=  new Periodo (this.periodoSelected.value);
+            if(this.asignaturaSelected == null)
+                this.comision.asignatura= this.asignaturas[0].value;
+            else
+                this.comision.asignatura=  new Asignatura(this.asignaturaSelected .value);
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
