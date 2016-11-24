@@ -33,6 +33,8 @@ export class GrillaComponent implements OnInit {
     fechaCalendar: Date = new Date();
     private scheduleHeader: any;
 
+    eventSelected : any;
+
     displayDialog: boolean = false;
 
     es: any = CALENDAR_LOCALE_ES;
@@ -88,6 +90,7 @@ export class GrillaComponent implements OnInit {
                         id: clase.id,
                         type: 'Clase',
                         resourceId: clase.aula.id,
+                        aula: clase.aula,
                         start: clase.hora_inicio,
                         end: clase.hora_fin,
                         title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre
@@ -100,6 +103,7 @@ export class GrillaComponent implements OnInit {
                                 id: evento.id,
                                 type: 'Evento',
                                 resourceId: evento.aula.id,
+                                aula: evento.aula,
                                 start: this.hora_inicio,
                                 end: this.hora_fin,
                                 title: evento.motivo
@@ -124,17 +128,19 @@ export class GrillaComponent implements OnInit {
         this.events.subscribe(events => event.callback(events))
     }
 
-
     onEventClick(event): void {
         console.log(event);
+        this.eventSelected = event.calEvent;
+        this.displayDialog = true;
+
     }
 
     onEventMouseover(event): void {
-        console.log(event);
+        //console.log(event);
     }
 
     onEventMouseout(event): void {
-        console.log(event);
+        //console.log(event);
     }
 
     onEventDragStart(event): void {

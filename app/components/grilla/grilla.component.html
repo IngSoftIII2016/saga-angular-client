@@ -34,26 +34,18 @@
 
 
     <p-dialog header="Editar" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="evento">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="eventSelected">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="evento.aula.nombre"/></div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
-                <div class="ui-grid-col-8"><input type="date" id="fecha" [(ngModel)]="evento.fecha"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
-                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="evento.hora_inicio"/></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="eventSelected.start"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin</label></div>
-                <div class="ui-grid-col-8"><input type="time" id="hora_fin" [(ngModel)]="evento.hora_fin"/></div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="motivo">Motivo</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="evento.motivo"/></div>
+                <div class="ui-grid-col-8"><input type="time" id="hora_fin" [(ngModel)]="eventSelected.end"/></div>
             </div>
 
         </div>

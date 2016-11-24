@@ -9,8 +9,8 @@ export class AsignaturaCarrera implements Entity {
     id: number;
     anio: number;
     regimen: string;
-    asignatura: Asignatura;
-    carrera: Carrera;
+    asignatura: Asignatura = new Asignatura();
+    carrera: Carrera = new Carrera();
 
     constructor(value : Object = {}) {
         Object.assign(this, value);
