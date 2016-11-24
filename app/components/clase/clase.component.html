@@ -46,7 +46,8 @@
                     <label for="fecha">Capacidad</label>
                 </div>
                 <div class="ui-grid-col-8">
-                    <input type="date" id="fecha" [(ngModel)]="clase.fecha"/>
+                    <p-calendar id="fecha" [(ngModel)]="fecha" [locale]="es" dateFormat="dd/mm/yy"
+                                readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">

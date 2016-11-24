@@ -5,6 +5,7 @@ import {ClaseStore} from "../../services/clase.store";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
 import {Subject} from "rxjs";
+import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 
 
 @Component({
@@ -26,6 +27,10 @@ export class ClaseComponent {
     aulas: SelectItem[] = [];
 
     aulaSelected: SelectItem;
+
+
+    fecha: Date;
+    es: any = CALENDAR_LOCALE_ES;
 
     private searchTerms = new Subject<string>();
 
@@ -51,17 +56,20 @@ export class ClaseComponent {
     showDialogToAdd() {
         this.isNew = true;
         this.clase = new Clase();
+        this.fecha = new Date();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.clase =new Clase(event.data);
+        this.fecha = new Date(this.clase.fecha);
         this.aulaSelected = {label: this.clase.aula.nombre, value: new Aula(this.clase.aula)};
         this.displayDialog = true;
     }
 
     save() {
+        this.clase.fecha = this.fecha.toISOString().split('T')[0];
         if (this.clase.aula.nombre != this.aulaSelected.label){
             this.clase.aula= new Aula (this.aulaSelected);
         }

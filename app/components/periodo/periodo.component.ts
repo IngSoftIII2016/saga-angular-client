@@ -3,6 +3,7 @@ import {Periodo} from '../../entities/periodo';
 import {PeriodoStore} from "../../services/periodo.store";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 import {ConfirmationService, Message} from "primeng/components/common/api";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -21,6 +22,8 @@ export class PeriodoComponent {
 
     isNew: boolean;
 
+    private searchTerms = new Subject<string>();
+
     fechaInicio: Date;
     fechaFin: Date;
 
@@ -29,6 +32,15 @@ export class PeriodoComponent {
     constructor(
         private periodoStore: PeriodoStore,
         private confirmationService: ConfirmationService) { }
+
+
+    ngOnInit() {
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.periodoStore.setLikes(terms.length > 0 ? {descripcion: '*'+terms+'*', fecha_inicio: '*'+terms+'*', fecha_fin: '*'+terms+'*'} : {}))
+    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -144,4 +156,7 @@ export class PeriodoComponent {
         this.periodoStore.setSorts([event]);
     }
 
+    search(term: string): void {
+        this.searchTerms.next(term);
+    }
 }	

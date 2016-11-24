@@ -42,7 +42,9 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
-                <div class="ui-grid-col-8"><input type="date" id="fecha" [(ngModel)]="evento.fecha"/></div>
+                <div class="ui-grid-col-8"> <p-calendar id="fecha" [(ngModel)]="fecha" [locale]="es" dateFormat="dd/mm/yy"
+                                                        readonlyInput="readonlyInput"></p-calendar>
+                </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
