@@ -93,7 +93,7 @@ export class ComisionComponent {
             this.comision.asignatura = new Asignatura(this.asignaturaSelected);
             this.comision.periodo = new Periodo(this.periodoSelected);
             this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el aula?',
+                message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
                 icon: 'fa fa-plus-square',
                 accept: () => {
@@ -104,7 +104,7 @@ export class ComisionComponent {
                                 {
                                     severity: 'success',
                                     summary: 'Creada',
-                                    detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
+                                    detail: 'Se ha agregado la comision ' + creada.nombre + ' con exito!'
                                 })
                         },
                         error => {
@@ -112,7 +112,7 @@ export class ComisionComponent {
                                 {
                                     severity: 'error',
                                     summary: 'Error',
-                                    detail: 'No se ha podido crear el aula:\n' + error
+                                    detail: 'No se ha podido crear la comision:\n' + error
                                 });
                         });
                 }
@@ -120,18 +120,18 @@ export class ComisionComponent {
         }
         else
             this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el aula?',
+                message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa fa-pencil-square-o',
                 accept: () => {
-                    this.comisionStore.create(this.comision).subscribe(
-                        creada => {
+                    this.comisionStore.update(this.comision).subscribe(
+                        guardada => {
                             this.displayDialog = false;
                             this.msgs.push(
                                 {
                                     severity: 'success',
                                     summary: 'Creada',
-                                    detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
+                                    detail: 'Se ha agregado la comision ' + guardada.nombre + ' con exito!'
                                 })
                         },
                         error => {
@@ -139,7 +139,7 @@ export class ComisionComponent {
                                 {
                                     severity: 'error',
                                     summary: 'Error',
-                                    detail: 'No se ha podido crear el aula:\n' + error
+                                    detail: 'No se ha podido crear la comision:\n' + error
                                 });
                         });
                 }
@@ -149,7 +149,7 @@ export class ComisionComponent {
 
     delete() {
         this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar la clase?',
+            message: 'Estas seguro que desea eliminar la comision?',
             header: 'Confirmar eliminacion',
             icon: 'fa fa-trash',
             accept: () => {
@@ -160,7 +160,7 @@ export class ComisionComponent {
                             {
                                 severity:'success',
                                 summary:'Exito',
-                                detail:'Se ha borrado la clase con exito!'
+                                detail:'Se ha borrado la comision con exito!'
                             })
                     },
                     error => {
@@ -168,7 +168,7 @@ export class ComisionComponent {
                             {
                                 severity:'error',
                                 summary:'Error',
-                                detail:'No se ha podido eliminar la clase:\n' + error
+                                detail:'No se ha podido eliminar la comision:\n' + error
                             });
                     }
                 );
