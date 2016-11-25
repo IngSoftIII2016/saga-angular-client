@@ -84,7 +84,7 @@ export class LocalidadComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la localidad?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.localidadStore.create(this.localidad).subscribe(
                         creada => {
@@ -116,7 +116,7 @@ export class LocalidadComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificarla localidad?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.localidadStore.update(this.localidad).subscribe(
                         guardada => {
@@ -146,7 +146,7 @@ export class LocalidadComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la localidad?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.localidadStore.delete(this.localidad).subscribe(
                     borrada => {

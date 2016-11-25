@@ -78,7 +78,7 @@ export class EdificioComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el edificio?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.edificioStore.create(this.edificio).subscribe(
                         creada => {
@@ -110,7 +110,7 @@ export class EdificioComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el edificio?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.edificioStore.update(this.edificio).subscribe(
                         guardada => {
@@ -140,7 +140,7 @@ export class EdificioComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el edificio?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.edificioStore.delete(this.edificio).subscribe(
                     borrada => {

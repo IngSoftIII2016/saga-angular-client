@@ -50,7 +50,7 @@ export class SedeComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la sede?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.sedeStore.create(this.sede).subscribe(
                         creada => {
@@ -78,7 +78,7 @@ export class SedeComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificarla sede?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.sedeStore.update(this.sede).subscribe(
                         guardada => {
@@ -107,7 +107,7 @@ export class SedeComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la sede?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.sedeStore.delete(this.sede).subscribe(
                     borrada => {

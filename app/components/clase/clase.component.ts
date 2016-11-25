@@ -93,7 +93,7 @@ export class ClaseComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar una clase?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.claseStore.create(this.clase).subscribe(
                         creada => {
@@ -125,7 +125,7 @@ export class ClaseComponent {
            this.confirmationService.confirm({
                message: 'Estas seguro que desea modificar la clase?',
                header: 'Confirmar modificacion',
-               icon: 'fa fa-pencil-square-o',
+               icon: 'fa ui-icon-warning',
                accept: () => {
                    this.claseStore.update(this.clase).subscribe(
                        guardada => {
@@ -156,7 +156,7 @@ export class ClaseComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la clase?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.claseStore.delete(this.clase).subscribe(
                     borrada => {

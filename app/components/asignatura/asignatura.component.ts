@@ -49,7 +49,7 @@ export class AsignaturaComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la asignatura?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.asignaturaStore.create(this.asignatura).subscribe(
                         creada => {
@@ -77,7 +77,7 @@ export class AsignaturaComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar la asignatura?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.asignaturaStore.update(this.asignatura).subscribe(
                         guardada => {
@@ -106,7 +106,7 @@ export class AsignaturaComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la asignatura?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.asignaturaStore.delete(this.asignatura).subscribe(
                     borrada => {

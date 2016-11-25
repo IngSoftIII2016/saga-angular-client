@@ -64,7 +64,7 @@ export class GrupoComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el rol?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.grupoStore.delete(this.grupo).subscribe(
                     borrada => {
