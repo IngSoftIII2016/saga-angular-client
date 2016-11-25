@@ -19,6 +19,7 @@ import {ClaseComponent} from "./components/clase/clase.component";
 import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {ComisionComponent} from "./components/comision/comision.component";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
+import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
 
 
 
@@ -91,6 +92,10 @@ const appRoutes: Routes = [
     {
         path: 'sedes',
         component: SedeComponent , canActivate: [AuthGuard]
+    },
+     {
+        path: 'usuario-rol',
+        component: UsuarioGrupoComponent, canActivate: [AuthGuard]
     },
     {path: '404', component: NotFoundComponent},
 

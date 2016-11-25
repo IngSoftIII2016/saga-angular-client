@@ -50,7 +50,7 @@ export class CarreraComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la carrera?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.carreraStore.create(this.carrera).subscribe(
                         creada => {
@@ -78,7 +78,7 @@ export class CarreraComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar la carrera?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.carreraStore.update(this.carrera).subscribe(
                         guardada => {
@@ -108,7 +108,7 @@ export class CarreraComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la carrera?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.carreraStore.delete(this.carrera).subscribe(
                     borrada => {

@@ -17,3 +17,20 @@
     background-color: #009b1e !important;;
     color: white !important;
 }
+
+.no {
+    background-color: #ce0707 !important;
+    color: white !important;;
+}
+.yes{
+    background-color: #00ce21 !important;;
+    color: white !important;
+}
+.no:hover {
+    background-color: #8a0707 !important;
+    color: white !important;;
+}
+.yes:hover{
+    background-color: #009b1e !important;;
+    color: white !important;
+}

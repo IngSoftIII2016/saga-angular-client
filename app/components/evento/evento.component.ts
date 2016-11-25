@@ -88,7 +88,7 @@ export class EventoComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar un evento?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.eventoStore.create(this.evento).subscribe(
                         creada => {
@@ -116,7 +116,7 @@ export class EventoComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el evento?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.eventoStore.update(this.evento).subscribe(
                         guardada => {
@@ -144,7 +144,7 @@ export class EventoComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el evento?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.eventoStore.delete(this.evento).subscribe(
                     borrada => {

@@ -62,25 +62,32 @@ export class PeriodoComponent {
         this.periodo.fecha_fin= this.fechaFin.toISOString().split('T')[0];
 
         if (this.isNew) {
-            this.periodoStore.create(this.periodo)
-                .subscribe(
-                    creada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity: 'success',
-                                summary: 'Creado',
-                                detail: 'Se ha creado el periodo ' + creada.descripcion + ' con éxito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido crear el periodo:\n' + error
-                            });
-                    });
+            this.confirmationService.confirm({
+                message: '¿esta seguro que desea agregar el periodo?',
+                header: 'Confirmar ',
+                icon: 'fa ui-icon-warning',
+                accept: () => {
+                        this.periodoStore.create(this.periodo)
+                            .subscribe(
+                                creada => {
+                                    this.displayDialog = false;
+                                    this.msgs.push(
+                                        {
+                                            severity: 'success',
+                                            summary: 'Creado',
+                                            detail: 'Se ha creado el periodo ' + creada.descripcion + ' con éxito!'
+                                        })
+                                },
+                                error => {
+                                    this.msgs.push(
+                                        {
+                                            severity: 'error',
+                                            summary: 'Error',
+                                            detail: 'No se ha podido crear el periodo:\n' + error
+                                        });
+                                });
+                    }
+            });
         }
 
         //update
@@ -88,7 +95,7 @@ export class PeriodoComponent {
             this.confirmationService.confirm({
                 message: '¿esta seguro que desea modificar el periodo?',
                 header: 'Confirmar modificación',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.periodoStore.update(this.periodo).subscribe(
                         guardada => {
@@ -117,7 +124,7 @@ export class PeriodoComponent {
         this.confirmationService.confirm({
             message: '¿esta seguro que desea eliminar el aula?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.periodoStore.delete(this.periodo).subscribe(
                     borrada => {

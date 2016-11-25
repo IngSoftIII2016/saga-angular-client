@@ -128,7 +128,7 @@ export class ComisionComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.comisionStore.create(this.comision).subscribe(
                         creada => {
@@ -170,7 +170,7 @@ export class ComisionComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.comisionStore.update(this.comision).subscribe(
                         guardada => {
@@ -200,7 +200,7 @@ export class ComisionComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la comision?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.comisionStore.delete(this.comision).subscribe(
                     borrada => {

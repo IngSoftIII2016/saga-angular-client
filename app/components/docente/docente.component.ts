@@ -74,7 +74,7 @@ export class DocenteComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el docente?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.docenteStore.delete(this.docente).subscribe(
                     borrada => {

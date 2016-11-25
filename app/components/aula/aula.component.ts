@@ -80,7 +80,7 @@ export class AulaComponent {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el aula?',
                 header: 'Confirmar ',
-                icon: 'fa fa-plus-square',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.aula.ubicacion = 0;
                     this.aulaStore.create(this.aula).subscribe(
@@ -113,7 +113,7 @@ export class AulaComponent {
            this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el aula?',
                 header: 'Confirmar modificacion',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.aulaStore.update(this.aula).subscribe(
                         guardada => {
@@ -143,7 +143,7 @@ export class AulaComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el aula?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.aulaStore.delete(this.aula).subscribe(
                     borrada => {

@@ -62,9 +62,9 @@ export class GrupoComponent {
 
     delete() {
         this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el grupo?',
+            message: 'Estas seguro que desea eliminar el rol?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.grupoStore.delete(this.grupo).subscribe(
                     borrada => {
@@ -73,7 +73,7 @@ export class GrupoComponent {
                             {
                                 severity:'success',
                                 summary:'Exito',
-                                detail:'Se ha borrado el grupo '+ borrada.nombre + ' con exito!'
+                                detail:'Se ha borrado el rol '+ borrada.nombre + ' con exito!'
                             })
                     },
                     error => {
@@ -81,7 +81,7 @@ export class GrupoComponent {
                             {
                                 severity:'error',
                                 summary:'Error',
-                                detail:'No se ha podido eliminar el grupo:\n' + error
+                                detail:'No se ha podido eliminar el rol:\n' + error
                             });
                     }
                 );

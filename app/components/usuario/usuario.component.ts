@@ -64,7 +64,7 @@ export class UsuarioComponent {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar el usuario?',
             header: 'Confirmar eliminacion',
-            icon: 'fa fa-trash',
+            icon: 'fa ui-icon-delete',
             accept: () => {
                 this.usuarioStore.delete(this.usuario).subscribe(
                     borrada => {

@@ -1,7 +1,10 @@
     <div class="ContentSideSections">
     <p-growl [value]="msgs" life=2000></p-growl>
-    <p-confirmDialog width="425">
-        <i class="fa fa-search"></i>
+    <p-confirmDialog width="425" #cd>
+        <footer>
+            <button type="button" pButton class="no" icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton class="yes" icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+        </footer>
     </p-confirmDialog>
 </div>
 <div class="ContentSideSections Implementation">
