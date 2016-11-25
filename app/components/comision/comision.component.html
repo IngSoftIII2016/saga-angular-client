@@ -14,6 +14,7 @@
         <header>Comisiones</header>
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="docente.nombre" header="Docente" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="nombre" header="Comision" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
@@ -45,6 +46,17 @@
                 <div class="ui-grid-col-4"><label for="asignatura">Seleccione Asignatura</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas" [(ngModel)]="asignaturaSelected" [filter]="true"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label >Docente Actual</label></div>
+                <div class="ui-grid-col-8">{{docente||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="asignatura">Seleccione Docente</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="docente" [(ngModel)]="docenteSelected" [filter]="true"></p-dropdown>
                 </div>
             </div>
 
