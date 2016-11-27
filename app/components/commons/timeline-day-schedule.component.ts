@@ -61,7 +61,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     @Input() allDayText: string = 'all-day';
 
-    @Input() slotDuration: any = '00:30:00';
+    @Input() slotDuration: any = '00:15:00';
 
     @Input() slotLabelInterval: any;
 
@@ -132,7 +132,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     ngAfterViewInit() {
-        let element = this.el.nativeElement.children[0]
+        let element = this.el.nativeElement.children[0];
         this.resources.subscribe(resources => this.initSchedule(resources, element));
     }
 

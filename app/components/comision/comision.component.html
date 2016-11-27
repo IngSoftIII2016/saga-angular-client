@@ -57,9 +57,9 @@
                 <div class="ui-grid-col-8">{{docente||'none'}}</div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="asignatura">Seleccione Docente</label></div>
+                <div class="ui-grid-col-4"><label for="docente">Seleccione Docente</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="docente" [(ngModel)]="docenteSelected" [filter]="true"></p-dropdown>
+                    <p-dropdown class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected" [filter]="true"></p-dropdown>
                 </div>
             </div>
 
