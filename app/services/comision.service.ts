@@ -20,7 +20,7 @@ export class ComisionService extends GenericService<Comision> {
 	public getDefaultQueryOptions() : QueryOptions {
 		return new QueryOptions(
 			{
-				includes: ['periodo', 'asignatura'],
+				includes: ['periodo', 'asignatura', 'docente'],
 				sorts: [
 					{field : 'asignatura.nombre', order: 1}]
 			})
