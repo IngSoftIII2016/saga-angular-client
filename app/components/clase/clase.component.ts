@@ -26,9 +26,7 @@ export class ClaseComponent {
 
     aulas: SelectItem[] = [];
 
-    aula : string;
-
-    aulaSelected: SelectItem;
+    aulaSelected: Aula;
 
 
     fecha: Date;
@@ -67,7 +65,7 @@ export class ClaseComponent {
         this.hora_inicio = new Date();
         this.hora_fin = new Date();
         this.displayDialog = true;
-        this.aula = this.aulaSelected.label;
+        this.aulaSelected = this.aulas[0].value;
     }
 
     onRowSelect(event) {
@@ -76,20 +74,16 @@ export class ClaseComponent {
         this.fecha = new Date(this.clase.fecha);
         this.hora_inicio = this.clase.getHoraInicio();
         this.hora_fin = this.clase.getHoraFin();
-        this.aulaSelected = {label: this.clase.aula.nombre, value: new Aula(this.clase.aula)};
+        this.aulaSelected = new Aula(this.clase.aula);
         this.displayDialog = true;
-        this.aula = this.clase.aula.nombre;
     }
 
     save() {
         this.clase.fecha = this.fecha.toISOString().split('T')[0];
         this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
         this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-       if (this.isNew) {
-           if(this.aulaSelected == null)
-               this.clase.aula = this.aulas[0].value;
-           else
-               this.clase.aula =  new Aula (this.aulaSelected.value);
+        this.clase.aula = new Aula(this.aulaSelected);
+       if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar una clase?',
                 header: 'Confirmar ',
@@ -115,13 +109,8 @@ export class ClaseComponent {
                         });
                 }
             });
-        }
         //update
-        else {
-           if (this.clase.aula.nombre == this.aulaSelected.label)
-               this.clase.aula = new Aula(this.aulaSelected.value);
-           else
-               this.clase.aula = new Aula(this.aulaSelected);
+        else
            this.confirmationService.confirm({
                message: 'Estas seguro que desea modificar la clase?',
                header: 'Confirmar modificacion',
@@ -147,7 +136,6 @@ export class ClaseComponent {
                        });
                }
            });
-       }
     }
 
 

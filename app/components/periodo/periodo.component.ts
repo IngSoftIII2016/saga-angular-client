@@ -54,14 +54,13 @@ export class PeriodoComponent {
         this.isNew = false;
         this.periodo = new Periodo(event.data);
         this.fechaInicio = new Date(this.periodo.fecha_inicio);
-        this.fechaFin = new Date(this.periodo.fecha_fin)
+        this.fechaFin = new Date(this.periodo.fecha_fin);
         this.displayDialog = true;
     }
     save() {
         this.periodo.fecha_inicio = this.fechaInicio.toISOString().split('T')[0];
         this.periodo.fecha_fin= this.fechaFin.toISOString().split('T')[0];
-
-        if (this.isNew) {
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: '¿esta seguro que desea agregar el periodo?',
                 header: 'Confirmar ',
@@ -88,8 +87,6 @@ export class PeriodoComponent {
                                 });
                     }
             });
-        }
-
         //update
         else
             this.confirmationService.confirm({

@@ -22,13 +22,11 @@ export class AulaComponent {
 
     aula: Aula = new Aula();
 
-    edificio : string;
-
     isNew: boolean;
 
     edificios: SelectItem[] = [];
 
-    edificioSelected: SelectItem;
+    edificioSelected: Edificio;
 
     private searchTerms = new Subject<string>();
 
@@ -59,24 +57,20 @@ export class AulaComponent {
         this.isNew = true;
         this.aula = new Aula();
         this.displayDialog = true;
-        this.edificio = this.edificioSelected.label;
+        this.edificioSelected = this.edificios[0].value;
 
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.aula = new Aula(event.data);
-        this.edificioSelected = {label: this.aula.edificio.nombre, value: new Edificio(this.aula.edificio)};
-        this.edificio = this.aula.edificio.nombre;
+        this.edificioSelected = new Edificio(this.aula.edificio);
         this.displayDialog = true;
     }
 
     save() {
-        if (this.isNew) {
-            if(this.edificioSelected == null)
-                this.aula.edificio = this.edificios[0].value;
-            else
-                this.aula.edificio =  new Edificio (this.edificioSelected.value);
+        this.aula.edificio = new Edificio (this.edificioSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el aula?',
                 header: 'Confirmar ',
@@ -103,13 +97,8 @@ export class AulaComponent {
                         });
                 }
             });
-        }
         //update
-        else {
-            if(this.aula.edificio.nombre == this.edificioSelected.label)
-                this.aula.edificio = new Edificio (this.edificioSelected.value);
-            else
-                    this.aula.edificio = new Edificio (this.edificioSelected);
+        else
            this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el aula?',
                 header: 'Confirmar modificacion',
@@ -135,7 +124,6 @@ export class AulaComponent {
                         });
                 }
             });
-        }
     }
 
 

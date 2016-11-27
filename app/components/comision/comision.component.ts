@@ -27,15 +27,11 @@ export class ComisionComponent {
 
     asignaturas: SelectItem[] = [];
 
-    asignaturaSelected: SelectItem;
+    asignaturaSelected: Asignatura;
 
     periodos: SelectItem[] = [];
 
-    periodo : string;
-
-    asignatura : string;
-
-    periodoSelected: SelectItem;
+    periodoSelected: Periodo;
 
     private searchTerms = new Subject<string>();
 
@@ -76,30 +72,22 @@ export class ComisionComponent {
         this.isNew = true;
         this.comision = new Comision();
         this.displayDialog = true;
-        this.asignatura = this.asignaturaSelected.label;
-        this.periodo = this.periodoSelected.label;
+        this.asignaturaSelected = this.asignaturas[0].value;
+        this.periodoSelected = this.periodos[0].value;
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.comision =new Comision(event.data);
-        this.asignaturaSelected = {label: this.comision.asignatura.nombre, value: new Asignatura(this.comision.asignatura)};
-        this.periodoSelected = {label: this.comision.periodo.descripcion, value: new Periodo(this.comision.periodo)};
-        this.asignatura = this.comision.asignatura.nombre;
-        this.periodo = this.comision.periodo.descripcion;
+        this.asignaturaSelected =  new Asignatura(this.comision.asignatura);
+        this.periodoSelected = new Periodo(this.comision.periodo);
         this.displayDialog = true;
     }
 
-    save() {
-        if (this.isNew) {
-            if(this.periodoSelected == null)
-                this.comision.periodo= this.periodos[0].value;
-            else
-                this.comision.periodo=  new Periodo (this.periodoSelected.value);
-            if(this.asignaturaSelected == null)
-                this.comision.asignatura= this.asignaturas[0].value;
-            else
-                this.comision.asignatura=  new Asignatura(this.asignaturaSelected .value);
+    save(){
+        this.comision.asignatura = new Asignatura(this.asignaturaSelected);
+        this.comision.periodo = new Periodo(this.periodoSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
@@ -125,7 +113,6 @@ export class ComisionComponent {
                         });
                 }
             });
-        }
         else
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
