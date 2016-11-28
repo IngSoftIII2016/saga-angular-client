@@ -25,9 +25,7 @@ export class EdificioComponent {
 
     localidades: SelectItem[] = [];
 
-    localidadSelected: SelectItem;
-
-    localidad : string;
+    localidadSelected: Localidad;
 
     private searchTerms = new Subject<string>();
 
@@ -58,23 +56,20 @@ export class EdificioComponent {
         this.isNew = true;
         this.edificio = new Edificio();
         this.displayDialog = true;
-        this.localidad = this.localidadSelected.label;
+        this.localidadSelected =  new Localidad(this.localidades[0].value);
+
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.edificio = new Edificio(event.data);
-        this.localidadSelected = {label: this.edificio.localidad.nombre, value: new Localidad(this.edificio.localidad)};
+        this.localidadSelected =  new Localidad(this.edificio.localidad);
         this.displayDialog = true;
-        this.localidad = this.edificio.localidad.nombre;
     }
 
     save() {
-        if (this.isNew) {
-            if(this.localidadSelected == null)
-                this.edificio.localidad= this.localidades[0].value;
-            else
-                this.edificio.localidad =  new Localidad (this.localidadSelected.value);
+        this.edificio.localidad = new Localidad(this.localidadSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar el edificio?',
                 header: 'Confirmar ',
@@ -100,13 +95,8 @@ export class EdificioComponent {
                         });
                 }
             });
-        }
         //update
-        else {
-            if (this.edificio.localidad.nombre == this.localidadSelected.label)
-                this.edificio.localidad = new Localidad(this.localidadSelected.value);
-            else
-                this.edificio.localidad = new Localidad(this.localidadSelected);
+        else
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificar el edificio?',
                 header: 'Confirmar modificacion',
@@ -132,7 +122,6 @@ export class EdificioComponent {
                         });
                 }
             });
-        }
     }
 
 

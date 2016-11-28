@@ -26,7 +26,7 @@ export class EventoComponent {
 
     aulas: SelectItem[] = [];
 
-    aulaSelected: SelectItem;
+    aulaSelected: Aula;
 
     fecha: Date;
     hora_inicio: Date;
@@ -63,6 +63,7 @@ export class EventoComponent {
         this.fecha = new Date();
         this.hora_inicio = new Date();
         this.hora_fin = new Date();
+        this.aulaSelected = this.aulas[0].value;
         this.displayDialog = true;
     }
 
@@ -72,7 +73,7 @@ export class EventoComponent {
         this.fecha = new Date(this.evento.fecha);
         this.hora_inicio = this.evento.getHoraInicio();
         this.hora_fin = this.evento.getHoraFin();
-        this.aulaSelected = {label: this.evento.aula.nombre, value: new Aula(this.evento.aula)};
+        this.aulaSelected = new Aula(this.evento.aula);
         this.displayDialog = true;
     }
 
@@ -80,11 +81,8 @@ export class EventoComponent {
         this.evento.fecha = this.fecha.toISOString().split('T')[0];
         this.evento.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
         this.evento.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-        if (this.evento.aula.nombre != this.aulaSelected.label){
-            this.evento.aula = new Aula (this.aulaSelected);
-        }
-        if (this.isNew) {
-            this.evento.aula = new Aula (this.aulaSelected);
+        this.evento.aula = new Aula (this.aulaSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar un evento?',
                 header: 'Confirmar ',
@@ -110,7 +108,6 @@ export class EventoComponent {
                         });
                 }
             });
-        }
         //update
         else
             this.confirmationService.confirm({

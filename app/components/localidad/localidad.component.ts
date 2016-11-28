@@ -31,9 +31,7 @@ export class LocalidadComponent {
 
     sedes: SelectItem[] = [];
 
-    sedeSelected: SelectItem;
-
-    sede : string;
+    sedeSelected: Sede;
 
     private searchTerms = new Subject<string>();
 
@@ -64,23 +62,19 @@ export class LocalidadComponent {
         this.isNew = true;
         this.localidad = new Localidad();
         this.displayDialog = true;
-        this.sede = this.sedeSelected.label;
+        this.sedeSelected = this.sedes[0].value;
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.localidad = new Localidad(event.data);
-        this.sedeSelected = {label: this.localidad.sede.nombre, value: new Sede(this.localidad.sede)};
+        this.sedeSelected = new Sede(this.localidad.sede);
         this.displayDialog = true;
-        this.sede = this.localidad.sede.nombre;
     }
 
     save() {
-        if (this.isNew) {
-            if(this.sedeSelected == null)
-                this.localidad.sede= this.sedes[0].value;
-            else
-                this.localidad.sede =  new Sede (this.sedeSelected.value);
+        this.localidad.sede = new Sede(this.sedeSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la localidad?',
                 header: 'Confirmar ',
@@ -106,13 +100,8 @@ export class LocalidadComponent {
                         });
                 }
             });
-        }
         //update
-        else {
-            if (this.localidad.sede.nombre == this.sedeSelected.label)
-                this.localidad.sede = new Sede(this.sedeSelected.value);
-            else
-                this.localidad.sede = new Sede(this.sedeSelected);
+        else
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea modificarla localidad?',
                 header: 'Confirmar modificacion',
@@ -138,7 +127,6 @@ export class LocalidadComponent {
                         });
                 }
             });
-        }
     }
 
 

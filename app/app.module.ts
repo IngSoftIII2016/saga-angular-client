@@ -18,7 +18,8 @@ import {
     GrowlModule,
     PaginatorModule,
     ConfirmDialogModule,
-    ConfirmationService
+    ConfirmationService,
+    PickListModule
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";

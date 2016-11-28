@@ -5,17 +5,17 @@ import {ComisionStore} from "../../services/comision.store";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {Asignatura} from "../../entities/asignatura";
 import {PeriodoService} from "../../services/periodo.service";
-import {Docente} from "../../entities/docente";
-import {DocenteService} from "../../services/docente.service";
 import {Periodo} from "../../entities/periodo";
 import {Subject} from "rxjs";
+import {DocenteService} from "../../services/docente.service";
+import {Docente} from "../../entities/docente";
 
 
 @Component({
     templateUrl: 'app/components/comision/comision.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision',
-    providers:[ComisionStore, AsignaturaService, PeriodoService, DocenteService, ConfirmationService]
+    providers:[ComisionStore, AsignaturaService, PeriodoService,DocenteService, ConfirmationService]
 })
 export class ComisionComponent {
 
@@ -27,23 +27,17 @@ export class ComisionComponent {
 
     isNew: boolean;
 
-    asignatura : string;
-
     asignaturas: SelectItem[] = [];
 
-    asignaturaSelected: SelectItem;
-
-    periodo : string;
+    asignaturaSelected: Asignatura;
 
     periodos: SelectItem[] = [];
 
-    periodoSelected: SelectItem;
-
-    docente : string;
+    periodoSelected: Periodo;
 
     docentes: SelectItem[] = [];
 
-    docenteSelected: SelectItem;
+    docenteSelected: Docente;
 
     private searchTerms = new Subject<string>();
 
@@ -74,10 +68,11 @@ export class ComisionComponent {
                 }
             )
         });
+        var sel = this;
         this.docenteService.getAll().subscribe(docentes => {
             docentes.forEach(docente => {
                     sel.docentes.push({
-                            label: docente.nombre, value: new Docente(docente)
+                            label: docente.apellido + ' ' + docente.nombre, value: new Docente(docente)
                         }
                     )
                 }
@@ -94,37 +89,25 @@ export class ComisionComponent {
         this.isNew = true;
         this.comision = new Comision();
         this.displayDialog = true;
-        this.asignatura = this.asignaturaSelected.label;
-        this.periodo = this.periodoSelected.label;
-        this.docente = this.docenteSelected.label;
+        this.asignaturaSelected = this.asignaturas[0].value;
+        this.periodoSelected = this.periodos[0].value;
+        this.docenteSelected = this.docentes[0].value;
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.comision =new Comision(event.data);
-        this.asignaturaSelected = {label: this.comision.asignatura.nombre, value: new Asignatura(this.comision.asignatura)};
-        this.periodoSelected = {label: this.comision.periodo.descripcion, value: new Periodo(this.comision.periodo)};
-        this.docenteSelected = {label: this.comision.docente.nombre, value: new Docente(this.comision.docente)};
-        this.asignatura = this.comision.asignatura.nombre;
-        this.periodo = this.comision.periodo.descripcion;
-        this.docente = this.comision.docente.nombre;
+        this.asignaturaSelected =  new Asignatura(this.comision.asignatura);
+        this.periodoSelected = new Periodo(this.comision.periodo);
+        this.docenteSelected = new Docente(this.comision.docente);
         this.displayDialog = true;
     }
 
-    save() {
-        if (this.isNew) {
-            if(this.periodoSelected == null)
-                this.comision.periodo= this.periodos[0].value;
-            else
-                this.comision.periodo=  new Periodo (this.periodoSelected.value);
-            if(this.asignaturaSelected == null)
-                this.comision.asignatura= this.asignaturas[0].value;
-            else
-                this.comision.asignatura=  new Asignatura(this.asignaturaSelected .value);
-            if(this.docenteSelected == null)
-                this.comision.docente= this.docentes[0].value;
-            else
-                this.comision.docente=  new Docente(this.docenteSelected .value);
+    save(){
+        this.comision.asignatura = new Asignatura(this.asignaturaSelected);
+        this.comision.periodo = new Periodo(this.periodoSelected);
+        this.comision.docente = new Docente(this.docenteSelected);
+        if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
@@ -150,23 +133,7 @@ export class ComisionComponent {
                         });
                 }
             });
-        }
-        else {
-            if(this.comision.asignatura.nombre == this.asignaturaSelected.label)
-                this.comision.asignatura = new Asignatura (this.asignaturaSelected.value);
-            else
-                this.comision.asignatura = new Asignatura (this.asignaturaSelected);
-
-            if(this.comision.periodo.descripcion == this.periodoSelected.label)
-                this.comision.periodo = new Periodo (this.periodoSelected.value);
-            else
-                this.comision.periodo = new Periodo (this.periodoSelected);
-
-            if(this.comision.docente.nombre == this.docenteSelected.label)
-                this.comision.docente = new Docente (this.docenteSelected.value);
-            else
-                this.comision.docente = new Docente (this.docenteSelected);
-
+        else
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
                 header: 'Confirmar ',
@@ -192,7 +159,6 @@ export class ComisionComponent {
                         });
                 }
             });
-        }
     }
 
 
