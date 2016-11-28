@@ -158,6 +158,7 @@ export class AsignaturaCarreraComponent {
 
 
     delete() {
+        console.log(this.asignaturaCarrera);
         this.confirmationService.confirm({
             message: 'Estas seguro que desea eliminar la relacion asignatura carrera?',
             header: 'Confirmar eliminacion',
