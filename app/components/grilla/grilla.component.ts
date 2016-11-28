@@ -41,6 +41,8 @@ export class GrillaComponent implements OnInit {
 
     es: any = CALENDAR_LOCALE_ES;
 
+    arg: any;
+
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
@@ -53,7 +55,6 @@ export class GrillaComponent implements OnInit {
         var self = this;
 
         this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
-
         this.edificio = this.route.params
             .flatMap(params => this.edificioService.get(params['id']))
 
@@ -100,6 +101,22 @@ export class GrillaComponent implements OnInit {
             center: 'title',
             right: ''
         };
+        this.arg = {
+            buttonText: {
+                today:    'Hoy',
+                month:    'Mes',
+                week:     'Semana',
+                day:      'Dia'
+            },
+            businessHours: [ // specify an array instead
+                {
+                    dow: [ 1, 2, 3, 4, 5, 6, 7 ], // Lunes, martes, miercoles jueves, viernes, sabado, domingo
+                    start: '08:00', // 8am
+                    end: '21:00' // 9pm
+                }
+                ]
+        };
+       
     }
 
     save() {
