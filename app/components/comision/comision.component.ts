@@ -7,13 +7,15 @@ import {Asignatura} from "../../entities/asignatura";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
 import {Subject} from "rxjs";
+import {DocenteService} from "../../services/docente.service";
+import {Docente} from "../../entities/docente";
 
 
 @Component({
     templateUrl: 'app/components/comision/comision.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision',
-    providers:[ComisionStore, AsignaturaService, PeriodoService, ConfirmationService]
+    providers:[ComisionStore, AsignaturaService, PeriodoService,DocenteService, ConfirmationService]
 })
 export class ComisionComponent {
 
@@ -33,11 +35,16 @@ export class ComisionComponent {
 
     periodoSelected: Periodo;
 
+    docentes: SelectItem[] = [];
+
+    docenteSelected: Docente;
+
     private searchTerms = new Subject<string>();
 
     constructor(private comisionStore: ComisionStore,
                 private asignaturaService: AsignaturaService,
                 private periodoService: PeriodoService,
+                private docenteService: DocenteService,
                 private confirmationService : ConfirmationService) { }
 
     ngOnInit() {
@@ -61,6 +68,16 @@ export class ComisionComponent {
                 }
             )
         });
+        var sel = this;
+        this.docenteService.getAll().subscribe(docentes => {
+            docentes.forEach(docente => {
+                    sel.docentes.push({
+                            label: docente.apellido + ' ' + docente.nombre, value: new Docente(docente)
+                        }
+                    )
+                }
+            )
+        });
         this.searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
@@ -74,6 +91,7 @@ export class ComisionComponent {
         this.displayDialog = true;
         this.asignaturaSelected = this.asignaturas[0].value;
         this.periodoSelected = this.periodos[0].value;
+        this.docenteSelected = this.docentes[0].value;
     }
 
     onRowSelect(event) {
@@ -81,12 +99,14 @@ export class ComisionComponent {
         this.comision =new Comision(event.data);
         this.asignaturaSelected =  new Asignatura(this.comision.asignatura);
         this.periodoSelected = new Periodo(this.comision.periodo);
+        this.docenteSelected = new Docente(this.comision.docente);
         this.displayDialog = true;
     }
 
     save(){
         this.comision.asignatura = new Asignatura(this.asignaturaSelected);
         this.comision.periodo = new Periodo(this.periodoSelected);
+        this.comision.docente = new Docente(this.docenteSelected);
         if (this.isNew)
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la comision?',
