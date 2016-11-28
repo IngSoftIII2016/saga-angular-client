@@ -69,7 +69,10 @@ export class AsignaturaCarreraComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.asignaturaCarreraStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+                this.asignaturaCarreraStore.setLikes(
+                    terms.length > 0 ?
+                        {'asignatura.nombre': '*'+terms+'*', 'carrera.nombre': '*'+terms+'*'} :
+                        {}))
 
     }
 
@@ -87,6 +90,7 @@ export class AsignaturaCarreraComponent {
 
         this.isNew = false;
         this.asignaturaCarrera = new AsignaturaCarrera(event.data);
+        console.log(this.asignaturaCarrera);
         this.carreraSelected =  new Carrera(this.asignaturaCarrera.carrera);
         this.asignaturaSelected =  new Asignatura(this.asignaturaCarrera.asignatura);
         this.displayDialog = true;
@@ -200,6 +204,10 @@ export class AsignaturaCarreraComponent {
 
     sort(event) {
         this.asignaturaCarreraStore.setSorts([event]);
+    }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 
 }

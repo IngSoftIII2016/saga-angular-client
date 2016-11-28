@@ -22,7 +22,9 @@ export class AsignaturaCarreraService extends RelationService<AsignaturaCarrera>
             includes: ['asignatura', 'carrera'],
             sorts: [
                 {field: 'carrera.id', order: 1},
-                {field: 'asignatura.id', order: 1}
+                {field: 'anio', order: 1},
+                {field: 'regimen', order: 1},
+                {field: 'asignatura.nombre', order: 1}
             ]
         });
     }

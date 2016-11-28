@@ -13,7 +13,6 @@
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
     <p-dataTable
-            [globalFilter]="gb"
             [value]="asignaturaStore.items | async"
             selectionMode="single"
             (onRowSelect)="onRowSelect($event)"
