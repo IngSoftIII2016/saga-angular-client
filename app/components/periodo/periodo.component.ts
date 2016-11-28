@@ -119,7 +119,7 @@ export class PeriodoComponent {
 
     delete() {
         this.confirmationService.confirm({
-            message: '¿esta seguro que desea eliminar el aula?',
+            message: '¿esta seguro que desea eliminar el periodo?',
             header: 'Confirmar eliminacion',
             icon: 'fa ui-icon-delete',
             accept: () => {
