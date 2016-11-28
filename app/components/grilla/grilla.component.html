@@ -6,8 +6,8 @@
         <div class="ui-g-12">
             <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
                         dateFormat="dd/mm/yy" readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)">
-                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected"></p-dropdown>
             </p-calendar>
+            <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected"></p-dropdown>
         </div>
         <div class="ui-g-12">
         </div>

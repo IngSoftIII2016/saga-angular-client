@@ -158,7 +158,7 @@ export class GrillaComponent implements OnInit {
 
     getEvents(event): void {
         this.fecha.next(event.day);
-        this.events.subscribe(events => event.callback(events))
+        this.events.subscribe(event.callback)
     }
 
     onEventClick(event): void {

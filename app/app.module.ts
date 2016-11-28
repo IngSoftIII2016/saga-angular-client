@@ -46,7 +46,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {LoginGuard} from "./guards/login.guard";
 import {AuthenticationService} from "./services/authentication.service";
 
-import {TimelineDaySchedule} from "./components/commons/timeline-day-schedule.component";
+import {TimelineDaySchedule} from "./components/grilla/timeline-day-schedule.component";
 import {SedeService} from "./services/sede.service";
 import {AulaService} from "./services/aula.service";
 import {CarreraService} from "./services/carrera.service";
