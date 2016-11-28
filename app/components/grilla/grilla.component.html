@@ -1,5 +1,7 @@
+<div class="ContentSideSections">
+    <p-growl [value]="msgs" life=2000></p-growl>
+</div>
 <div class="ui-g-12">
-
     <div class="card">
         <div class="ui-g-12">
             <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
@@ -17,6 +19,7 @@
                 [height]="500"
                 [scrollTime]="scrollTime"
                 [hiddenDays]="[0]"
+                [locale]="es"
                 (onDayChanged)="getEvents($event)"
                 (onEventClick)="onEventClick($event)"
                 (onEventMouseover)="onEventMouseover($event)"
@@ -32,11 +35,19 @@
     </div>
 
 
-    <p-dialog header="Editar" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="eventSelected">
+    <p-dialog [header]="eventSelected.title" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+              [modal]="true"  *ngIf="eventSelected" (onAfterHide)="cancel()">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
+                <div class="ui-grid-col-8">
+                    <p-calendar id="fecha" [(ngModel)]="eventSelected.start._d" [locale]="es"
+                                readonlyInput="readonlyInput"></p-calendar>
+                </div>
             </div>
             <!--
             <div class="ui-grid-row">
@@ -45,20 +56,19 @@
             </div>
             -->
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha_inicio">Fecha Inicio</label></div>
+                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="fecha_inicio" [(ngModel)]="eventSelected.start._d" [locale]="es"
+                    <p-calendar id="hora_inicio" [(ngModel)]="eventSelected.start._d" [locale]="es"
                                 [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Fin</label></div>
+                <div class="ui-grid-col-4"><label for="hora_fin">Fecha Fin</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="fecha_fin" [(ngModel)]="eventSelected.end._d" [locale]="es"
+                    <p-calendar id="hora_fin" [(ngModel)]="eventSelected.end._d" [locale]="es"
                                 [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
-
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

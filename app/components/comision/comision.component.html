@@ -17,6 +17,7 @@
         <header>Comisiones</header>
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="docente.nombre" header="Docente" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="nombre" header="Comision" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
@@ -41,13 +42,33 @@
                 <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="comision.nombre"/></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="asignatura">Asignatura</label></div>
+                <div class="ui-grid-col-4"><label >Asignatura Actual</label></div>
+                <div class="ui-grid-col-8">{{asignatura||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="asignatura">Seleccione Asignatura</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas" [(ngModel)]="asignaturaSelected" [filter]="true"></p-dropdown>
                 </div>
             </div>
+
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="periodo">Periodo</label></div>
+                <div class="ui-grid-col-4"><label >Docente Actual</label></div>
+                <div class="ui-grid-col-8">{{docente||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="docente">Seleccione Docente</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected" [filter]="true"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label >Periodo Actual</label></div>
+                <div class="ui-grid-col-8">{{periodo||'none'}}</div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="periodo">Seleccione Periodo</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="periodo" [options]="periodos" [(ngModel)]="periodoSelected" [filter]="true"></p-dropdown>
                 </div>

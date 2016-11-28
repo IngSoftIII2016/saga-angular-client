@@ -1,6 +1,6 @@
 import {Entity} from "./entity";
 import {Usuario} from "./usuario";
-import {Grupo} from "./Grupo";
+import {Grupo} from "./grupo";
 
 export class UsuarioGrupo implements Entity {
 

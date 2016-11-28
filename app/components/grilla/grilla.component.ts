@@ -11,6 +11,7 @@ import {ClaseStore} from "../../services/clase.store";
 import {EventoStore} from "../../services/evento.store";
 
 import {CALENDAR_LOCALE_ES} from '../commons/calendar-locale-es';
+import {ConfirmationService, Message} from "primeng/components/common/api";
 
 declare var moment: any;
 
@@ -21,7 +22,7 @@ declare var moment: any;
     providers: [EdificioService, AulaService, ClaseStore, EventoStore]
 })
 export class GrillaComponent implements OnInit {
-
+    msgs: Message[] = [];
     edificio: Observable<Edificio>;
     aulas: Observable<Aula[]>;
     fecha = new BehaviorSubject<Date>(new Date());
@@ -34,7 +35,7 @@ export class GrillaComponent implements OnInit {
     fechaCalendar: Date = new Date();
     private scheduleHeader: any;
 
-    eventSelected : any = null;
+    eventSelected: any = null;
 
     displayDialog: boolean = false;
 
@@ -86,36 +87,13 @@ export class GrillaComponent implements OnInit {
 
         this.events = this.claseStore.items
             .map(function (clases: Clase[]) {
-                return clases.map(function (clase: Clase) {
-                    return {
-                        id: clase.id,
-                        type: 'Clase',
-                        resourceId: clase.aula.id,
-                        aula: clase.aula,
-                        start: clase.hora_inicio,
-                        end: clase.hora_fin,
-                        title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre
-                    }
-                })
+                return clases.map(GrillaComponent.claseToEvent)
             }).combineLatest(this.eventoStore.items
-                .map(function (eventos: Evento[]) {
-                        return eventos.map(function (evento: Evento) {
-                            return {
-                                id: evento.id,
-                                type: 'Evento',
-                                resourceId: evento.aula.id,
-                                aula: evento.aula,
-                                start: this.hora_inicio,
-                                end: this.hora_fin,
-                                title: evento.motivo
-                            }
-                        })
-                    }
-                ),
-            function (clases, eventos) {
-                return clases.concat(eventos);
-            }
-        );
+                    .map( (eventos: Evento[]) => eventos.map(GrillaComponent.eventoToEvent)),
+                function (clases, eventos) {
+                    return clases.concat(eventos);
+                }
+            );
 
         this.scheduleHeader = {
             left: 'prev,next today',
@@ -125,16 +103,58 @@ export class GrillaComponent implements OnInit {
     }
 
     save() {
-        if(this.eventSelected.calEvent.type == 'Clase'){
-            this.claseStore.service.get(this.eventSelected.calEvent.id)
-                .subscribe(clase => {
-                    clase.aula = this.eventSelected.calEvent.aula;
-                    clase.hora_inicio = this.eventSelected.calEvent.start._d.toTimeString().split(' ')[0];
-                    clase.hora_fin = this.eventSelected.calEvent.end._d.toTimeString().split(' ')[0];
-                    console.log(clase);
-                });
+
+        if (this.eventSelected.type == 'Clase') {
+            let clase = GrillaComponent.eventToClase(this.eventSelected);
+            this.claseStore.update(clase).subscribe(editada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity: 'success',
+                        summary: 'Modificida',
+                        detail: 'Se ha modificado la clase ' + clase.horario.comision.asignatura + ' con exito!'
+                    })
+            }, error => {
+                this.msgs.push(
+                    {
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'No se ha podido modificar la clase:\n' + error
+                    });
+            });
+        } else if (this.eventSelected.type == 'Evento') {
+            let evento = GrillaComponent.eventToEvento(this.eventSelected);
+            this.eventoStore.update(evento).subscribe(editada => {
+                this.displayDialog = false;
+                this.msgs.push(
+                    {
+                        severity: 'success',
+                        summary: 'Modificido',
+                        detail: 'Se ha modificado el evento con exito!'
+                    })
+            }, error => {
+                this.msgs.push(
+                    {
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'No se ha podido modificar el evento:\n' + error
+                    });
+            });
         }
     }
+
+    cancel(): void {
+        if (this.eventSelected.type == 'Clase') {
+            this.claseStore.mergeQueryOptions();
+            /*
+            let clase: Clase = this.eventSelected.model as Clase;
+            let event = GrillaComponent.claseToEvent(clase);
+            Object.assign(this.eventSelected, event);
+            */
+        }
+        this.displayDialog = false;
+    }
+
 
     getEvents(event): void {
         this.fecha.next(event.day);
@@ -157,30 +177,82 @@ export class GrillaComponent implements OnInit {
     }
 
     onEventDragStart(event): void {
-        console.log(event);
+        //console.log(event);
     }
 
     onEventDragStop(event): void {
-        console.log(event);
+        //console.log(event);
+        this.eventSelected = event.event;
+        this.displayDialog = true;
     }
 
     onEventDrop(event): void {
-        console.log(event);
+        //console.log(event);
+        this.eventSelected = event.event;
+        this.displayDialog = true;
     }
 
     onEventResizeStart(event): void {
-        console.log(event);
+        //console.log(event);
+        //console.log("onEventResizeStart");
     }
 
     onEventResizeStop(event): void {
-        console.log(event);
+        //console.log(event);
+        //console.log("onEventResizeStop");
+        this.eventSelected = event.event;
+        this.displayDialog = true;
     }
 
     onEventResize(event): void {
-        console.log(event);
+        //console.log(event);
+        //console.log("onEventResize");
     }
 
-    parseDate(fecha: string, hora: string): Date {
+
+    static eventToClase(event: any): Clase {
+        let clase: Clase = event.model as Clase;
+        clase.aula = event.aula;
+        clase.hora_inicio = event.start._d.toTimeString().split(' ')[0];
+        clase.hora_fin = event.end._d.toTimeString().split(' ')[0];
+        return clase;
+    }
+
+    static claseToEvent(clase: Clase): any {
+        return {
+            id: clase.id,
+            type: 'Clase',
+            model: clase as any,
+            resourceId: clase.aula.id,
+            aula: clase.aula,
+            start: moment(clase.fecha + ' ' + clase.hora_inicio),
+            end: moment(clase.fecha + ' ' + clase.hora_fin),
+            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre
+        }
+    }
+
+    static eventToEvento(event: any): Evento {
+        let evento: Evento = event.model as Evento;
+        evento.aula = event.aula;
+        evento.hora_inicio = event.start._d.toTimeString().split(' ')[0];
+        evento.hora_fin = event.end._d.toTimeString().split(' ')[0];
+        return event;
+    }
+
+    static eventoToEvent(evento: Evento): any {
+        return {
+            id: evento.id,
+            type: 'Evento',
+            model: evento as any,
+            resourceId: evento.aula.id,
+            aula: evento.aula,
+            start: evento.hora_inicio,
+            end: evento.hora_fin,
+            title: evento.motivo
+        }
+    }
+
+    static parseDate(fecha: string, hora: string): Date {
         let d = new Date(fecha);
         let h = hora.split(':');
         return new Date(d.getFullYear(), d.getMonth(), d.getDay(), parseInt(h[0]), parseInt(h[1]), parseInt(h[2]));

@@ -10,3 +10,15 @@
     color: white;
     text-decoration: none;
 }
+.layout-container .topbar .topbar-left {
+    padding-top: 0;
+}
+
+#logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+    height: 75px;
+    background: url("/app/resources/logo-saga.png") top left no-repeat;
+    background-size: 250px 75px ;
+}
