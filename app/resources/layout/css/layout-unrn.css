@@ -933,7 +933,7 @@ body {
       position: relative;
       left: -16px;
       top: 3px;
-      background-color: #4d0000;
+      background-color: #cc1b00;
       -moz-border-radius: 50%;
       -webkit-border-radius: 50%;
       border-radius: 50%;
@@ -1112,7 +1112,7 @@ body {
         background-color: #676767; }
     .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a {
       color: #ffffff;
-      background-color: #4d0000; }
+      background-color: #cc1b00; }
 .layout-container.menu-layout-overlay .layout-menu {
   margin-left: -250px; }
 .layout-container.menu-layout-overlay .layout-main {
@@ -1235,7 +1235,7 @@ body {
 
 .ajax-loader {
   font-size: 32px;
-  color: #4d0000; }
+  color: #cc1b00; }
 
 @media (min-width: 1025px) {
   .layout-container .topbar-items {
@@ -1256,7 +1256,7 @@ body {
           position: absolute;
           right: -5px;
           top: -5px;
-          background-color: #4d0000;
+          background-color: #cc1b00;
           color: #ffffff;
           -moz-border-radius: 50%;
           -webkit-border-radius: 50%;
@@ -1386,7 +1386,7 @@ body {
           background-color: #e8e8e8; }
       .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a {
         color: #ffffff;
-        background-color: #4d0000; }
+        background-color: #cc1b00; }
         .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a i {
           color: #ffffff; }
     .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark {
@@ -1399,7 +1399,7 @@ body {
             color: #ffffff; }
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a {
         color: #ffffff;
-        background-color: #4d0000; }
+        background-color: #cc1b00; }
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li ul {
         background-color: #424242; }
   .layout-container.menu-layout-horizontal .layout-main {
@@ -1471,7 +1471,7 @@ body {
         position: absolute;
         left: 30px;
         top: 10px;
-        background-color: #4d0000;
+        background-color: #cc1b00;
         color: #ffffff;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
