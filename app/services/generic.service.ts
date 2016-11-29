@@ -56,7 +56,7 @@ export abstract class GenericService<T extends Entity> {
             .map(json => json.data);
     }
 
-    public getAll(qo : QueryOptions = new QueryOptions()) : Observable<T[]> {
+    public getAll(qo : QueryOptions = this.getDefaultQueryOptions()) : Observable<T[]> {
         qo.merge({page : -1});
         return this.query(qo);
     }

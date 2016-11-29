@@ -38,14 +38,16 @@ export class ClaseComponent {
 
     private searchTerms = new Subject<string>();
 
-    constructor(private claseStore: ClaseStore,   private aulaService: AulaService,private confirmationService : ConfirmationService) { }
+    constructor(private claseStore: ClaseStore,
+                private aulaService: AulaService,
+                private confirmationService : ConfirmationService) { }
 
     ngOnInit() {
         var sel = this;
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                     sel.aulas.push({
-                            label: aula.nombre, value: new Aula (aula)
+                            label: aula.nombre + ' - ' + aula.edificio.nombre, value: new Aula (aula)
                         }
                     )
                 }

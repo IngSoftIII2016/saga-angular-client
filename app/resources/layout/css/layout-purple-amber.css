@@ -259,7 +259,7 @@
     vertical-align: middle;
     width: 200px;
     height: 30px;
-    background: url("../images/logo2x.png.old") top left no-repeat;
+    background: url("../images/logo2x.png") top left no-repeat;
     background-size: 200px 30px; }
   .splash-screen .load-bar {
     position: relative;
@@ -868,7 +868,7 @@
       padding: 0; } }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .landing-wrapper .header .header-top .logo {
-    background: url("../images/logo2x.png.old") top left no-repeat;
+    background: url("../images/logo2x.png") top left no-repeat;
     background-size: 200px 30px; } }
 html {
   height: 100%; }
@@ -910,7 +910,7 @@ body {
     vertical-align: middle;
     width: 200px;
     height: 30px;
-    background: url("../images/logo2x.png.old") top left no-repeat;
+    background: url("../images/logo2x.png") top left no-repeat;
     background-size: 200px 30px; }
   .layout-container .topbar .topbar-left {
     box-sizing: border-box;
@@ -2171,3 +2171,5 @@ body .layout-wrapper.layout-compact {
     padding: 14px 16px; }
     body .layout-wrapper.layout-compact .layout-container .topbar .topbar-right .topbar-items > li > a i {
       font-size: 20px; } }
+
+/*# sourceMappingURL=layout-purple-amber.css.map */

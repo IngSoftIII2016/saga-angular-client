@@ -27,21 +27,18 @@ export class GrillaComponent implements OnInit {
     aulas: Observable<Aula[]>;
     fecha = new BehaviorSubject<Date>(new Date());
     clases: Observable<Clase[]>;
-    private eventos: Observable<Evento[]>;
     obsResources: Observable<any[]>;
     resources: any[] = [];
     events: Observable<any[]>;
     scrollTime: string;
     fechaCalendar: Date = new Date();
-    private scheduleHeader: any;
+    scheduleHeader: any;
 
     eventSelected: any = null;
 
     displayDialog: boolean = false;
 
     es: any = CALENDAR_LOCALE_ES;
-
-    arg: any;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
@@ -86,11 +83,13 @@ export class GrillaComponent implements OnInit {
                 self.eventoStore.mergeQueryOptions(qo);
             })
 
+        this.fecha.subscribe(fecha => this.fechaCalendar = fecha);
+
         this.events = this.claseStore.items
             .map(function (clases: Clase[]) {
                 return clases.map(GrillaComponent.claseToEvent)
             }).combineLatest(this.eventoStore.items
-                    .map( (eventos: Evento[]) => eventos.map(GrillaComponent.eventoToEvent)),
+                    .map((eventos: Evento[]) => eventos.map(GrillaComponent.eventoToEvent)),
                 function (clases, eventos) {
                     return clases.concat(eventos);
                 }
@@ -101,25 +100,15 @@ export class GrillaComponent implements OnInit {
             center: 'title',
             right: ''
         };
-        this.arg = {
-            buttonText: {
-                today:    'Hoy',
-                month:    'Mes',
-                week:     'Semana',
-                day:      'Dia'
-            },
-            businessHours: [ // specify an array instead
-                {
-                    dow: [ 1, 2, 3, 4, 5, 6, 7 ], // Lunes, martes, miercoles jueves, viernes, sabado, domingo
-                    start: '08:00', // 8am
-                    end: '21:00' // 9pm
-                }
-                ]
+        this.es.buttonText = {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Dia'
         };
     }
 
     save() {
-
         if (this.eventSelected.type == 'Clase') {
             let clase = GrillaComponent.eventToClase(this.eventSelected);
             this.claseStore.update(clase).subscribe(editada => {
@@ -163,10 +152,10 @@ export class GrillaComponent implements OnInit {
         if (this.eventSelected.type == 'Clase') {
             this.claseStore.mergeQueryOptions();
             /*
-            let clase: Clase = this.eventSelected.model as Clase;
-            let event = GrillaComponent.claseToEvent(clase);
-            Object.assign(this.eventSelected, event);
-            */
+             let clase: Clase = this.eventSelected.model as Clase;
+             let event = GrillaComponent.claseToEvent(clase);
+             Object.assign(this.eventSelected, event);
+             */
         }
         this.displayDialog = false;
     }
