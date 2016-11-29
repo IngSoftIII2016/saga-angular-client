@@ -21,6 +21,8 @@ import {Sede} from "../../entities/sede";
 
 export class LocalidadComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -73,60 +75,69 @@ export class LocalidadComponent {
     }
 
     save() {
-        this.localidad.sede = new Sede(this.sedeSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar la localidad?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.localidadStore.create(this.localidad).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado la localidad ' + creada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la localidad:\n' + error
-                                });
-                        });
-                }
+        if (this.localidad.nombre == undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             });
-        //update
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificarla localidad?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.localidadStore.update(this.localidad).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardarla localidad:\n' + error
-                                });
-                        });
-                }
-            });
+        }
+        else {
+            this.localidad.sede = new Sede(this.sedeSelected);
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea agregar la localidad?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.localidadStore.create(this.localidad).subscribe(
+                            creada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Creada',
+                                        detail: 'Se ha agregado la localidad ' + creada.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido crear la localidad:\n' + error
+                                    });
+                            });
+                    }
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea modificarla localidad?',
+                    header: 'Confirmar modificacion',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.localidadStore.update(this.localidad).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardarla localidad:\n' + error
+                                    });
+                            });
+                    }
+                });
+        }
     }
 
 

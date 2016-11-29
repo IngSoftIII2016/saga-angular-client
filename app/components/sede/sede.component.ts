@@ -15,6 +15,8 @@ export class SedeComponent {
 
     sede: Sede = new Sede();
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     isNew = false;
@@ -46,6 +48,14 @@ export class SedeComponent {
     }
 
     save() {
+        if (this.sede.nombre== undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
+            });
+        }
+        else
         if (this.isNew) {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la sede?',

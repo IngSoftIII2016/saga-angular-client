@@ -15,6 +15,8 @@ export class CarreraComponent {
 
     carrera: Carrera = new Carrera();
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     isNew = false;
@@ -46,6 +48,14 @@ export class CarreraComponent {
     }
 
     save() {
+        if(this.carrera.nombre== undefined ){
+            this.validaciones.push({
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            });
+        }
+        else
         if (this.isNew) {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la carrera?',

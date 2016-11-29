@@ -38,31 +38,34 @@
     <p-dialog header="Evento" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="evento">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
+                <p-messages [value]="validaciones"></p-messages>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas" [(ngModel)]="aulaSelected" [filter]="true"></p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
+                <div class="ui-grid-col-4"><label for="fecha">Fecha*</label></div>
                 <div class="ui-grid-col-8"> <p-calendar id="fecha" [(ngModel)]="fecha" [locale]="es" dateFormat="dd/mm/yy"
                                                         readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
+                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio*</label></div>
                 <div class="ui-grid-col-8">
                     <p-calendar  id="hora_inicio"  [(ngModel)]="hora_inicio"  [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin</label></div>
+                <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin*</label></div>
                 <div class="ui-grid-col-8">
                     <p-calendar  id="hora_fin" [(ngModel)]="hora_fin"  [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="motivo">Motivo</label></div>
+                <div class="ui-grid-col-4"><label for="motivo">Motivo*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="evento.motivo"/></div>
             </div>
 

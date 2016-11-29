@@ -40,19 +40,22 @@
     <p-dialog header="Periodo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="descripcion">Descripción</label></div>
+                <p-messages [value]="validaciones"></p-messages>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="descripcion">Descripción*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="periodo.descripcion"/></div>
             </div>
 
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha_inicio">Fecha Inicio</label></div>
+                <div class="ui-grid-col-4"><label for="fecha_inicio">Fecha Inicio*</label></div>
                 <div class="ui-grid-col-8">
                     <p-calendar id="fecha_inicio" [(ngModel)]="fechaInicio" [locale]="es" dateFormat="dd/mm/yy"
                                 readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Fin</label></div>
+                <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Fin*</label></div>
                 <div class="ui-grid-col-8">
                     <p-calendar id="fecha_fin" [(ngModel)]="fechaFin" [locale]="es" dateFormat="dd/mm/yy"
                                 readonlyInput="readonlyInput"></p-calendar>

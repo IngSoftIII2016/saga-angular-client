@@ -14,6 +14,8 @@ export class AsignaturaComponent {
 
     asignatura: Asignatura = new Asignatura();
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     isNew = false;
@@ -45,6 +47,14 @@ export class AsignaturaComponent {
     }
 
     save() {
+        if(this.asignatura.nombre== undefined ){
+            this.validaciones.push({
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            });
+        }
+        else
         if (this.isNew) {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la asignatura?',

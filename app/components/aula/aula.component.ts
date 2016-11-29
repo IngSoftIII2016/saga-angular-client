@@ -16,6 +16,8 @@ import {QueryOptions} from "../../services/generic.service";
 })
 export class AulaComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -69,61 +71,70 @@ export class AulaComponent {
     }
 
     save() {
-        this.aula.edificio = new Edificio (this.edificioSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el aula?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.aula.ubicacion = 0;
-                    this.aulaStore.create(this.aula).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear el aula:\n' + error
-                                });
-                        });
-                }
+        if (this.aula.nombre == undefined || this.aula.capacidad == undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             });
-        //update
-        else
-           this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar el aula?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.aulaStore.update(this.aula).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el aula:\n' + error
-                                });
-                        });
-                }
-            });
+        }
+        else {
+            this.aula.edificio = new Edificio(this.edificioSelected);
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea agregar el aula?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.aula.ubicacion = 0;
+                        this.aulaStore.create(this.aula).subscribe(
+                            creada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Creada',
+                                        detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido crear el aula:\n' + error
+                                    });
+                            });
+                    }
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea modificar el aula?',
+                    header: 'Confirmar modificacion',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.aulaStore.update(this.aula).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardar el aula:\n' + error
+                                    });
+                            });
+                    }
+                });
+        }
     }
 
 

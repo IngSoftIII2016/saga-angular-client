@@ -14,6 +14,8 @@ import {Subject} from "rxjs";
 })
 export class PeriodoComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
 	displayDialog: boolean = false;
@@ -58,14 +60,22 @@ export class PeriodoComponent {
         this.displayDialog = true;
     }
     save() {
-        this.periodo.fecha_inicio = this.fechaInicio.toISOString().split('T')[0];
-        this.periodo.fecha_fin= this.fechaFin.toISOString().split('T')[0];
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: '¿esta seguro que desea agregar el periodo?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
+        if (this.periodo.descripcion == undefined || this.periodo.fecha_inicio == undefined || this.periodo.fecha_fin == undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
+            });
+        }
+        else {
+            this.periodo.fecha_inicio = this.fechaInicio.toISOString().split('T')[0];
+            this.periodo.fecha_fin = this.fechaFin.toISOString().split('T')[0];
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: '¿esta seguro que desea agregar el periodo?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
                         this.periodoStore.create(this.periodo)
                             .subscribe(
                                 creada => {
@@ -86,36 +96,36 @@ export class PeriodoComponent {
                                         });
                                 });
                     }
-            });
-        //update
-        else
-            this.confirmationService.confirm({
-                message: '¿esta seguro que desea modificar el periodo?',
-                header: 'Confirmar modificación',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.periodoStore.update(this.periodo).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.descripcion + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el periodo:\n' + error
-                                });
-                        });
-                }
-            });
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: '¿esta seguro que desea modificar el periodo?',
+                    header: 'Confirmar modificación',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.periodoStore.update(this.periodo).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.descripcion + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardar el periodo:\n' + error
+                                    });
+                            });
+                    }
+                });
+        }
     }
-
 
     delete() {
         this.confirmationService.confirm({

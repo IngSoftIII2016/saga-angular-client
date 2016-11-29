@@ -18,6 +18,8 @@ export class DocenteComponent {
 
     docente: Docente = new Docente();
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     isNew = false;
@@ -49,24 +51,69 @@ export class DocenteComponent {
     }
 
     save() {
-        this.docenteStore.save(this.docente).subscribe(
-            guardada => {
-                this.displayDialog = false;
-                this.msgs.push(
-                    {
-                        severity:'success',
-                        summary:'Guardado',
-                        detail:'Se ha guardado el docente '+ guardada.nombre + ' con exito!'
-                    })
-            },
-            error => {
-                this.msgs.push(
-                    {
-                        severity:'error',
-                        summary:'Error',
-                        detail:'No se ha podido guardar el docente:\n' + error
-                    });
+        if(this.docente.nombre == undefined || this.docente.apellido == undefined ){
+            this.validaciones.push({
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
             });
+        }
+        else
+        if (this.isNew) {
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea agregar el docente?',
+                header: 'Confirmar ',
+                icon: 'fa ui-icon-warning',
+                accept: () => {
+                    this.docenteStore.create(this.docente).subscribe(
+                        guardada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity:'success',
+                                    summary:'Guardado',
+                                    detail:'Se ha guardado el docente '+ guardada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity:'error',
+                                    summary:'Error',
+                                    detail:'No se ha podido guardar el docente:\n' + error
+                                });
+                        });
+                }
+            });
+        }
+        //update
+        else
+            this.confirmationService.confirm({
+                message: 'Estas seguro que desea modificar el docente?',
+                header: 'Confirmar modificacion',
+                icon: 'fa ui-icon-warning',
+                accept: () => {
+                    this.docenteStore.update(this.docente).subscribe(
+                        guardada => {
+                            this.displayDialog = false;
+                            this.msgs.push(
+                                {
+                                    severity: 'success',
+                                    summary: 'Guardada',
+                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
+                                })
+                        },
+                        error => {
+                            this.msgs.push(
+                                {
+                                    severity: 'error',
+                                    summary: 'Error',
+                                    detail: 'No se ha podido guardar el docente:\n' + error
+                                });
+                        });
+                }
+            });
+
     }
 
 

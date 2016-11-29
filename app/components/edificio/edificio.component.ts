@@ -15,6 +15,8 @@ import {Localidad} from "../../entities/localidad";
 export class EdificioComponent {
 
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -68,6 +70,14 @@ export class EdificioComponent {
     }
 
     save() {
+        if(this.edificio.nombre == undefined){
+            this.validaciones.push({
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            });
+        }
+        else {
         this.edificio.localidad = new Localidad(this.localidadSelected);
         if (this.isNew)
             this.confirmationService.confirm({
@@ -123,7 +133,7 @@ export class EdificioComponent {
                 }
             });
     }
-
+    }
 
     delete() {
         this.confirmationService.confirm({

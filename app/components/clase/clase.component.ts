@@ -16,6 +16,8 @@ import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 })
 export class ClaseComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -79,63 +81,72 @@ export class ClaseComponent {
     }
 
     save() {
-        this.clase.fecha = this.fecha.toISOString().split('T')[0];
-        this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
-        this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-        this.clase.aula = new Aula(this.aulaSelected);
-       if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar una clase?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.claseStore.create(this.clase).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado la clase ' + creada.aula.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la clase:\n' + error
-                                });
-                        });
-                }
+        if (this.clase.fecha == undefined || this.clase.hora_inicio== undefined || this.clase.hora_fin== undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             });
-        //update
-        else
-           this.confirmationService.confirm({
-               message: 'Estas seguro que desea modificar la clase?',
-               header: 'Confirmar modificacion',
-               icon: 'fa ui-icon-warning',
-               accept: () => {
-                   this.claseStore.update(this.clase).subscribe(
-                       guardada => {
-                           this.displayDialog = false;
-                           this.msgs.push(
-                               {
-                                   severity: 'success',
-                                   summary: 'Guardada',
-                                   detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
-                               })
-                       },
-                       error => {
-                           this.msgs.push(
-                               {
-                                   severity: 'error',
-                                   summary: 'Error',
-                                   detail: 'No se ha podido guardar la clase:\n' + error
-                               });
-                       });
-               }
-           });
+        }
+        else {
+            this.clase.fecha = this.fecha.toISOString().split('T')[0];
+            this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
+            this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
+            this.clase.aula = new Aula(this.aulaSelected);
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea agregar una clase?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.claseStore.create(this.clase).subscribe(
+                            creada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Creada',
+                                        detail: 'Se ha agregado la clase ' + creada.aula.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido crear la clase:\n' + error
+                                    });
+                            });
+                    }
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea modificar la clase?',
+                    header: 'Confirmar modificacion',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.claseStore.update(this.clase).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardar la clase:\n' + error
+                                    });
+                            });
+                    }
+                });
+        }
     }
 
 

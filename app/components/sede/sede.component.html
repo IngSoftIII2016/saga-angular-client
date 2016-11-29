@@ -43,9 +43,11 @@
 
     <p-dialog header="Sede" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="sede">
-
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
+                <p-messages [value]="validaciones"></p-messages>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="nombre">Nombre*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="sede.nombre" /></div>
             </div>
             

@@ -19,7 +19,7 @@ import {
     PaginatorModule,
     ConfirmDialogModule,
     ConfirmationService,
-    PickListModule
+    MessagesModule
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
@@ -83,7 +83,8 @@ import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.co
       CalendarModule,
       GrowlModule,
       PaginatorModule,
-      ConfirmDialogModule
+      ConfirmDialogModule,
+      MessagesModule
   ],
   declarations: [
       AppComponent,

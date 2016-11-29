@@ -16,6 +16,8 @@ import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 })
 export class EventoComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -78,63 +80,73 @@ export class EventoComponent {
     }
 
     save() {
-        this.evento.fecha = this.fecha.toISOString().split('T')[0];
-        this.evento.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
-        this.evento.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-        this.evento.aula = new Aula (this.aulaSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar un evento?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.eventoStore.create(this.evento).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado el evento ' + creada.aula.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear el evento:\n' + error
-                                });
-                        });
-                }
+        if (this.evento.fecha == undefined || this.evento.hora_inicio == undefined
+            || this.evento.hora_fin == undefined || this.evento.motivo == undefined) {
+            this.validaciones.push({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             });
-        //update
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar el evento?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.eventoStore.update(this.evento).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el evento:\n' + error
-                                });
-                        });
-                }
-            });
+        }
+        else {
+            this.evento.fecha = this.fecha.toISOString().split('T')[0];
+            this.evento.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
+            this.evento.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
+            this.evento.aula = new Aula(this.aulaSelected);
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea agregar un evento?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.eventoStore.create(this.evento).subscribe(
+                            creada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Creada',
+                                        detail: 'Se ha agregado el evento ' + creada.aula.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido crear el evento:\n' + error
+                                    });
+                            });
+                    }
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea modificar el evento?',
+                    header: 'Confirmar modificacion',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.eventoStore.update(this.evento).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardar el evento:\n' + error
+                                    });
+                            });
+                    }
+                });
+        }
     }
 
     delete() {
