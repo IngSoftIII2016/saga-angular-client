@@ -49,11 +49,11 @@ export class SedeComponent {
 
     save() {
         if (this.sede.nombre== undefined) {
-            this.validaciones.push({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            });
+            this.validaciones[0] ={
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            };
         }
         else
         if (this.isNew) {

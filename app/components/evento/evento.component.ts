@@ -82,11 +82,11 @@ export class EventoComponent {
     save() {
         if (this.evento.fecha == undefined || this.evento.hora_inicio == undefined
             || this.evento.hora_fin == undefined || this.evento.motivo == undefined) {
-            this.validaciones.push({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            });
+            this.validaciones[0] ={
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            };
         }
         else {
             this.evento.fecha = this.fecha.toISOString().split('T')[0];

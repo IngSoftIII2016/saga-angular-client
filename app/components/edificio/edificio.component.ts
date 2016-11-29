@@ -71,11 +71,11 @@ export class EdificioComponent {
 
     save() {
         if(this.edificio.nombre == undefined){
-            this.validaciones.push({
+            this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            });
+            };
         }
         else {
         this.edificio.localidad = new Localidad(this.localidadSelected);

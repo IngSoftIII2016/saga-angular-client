@@ -61,11 +61,11 @@ export class PeriodoComponent {
     }
     save() {
         if (this.periodo.descripcion == undefined || this.periodo.fecha_inicio == undefined || this.periodo.fecha_fin == undefined) {
-            this.validaciones.push({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            });
+            this.validaciones[0] ={
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            };
         }
         else {
             this.periodo.fecha_inicio = this.fechaInicio.toISOString().split('T')[0];

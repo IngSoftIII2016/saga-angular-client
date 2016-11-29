@@ -49,11 +49,11 @@ export class CarreraComponent {
 
     save() {
         if(this.carrera.nombre== undefined ){
-            this.validaciones.push({
+            this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            });
+            };
         }
         else
         if (this.isNew) {
