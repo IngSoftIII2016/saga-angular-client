@@ -19,6 +19,8 @@ import {Asignatura} from "../../entities/asignatura";
 })
 export class AsignaturaCarreraComponent {
 
+    validaciones: Message[] = [];
+
     msgs: Message[] = [];
 
     displayDialog: boolean;
@@ -98,64 +100,72 @@ export class AsignaturaCarreraComponent {
     }
 
     save() {
-        this.asignaturaCarrera.carrera = new Carrera(this.carreraSelected);
-        this.asignaturaCarrera.asignatura = new Asignatura(this.asignaturaSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea asignar la carrera a esta materia?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                        this.asignaturaCarreraStore.create(this.asignaturaCarrera)
-                            .subscribe(
-                                creada => {
-                                    this.displayDialog = false;
-                                    this.msgs.push(
-                                        {
-                                            severity: 'success',
-                                            summary: 'Creada',
-                                            detail: 'Se ha agregado la carrera ' + creada.carrera.nombre + ' con exito!'
-                                        })
-                                },
-                                error => {
-                                    this.msgs.push(
-                                        {
-                                            severity: 'error',
-                                            summary: 'Error',
-                                            detail: 'No se ha podido guardar los cambios:\n' + error
-                                        });
-                                });
+        if(this.asignaturaCarrera.anio == undefined || this.asignaturaCarrera.regimen == undefined ){
+            this.validaciones.push({
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            });
+        }
+        else {
+            this.asignaturaCarrera.carrera = new Carrera(this.carreraSelected);
+            this.asignaturaCarrera.asignatura = new Asignatura(this.asignaturaSelected);
+            if (this.isNew)
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea asignar la carrera a esta materia?',
+                    header: 'Confirmar ',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                            this.asignaturaCarreraStore.create(this.asignaturaCarrera)
+                                .subscribe(
+                                    creada => {
+                                        this.displayDialog = false;
+                                        this.msgs.push(
+                                            {
+                                                severity: 'success',
+                                                summary: 'Creada',
+                                                detail: 'Se ha agregado la carrera ' + creada.carrera.nombre + ' con exito!'
+                                            })
+                                    },
+                                    error => {
+                                        this.msgs.push(
+                                            {
+                                                severity: 'error',
+                                                summary: 'Error',
+                                                detail: 'No se ha podido guardar los cambios:\n' + error
+                                            });
+                                    });
+                        }
+                });
+            //update
+            else
+                this.confirmationService.confirm({
+                    message: 'Estas seguro que desea modificar la relacion?',
+                    header: 'Confirmar modificacion',
+                    icon: 'fa ui-icon-warning',
+                    accept: () => {
+                        this.asignaturaCarreraStore.update(this.asignaturaCarrera).subscribe(
+                            guardada => {
+                                this.displayDialog = false;
+                                this.msgs.push(
+                                    {
+                                        severity: 'success',
+                                        summary: 'Guardada',
+                                        detail: 'Se han guardado los cambios a ' + guardada.asignatura.nombre + ' con exito!'
+                                    })
+                            },
+                            error => {
+                                this.msgs.push(
+                                    {
+                                        severity: 'error',
+                                        summary: 'Error',
+                                        detail: 'No se ha podido guardar los cambios:\n' + error
+                                    });
+                            });
                     }
-            });
-        //update
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar la relacion?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.asignaturaCarreraStore.update(this.asignaturaCarrera).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.asignatura.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar los cambios:\n' + error
-                                });
-                        });
-                }
-            });
+                });
+        }
     }
-
 
     delete() {
         console.log(this.asignaturaCarrera);
