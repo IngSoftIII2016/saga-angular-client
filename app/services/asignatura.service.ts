@@ -18,8 +18,7 @@ export class AsignaturaService extends GenericService<Asignatura> {
 
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions({
-            includes : ['carrera'],
-            page: -1
+            includes : ['carrera']
         });
     }
 
