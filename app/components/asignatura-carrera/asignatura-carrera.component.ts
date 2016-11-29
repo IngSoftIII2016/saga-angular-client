@@ -100,7 +100,7 @@ export class AsignaturaCarreraComponent {
     }
 
     save() {
-        if(this.asignaturaCarrera.anio == undefined || this.asignaturaCarrera.regimen == undefined ){
+        if( !this.asignaturaCarrera.anio || !this.asignaturaCarrera.regimen ){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

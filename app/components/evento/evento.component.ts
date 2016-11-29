@@ -80,8 +80,8 @@ export class EventoComponent {
     }
 
     save() {
-        if (this.evento.fecha == undefined || this.evento.hora_inicio == undefined
-            || this.evento.hora_fin == undefined || this.evento.motivo == undefined) {
+        if (!this.evento.fecha || !this.evento.hora_inicio
+            || !this.evento.hora_fin || !this.evento.motivo) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

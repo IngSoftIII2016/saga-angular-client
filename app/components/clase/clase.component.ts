@@ -81,7 +81,7 @@ export class ClaseComponent {
     }
 
     save() {
-        if (this.clase.fecha == undefined || this.clase.hora_inicio== undefined || this.clase.hora_fin== undefined) {
+        if (!this.clase.fecha || !this.clase.hora_inicio || !this.clase.hora_fin) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

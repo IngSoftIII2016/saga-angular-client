@@ -48,7 +48,7 @@ export class AsignaturaComponent {
     }
 
     save() {
-        if(this.asignatura.nombre== undefined ){
+        if(!this.asignatura.nombre){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

@@ -60,7 +60,7 @@ export class PeriodoComponent {
         this.displayDialog = true;
     }
     save() {
-        if (this.periodo.descripcion == undefined || this.periodo.fecha_inicio == undefined || this.periodo.fecha_fin == undefined) {
+        if (!this.periodo.descripcion || !this.periodo.fecha_inicio  || !this.periodo.fecha_fin ) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

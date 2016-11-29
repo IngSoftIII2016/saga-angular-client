@@ -48,7 +48,7 @@ export class SedeComponent {
     }
 
     save() {
-        if (this.sede.nombre== undefined) {
+        if (!this.sede.nombre) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

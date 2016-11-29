@@ -51,7 +51,7 @@ export class DocenteComponent {
     }
 
     save() {
-        if(this.docente.nombre == undefined || this.docente.apellido == undefined ){
+        if(!this.docente.nombre || !this.docente.apellido){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

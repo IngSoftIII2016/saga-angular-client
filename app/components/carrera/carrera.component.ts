@@ -48,7 +48,7 @@ export class CarreraComponent {
     }
 
     save() {
-        if(this.carrera.nombre== undefined ){
+        if(!this.carrera.nombre){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

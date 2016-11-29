@@ -75,7 +75,7 @@ export class LocalidadComponent {
     }
 
     save() {
-        if (this.localidad.nombre == undefined) {
+        if (!this.localidad.nombre ) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

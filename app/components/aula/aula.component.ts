@@ -71,7 +71,7 @@ export class AulaComponent {
     }
 
     save() {
-        if (this.aula.nombre == undefined || this.aula.capacidad == undefined) {
+        if (!this.aula.nombre || !this.aula.capacidad) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',

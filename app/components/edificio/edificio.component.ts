@@ -70,7 +70,7 @@ export class EdificioComponent {
     }
 
     save() {
-        if(this.edificio.nombre == undefined){
+        if(!this.edificio.nombre ){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
