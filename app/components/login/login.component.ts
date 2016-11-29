@@ -29,12 +29,10 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
-                if (result === true) {
                     this.router.navigate(['/']);
-                } else {
-                    this.error = 'El usuario o contraseña  es incorrecto';
-                    this.loading = false;
-                }
+            }, error => {
+                this.error = 'El usuario o contraseña  es incorrecto';
+                this.loading = false;
             });
     }
 }

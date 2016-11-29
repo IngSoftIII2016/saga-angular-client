@@ -20,7 +20,8 @@
 
 			<div class="ui-g-12" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
 				<span class="md-inputfield">
-					<input type="password" pInputText autocomplete="on" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required/>
+					<input type="password" pInputText autocomplete="on" class="form-control" name="password"
+						   [(ngModel)]="model.password" #password="ngModel" required/>
 					<label>Contraseña</label>
 					<div *ngIf="f.submitted && !password.valid" style="color:red" class="help-block">Ingrese su contraseña</div>
 				</span>

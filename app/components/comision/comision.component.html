@@ -44,19 +44,25 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="asignatura">Asignatura*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas" [(ngModel)]="asignaturaSelected" [filter]="true"></p-dropdown>
+                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas"
+                                [(ngModel)]="asignaturaSelected" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="docente">Docente*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected" [filter]="true"></p-dropdown>
+                    <p-dropdown class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="periodo">Periodo*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="periodo" [options]="periodos" [(ngModel)]="periodoSelected" [filter]="true"></p-dropdown>
+                    <p-dropdown class="ui-grid-col-12" id="periodo" [options]="periodos" [(ngModel)]="periodoSelected"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
                 </div>
             </div>
         </div>

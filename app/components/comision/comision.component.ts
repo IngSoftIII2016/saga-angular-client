@@ -72,7 +72,7 @@ export class ComisionComponent {
         this.docenteService.getAll().subscribe(docentes => {
             docentes.forEach(docente => {
                     sel.docentes.push({
-                            label: docente.apellido + ' ' + docente.nombre, value: new Docente(docente)
+                            label: docente.apellido + ', ' + docente.nombre, value: new Docente(docente)
                         }
                     )
                 }
@@ -82,7 +82,13 @@ export class ComisionComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.comisionStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*', 'asignatura.nombre': '*'+terms+'*'} : {}))
+                this.comisionStore.setLikes(terms.length > 0 ?
+                    {
+                        nombre: '*'+terms+'*',
+                        'asignatura.nombre': '*'+terms+'*',
+                        'docente.nombre': '*'+terms+'*',
+                        'docente.apellido' : '*'+terms+'*'
+                    } : {}))
     }
 
     showDialogToAdd() {

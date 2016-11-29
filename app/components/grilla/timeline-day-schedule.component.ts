@@ -175,6 +175,8 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventRender: this.eventRender,
             resources: resources,
             locale: 'es',
+            timeFormat: 'H:mm',
+            timezone: 'local',
             titleFormat: '[Clases y Eventos del] dddd D MMM YYYY',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
