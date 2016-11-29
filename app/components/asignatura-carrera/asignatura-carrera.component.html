@@ -47,7 +47,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="carrera">Carrera</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="carrera" [options]="carreras" [(ngModel)]="carreraSelected" [filter]="true">
+                    <p-dropdown class="ui-grid-col-12" [disabled]="diseable" id="carrera" [options]="carreras" [(ngModel)]="carreraSelected" [filter]="true">
                     </p-dropdown>
                 </div>
             </div>

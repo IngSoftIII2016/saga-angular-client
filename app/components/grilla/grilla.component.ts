@@ -116,7 +116,6 @@ export class GrillaComponent implements OnInit {
                 }
                 ]
         };
-       
     }
 
     save() {

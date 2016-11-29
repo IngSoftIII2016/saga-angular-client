@@ -6335,7 +6335,7 @@ body {
       -moz-box-shadow: none;
       width: auto; }
       body .ui-dialog .ui-dialog-buttonpane .ui-button .fa, body .ui-dialog .ui-dialog-footer .ui-button .fa {
-        color: #757575; }
+        color: white; }
       body .ui-dialog .ui-dialog-buttonpane .ui-button.ui-state-hover, body .ui-dialog .ui-dialog-footer .ui-button.ui-state-hover {
         background-color: #e8e8e8;
         color: #000000; }
