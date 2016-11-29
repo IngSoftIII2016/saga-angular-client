@@ -72,11 +72,11 @@ export class AulaComponent {
 
     save() {
         if (this.aula.nombre == undefined || this.aula.capacidad == undefined) {
-            this.validaciones.push({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            });
+            this.validaciones[0] ={
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            };
         }
         else {
             this.aula.edificio = new Edificio(this.edificioSelected);

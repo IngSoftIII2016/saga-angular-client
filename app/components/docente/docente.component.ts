@@ -52,11 +52,11 @@ export class DocenteComponent {
 
     save() {
         if(this.docente.nombre == undefined || this.docente.apellido == undefined ){
-            this.validaciones.push({
+            this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            });
+            };
         }
         else
         if (this.isNew) {

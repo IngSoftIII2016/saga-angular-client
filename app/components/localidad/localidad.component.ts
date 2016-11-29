@@ -76,11 +76,11 @@ export class LocalidadComponent {
 
     save() {
         if (this.localidad.nombre == undefined) {
-            this.validaciones.push({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            });
+            this.validaciones[0] ={
+                severity:'error',
+                summary:'Error',
+                detail:'Complete los campos requeridos'
+            };
         }
         else {
             this.localidad.sede = new Sede(this.sedeSelected);

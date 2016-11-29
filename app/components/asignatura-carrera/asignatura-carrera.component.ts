@@ -101,11 +101,11 @@ export class AsignaturaCarreraComponent {
 
     save() {
         if(this.asignaturaCarrera.anio == undefined || this.asignaturaCarrera.regimen == undefined ){
-            this.validaciones.push({
+            this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            });
+            };
         }
         else {
             this.asignaturaCarrera.carrera = new Carrera(this.carreraSelected);

@@ -3,6 +3,7 @@ import {Asignatura} from "../../entities/asignatura";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
 import {Subject} from "rxjs";
+import {Validacion} from "../../validaciones/validacion";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -48,11 +49,11 @@ export class AsignaturaComponent {
 
     save() {
         if(this.asignatura.nombre== undefined ){
-            this.validaciones.push({
+            this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            });
+            };
         }
         else
         if (this.isNew) {
