@@ -80,8 +80,7 @@ export class EventoComponent {
     }
 
     save() {
-        if (!this.evento.fecha || !this.evento.hora_inicio
-            || !this.evento.hora_fin || !this.evento.motivo) {
+        if (!this.hora_inicio || !this.hora_fin || !this.evento.motivo) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
