@@ -28,7 +28,7 @@ export class AulaComponent {
 
     edificios: SelectItem[] = [];
 
-    aulaSelectedEdificios: Edificio ;
+    aulaSelected: Edificio ;
 
     private searchTerms = new Subject<string>();
 
@@ -58,14 +58,14 @@ export class AulaComponent {
     showDialogToAdd() {
         this.isNew = true;
         this.aula = new Aula();
-        this.aulaSelectedEdificios = this.edificios[0].value;
+        this.aulaSelected = this.edificios[0].value;
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.aula = new Aula(event.data);
-        this.aulaSelectedEdificios = new Edificio(this.aula.edificio);
+        this.aulaSelected = new Edificio (this.aula.edificio);
         this.displayDialog = true;
     }
 
@@ -79,7 +79,7 @@ export class AulaComponent {
             });
         }
         else {
-            this.aula.edificio = new Edificio(this.aulaSelectedEdificios);
+            this.aula.edificio = new Edificio(this.aulaSelected);
             if (this.isNew)
                 this.confirmationService.confirm({
                     message: 'Estas seguro que desea agregar el aula?',

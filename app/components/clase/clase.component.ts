@@ -28,7 +28,7 @@ export class ClaseComponent {
 
     aulas: SelectItem[] = [];
 
-    claseSelectedAula: Aula;
+    aulaSelected: Aula;
 
 
     fecha: Date;
@@ -47,7 +47,7 @@ export class ClaseComponent {
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                     sel.aulas.push({
-                            label: aula.nombre , value: new Aula(aula)
+                            label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre , value: new Aula(aula)
                         }
                     )
                 }
@@ -69,7 +69,7 @@ export class ClaseComponent {
         this.hora_inicio = new Date();
         this.hora_fin = new Date();
         this.displayDialog = true;
-        this.claseSelectedAula = this.aulas[0].value;
+        this.aulaSelected = this.aulas[0].value;
     }
 
     onRowSelect(event) {
@@ -78,7 +78,7 @@ export class ClaseComponent {
         this.fecha = new Date(this.clase.fecha);
         this.hora_inicio = this.clase.getHoraInicio();
         this.hora_fin = this.clase.getHoraFin();
-        this.claseSelectedAula = new Aula(this.clase.aula);
+        this.aulaSelected = new Aula(this.clase.aula);
         this.displayDialog = true;
     }
 
@@ -94,7 +94,7 @@ export class ClaseComponent {
             this.clase.fecha = this.fecha.toISOString().split('T')[0];
             this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
             this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-            this.clase.aula = new Aula(this.claseSelectedAula);
+            this.clase.aula = new Aula(this.aulaSelected);
             if (this.isNew)
                 this.confirmationService.confirm({
                     message: 'Estas seguro que desea agregar una clase?',

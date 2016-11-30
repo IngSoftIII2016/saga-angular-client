@@ -52,7 +52,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="docente">Docente*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected"
+                    <p-dropdown  class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -69,7 +69,7 @@
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                <button type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
+                <button *ngIf="!isNew" type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
                         label="Eliminar"></button>
             </div>
         </footer>

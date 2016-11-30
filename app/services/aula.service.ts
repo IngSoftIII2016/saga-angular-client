@@ -25,7 +25,7 @@ export class AulaService extends GenericService<Aula> {
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions(
             {
-                includes: ['edificio']
+                includes: ['edificio.localidad']
             })
     }
 
