@@ -126,7 +126,7 @@ export class ComisionComponent {
                                 {
                                     severity: 'success',
                                     summary: 'Creada',
-                                    detail: 'Se ha agregado la comision ' + creada.nombre + ' con exito!'
+                                    detail: 'Se ha agregado la comision con exito!'
                                 })
                         },
                         error => {
@@ -141,8 +141,8 @@ export class ComisionComponent {
             });
         else
             this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar la comision?',
-                header: 'Confirmar ',
+                message: 'Estas seguro que desea modificar la comision?',
+                header: 'Confirmar modificacion',
                 icon: 'fa ui-icon-warning',
                 accept: () => {
                     this.comisionStore.update(this.comision).subscribe(
@@ -151,8 +151,8 @@ export class ComisionComponent {
                             this.msgs.push(
                                 {
                                     severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado la comision ' + guardada.nombre + ' con exito!'
+                                    summary: 'Guardada',
+                                    detail: 'Se ha guardado la comision  con exito!'
                                 })
                         },
                         error => {
@@ -160,7 +160,7 @@ export class ComisionComponent {
                                 {
                                     severity: 'error',
                                     summary: 'Error',
-                                    detail: 'No se ha podido crear la comision:\n' + error
+                                    detail: 'No se ha podido guardar la comision:\n' + error
                                 });
                         });
                 }

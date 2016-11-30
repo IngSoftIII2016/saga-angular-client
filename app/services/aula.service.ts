@@ -25,10 +25,7 @@ export class AulaService extends GenericService<Aula> {
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions(
             {
-                includes: ['edificio'],
-                sorts: [
-                    {field : 'edificio.id', order: 1},
-                    {field : 'nombre', order : 1}]
+                includes: ['edificio']
             })
     }
 

@@ -65,6 +65,8 @@ import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asigna
 import {UsuarioService} from "./services/usuario.service";
 import {UsuarioGrupoService} from "./services/usuario-grupo.service";
 import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
+import {HorarioComponent} from "./components/horario/horario.component";
+import {HorarioService} from "./services/horario.service";
 
 
 
@@ -106,7 +108,8 @@ import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.co
       SedeComponent,
       UsuarioComponent,
       UsuarioGrupoComponent,
-      TimelineDaySchedule
+      TimelineDaySchedule,
+      HorarioComponent
 
   ],
   bootstrap: [AppComponent],
@@ -131,6 +134,7 @@ import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.co
       ConfirmationService,
       UsuarioService,
       UsuarioGrupoService,
+      HorarioService,
       { provide: LOCALE_ID, useValue: "es" }
   ]
 })

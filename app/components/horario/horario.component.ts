@@ -1,20 +1,29 @@
 import {Component} from '@angular/core';
-import {Clase} from "../../entities/clase";
+import {Comision} from "../../entities/comision";
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
-import {ClaseStore} from "../../services/clase.store";
+import {ComisionStore} from "../../services/comision.store";
+import {AsignaturaService} from "../../services/asignatura.service";
+import {Asignatura} from "../../entities/asignatura";
+import {PeriodoService} from "../../services/periodo.service";
+import {Periodo} from "../../entities/periodo";
+import {Subject} from "rxjs";
+import {DocenteService} from "../../services/docente.service";
+import {Docente} from "../../entities/docente";
+import {ComisionService} from "../../services/comision.service";
 import {AulaService} from "../../services/aula.service";
+import {Horario} from "../../entities/horario";
 import {Aula} from "../../entities/aula";
-import {Subject, Timestamp} from "rxjs";
+import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 
 
 @Component({
-    templateUrl: 'app/components/clase/clase.component.html',
+    templateUrl: 'app/components/horario/horario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-    selector: 'clase',
-    providers:[ClaseStore,AulaService, ConfirmationService]
+    selector: 'horario',
+    providers:[HorarioStore, ComisionService, AulaService, ConfirmationService]
 })
-export class ClaseComponent {
+export class HorarioComponent {
 
     validaciones: Message[] = [];
 
@@ -22,24 +31,28 @@ export class ClaseComponent {
 
     displayDialog: boolean;
 
-    clase: Clase= new Clase();
+    horario: Horario = new Horario();
 
     isNew: boolean;
 
+
+    hora_inicio: Date;
+    duracion: Date;
+    es: any = CALENDAR_LOCALE_ES;
+
     aulas: SelectItem[] = [];
 
-    claseSelectedAula: Aula;
+    aulaSelected: Aula;
 
+    comisiones: SelectItem[] = [];
 
-    fecha: Date;
-    hora_inicio: Date;
-    hora_fin: Date;
-    es: any = CALENDAR_LOCALE_ES;
+    comisionSelected: Comision;
 
     private searchTerms = new Subject<string>();
 
-    constructor(private claseStore: ClaseStore,
+    constructor(private horarioStore: HorarioStore,
                 private aulaService: AulaService,
+                private comisionService: ComisionService,
                 private confirmationService : ConfirmationService) { }
 
     ngOnInit() {
@@ -47,7 +60,17 @@ export class ClaseComponent {
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                     sel.aulas.push({
-                            label: aula.nombre , value: new Aula(aula)
+                            label: aula.nombre + ', ' + aula.capacidad + ', ' + aula.edificio.nombre, value: new Aula(aula)
+                        }
+                    )
+                }
+            )
+        });
+        var sel = this;
+        this.comisionService.getAll().subscribe(comisiones => {
+            comisiones.forEach(comision => {
+                    sel.comisiones.push({
+                            label: comision.asignatura.nombre + ', ' +comision.periodo.descripcion, value: new Comision(comision)
                         }
                     )
                 }
@@ -57,58 +80,66 @@ export class ClaseComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.claseStore.setLikes(terms.length > 0 ? {
-                    comentario: '*'+terms+'*',
-                    'aula.nombre' : '*'+terms+'*',
-                } : {}))
+                this.horarioStore.setLikes(terms.length > 0 ?
+                    {
+                        dia: '*'+terms+'*',
+                        hora_inicio: '*'+terms+'*',
+                        duracion: '*'+terms+'*',
+                        'asignatura.nombre': '*'+terms+'*',
+                        'periodo.descripcion': '*'+terms+'*',
+                        'docente.apellido' : '*'+terms+'*',
+                        'docente.nombre' : '*'+terms+'*'
+                    } : {}))
     }
+
     showDialogToAdd() {
         this.isNew = true;
-        this.clase = new Clase();
-        this.fecha = new Date();
+        this.horario = new Horario();
         this.hora_inicio = new Date();
-        this.hora_fin = new Date();
+        this.duracion = new Date();
         this.displayDialog = true;
-        this.claseSelectedAula = this.aulas[0].value;
+        this.aulaSelected = this.aulas[0].value;
+        this.comisionSelected = this.comisiones[0].value;
     }
 
     onRowSelect(event) {
         this.isNew = false;
-        this.clase =new Clase(event.data);
-        this.fecha = new Date(this.clase.fecha);
-        this.hora_inicio = this.clase.getHoraInicio();
-        this.hora_fin = this.clase.getHoraFin();
-        this.claseSelectedAula = new Aula(this.clase.aula);
+        this.horario = new Horario(event.data);
+        this.hora_inicio = this.horario.getHoraInicio();
+        this.duracion = this.horario.getDuracion();
+        this.aulaSelected = new Aula(this.horario.aula);
+        this.comisionSelected = new Comision(this.horario.comision);
         this.displayDialog = true;
     }
 
     save() {
-        if (!this.clase.fecha || !this.clase.hora_inicio || !this.clase.hora_fin) {
-            this.validaciones[0] ={
-                severity:'error',
-                summary:'Error',
-                detail:'Complete los campos requeridos'
+        if (!this.horario.dia|| !this.horario.hora_inicio
+            || !this.horario.duracion) {
+            this.validaciones[0] = {
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             };
         }
         else {
-            this.clase.fecha = this.fecha.toISOString().split('T')[0];
-            this.clase.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
-            this.clase.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-            this.clase.aula = new Aula(this.claseSelectedAula);
+            this.horario.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
+            this.horario.duracion = this.duracion.toTimeString().split(' ')[0];
+            this.horario.aula = new Aula(this.aulaSelected);
+            this.horario.comision = new Comision(this.comisionSelected);
             if (this.isNew)
                 this.confirmationService.confirm({
-                    message: 'Estas seguro que desea agregar una clase?',
+                    message: 'Estas seguro que desea agregar el horario?',
                     header: 'Confirmar ',
                     icon: 'fa ui-icon-warning',
                     accept: () => {
-                        this.claseStore.create(this.clase).subscribe(
+                        this.horarioStore.create(this.horario).subscribe(
                             creada => {
                                 this.displayDialog = false;
                                 this.msgs.push(
                                     {
                                         severity: 'success',
                                         summary: 'Creada',
-                                        detail: 'Se ha agregado la clase ' + creada.aula.nombre + ' con exito!'
+                                        detail: 'Se ha agregado el horario con exito!'
                                     })
                             },
                             error => {
@@ -116,26 +147,25 @@ export class ClaseComponent {
                                     {
                                         severity: 'error',
                                         summary: 'Error',
-                                        detail: 'No se ha podido crear la clase:\n' + error
+                                        detail: 'No se ha podido crear el horario:\n' + error
                                     });
                             });
                     }
                 });
-            //update
             else
                 this.confirmationService.confirm({
-                    message: 'Estas seguro que desea modificar la clase?',
+                    message: 'Estas seguro que desea agregar la comision?',
                     header: 'Confirmar modificacion',
                     icon: 'fa ui-icon-warning',
                     accept: () => {
-                        this.claseStore.update(this.clase).subscribe(
+                        this.horarioStore.update(this.horario).subscribe(
                             guardada => {
                                 this.displayDialog = false;
                                 this.msgs.push(
                                     {
                                         severity: 'success',
                                         summary: 'Guardada',
-                                        detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
+                                        detail: 'Se ha guardado el horario con exito!'
                                     })
                             },
                             error => {
@@ -143,7 +173,7 @@ export class ClaseComponent {
                                     {
                                         severity: 'error',
                                         summary: 'Error',
-                                        detail: 'No se ha podido guardar la clase:\n' + error
+                                        detail: 'No se ha podido guardar el horario:\n' + error
                                     });
                             });
                     }
@@ -152,21 +182,20 @@ export class ClaseComponent {
     }
 
 
-
     delete() {
         this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar la clase?',
+            message: 'Estas seguro que desea eliminar el horario?',
             header: 'Confirmar eliminacion',
             icon: 'fa ui-icon-delete',
             accept: () => {
-                this.claseStore.delete(this.clase).subscribe(
+                this.horarioStore.delete(this.horario).subscribe(
                     borrada => {
                         this.displayDialog = false;
                         this.msgs.push(
                             {
                                 severity:'success',
                                 summary:'Exito',
-                                detail:'Se ha borrado la clase con exito!'
+                                detail:'Se ha borrado el horario con exito!'
                             })
                     },
                     error => {
@@ -174,7 +203,7 @@ export class ClaseComponent {
                             {
                                 severity:'error',
                                 summary:'Error',
-                                detail:'No se ha podido eliminar la clase:\n' + error
+                                detail:'No se ha podido eliminar el horario:\n' + error
                             });
                     }
                 );
@@ -189,16 +218,21 @@ export class ClaseComponent {
         };
         console.log(qo);
 
-        this.claseStore.mergeQueryOptions(qo);
+        this.horarioStore.mergeQueryOptions(qo);
     }
 
     sort(event) {
-        this.claseStore.setSorts([event]);
+        this.horarioStore.setSorts([event]);
     }
 
     search(term: string): void {
         this.searchTerms.next(term);
     }
+
+
 }	/**
  * Created by Federico on 17/11/2016.
+ */
+/**
+ * Created by Federico on 29/11/2016.
  */

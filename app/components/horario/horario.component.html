@@ -1,0 +1,89 @@
+<div class="ContentSideSections">
+    <p-growl [value]="msgs" life=2000></p-growl>
+    <p-confirmDialog width="425" #cd>
+        <footer>
+            <button type="button" pButton class="no" icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton class="yes" icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+        </footer>
+    </p-confirmDialog>
+</div>
+<div class="ContentSideSections Implementation">
+    <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+        <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
+    </div>
+    <p-dataTable [value]="horarioStore.items | async" selectionMode="single"
+                 (onRowSelect)="onRowSelect($event)" [responsive]="true">
+        <header>Horarios</header>
+        <p-column field="dia" header="Dia" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="duracion" header="Duracion" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="aula.nombre" header="Aula " sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="aula.capacidad" header="Capacidad aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="aula.edificio.nombre" header="Edificio" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="comision.periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="comision.asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="comision.docente.apellido" header="Docente" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
+                        label="Agregar"></button>
+            </div>
+        </footer>
+    </p-dataTable>
+    <p-paginator
+            styleClass="ui-paginator-bottom"
+            rows="10"
+            totalRecords="{{horarioStore.service.totalRows | async}}"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="pageChange($event)">
+    </p-paginator>
+
+
+    <p-dialog header="Horario" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="horario">
+            <div class="ui-grid-row">
+                <p-messages [value]="validaciones"></p-messages>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="dia">Dia*</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="dia" [(ngModel)]="horario.dia"/></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-calendar id="hora_inicio" [(ngModel)]="hora_inicio" [timeOnly]="true" hourFormat="24"></p-calendar>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="duracion">Duracion*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-calendar id="duracion" [(ngModel)]="duracion" [timeOnly]="true" hourFormat="24"></p-calendar>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas"
+                                [(ngModel)]="aulaSelected" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="comision">Comision*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="comision" [options]="comisiones" [(ngModel)]="comisionSelected"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+                <button type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
+                        label="Eliminar"></button>
+            </div>
+        </footer>
+    </p-dialog>
+</div>

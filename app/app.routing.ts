@@ -20,6 +20,7 @@ import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {ComisionComponent} from "./components/comision/comision.component";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
+import {HorarioComponent} from "./components/horario/horario.component";
 
 
 
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
     {
         path: 'localidades',
         component: LocalidadComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'horarios',
+        component: HorarioComponent, canActivate: [AuthGuard]
     },
     {
         path: 'login',

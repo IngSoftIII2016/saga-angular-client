@@ -28,7 +28,7 @@ export class AulaComponent {
 
     edificios: SelectItem[] = [];
 
-    edificioSelected: Edificio;
+    aulaSelectedEdificios: Edificio ;
 
     private searchTerms = new Subject<string>();
 
@@ -42,7 +42,7 @@ export class AulaComponent {
         this.edificioService.getAll().subscribe(edificios => {
             edificios.forEach(edificio => {
                     sel.edificios.push({
-                            label: edificio.nombre, value: new Edificio (edificio)
+                            label: edificio.nombre + ' - ' + edificio.localidad.nombre, value: new Edificio (edificio)
                         }
                     )
                 }
@@ -58,28 +58,28 @@ export class AulaComponent {
     showDialogToAdd() {
         this.isNew = true;
         this.aula = new Aula();
+        this.aulaSelectedEdificios = this.edificios[0].value;
         this.displayDialog = true;
-        this.edificioSelected = this.edificios[0].value;
-
     }
 
     onRowSelect(event) {
         this.isNew = false;
         this.aula = new Aula(event.data);
-        this.edificioSelected = new Edificio(this.aula.edificio);
+        this.aulaSelectedEdificios = new Edificio(this.aula.edificio);
         this.displayDialog = true;
     }
 
     save() {
         if (!this.aula.nombre || !this.aula.capacidad) {
-            this.validaciones[0] ={
+            this.validaciones.pop();
+            this.validaciones.push({
                 severity:'error',
                 summary:'Error',
                 detail:'Complete los campos requeridos'
-            };
+            });
         }
         else {
-            this.aula.edificio = new Edificio(this.edificioSelected);
+            this.aula.edificio = new Edificio(this.aulaSelectedEdificios);
             if (this.isNew)
                 this.confirmationService.confirm({
                     message: 'Estas seguro que desea agregar el aula?',
@@ -167,18 +167,11 @@ export class AulaComponent {
         });
     }
 
-    message(evento: string) {
-        this.msgs = [];
-        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Aula ' + evento + ' con exito!'});
-    }
-
     pageChange(event) {
         let qo = {
             size: event.rows,
             page: event.page + 1
         };
-        console.log(qo);
-
         this.aulaStore.mergeQueryOptions(qo);
     }
 

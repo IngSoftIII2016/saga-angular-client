@@ -3,7 +3,6 @@ import {Asignatura} from "../../entities/asignatura";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
 import {Subject} from "rxjs";
-import {Validacion} from "../../validaciones/validacion";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -147,7 +146,6 @@ export class AsignaturaComponent {
             size: event.rows,
             page: event.page + 1
         };
-        console.log(qo);
 
         this.asignaturaStore.mergeQueryOptions(qo);
     }

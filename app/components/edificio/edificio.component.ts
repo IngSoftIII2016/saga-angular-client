@@ -15,7 +15,6 @@ import {Localidad} from "../../entities/localidad";
 export class EdificioComponent {
 
 
-    validaciones: Message[] = [];
 
     msgs: Message[] = [];
 
@@ -41,7 +40,7 @@ export class EdificioComponent {
         this.localidadService.getAll().subscribe(localidades => {
             localidades.forEach(localidad => {
                     sel.localidades.push({
-                            label: localidad.nombre, value: new Localidad (localidad)
+                            label: localidad.nombre, value: new Localidad(localidad)
                         }
                     )
                 }
@@ -57,27 +56,20 @@ export class EdificioComponent {
     showDialogToAdd() {
         this.isNew = true;
         this.edificio = new Edificio();
+        this.localidadSelected = this.localidades[0].value;
         this.displayDialog = true;
-        this.localidadSelected =  new Localidad(this.localidades[0].value);
 
     }
 
     onRowSelect(event) {
         this.isNew = false;
+        this.displayDialog = true;
         this.edificio = new Edificio(event.data);
         this.localidadSelected =  new Localidad(this.edificio.localidad);
-        this.displayDialog = true;
+
     }
 
     save() {
-        if(!this.edificio.nombre ){
-            this.validaciones[0] ={
-                severity:'error',
-                summary:'Error',
-                detail:'Complete los campos requeridos'
-            };
-        }
-        else {
         this.edificio.localidad = new Localidad(this.localidadSelected);
         if (this.isNew)
             this.confirmationService.confirm({
@@ -132,7 +124,6 @@ export class EdificioComponent {
                         });
                 }
             });
-    }
     }
 
     delete() {
