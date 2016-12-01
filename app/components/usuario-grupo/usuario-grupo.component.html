@@ -29,16 +29,23 @@
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
-
     <p-dialog header="Permisos" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="usuarioGrupo">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="usuario">Usuario</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="usuario" [(ngModel)]="usuarioGrupo.usuario.nombre"/></div>
+                <div class="ui-grid-col-4"><label for="usuario">Usuario*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="usuario" [options]="usuarios"
+                                [(ngModel)]="usuarioSelected" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="grupo">Rol</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="grupo" [(ngModel)]="usuarioGrupo.grupo.nombre"/></div>
+                <div class="ui-grid-col-4"><label for="grupo">Rol*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="grupo" [options]="grupos"
+                                [(ngModel)]="grupoSelected" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
         <footer>
