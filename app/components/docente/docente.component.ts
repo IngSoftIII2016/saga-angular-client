@@ -39,12 +39,14 @@ export class DocenteComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.docente = new Docente();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.docente =new Docente(event.data);
         this.displayDialog = true;

@@ -35,7 +35,7 @@
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
-    <p-dialog header="Asignatura Carrera" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <p-dialog header="Planes de estudios" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="asignaturaCarrera">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
@@ -71,6 +71,5 @@
                         label="Eliminar"></button>
             </div>
         </footer>
-
     </p-dialog>
 </div>

@@ -63,6 +63,7 @@ export class ClaseComponent {
                 } : {}))
     }
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.clase = new Clase();
         this.fecha = new Date();
@@ -73,6 +74,7 @@ export class ClaseComponent {
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.clase =new Clase(event.data);
         this.fecha = new Date(this.clase.fecha);

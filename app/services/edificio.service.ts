@@ -20,7 +20,7 @@ export class EdificioService extends GenericService<Edificio> {
 
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions({
-            includes : ['localidad'],
+            includes : ['localidad.sede'],
             page: -1
         });
     }

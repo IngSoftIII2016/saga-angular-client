@@ -60,7 +60,7 @@ export class HorarioComponent {
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                     sel.aulas.push({
-                            label: aula.nombre + ', ' + aula.capacidad + ', ' + aula.edificio.nombre, value: new Aula(aula)
+                            label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: new Aula(aula)
                         }
                     )
                 }
@@ -70,7 +70,7 @@ export class HorarioComponent {
         this.comisionService.getAll().subscribe(comisiones => {
             comisiones.forEach(comision => {
                     sel.comisiones.push({
-                            label: comision.asignatura.nombre + ', ' +comision.periodo.descripcion, value: new Comision(comision)
+                            label: comision.asignatura.nombre + ', ' + comision.periodo.descripcion, value: new Comision(comision)
                         }
                     )
                 }
@@ -93,6 +93,7 @@ export class HorarioComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.horario = new Horario();
         this.hora_inicio = new Date();
@@ -103,6 +104,7 @@ export class HorarioComponent {
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.horario = new Horario(event.data);
         this.hora_inicio = this.horario.getHoraInicio();

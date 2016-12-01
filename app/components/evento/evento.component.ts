@@ -44,7 +44,7 @@ export class EventoComponent {
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                     sel.aulas.push({
-                            label: aula.nombre, value: new Aula (aula)
+                            label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: new Aula (aula)
                         }
                     )
                 }
@@ -60,6 +60,7 @@ export class EventoComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.evento = new Evento();
         this.fecha = new Date();
@@ -70,6 +71,7 @@ export class EventoComponent {
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.evento =new Evento(event.data);
         this.fecha = new Date(this.evento.fecha);

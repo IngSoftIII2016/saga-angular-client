@@ -36,12 +36,14 @@ export class SedeComponent {
                 this.sedeStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
     }
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.sede = new Sede();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.sede = new Sede(event.data);
         this.displayDialog = true;

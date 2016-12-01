@@ -35,27 +35,29 @@ export class AsignaturaComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.asignatura = new Asignatura();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.asignatura =new Asignatura(event.data);
         this.displayDialog = true;
     }
 
     save() {
-        if(!this.asignatura.nombre){
-            this.validaciones[0] ={
-                severity:'error',
-                summary:'Error',
-                detail:'Complete los campos requeridos'
+        if (!this.asignatura.nombre) {
+            this.validaciones[0] = {
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Complete los campos requeridos'
             };
         }
         else
-        if (this.isNew) {
+            if (this.isNew) {
             this.confirmationService.confirm({
                 message: 'Estas seguro que desea agregar la asignatura?',
                 header: 'Confirmar ',

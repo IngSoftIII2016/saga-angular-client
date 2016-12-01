@@ -20,7 +20,7 @@ export class EventoService extends GenericService<Evento> {
 
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions({
-            includes: ['aula']
+            includes: ['aula.edificio.localidad']
         });
     }
 

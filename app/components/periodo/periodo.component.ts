@@ -45,6 +45,7 @@ export class PeriodoComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.periodo = new Periodo();
         this.fechaInicio = new Date();
@@ -53,6 +54,7 @@ export class PeriodoComponent {
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.periodo = new Periodo(event.data);
         this.fechaInicio = new Date(this.periodo.fecha_inicio);

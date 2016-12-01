@@ -80,6 +80,7 @@ export class AsignaturaCarreraComponent {
 
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.asignaturaCarrera = new AsignaturaCarrera();
         this.displayDialog = true;
@@ -89,7 +90,7 @@ export class AsignaturaCarreraComponent {
     }
 
     onRowSelect(event) {
-
+        this.validaciones = [];
         this.isNew = false;
         this.asignaturaCarrera = new AsignaturaCarrera(event.data);
         console.log(this.asignaturaCarrera);

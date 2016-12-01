@@ -36,12 +36,14 @@ export class CarreraComponent {
     }
 
     showDialogToAdd() {
+        this.validaciones = [];
         this.isNew = true;
         this.carrera = new Carrera();
         this.displayDialog = true;
     }
 
     onRowSelect(event) {
+        this.validaciones = [];
         this.isNew = false;
         this.carrera = new Carrera(event.data);
         this.displayDialog = true;
