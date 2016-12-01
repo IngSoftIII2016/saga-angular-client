@@ -6,6 +6,7 @@ export class Usuario implements Entity {
     apellido: string;
     email: string;
     telefono: string;
+    grupos: Grupo[] =[];
 
     constructor(value : Object = {}) {
         Object.assign(this, value);

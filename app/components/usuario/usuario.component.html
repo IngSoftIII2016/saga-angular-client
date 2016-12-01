@@ -20,30 +20,11 @@
             (onRowSelect)="onRowSelect($event)"
             [rows]="10" [responsive]="true">>
         <header>Usuarios</header>
-        <p-column 
-                field="nombre" 
-                header="Nombre"
-                sortable="custom"
-                (sortFunction)="sort($event)">
-        </p-column>
-        <p-column
-                field="apellido"
-                header="Apellido"
-                sortable="custom"
-                (sortFunction)="sort($event)">
-        </p-column>
-        <p-column
-                field="email" 
-                header="Email"
-                sortable="custom"
-                (sortFunction)="sort($event)">
-        </p-column>
-        <p-column
-                field="telefono"
-                header="Telefono"
-                sortable="custom"
-                (sortFunction)="sort($event)">
-        </p-column>
+        <p-column field="nombre" header="Nombre" sortable="custom"  (sortFunction)="sort($event)"> </p-column>
+        <p-column field="apellido" header="Apellido" sortable="custom" (sortFunction)="sort($event)"> </p-column>
+        <p-column field="email" header="Email" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="telefono" header="Telefono" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="grupo.nombre" header="Rol" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>
