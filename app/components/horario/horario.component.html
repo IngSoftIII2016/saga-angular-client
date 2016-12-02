@@ -15,7 +15,11 @@
     <p-dataTable [value]="horarioStore.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Horarios</header>
-        <p-column field="dia" header="Dia" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column header="Dia" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate type="body">
+                <span>{{es.dayNames[h.dia]}}</span>
+            </template>
+        </p-column>
         <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="duracion" header="Duracion" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="aula.nombre" header="Aula " sortable="custom" (sortFunction)="sort($event)"></p-column>
@@ -23,7 +27,11 @@
         <p-column field="aula.edificio.nombre" header="Edificio" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="comision.periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="comision.asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="comision.docente.apellido" header="Docente" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column header="Docente" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate type="body">
+                <span *ngIf="h.comision.docente">{{h.comision.docente.apellido + ', ' + h.comision.docente.nombre}}</span>
+            </template>
+        </p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
@@ -46,8 +54,14 @@
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="dia">Dia*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="dia" [(ngModel)]="horario.dia"/></div>
+                <div class="ui-grid-col-4">
+                    <label for="dia">Dia*</label>
+                </div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="dia" [options]="dias" [(ngModel)]="diaSelected"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio*</label></div>

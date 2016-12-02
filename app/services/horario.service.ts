@@ -20,7 +20,7 @@ export class HorarioService extends GenericService<Horario> {
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions(
             {
-                includes: ['comision.asignatura', 'comision.periodo','comision.docente',  'aula.edificio.localidad']
+                includes: ['comision.asignatura', 'comision.periodo', 'comision.docente',  'aula.edificio.localidad']
             })
     }
 

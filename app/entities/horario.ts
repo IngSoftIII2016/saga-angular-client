@@ -1,6 +1,7 @@
 import {Comision} from "./comision";
 import {Aula} from "./aula";
 import {Entity} from "./entity";
+import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es"
 
 export class Horario implements Entity {
     id: number = null;
@@ -13,6 +14,10 @@ export class Horario implements Entity {
 
     constructor(value : Object = {}) {
         Object.assign(this, value);
+    }
+
+    public diaString() {
+        return CALENDAR_LOCALE_ES.dayNames[this.dia];
     }
 
     public getHoraInicio(): Date {

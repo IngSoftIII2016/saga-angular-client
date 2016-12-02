@@ -10,7 +10,8 @@
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
-        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
+               placeholder="Buscar" (keyup)="search(gb.value)" >
     </div>
     <p-dataTable
             [value]="asignaturaStore.items | async"
@@ -26,6 +27,7 @@
         </footer>
     </p-dataTable>
     <p-paginator
+            #pg
             styleClass="ui-paginator-bottom"
             rows="10"
             totalRecords="{{asignaturaStore.service.totalRows | async}}"

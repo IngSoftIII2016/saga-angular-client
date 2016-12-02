@@ -27,4 +27,6 @@ export class UsuarioGrupoService extends RelationService<UsuarioGrupo> {
         });
     }
 
+
+
 }

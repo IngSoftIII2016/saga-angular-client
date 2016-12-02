@@ -5,7 +5,7 @@ import {ClaseStore} from "../../services/clase.store";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
 import {Subject, Timestamp} from "rxjs";
-import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
+import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 
 
 @Component({

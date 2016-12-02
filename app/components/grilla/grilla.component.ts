@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Observable, BehaviorSubject} from "rxjs";
+import {Observable, BehaviorSubject, Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Edificio} from "../../entities/edificio";
 import {Aula} from "../../entities/aula";
@@ -10,8 +10,8 @@ import {Evento} from "../../entities/evento";
 import {ClaseStore} from "../../services/clase.store";
 import {EventoStore} from "../../services/evento.store";
 
-import {CALENDAR_LOCALE_ES} from '../commons/calendar-locale-es';
-import {ConfirmationService, Message} from "primeng/components/common/api";
+import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
+import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
 
 declare var moment: any;
 
@@ -22,8 +22,8 @@ declare var moment: any;
     providers: [EdificioService, AulaService, ClaseStore, EventoStore]
 })
 export class GrillaComponent implements OnInit {
-    msgs: Message[] = [];
     edificio: Observable<Edificio>;
+    edificios: SelectItem[];
     aulas: Observable<Aula[]>;
     fecha = new BehaviorSubject<Date>(new Date());
     clases: Observable<Clase[]>;
@@ -32,13 +32,16 @@ export class GrillaComponent implements OnInit {
     events: Observable<any[]>;
     scrollTime: string;
     fechaCalendar: Date = new Date();
-    scheduleHeader: any;
-
     eventSelected: any = null;
-
     displayDialog: boolean = false;
 
     es: any = CALENDAR_LOCALE_ES;
+
+    scheduleHeader: any;
+
+    msgs: Message[] = [];
+
+    eventSubscription : Subscription = null;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
@@ -52,17 +55,24 @@ export class GrillaComponent implements OnInit {
         var self = this;
 
         this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
+
         this.edificio = this.route.params
             .flatMap(params => this.edificioService.get(params['id']))
 
+        this.edificioService.getAll()
+            .subscribe(edificios =>
+                this.edificios = edificios.map(edificio => {
+                    return {label: edificio.nombre, value: edificio}
+                }));
+
         this.aulas = this.edificio
-            .flatMap(edificio => this.aulaService.queryByEdificio(edificio))
+            .flatMap(edificio => this.aulaService.queryByEdificio(edificio));
 
         this.obsResources = this.aulas
             .map(aulas => aulas.map(
                 function (aula) {
                     return {id: aula.id, title: aula.nombre}
-                }))
+                }));
 
         this.fecha
             .combineLatest(
@@ -70,7 +80,6 @@ export class GrillaComponent implements OnInit {
                 function (fecha, edificio) {
                     return {edificio: edificio, fecha: fecha}
                 })
-            .do(ef => console.log(ef))
             .subscribe(function (ef) {
                 let qo = {
                     filters: {
@@ -78,10 +87,10 @@ export class GrillaComponent implements OnInit {
                         'fecha': ef.fecha.toISOString().split('T')[0]
                     },
                     page: -1
-                }
+                };
                 self.claseStore.mergeQueryOptions(qo);
                 self.eventoStore.mergeQueryOptions(qo);
-            })
+            });
 
         this.fecha.subscribe(fecha => this.fechaCalendar = fecha);
 
@@ -117,14 +126,14 @@ export class GrillaComponent implements OnInit {
                     {
                         severity: 'success',
                         summary: 'Modificida',
-                        detail: 'Se ha modificado la clase ' + clase.horario.comision.asignatura + ' con exito!'
+                        detail: 'Se ha modificado la clase de' + clase.horario.comision.asignatura.nombre + ' con exito!'
                     })
             }, error => {
                 this.msgs.push(
                     {
                         severity: 'error',
                         summary: 'Error',
-                        detail: 'No se ha podido modificar la clase:\n' + error
+                        detail: error.json().error.error
                     });
             });
         } else if (this.eventSelected.type == 'Evento') {
@@ -148,22 +157,13 @@ export class GrillaComponent implements OnInit {
         }
     }
 
-    cancel(): void {
-        if (this.eventSelected.type == 'Clase') {
-            this.claseStore.mergeQueryOptions();
-            /*
-             let clase: Clase = this.eventSelected.model as Clase;
-             let event = GrillaComponent.claseToEvent(clase);
-             Object.assign(this.eventSelected, event);
-             */
-        }
-        this.displayDialog = false;
-    }
-
 
     getEvents(event): void {
+        console.log('getEvents() called with ' + event.day);
         this.fecha.next(event.day);
-        this.events.subscribe(event.callback)
+        if(this.eventSubscription != null)
+            this.eventSubscription.unsubscribe();
+        this.eventSubscription = this.events.subscribe(event.callback);
     }
 
     onEventClick(event): void {

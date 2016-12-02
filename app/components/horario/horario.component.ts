@@ -14,7 +14,7 @@ import {AulaService} from "../../services/aula.service";
 import {Horario} from "../../entities/horario";
 import {Aula} from "../../entities/aula";
 import {HorarioStore} from "../../services/horario.store";
-import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
+import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 
 
 @Component({
@@ -35,10 +35,15 @@ export class HorarioComponent {
 
     isNew: boolean;
 
-
     hora_inicio: Date;
+
     duracion: Date;
+
     es: any = CALENDAR_LOCALE_ES;
+
+    dias: SelectItem[] = [];
+
+    diaSelected: number;
 
     aulas: SelectItem[] = [];
 
@@ -56,35 +61,34 @@ export class HorarioComponent {
                 private confirmationService : ConfirmationService) { }
 
     ngOnInit() {
-        var sel = this;
+        var self = this;
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
-                    sel.aulas.push({
+                    self.aulas.push({
                             label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: new Aula(aula)
                         }
                     )
                 }
             )
         });
-        var sel = this;
         this.comisionService.getAll().subscribe(comisiones => {
             comisiones.forEach(comision => {
-                    sel.comisiones.push({
+                    self.comisiones.push({
                             label: comision.asignatura.nombre + ', ' + comision.periodo.descripcion, value: new Comision(comision)
                         }
                     )
                 }
             )
         });
+        for(let i=1; i<7; i++)
+            this.dias.push({label: self.es.dayNames[i], value: i});
+
         this.searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
                 this.horarioStore.setLikes(terms.length > 0 ?
                     {
-                        dia: '*'+terms+'*',
-                        hora_inicio: '*'+terms+'*',
-                        duracion: '*'+terms+'*',
                         'asignatura.nombre': '*'+terms+'*',
                         'periodo.descripcion': '*'+terms+'*',
                         'docente.apellido' : '*'+terms+'*',
@@ -99,6 +103,7 @@ export class HorarioComponent {
         this.hora_inicio = new Date();
         this.duracion = new Date();
         this.displayDialog = true;
+        this.diaSelected = this.dias[0].value;
         this.aulaSelected = this.aulas[0].value;
         this.comisionSelected = this.comisiones[0].value;
     }
@@ -109,6 +114,7 @@ export class HorarioComponent {
         this.horario = new Horario(event.data);
         this.hora_inicio = this.horario.getHoraInicio();
         this.duracion = this.horario.getDuracion();
+        this.diaSelected = this.horario.dia;
         this.aulaSelected = new Aula(this.horario.aula);
         this.comisionSelected = new Comision(this.horario.comision);
         this.displayDialog = true;
@@ -126,6 +132,7 @@ export class HorarioComponent {
         else {
             this.horario.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
             this.horario.duracion = this.duracion.toTimeString().split(' ')[0];
+            this.horario.dia = this.diaSelected;
             this.horario.aula = new Aula(this.aulaSelected);
             this.horario.comision = new Comision(this.comisionSelected);
             if (this.isNew)

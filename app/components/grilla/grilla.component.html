@@ -4,12 +4,16 @@
 <div class="ui-g-12">
     <div class="card">
         <div class="ui-g-12">
-            <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
-                        dateFormat="dd/mm/yy" readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)">
-            </p-calendar>
-            <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected"></p-dropdown>
-        </div>
-        <div class="ui-g-12">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected"
+                            [style]="{width : '100%'}"></p-dropdown>
+            </div>
+            <div class="ui-g-6 ui-md-6"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
+                            readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)">
+                </p-calendar>
+            </div>
         </div>
         <timeline-day-schedule
                 #schedule
@@ -36,7 +40,7 @@
 
 
     <p-dialog [header]="eventSelected.title" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
-              [modal]="true"  *ngIf="eventSelected" (onAfterHide)="cancel()">
+              [modal]="true" *ngIf="eventSelected" (onAfterHide)="schedule.refetchEvents()">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
@@ -72,9 +76,12 @@
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                <button type="button" class="eliminar" pButton icon="ui-icon-cancel" (click)="displayDialog=false"
-                        label="Cancelar"></button>
+                <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
+                        (click)="save(); schedule.refetchEvents()" >
+                </button>
+                <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
+                        (click)="displayDialog=false; schedule.refetchEvents()">
+                </button>
             </div>
         </footer>
     </p-dialog>

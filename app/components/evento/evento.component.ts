@@ -5,7 +5,7 @@ import {EventoStore} from "../../services/evento.store";
 import {Subject} from "rxjs";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
-import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
+import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 
 
 @Component({

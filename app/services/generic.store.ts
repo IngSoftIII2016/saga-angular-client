@@ -33,14 +33,13 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
     public mergeQueryOptions(options: Object = {}) {
         let qo = this.queryOptions.getValue();
         qo.merge(options);
-        console.log(qo);
+        //console.log(qo);
         this.setQueryOptions(qo);
     }
 
     public create(entity: E): Observable<E> {
         return this.service.create(entity)
             .do(nuevo => this.updateItems());
-
     }
 
     public save(entity: E): Observable<E> {
