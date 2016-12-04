@@ -117,7 +117,7 @@ export class AsignaturaCarreraComponent {
     }
 
     save() {
-        if( !this.asignaturaCarrera.anio || !this.asignaturaCarrera.regimen ){
+        if( !this.asignaturaCarrera.anio){
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
@@ -127,6 +127,7 @@ export class AsignaturaCarreraComponent {
         else {
             this.asignaturaCarrera.carrera = new Carrera(this.carreraSelected);
             this.asignaturaCarrera.asignatura = new Asignatura(this.asignaturaSelected);
+            this.asignaturaCarrera.regimen = this.regimenSelected;
             if (this.isNew)
                 this.confirmationService.confirm({
                     message: 'Estas seguro que desea asignar la carrera a esta materia?',
