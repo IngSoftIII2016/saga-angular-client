@@ -23,6 +23,7 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
 
         this.items = this.queryOptions
             .flatMap(qo => this.service.query(qo));
+
     }
 
     private updateItems() {

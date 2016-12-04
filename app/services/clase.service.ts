@@ -18,7 +18,7 @@ export class ClaseService extends GenericService<Clase> {
 
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions({
-            includes: ['aula.edificio.localidad', 'horario.comision.asignatura']
+            includes: ['aula.edificio.localidad.sede', 'horario.comision.asignatura']
         });
     }
 

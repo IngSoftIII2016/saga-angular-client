@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Asignatura} from "../../entities/asignatura";
-import {Message, ConfirmationService} from "primeng/components/common/api";
+import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
 import {Subject} from "rxjs";
+import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -32,6 +33,8 @@ export class AsignaturaComponent {
             .distinctUntilChanged()
             .subscribe(terms =>
                 this.asignaturaStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+
+
     }
 
     showDialogToAdd() {

@@ -39,6 +39,12 @@ export class AsignaturaCarreraComponent {
 
     diseable : boolean;
 
+    regimenes: SelectItem[] = [];
+
+    regimenesTabla = new Array();
+
+    regimenSelected: string;
+
     private searchTerms = new Subject<string>();
 
     constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
@@ -75,6 +81,15 @@ export class AsignaturaCarreraComponent {
                     terms.length > 0 ?
                         {'asignatura.nombre': '*'+terms+'*', 'carrera.nombre': '*'+terms+'*'} :
                         {}))
+        sel.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
+        sel.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});
+        sel.regimenes.push({label: 'Cuatrimestral', value: 'C'});
+        sel.regimenes.push({label: 'Anual', value: 'Anual'});
+        sel.regimenesTabla['1C'] = 'Primer Cuatrimestre';
+        sel.regimenesTabla['2C'] = 'Segundo Cuatrimestre';
+        sel.regimenesTabla['C'] = 'Cuatrimestral';
+        sel.regimenesTabla['Anual'] = 'Anual';
+
 
     }
 
@@ -86,6 +101,7 @@ export class AsignaturaCarreraComponent {
         this.displayDialog = true;
         this.carreraSelected =  new Carrera(this.carreras[0].value);
         this.asignaturaSelected =  new Asignatura(this.asignaturas[0].value);
+        this.regimenSelected = this.regimenes[0].value;
         this.diseable = false;
     }
 
@@ -93,7 +109,7 @@ export class AsignaturaCarreraComponent {
         this.validaciones = [];
         this.isNew = false;
         this.asignaturaCarrera = new AsignaturaCarrera(event.data);
-        console.log(this.asignaturaCarrera);
+        this.regimenSelected = this.asignaturaCarrera.regimen;
         this.carreraSelected =  new Carrera(this.asignaturaCarrera.carrera);
         this.asignaturaSelected =  new Asignatura(this.asignaturaCarrera.asignatura);
         this.displayDialog = true;
