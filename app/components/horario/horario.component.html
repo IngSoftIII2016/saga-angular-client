@@ -26,11 +26,7 @@
         <p-column field="aula.edificio.nombre" header="Edificio" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="comision.periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="comision.asignatura.nombre" header="Comision" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column header="Docente" sortable="custom" (sortFunction)="sort($event)">
-            <template let-h="rowData" pTemplate type="body">
-                <span *ngIf="h.comision.docente.apellido">{{h.comision.docente.apellido + ', ' + h.comision.docente.nombre}}</span>
-            </template>
-        </p-column>
+
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
