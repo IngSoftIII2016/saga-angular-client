@@ -6,7 +6,8 @@
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
 		<div class="ui-g">
 			<div class="ui-g-12">
-				<label style="    font-size: x-large">SAGA</label>
+				<img src="app/resources/saga-login.png" width="128" height="128">
+				<!-- <label style="    font-size: x-large">SAGA</label> -->
 			</div>
 
 			<div class="ui-g-12" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
