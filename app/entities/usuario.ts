@@ -8,7 +8,7 @@ export class Usuario implements Entity {
     email: string;
     telefono: number;
     contrasenia: string;
-    estado: number;
+    estado: number = 1;
 
 
     constructor(value : Object = {}) {
