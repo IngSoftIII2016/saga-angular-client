@@ -62,7 +62,7 @@ export class PeriodoComponent {
         this.displayDialog = true;
     }
     save() {
-        if (!this.periodo.descripcion || !this.periodo.fecha_inicio  || !this.periodo.fecha_fin ) {
+        if (!this.periodo.descripcion) {
             this.validaciones[0] ={
                 severity:'error',
                 summary:'Error',
