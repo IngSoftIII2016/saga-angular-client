@@ -2,7 +2,7 @@
  * Created by juan on 21/11/16.
  */
 import {Injectable} from "@angular/core";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {Carrera} from "../entities/carrera";
 import {CarreraService} from "./carrera.service";
 @Injectable()

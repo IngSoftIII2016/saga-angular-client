@@ -4,8 +4,8 @@ import {Sede} from '../entities/sede';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-import {GenericService} from "./generic.service";
-import {QueryOptions} from "./generic.service";
+import {GenericService} from "../commons/generic.service";
+import {QueryOptions} from "../commons/generic.service";
 
 @Injectable()
 export class SedeService extends GenericService<Sede> {

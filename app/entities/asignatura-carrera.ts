@@ -1,4 +1,4 @@
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 import {Asignatura} from "./asignatura";
 import {Carrera} from "./carrera";
 /**

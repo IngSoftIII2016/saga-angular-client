@@ -2,7 +2,7 @@
  * Created by juan on 21/11/16.
  */
 import {Injectable} from "@angular/core";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {LocalidadService} from "./localidad.service";
 import {Localidad} from "../entities/localidad";
 @Injectable()

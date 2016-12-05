@@ -6,7 +6,7 @@ import {EdificioService} from "../../services/edificio.service";
 import {Edificio} from "../../entities/edificio";
 import {Observable, Subject} from "rxjs";
 import {forEach} from "@angular/router/src/utils/collection";
-import {QueryOptions} from "../../services/generic.service";
+import {QueryOptions} from "../../commons/generic.service";
 
 @Component({
     templateUrl: 'app/components/aula/aula.component.html',

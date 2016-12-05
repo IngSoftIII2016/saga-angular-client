@@ -1,4 +1,4 @@
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 import {Usuario} from "./usuario";
 import {Grupo} from "./grupo";
 

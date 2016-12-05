@@ -1,5 +1,5 @@
 import {GenericService} from "./generic.service";
-import {Entity} from "../entities/entity";
+import {Entity} from "./entity";
 import {Observable} from "rxjs";
 import {RequestMethod, Request, Http} from "@angular/http";
 /**

@@ -15,8 +15,10 @@
    <link id="layout-css" rel="stylesheet" type="text/css" href="app/resources/layout/css/layout-unrn.css">
 
 <!-- PrimeNG CSS -->
-    <link rel="stylesheet" type="text/css" href="app/resources/demo/css/fullcalendar.css" />
-    <link rel="stylesheet" type="text/css" href="app/resources/demo/css/scheduler.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="app/resources/demo/css/fullcalendar.css" />-->
+    <link rel="stylesheet" type="text/css" href="node_modules/fullcalendar/dist/fullcalendar.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="app/resources/demo/css/scheduler.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="node_modules/fullcalendar-scheduler/dist/scheduler.min.css" />
     <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/primeng.min.css"/>
     <link rel="stylesheet" type="text/css" href="main.css">
 
@@ -25,8 +27,10 @@
     <script src="app/resources/layout/js/layout.js"></script>                   <!-- Menu -->
     <script src="app/resources/demo/js/charts.min.js"></script>                 <!-- Charts -->
     <script src="app/resources/demo/js/moment-with-locales.min.js"></script>    <!-- Schedule -->
-    <script src="app/resources/demo/js/fullcalendar.min.js"></script>           <!-- Schedule -->
-    <script src="app/resources/demo/js/scheduler.min.js"></script>              <!-- Schedule -->
+    <!--<script src="app/resources/demo/js/fullcalendar.min.js"></script>           <!-- Schedule -->
+    <script src="node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
+    <!--<script src="app/resources/demo/js/scheduler.min.js"></script>              <!-- Schedule -->
+    <script src="node_modules/fullcalendar-scheduler/dist/scheduler.min.js"></script>
     <script src="app/resources/demo/js/quill.min.js"></script>                  <!-- Editor -->
 
 </head>
@@ -127,9 +131,6 @@
 
         }
 
-
-
-
         @-webkit-keyframes loader{
             0%{-webkit-transform:rotate(0deg);}
             100%{-webkit-transform:rotate(360deg);}
@@ -139,8 +140,6 @@
             0%{transform:rotate(0deg);}
             100%{transform:rotate(360deg);}
         }
-
-
 
     </style>
     <div class="containe">

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-import {GenericService} from "./generic.service";
+import {GenericService} from "../commons/generic.service";
 import {Periodo} from "../entities/periodo";
-import {QueryOptions} from "./generic.service";
+import {QueryOptions} from "../commons/generic.service";
 
 @Injectable()
 export class PeriodoService extends GenericService<Periodo> {

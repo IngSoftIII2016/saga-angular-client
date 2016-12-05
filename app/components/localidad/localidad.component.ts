@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Localidad} from "../../entities/localidad";
 import {LocalidadService} from "../../services/localidad.service";
-import {QueryOptions} from "../../services/generic.service";
+import {QueryOptions} from "../../commons/generic.service";
 import {LocalidadStore} from "../../services/localidad.store";
 import {SedeService} from "../../services/sede.service";
 import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";

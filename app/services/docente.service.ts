@@ -3,7 +3,7 @@ import {Headers, Http, Response} from '@angular/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-import {GenericService, QueryOptions} from "./generic.service";
+import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Docente} from "../entities/docente";
 
 @Injectable()

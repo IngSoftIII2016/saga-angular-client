@@ -35,6 +35,10 @@ const appRoutes: Routes = [
         component: AsignaturaComponent, canActivate: [AuthGuard]
     },
     {
+        path: 'composite-asignaturas',
+        component: AsignaturaComponent, canActivate: [AuthGuard]
+    },
+    {
         path: 'asignatura-carrera',
         component: AsignaturaCarreraComponent, canActivate: [AuthGuard]
     },

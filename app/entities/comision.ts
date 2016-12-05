@@ -1,6 +1,6 @@
 import {Asignatura} from "./asignatura";
 import {Periodo} from "./periodo"
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 import {Docente} from "./docente";
 
 export class Comision implements Entity {

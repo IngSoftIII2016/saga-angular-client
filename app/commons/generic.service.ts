@@ -4,7 +4,7 @@ import {
     URLSearchParams
 } from "@angular/http";
 import {Inject, Injectable} from "@angular/core";
-import {Entity} from "../entities/entity";
+import {Entity} from "./entity";
 
 /**
  * Created by juan on 12/11/16.

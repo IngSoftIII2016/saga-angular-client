@@ -1,14 +1,15 @@
 import {Comision} from "./comision";
 import {Aula} from "./aula";
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es"
 
 export class Horario implements Entity {
     id: number = null;
+    frecuencia_semanas: number = 1;
     dia: number;
     hora_inicio: string;
     duracion: string;
-    descripcion: string;
+    descripcion: string = "";
     comision: Comision = new Comision();
     aula: Aula = new Aula();
 

@@ -1,5 +1,5 @@
 import {Carrera} from "./carrera";
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 
 export class Asignatura implements Entity {
     id: number = null;

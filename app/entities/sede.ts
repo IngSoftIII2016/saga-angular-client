@@ -1,4 +1,4 @@
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 export class Sede implements Entity {
     id : number = null;
     nombre : string = '';

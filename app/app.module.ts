@@ -67,6 +67,7 @@ import {UsuarioGrupoService} from "./services/usuario-grupo.service";
 import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
 import {HorarioComponent} from "./components/horario/horario.component";
 import {HorarioService} from "./services/horario.service";
+import {CompositeAsignaturaComponent} from "./components/composite-asignatura/composite-asignatura.component";
 
 
 
@@ -96,6 +97,7 @@ import {HorarioService} from "./services/horario.service";
       CarreraComponent,
       ClaseComponent,
       ComisionComponent,
+      CompositeAsignaturaComponent,
       DocenteComponent,
       EdificioComponent,
       EventoComponent,

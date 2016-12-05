@@ -3,10 +3,10 @@ import {Headers, Http, Response, BaseRequestOptions} from '@angular/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-import {GenericService} from "./generic.service";
+import {GenericService} from "../commons/generic.service";
 import {Aula} from "../entities/aula";
 import {Edificio} from "../entities/edificio";
-import {QueryOptions} from "./generic.service";
+import {QueryOptions} from "../commons/generic.service";
 
 @Injectable()
 export class AulaService extends GenericService<Aula> {

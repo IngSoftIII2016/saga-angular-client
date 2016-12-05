@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {UsuarioGrupo} from "../entities/usuario-grupo";
 import {UsuarioGrupoService} from "./usuario-grupo.service";
 /**

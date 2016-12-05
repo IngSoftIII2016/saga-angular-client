@@ -1,6 +1,6 @@
 import {EdificioService} from "./edificio.service";
 import {Edificio} from "../entities/edificio";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {Injectable} from "@angular/core";
 /**
  * Created by juan on 21/11/16.

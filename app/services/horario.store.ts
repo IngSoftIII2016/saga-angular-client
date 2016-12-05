@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {Horario} from "../entities/horario";
 import {HorarioService} from "./horario.service";
 @Injectable()

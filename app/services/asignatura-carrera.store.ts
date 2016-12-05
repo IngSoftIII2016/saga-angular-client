@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {AsignaturaCarrera} from "../entities/asignatura-carrera";
 import {AsignaturaCarreraService} from "./asignatura-carrera.service";
 /**

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 
 import 'rxjs/add/operator/map'
-import {GenericService, QueryOptions} from "./generic.service";
+import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Grupo} from "../entities/grupo";
 
 @Injectable()

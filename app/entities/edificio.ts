@@ -1,5 +1,5 @@
 import {Localidad} from "./localidad";
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 export class Edificio implements Entity{
     id: number = null;
     nombre: string;

@@ -1,5 +1,5 @@
 import {Aula} from "./aula";
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 /**
  * Created by juan on 07/11/16.
  */

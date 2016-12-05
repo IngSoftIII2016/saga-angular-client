@@ -174,16 +174,17 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventConstraint: this.eventConstraint,
             eventRender: this.eventRender,
             resources: resources,
-            locale: 'es',
-            timeFormat: 'H:mm',
+            locale: this.locale,
+            timeFormat: 'H(:mm)',
             timezone: 'local',
-            titleFormat: '[Clases y Eventos del] dddd D MMM YYYY',
+            titleFormat: '[Clases y Eventos del] dddd D MMMM YYYY',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
-                 this.onDayChanged.emit({
-                 'day': start.toDate(),
-                 'callback': callback
-                 });
+                this.onDayChanged.emit({
+                    'day': start.toDate(),
+                    'timezone': timezone,
+                    'callback': callback
+                });
             },
             dayClick: (date, jsEvent, view) => {
                 this.onDayClick.emit({
@@ -303,6 +304,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     gotoDate(date: any) {
+        console.log('TimelineDaySchedule.gotoDate: ' + date);
         this.schedule.fullCalendar('gotoDate', date);
     }
 
@@ -335,7 +337,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     refetchEvents() {
-        this.schedule.fullCalendar( 'refetchEvents' );
+        this.schedule.fullCalendar('refetchEvents');
     }
 
 }

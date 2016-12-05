@@ -1,8 +1,8 @@
-import {GenericStore} from "./generic.store";
+import {GenericStore} from "../commons/generic.store";
 import {SedeService} from "./sede.service";
 import {Sede} from "../entities/sede";
 import {Injectable} from "@angular/core";
-import {QueryOptions} from "./generic.service";
+import {QueryOptions} from "../commons/generic.service";
 /**
  * Created by juan on 18/11/16.
  */

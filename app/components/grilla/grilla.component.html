@@ -5,8 +5,9 @@
     <div class="card">
         <div class="ui-g-12">
             <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected"
-                            [style]="{width : '100%'}"></p-dropdown>
+                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" [style]="{width : '100%'}"
+                            (onChange)="onChangeEdificio($event)">
+                </p-dropdown>
             </div>
             <div class="ui-g-6 ui-md-6"></div>
             <div class="ui-g-12 ui-md-6 ui-lg-3">
@@ -23,7 +24,7 @@
                 [height]="500"
                 [scrollTime]="scrollTime"
                 [hiddenDays]="[0]"
-                [locale]="es"
+                locale="es"
                 (onDayChanged)="getEvents($event)"
                 (onEventClick)="onEventClick($event)"
                 (onEventMouseover)="onEventMouseover($event)"
@@ -33,8 +34,7 @@
                 (onEventDrop)="onEventDrop($event)"
                 (onEventResizeStart)="onEventResizeStart($event)"
                 (onEventResizeStop)="onEventResizeStop($event)"
-                (onEventResize)="onEventResize($event)"
-        >
+                (onEventResize)="onEventResize($event)">
         </timeline-day-schedule>
     </div>
 
@@ -44,7 +44,12 @@
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/></div>
+                <div class="ui-grid-col-8">
+                    <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
+                    <p-dropdown id="aula" [options]="aulasOptions" [(ngModel)]="aulaSelected" [filter]="true"
+                                class="ui-grid-col-12"  [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha">Fecha</label></div>
@@ -77,10 +82,10 @@
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
-                        (click)="save(); schedule.refetchEvents()" >
+                        (click)="save()" >
                 </button>
                 <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
-                        (click)="displayDialog=false; schedule.refetchEvents()">
+                        (click)="cancel()">
                 </button>
             </div>
         </footer>

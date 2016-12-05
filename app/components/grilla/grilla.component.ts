@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {Observable, BehaviorSubject, Subscription} from "rxjs";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {Observable, BehaviorSubject, Subscription, Subject} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Edificio} from "../../entities/edificio";
 import {Aula} from "../../entities/aula";
@@ -12,6 +12,7 @@ import {EventoStore} from "../../services/evento.store";
 
 import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
 import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
+import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 
 declare var moment: any;
 
@@ -22,17 +23,32 @@ declare var moment: any;
     providers: [EdificioService, AulaService, ClaseStore, EventoStore]
 })
 export class GrillaComponent implements OnInit {
+
+    @ViewChild(TimelineDaySchedule)
+    private schedule: TimelineDaySchedule;
+
     edificio: Observable<Edificio>;
+
     edificios: SelectItem[];
+
     aulas: Observable<Aula[]>;
-    fecha = new BehaviorSubject<Date>(new Date());
+
+    fecha = new Subject<Date>();
+
     clases: Observable<Clase[]>;
+
     obsResources: Observable<any[]>;
+
     resources: any[] = [];
+
     events: Observable<any[]>;
+
     scrollTime: string;
-    fechaCalendar: Date = new Date();
+
+    fechaCalendar: Date;
+
     eventSelected: any = null;
+
     displayDialog: boolean = false;
 
     es: any = CALENDAR_LOCALE_ES;
@@ -42,6 +58,17 @@ export class GrillaComponent implements OnInit {
     msgs: Message[] = [];
 
     eventSubscription : Subscription = null;
+
+    buttonText = {
+        today: 'Hoy',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Dia'
+    };
+
+    aulasOptions: SelectItem[] = [];
+
+    aulaSelected: Aula;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
@@ -80,19 +107,22 @@ export class GrillaComponent implements OnInit {
                 function (fecha, edificio) {
                     return {edificio: edificio, fecha: fecha}
                 })
-            .subscribe(function (ef) {
+            .subscribe(function (fe) {
                 let qo = {
                     filters: {
-                        'aula.edificio.id': ef.edificio.id,
-                        'fecha': ef.fecha.toISOString().split('T')[0]
+                        'aula.edificio.id': fe.edificio.id,
+                        'fecha': fe.fecha.toISOString().split('T')[0]
                     },
                     page: -1
                 };
+                console.log('updateQO');console.log(qo);
                 self.claseStore.mergeQueryOptions(qo);
                 self.eventoStore.mergeQueryOptions(qo);
             });
 
-        this.fecha.subscribe(fecha => this.fechaCalendar = fecha);
+        this.fecha
+            .do(fecha => {console.log('updateCalendar');console.log(fecha)})
+            .subscribe(fecha => this.fechaCalendar = fecha);
 
         this.events = this.claseStore.items
             .map(function (clases: Clase[]) {
@@ -109,18 +139,34 @@ export class GrillaComponent implements OnInit {
             center: 'title',
             right: ''
         };
-        this.es.buttonText = {
+        /*
+        buttonText = {
             today: 'Hoy',
             month: 'Mes',
             week: 'Semana',
             day: 'Dia'
         };
+        */
+
+        this.aulaService.getAll()
+            .subscribe(aulas => {
+                this.aulasOptions = aulas
+                    .map(aula => {return {label: aula.nombre + ' - ' + aula.edificio.nombre, value: aula.id}});
+                this.aulaSelected = aulas[0];
+            })
+
+
+    }
+
+    onChangeEdificio(event): void {
+        console.log(event);
     }
 
     save() {
         if (this.eventSelected.type == 'Clase') {
             let clase = GrillaComponent.eventToClase(this.eventSelected);
             this.claseStore.update(clase).subscribe(editada => {
+                this.schedule.refetchEvents();
                 this.displayDialog = false;
                 this.msgs.push(
                     {
@@ -157,12 +203,18 @@ export class GrillaComponent implements OnInit {
         }
     }
 
+    cancel(): void {
+        this.displayDialog = false;
+        this.schedule.refetchEvents();
+    }
 
     getEvents(event): void {
-        console.log('getEvents() called with ' + event.day);
-        this.fecha.next(event.day);
+        console.log('getEvents() called');
+        console.log(event.day);
+        console.log(event.day);
         if(this.eventSubscription != null)
             this.eventSubscription.unsubscribe();
+        this.fecha.next(event.day);
         this.eventSubscription = this.events.subscribe(event.callback);
     }
 
