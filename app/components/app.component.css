@@ -23,3 +23,10 @@
     background: url("/app/resources/logo-saga.png") top left no-repeat;
     background-size: 250px 75px ;
 }
+.layout-container .layout-menu .profile {
+    box-sizing: border-box;
+    padding-top: 10px;
+    width: 250px;
+    height: 35px;
+    font:bold 11px "Arial";
+}

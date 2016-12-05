@@ -19,7 +19,9 @@ import {
     PaginatorModule,
     ConfirmDialogModule,
     ConfirmationService,
-    MessagesModule
+    MessagesModule,
+    RadioButtonModule,
+    PasswordModule
 } from 'primeng/primeng';
 
 import {AppComponent} from "./components/app.component";
@@ -87,7 +89,9 @@ import {CompositeAsignaturaComponent} from "./components/composite-asignatura/co
       GrowlModule,
       PaginatorModule,
       ConfirmDialogModule,
-      MessagesModule
+      MessagesModule,
+      RadioButtonModule,
+      PasswordModule
   ],
   declarations: [
       AppComponent,

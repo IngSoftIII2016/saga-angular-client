@@ -29,10 +29,17 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
-                    this.router.navigate(['/']);
-            }, error => {
-                this.error = 'El usuario o contraseña  es incorrecto';
-                this.loading = false;
+                this.router.navigate(['/']);
+            }, err => {
+                if (err.status == 0) {
+                    this.error = 'No se puede establecer la conexión con el servidor.';
+                    this.loading = false;
+                }
+                else {
+                    this.error = err.json().message;
+                    this.loading = false;
+                }
             });
     }
+
 }

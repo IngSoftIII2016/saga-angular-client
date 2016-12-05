@@ -14,10 +14,11 @@
                     <a id="menu-button">
                         <i></i>
                     </a>
-
-                    <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
+                   
+				   <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
                         <i class="material-icons">power_settings_new</i>
                     </a>
+
                     <ul class="topbar-items fadeInDown animated">
 
                         <li>
@@ -41,6 +42,9 @@
             <div class="layout-menu">
                 <div class="nano">
                     <div class="nano-content menu-scroll-content">
+					   <div class="profile" >
+                           <i class="fa ui-icon-person"></i>  <span class="profile-name">{{nombre_apellido}}</span>
+						</div>
                         <ul class="ultima-menu clearfix" id="main-menu">
 
                             <li role="menuitem"><a [routerLink]="['carreras']"><span>Carreras</span></a></li>

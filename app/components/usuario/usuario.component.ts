@@ -14,7 +14,7 @@ import {UsuarioGrupoStore} from "../../services/usuario-grupo.store";
     templateUrl: 'app/components/usuario/usuario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'usuario',
-    providers: [UsuarioStore,GrupoService,UsuarioGrupoStore, ConfirmationService]
+    providers: [UsuarioStore,UsuarioGrupoStore, ConfirmationService]
 })
 export class UsuarioComponent {
 
@@ -26,11 +26,15 @@ export class UsuarioComponent {
 
     isNew = false;
 
+    diseable : boolean;
+
     displayDialog: boolean;
 
     grupos: SelectItem[] = [];
 
     grupoSelected: Grupo;
+   
+    selectedValue: string = "1";
 
     private searchTerms = new Subject<string>();
 
@@ -41,7 +45,7 @@ export class UsuarioComponent {
             .distinctUntilChanged()
             .subscribe(terms =>
                 this.usuarioStore.setLikes(terms.length > 0 ? {
-                    nombre: '*'+terms+'*', apellido: '*'+terms+'*', email: '*'+terms+'*'} : {})
+                   nombre_usuario: '*'+terms+'*', nombre: '*'+terms+'*', apellido: '*'+terms+'*', email: '*'+terms+'*', contrasenia: '*'+terms+'*'} : {})
             )
     }
 
@@ -51,8 +55,9 @@ export class UsuarioComponent {
         this.validaciones = [];
         this.isNew = true;
         this.usuario = new Usuario();
-        this.grupoSelected = this.grupos[0].value;
         this.displayDialog = true;
+         this.diseable = false;
+
     }
 
     onRowSelect(event) {
@@ -60,11 +65,13 @@ export class UsuarioComponent {
         this.isNew = false;
         this.usuario =new Usuario(event.data);
         this.displayDialog = true;
+         this.diseable = true;
+
     }
 
 
     save() {
-        if (!this.usuario.nombre || !this.usuario.apellido || !this.usuario.email || !this.usuario.telefono) {
+        if ( !this.usuario.nombre_usuario ||!this.usuario.nombre || !this.usuario.apellido || !this.usuario.email  || (  this.isNew && !this.usuario.contrasenia)) {
             this.validaciones[0] = {
                 severity: 'error',
                 summary: 'Error',
