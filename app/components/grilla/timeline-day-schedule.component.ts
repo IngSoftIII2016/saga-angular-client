@@ -23,6 +23,8 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     @Input() header: any;
 
+    @Input() buttonText: any;
+
     @Input() style: any;
 
     @Input() styleClass: string;
@@ -142,6 +144,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
         this.options = {
             theme: true,
             header: this.header,
+            buttonText: this.buttonText,
             isRTL: this.rtl,
             weekends: this.weekends,
             hiddenDays: this.hiddenDays,
@@ -174,7 +177,6 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventConstraint: this.eventConstraint,
             eventRender: this.eventRender,
             resources: resources,
-            locale: this.locale,
             timeFormat: 'H(:mm)',
             timezone: 'local',
             titleFormat: '[Clases y Eventos del] dddd D MMMM YYYY',

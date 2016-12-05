@@ -19,12 +19,13 @@
         <timeline-day-schedule
                 #schedule
                 [header]="scheduleHeader"
+                [buttonText]="buttonText"
                 [resources]="obsResources"
                 [editable]="true"
                 [height]="500"
                 [scrollTime]="scrollTime"
                 [hiddenDays]="[0]"
-                locale="es"
+                [locale]="es"
                 (onDayChanged)="getEvents($event)"
                 (onEventClick)="onEventClick($event)"
                 (onEventMouseover)="onEventMouseover($event)"

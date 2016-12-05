@@ -139,14 +139,14 @@ export class GrillaComponent implements OnInit {
             center: 'title',
             right: ''
         };
-        /*
-        buttonText = {
+
+        this.buttonText = {
             today: 'Hoy',
             month: 'Mes',
             week: 'Semana',
             day: 'Dia'
         };
-        */
+
 
         this.aulaService.getAll()
             .subscribe(aulas => {
