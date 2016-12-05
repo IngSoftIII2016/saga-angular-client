@@ -7,8 +7,8 @@ import {Entity} from "../commons/entity";
 export class Evento implements Entity {
     id: number = null;
     fecha: string;
-    hora_inicio: string;
-    hora_fin: string;
+    hora_inicio: string = '09:00:00';
+    hora_fin: string = '10:00:00';
     aula: Aula = new Aula();
     motivo: string;
 
@@ -16,7 +16,9 @@ export class Evento implements Entity {
         Object.assign(this, value);
     }
     public getFecha(): Date {
-        return new Date(this.fecha);
+        let fecha = new Date(this.fecha)
+        fecha.setTime(fecha.getTime() + (3*60*60*1000));
+        return fecha;
     }
     public setFecha(fecha: Date) {
         this.fecha = fecha.format("yyyy-mm-dd");
@@ -29,7 +31,7 @@ export class Evento implements Entity {
         return this.parseHora(this.hora_fin);
     }
     public parseHora(hora : string) {
-        let fecha: Date = this.getFecha();
+        let fecha: Date = new Date(0);
         let a = hora.split(':');
         return new Date(fecha.getFullYear(),fecha.getMonth(),fecha.getDay(), parseInt(a[0]), parseInt(a[1]), parseInt(a[2]));
     }

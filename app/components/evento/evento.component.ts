@@ -64,8 +64,8 @@ export class EventoComponent {
         this.isNew = true;
         this.evento = new Evento();
         this.fecha = new Date();
-        this.hora_inicio = new Date();
-        this.hora_fin = new Date();
+        this.hora_inicio = this.evento.getHoraInicio();
+        this.hora_fin = this.evento.getHoraFin();
         this.aulaSelected = this.aulas[0].value;
         this.displayDialog = true;
     }
@@ -74,7 +74,7 @@ export class EventoComponent {
         this.validaciones = [];
         this.isNew = false;
         this.evento =new Evento(event.data);
-        this.fecha = new Date(this.evento.fecha);
+        this.fecha = this.evento.getFecha();
         this.hora_inicio = this.evento.getHoraInicio();
         this.hora_fin = this.evento.getHoraFin();
         this.aulaSelected = new Aula(this.evento.aula);

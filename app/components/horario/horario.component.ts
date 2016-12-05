@@ -102,8 +102,8 @@ export class HorarioComponent {
         this.validaciones = [];
         this.isNew = true;
         this.horario = new Horario();
-        this.hora_inicio = new Date();
-        this.duracion = new Date();
+        this.hora_inicio = this.horario.getHoraInicio();
+        this.duracion = this.horario.getDuracion();
         this.displayDialog = true;
         this.diaSelected = this.dias[0].value;
         this.aulaSelected = this.aulas[0].value;

@@ -6,6 +6,7 @@ import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
 import {Subject, Timestamp} from "rxjs";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
+import {moment} from "../grilla/grilla.component";
 
 
 @Component({
@@ -67,8 +68,8 @@ export class ClaseComponent {
         this.isNew = true;
         this.clase = new Clase();
         this.fecha = new Date();
-        this.hora_inicio = new Date();
-        this.hora_fin = new Date();
+        this.hora_inicio = this.clase.getHoraInicio();
+        this.hora_fin = this.clase.getHoraFin();
         this.displayDialog = true;
         this.aulaSelected = this.aulas[0].value;
     }
@@ -76,8 +77,8 @@ export class ClaseComponent {
     onRowSelect(event) {
         this.validaciones = [];
         this.isNew = false;
-        this.clase =new Clase(event.data);
-        this.fecha = new Date(this.clase.fecha);
+        this.clase = new Clase(event.data);
+        this.fecha = this.clase.getFecha();
         this.hora_inicio = this.clase.getHoraInicio();
         this.hora_fin = this.clase.getHoraFin();
         this.aulaSelected = new Aula(this.clase.aula);
