@@ -22,8 +22,10 @@
                     <ul class="topbar-items fadeInDown animated">
 
                         <li>
-                            <button type="button" pButton label="Salir" icon="fa ui-icon-power-settings-new"
-                                    (click)="logout()" style="background-color: #cc1b00;"></button>
+                            <a (click)="logout()" href="#" class="ripplelink">
+                                <i style="    color: white;
+    font-size: 40px;" class="material-icons">power_settings_new</i>
+                            </a>
 
                             <ul class="ultima-menu animated">
                                 <li role="menuitem">
