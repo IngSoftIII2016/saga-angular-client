@@ -92,8 +92,8 @@ export class UsuarioComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar el usuario:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -119,8 +119,8 @@ export class UsuarioComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar el usuario:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -149,8 +149,8 @@ export class UsuarioComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar el usuario:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

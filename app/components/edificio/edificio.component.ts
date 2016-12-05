@@ -101,8 +101,8 @@ export class EdificioComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear el edificio:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -128,8 +128,8 @@ export class EdificioComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el edificio:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -157,8 +157,8 @@ export class EdificioComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar el edificio:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

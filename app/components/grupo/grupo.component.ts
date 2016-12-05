@@ -53,8 +53,8 @@ export class GrupoComponent {
                 this.msgs.push(
                     {
                         severity:'error',
-                        summary:'Error',
-                        detail:'No se ha podido guardar el grupo:\n' + error
+                        summary: error.json().error.error.title,
+                        detail: error.json().error.error.detail
                     });
             });
     }
@@ -80,8 +80,8 @@ export class GrupoComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar el rol:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

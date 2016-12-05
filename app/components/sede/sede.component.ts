@@ -78,10 +78,11 @@ export class SedeComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la sede:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
+
                 }
             });
         }
@@ -106,8 +107,8 @@ export class SedeComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardarla sede:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -135,8 +136,8 @@ export class SedeComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar la sede:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

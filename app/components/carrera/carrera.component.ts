@@ -78,8 +78,8 @@ export class CarreraComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la carrera:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -106,8 +106,8 @@ export class CarreraComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar la carrera:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -136,8 +136,8 @@ export class CarreraComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar la carrera:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

@@ -155,8 +155,8 @@ export class HorarioComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido crear el horario:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -181,8 +181,8 @@ export class HorarioComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar el horario:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -211,8 +211,8 @@ export class HorarioComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar el horario:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

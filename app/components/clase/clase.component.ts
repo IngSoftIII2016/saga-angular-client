@@ -117,8 +117,8 @@ export class ClaseComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido crear la clase:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -144,8 +144,8 @@ export class ClaseComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar la clase:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -175,8 +175,8 @@ export class ClaseComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar la clase:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

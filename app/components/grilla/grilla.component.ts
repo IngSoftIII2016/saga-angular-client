@@ -132,8 +132,8 @@ export class GrillaComponent implements OnInit {
                 this.msgs.push(
                     {
                         severity: 'error',
-                        summary: 'Error',
-                        detail: error.json().error.error
+                        summary: error.json().error.error.title,
+                        detail: error.json().error.error.detail
                     });
             });
         } else if (this.eventSelected.type == 'Evento') {

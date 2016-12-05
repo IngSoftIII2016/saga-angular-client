@@ -133,8 +133,8 @@ export class ComisionComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la comision:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -159,8 +159,8 @@ export class ComisionComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar la comision:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -188,8 +188,8 @@ export class ComisionComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar la comision:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

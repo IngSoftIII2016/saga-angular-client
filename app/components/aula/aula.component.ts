@@ -103,8 +103,8 @@ export class AulaComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido crear el aula:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -130,8 +130,8 @@ export class AulaComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar el aula:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -160,8 +160,8 @@ export class AulaComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar el aula:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

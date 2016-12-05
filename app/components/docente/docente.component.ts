@@ -81,8 +81,8 @@ export class DocenteComponent {
                             this.msgs.push(
                                 {
                                     severity:'error',
-                                    summary:'Error',
-                                    detail:'No se ha podido guardar el docente:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -109,8 +109,8 @@ export class DocenteComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el docente:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -139,8 +139,8 @@ export class DocenteComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar el docente:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

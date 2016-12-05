@@ -104,8 +104,8 @@ export class LocalidadComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido crear la localidad:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -131,8 +131,8 @@ export class LocalidadComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardarla localidad:\n' + error
+                                        summary: error.json().error.error.title,
+                                        detail: error.json().error.error.detail
                                     });
                             });
                     }
@@ -161,8 +161,8 @@ export class LocalidadComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar la localidad:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );

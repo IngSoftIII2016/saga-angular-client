@@ -3,7 +3,7 @@ import {Asignatura} from "../../entities/asignatura";
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {AsignaturaStore} from "../../services/asignatura.store";
 import {Subject} from "rxjs";
-import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
+import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -80,8 +80,9 @@ export class AsignaturaComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la asignatura:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
+
                                 });
                         });
                 }
@@ -108,8 +109,8 @@ export class AsignaturaComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar la asignatura:\n' + error
+                                    summary: error.json().error.error.title,
+                                    detail: error.json().error.error.detail
                                 });
                         });
                 }
@@ -137,8 +138,8 @@ export class AsignaturaComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar la asignatura:\n' + error
+                                summary: error.json().error.error.title,
+                                detail: error.json().error.error.detail
                             });
                     }
                 );
