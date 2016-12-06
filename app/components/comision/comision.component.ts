@@ -86,6 +86,7 @@ export class ComisionComponent {
                     {
                         nombre: '*'+terms+'*',
                         'asignatura.nombre': '*'+terms+'*',
+                        'periodo.descripcion': '*'+terms+'*',
                         'docente.nombre': '*'+terms+'*',
                         'docente.apellido' : '*'+terms+'*'
                     } : {}))

@@ -50,7 +50,10 @@ export class EdificioComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.edificioStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+                this.edificioStore.setLikes(terms.length > 0 ? {
+                    nombre: '*'+terms+'*',
+                    'localidad.nombre': '*'+terms+'*',
+                    'localidad.sede.nombre': '*'+terms+'*'} : {}))
     }
 
     showDialogToAdd() {

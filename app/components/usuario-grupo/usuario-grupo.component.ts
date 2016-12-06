@@ -61,6 +61,12 @@ export class UsuarioGrupoComponent {
                 }
             )
         });
+        this.searchTerms
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe(terms =>
+                this.usuarioGrupoStore.setLikes(terms.length > 0 ? {'usuario.nombre': '*'+terms+'*',
+                    'grupo.nombre': '*'+terms+'*'} : {}))
     }
 
     showDialogToAdd() {

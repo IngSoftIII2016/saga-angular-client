@@ -52,7 +52,11 @@ export class AulaComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.aulaStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+                this.aulaStore.setLikes(terms.length > 0 ? {
+                    nombre: '*'+terms+'*',
+                    'edificio.nombre' : '*'+terms+'*',
+                    'edificio.localidad.nombre' : '*'+terms+'*',
+                } : {}))
     }
 
     showDialogToAdd() {

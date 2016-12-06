@@ -91,10 +91,12 @@ export class HorarioComponent {
             .subscribe(terms =>
                 this.horarioStore.setLikes(terms.length > 0 ?
                     {
-                        'asignatura.nombre': '*' + terms + '*',
-                        'periodo.descripcion': '*' + terms + '*',
-                        'docente.apellido': '*' + terms + '*',
-                        'docente.nombre': '*' + terms + '*'
+                        'comision.asignatura.nombre': '*' + terms + '*',
+                        'aula.nombre': '*' + terms + '*',
+                        'comision.periodo.descripcion': '*' + terms + '*',
+                        'aula.edificio.nombre': '*' + terms + '*',
+                        'comision.docente.apellido': '*' + terms + '*',
+                        'comision.docente.nombre': '*' + terms + '*'
                     } : {}))
     }
 

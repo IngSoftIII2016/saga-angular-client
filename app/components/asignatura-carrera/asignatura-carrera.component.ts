@@ -79,7 +79,9 @@ export class AsignaturaCarreraComponent {
             .subscribe(terms =>
                 this.asignaturaCarreraStore.setLikes(
                     terms.length > 0 ?
-                        {'asignatura.nombre': '*'+terms+'*', 'carrera.nombre': '*'+terms+'*'} :
+                        {'asignatura.nombre': '*'+terms+'*',
+                            'carrera.nombre': '*'+terms+'*',
+                            'regimen': '*'+terms+'*'} :
                         {}))
         sel.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
         sel.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});

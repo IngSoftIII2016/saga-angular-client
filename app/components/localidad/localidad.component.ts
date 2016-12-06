@@ -57,7 +57,8 @@ export class LocalidadComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.localidadStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*'} : {}))
+                this.localidadStore.setLikes(terms.length > 0 ? {nombre: '*'+terms+'*',
+                    'sede.nombre': '*'+terms+'*'} : {}))
     }
 
     showDialogToAdd() {

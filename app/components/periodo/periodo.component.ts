@@ -41,7 +41,9 @@ export class PeriodoComponent {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(terms =>
-                this.periodoStore.setLikes(terms.length > 0 ? {descripcion: '*'+terms+'*', fecha_inicio: '*'+terms+'*', fecha_fin: '*'+terms+'*'} : {}))
+                this.periodoStore.setLikes(terms.length > 0 ? {descripcion: '*'+terms+'*',
+                    fecha_inicio: '*'+terms+'*',
+                    fecha_fin: '*'+terms+'*'} : {}))
     }
 
     showDialogToAdd() {
