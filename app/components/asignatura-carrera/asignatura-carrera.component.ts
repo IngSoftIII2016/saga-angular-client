@@ -149,8 +149,8 @@ export class AsignaturaCarreraComponent {
                                         this.msgs.push(
                                             {
                                                 severity: 'error',
-                                                summary: 'Error',
-                                                detail: 'No se ha podido guardar los cambios:\n' + error
+                                                summary: error.json().error.title,
+                                                detail: error.json().error.detail
                                             });
                                     });
                         }
@@ -176,8 +176,8 @@ export class AsignaturaCarreraComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: 'Error',
-                                        detail: 'No se ha podido guardar los cambios:\n' + error
+                                        summary: error.json().error.title,
+                                        detail: error.json().error.detail
                                     });
                             });
                     }
@@ -207,8 +207,8 @@ export class AsignaturaCarreraComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar:\n' + error
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     }
                 );

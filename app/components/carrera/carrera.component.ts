@@ -78,8 +78,8 @@ export class CarreraComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: error.json().error.error.title,
-                                    detail: error.json().error.error.detail
+                                    summary: error.json().error.title,
+                                    detail: error.json().error.detail
                                 });
                         });
                 }
@@ -106,8 +106,8 @@ export class CarreraComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: error.json().error.error.title,
-                                    detail: error.json().error.error.detail
+                                    summary: error.json().error.title,
+                                    detail: error.json().error.detail
                                 });
                         });
                 }
@@ -136,8 +136,8 @@ export class CarreraComponent {
                         this.msgs.push(
                             {
                                 severity:'error',
-                                summary: error.json().error.error.title,
-                                detail: error.json().error.error.detail
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     }
                 );

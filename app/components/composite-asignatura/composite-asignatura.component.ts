@@ -83,8 +83,8 @@ export class CompositeAsignaturaComponent extends CRUD<Asignatura, AsignaturaSer
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido crear la asignatura:\n' + error
+                                    summary: error.json().error.title,
+                                    detail: error.json().error.detail
                                 });
                         });
                 }
@@ -111,8 +111,8 @@ export class CompositeAsignaturaComponent extends CRUD<Asignatura, AsignaturaSer
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar la asignatura:\n' + error
+                                    summary: error.json().error.title,
+                                    detail: error.json().error.detail
                                 });
                         });
                 }
@@ -139,9 +139,9 @@ export class CompositeAsignaturaComponent extends CRUD<Asignatura, AsignaturaSer
                     error => {
                         this.msgs.push(
                             {
-                                severity:'error',
-                                summary:'Error',
-                                detail:'No se ha podido eliminar la asignatura:\n' + error
+                                severity: 'error',
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     }
                 );

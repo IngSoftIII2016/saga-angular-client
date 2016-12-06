@@ -103,8 +103,8 @@ export class UsuarioGrupoComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido crear el permiso:\n' + error
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     });
                 }
@@ -131,8 +131,8 @@ export class UsuarioGrupoComponent {
                             this.msgs.push(
                                 {
                                     severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'No se ha podido guardar el permiso:\n' + error
+                                    summary: error.json().error.title,
+                                    detail: error.json().error.detail
                                 });
                         });
                 }
@@ -160,8 +160,8 @@ export class UsuarioGrupoComponent {
                         this.msgs.push(
                             {
                                 severity: 'error',
-                                summary: 'Error',
-                                detail: 'No se ha podido eliminar:\n' + error
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     }
                 );

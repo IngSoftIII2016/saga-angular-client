@@ -178,8 +178,8 @@ export class GrillaComponent implements OnInit {
                 this.msgs.push(
                     {
                         severity: 'error',
-                        summary: error.json().error.error.title,
-                        detail: error.json().error.error.detail
+                        summary: error.json().error.title,
+                        detail: error.json().error.detail
                     });
             });
         } else if (this.eventSelected.type == 'Evento') {
@@ -196,8 +196,8 @@ export class GrillaComponent implements OnInit {
                 this.msgs.push(
                     {
                         severity: 'error',
-                        summary: 'Error',
-                        detail: 'No se ha podido modificar el evento:\n' + error
+                        summary: error.json().error.title,
+                        detail: error.json().error.detail
                     });
             });
         }

@@ -114,8 +114,8 @@ export class EventoComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: error.json().error.error.title,
-                                        detail: error.json().error.error.detail
+                                        summary: error.json().error.title,
+                                        detail: error.json().error.detail
                                     });
                             });
                     }
@@ -141,8 +141,8 @@ export class EventoComponent {
                                 this.msgs.push(
                                     {
                                         severity: 'error',
-                                        summary: error.json().error.error.title,
-                                        detail: error.json().error.error.detail
+                                        summary: error.json().error.title,
+                                        detail: error.json().error.detail
                                     });
                             });
                     }
@@ -169,9 +169,9 @@ export class EventoComponent {
                     error => {
                         this.msgs.push(
                             {
-                                severity:'error',
-                                summary: error.json().error.error.title,
-                                detail: error.json().error.error.detail
+                                severity: 'error',
+                                summary: error.json().error.title,
+                                detail: error.json().error.detail
                             });
                     }
                 );
