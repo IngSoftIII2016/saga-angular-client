@@ -1,4 +1,4 @@
-import {Entity} from "./entity";
+import {Entity} from "../commons/entity";
 import {Grupo} from "./grupo";
 export class Usuario implements Entity {
     id: number = null;
@@ -9,7 +9,6 @@ export class Usuario implements Entity {
     telefono: number;
     contrasenia: string;
     estado: number = 1;
-
 
     constructor(value : Object = {}) {
         Object.assign(this, value);

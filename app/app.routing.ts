@@ -21,6 +21,7 @@ import {ComisionComponent} from "./components/comision/comision.component";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
 import {HorarioComponent} from "./components/horario/horario.component";
+import {CompositeAsignaturaComponent} from "./components/composite-asignatura/composite-asignatura.component";
 
 
 
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'composite-asignaturas',
-        component: AsignaturaComponent, canActivate: [AuthGuard]
+        component: CompositeAsignaturaComponent, canActivate: [AuthGuard]
     },
     {
         path: 'asignatura-carrera',

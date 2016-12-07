@@ -104,8 +104,8 @@ export class HorarioComponent {
         this.validaciones = [];
         this.isNew = true;
         this.horario = new Horario();
-        this.hora_inicio = this.horario.getHoraInicio();
-        this.duracion = this.horario.getDuracion();
+        this.hora_inicio = this.horario.getHoraInicioDate();
+        this.duracion = this.horario.getDuracionDate();
         this.displayDialog = true;
         this.diaSelected = this.dias[0].value;
         this.aulaSelected = this.aulas[0].value;
@@ -116,8 +116,8 @@ export class HorarioComponent {
         this.validaciones = [];
         this.isNew = false;
         this.horario = new Horario(event.data);
-        this.hora_inicio = this.horario.getHoraInicio();
-        this.duracion = this.horario.getDuracion();
+        this.hora_inicio = this.horario.getHoraInicioDate();
+        this.duracion = this.horario.getDuracionDate();
         this.diaSelected = this.horario.dia;
         this.aulaSelected = new Aula(this.horario.aula);
         this.comisionSelected = new Comision(this.horario.comision);

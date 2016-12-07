@@ -135,12 +135,18 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     ngAfterViewInit() {
         let element = this.el.nativeElement.children[0];
-        this.resources.subscribe(resources => this.initSchedule(resources, element));
+        this.schedule = jQuery(element);
+        let self = this;
+        this.resources
+            .do(resources => console.log(resources))
+            .subscribe(resources => self.initSchedule(resources, element));
     }
 
     private initSchedule(resources: any[], element: any) {
 
-        this.schedule = jQuery(element);
+        //this.schedule = jQuery(element);
+        this.initialized = false;
+        console.log('initSchedule'); console.log(this.schedule);
         this.options = {
             theme: true,
             header: this.header,
@@ -182,8 +188,10 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             titleFormat: '[Clases y Eventos del] dddd D MMMM YYYY',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
+                console.log('TimelineDaySchedule.getEvents')
+                console.log(start);
                 this.onDayChanged.emit({
-                    'day': start.toDate(),
+                    'day': start.local().toDate(),
                     'timezone': timezone,
                     'callback': callback
                 });
