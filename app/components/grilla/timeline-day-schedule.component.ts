@@ -138,7 +138,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
         this.schedule = jQuery(element);
         let self = this;
         this.resources
-            .do(resources => console.log(resources))
+            //.do(resources => console.log(resources))
             .subscribe(resources => self.initSchedule(resources, element));
     }
 
@@ -146,7 +146,8 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
         //this.schedule = jQuery(element);
         this.initialized = false;
-        console.log('initSchedule'); console.log(this.schedule);
+        //console.log('initSchedule'); console.log(this.schedule);
+        this.schedule.fullCalendar( 'destroy' );
         this.options = {
             theme: true,
             header: this.header,
@@ -183,6 +184,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             eventConstraint: this.eventConstraint,
             eventRender: this.eventRender,
             resources: resources,
+            resourceLabelText: 'Aulas',
             timeFormat: 'H(:mm)',
             timezone: 'local',
             titleFormat: '[Clases y Eventos del] dddd D MMMM YYYY',

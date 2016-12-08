@@ -3,7 +3,7 @@
 </div>
 <div class="ui-g-12">
     <div class="card">
-        <div class="ui-g-12">
+        <div class="ui-g-12 ui-grid-row">
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" [style]="{width : '100%'}"
                             (onChange)="onChangeEdificio($event)">
@@ -23,7 +23,7 @@
                 [resources]="obsResources"
                 [editable]="true"
                 [height]="500"
-                [defaultDate]="defaultDate"
+                [defaultDate]="fechaCalendar"
                 [scrollTime]="scrollTime"
                 [hiddenDays]="[0]"
                 [locale]="es"
@@ -95,7 +95,7 @@
 
     <!-- Dialgo de edicion de EVENTOS -->
     <p-dialog [header]="eventoSelected.title" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
-              [modal]="true" *ngIf="eventSelected" (onAfterHide)="schedule.refetchEvents()">
+              [modal]="true" *ngIf="eventoSelected" (onAfterHide)="schedule.refetchEvents()">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
 
             <div class="ui-grid-row">
