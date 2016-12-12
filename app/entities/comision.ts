@@ -5,7 +5,7 @@ import {Docente} from "./docente";
 
 export class Comision implements Entity {
     id: number = null;
-    nombre: string;
+    nombre: string = '';
     asignatura: Asignatura = new Asignatura();
     periodo: Periodo = new Periodo();
     docente: Docente = new Docente();

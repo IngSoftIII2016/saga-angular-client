@@ -44,25 +44,45 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected abstract getSearchFields(): string[];
 
-    protected validate(entity: E): Message[] { return []; };
+    protected onSelect(entity: E): void {
+    };
 
-    protected onBeforeCreate(): boolean { return true };
+    protected validate(entity: E): Message[] {
+        return [];
+    };
 
-    protected onBeforeUpdate(): boolean { return true };
+    protected onBeforeCreate(): boolean {
+        return true
+    };
 
-    protected onBeforeDelete(): boolean { return true };
+    protected onBeforeUpdate(): boolean {
+        return true
+    };
 
-    protected onCreate(entity: E): E { return entity };
+    protected onBeforeDelete(): boolean {
+        return true
+    };
 
-    protected onUpdate(entity: E): E { return entity };
+    protected onCreate(entity: E): E {
+        return entity
+    };
 
-    protected onDelete(entity: E): E { return entity };
+    protected onUpdate(entity: E): E {
+        return entity
+    };
 
-    protected onAfterCreate(entity: E): void {};
+    protected onDelete(entity: E): E {
+        return entity
+    };
 
-    protected onAfterUpdate(entity: E): void {};
+    protected onAfterCreate(entity: E): void {
+    };
 
-    protected onAfterDelete(entity: E): void {};
+    protected onAfterUpdate(entity: E): void {
+    };
+
+    protected onAfterDelete(entity: E): void {
+    };
 
     constructor(store: ST, confirmService: ConfirmationService = null) {
         this.store = store;
@@ -98,6 +118,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     onRowSelect(event): void {
         this.isNew = false;
         this.entity = this.getEntityFromEvent(event);
+        this.onSelect(this.entity);
         this.openDialog();
     }
 

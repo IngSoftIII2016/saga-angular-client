@@ -17,9 +17,7 @@ export class AsignaturaService extends GenericService<Asignatura> {
     }
 
     public getDefaultQueryOptions() : QueryOptions {
-        return new QueryOptions({
-            includes : ['carrera']
-        });
+        return new QueryOptions();
     }
 
 }

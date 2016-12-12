@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
 import {Comision} from "../../entities/comision";
-import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
+import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {ComisionStore} from "../../services/comision.store";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {Asignatura} from "../../entities/asignatura";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
-import {Subject} from "rxjs";
 import {DocenteService} from "../../services/docente.service";
 import {Docente} from "../../entities/docente";
+import {CRUD} from "../../commons/crud";
+import {ComisionService} from "../../services/comision.service";
 
 
 @Component({
@@ -17,206 +18,104 @@ import {Docente} from "../../entities/docente";
     selector: 'comision',
     providers:[ComisionStore, AsignaturaService, PeriodoService,DocenteService, ConfirmationService]
 })
-export class ComisionComponent {
+export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionStore> {
 
-    msgs: Message[] = [];
-
-    displayDialog: boolean;
-
-    comision: Comision = new Comision();
-
-    isNew: boolean;
 
     asignaturas: SelectItem[] = [];
 
-    asignaturaSelected: Asignatura;
+    //asignaturaSelected: Asignatura;
 
     periodos: SelectItem[] = [];
 
-    periodoSelected: Periodo;
+    //periodoSelected: Periodo;
 
     docentes: SelectItem[] = [];
 
-    docenteSelected: Docente;
-
-    private searchTerms = new Subject<string>();
+    //docenteSelected: Docente;
 
     constructor(private comisionStore: ComisionStore,
                 private asignaturaService: AsignaturaService,
                 private periodoService: PeriodoService,
                 private docenteService: DocenteService,
-                private confirmationService : ConfirmationService) { }
+                private confirmationService : ConfirmationService)
+    {
+        super(comisionStore, confirmationService);
+    }
 
     ngOnInit() {
-        var sel = this;
+        super.ngOnInit();
+        var self = this;
         this.asignaturaService.getAll().subscribe(asignaturas => {
-            asignaturas.forEach(asignatura => {
-                    sel.asignaturas.push({
-                            label: asignatura.nombre, value: new Asignatura(asignatura)
-                        }
-                    )
+            self.asignaturas = asignaturas.map(asignatura => {
+                    return { label: asignatura.nombre, value: asignatura }
                 }
             )
         });
-        var sel = this;
         this.periodoService.getAll().subscribe(periodos => {
-            periodos.forEach(periodo => {
-                    sel.periodos.push({
-                            label: periodo.descripcion, value: new Periodo(periodo)
-                        }
-                    )
+            this.periodos = periodos.map(periodo => {
+                    return { label: periodo.descripcion, value: periodo }
                 }
             )
         });
-        var sel = this;
         this.docenteService.getAll().subscribe(docentes => {
-            docentes.forEach(docente => {
-                    sel.docentes.push({
-                            label: docente.apellido + ', ' + docente.nombre, value: new Docente(docente)
-                        }
-                    )
+            this.docentes = docentes.map(docente => {
+                    return { label: docente.apellido + ', ' + docente.nombre, value: docente }
                 }
             )
         });
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(terms =>
-                this.comisionStore.setLikes(terms.length > 0 ?
-                    {
-                        nombre: '*'+terms+'*',
-                        'asignatura.nombre': '*'+terms+'*',
-                        'periodo.descripcion': '*'+terms+'*',
-                        'docente.nombre': '*'+terms+'*',
-                        'docente.apellido' : '*'+terms+'*'
-                    } : {}))
     }
 
-    showDialogToAdd() {
-        this.isNew = true;
-        this.comision = new Comision();
-        this.displayDialog = true;
-        this.asignaturaSelected = this.asignaturas[0].value;
-        this.periodoSelected = this.periodos[0].value;
-        this.docenteSelected = this.docentes[0].value;
-    }
-
-    onRowSelect(event) {
-        this.isNew = false;
-        this.comision =new Comision(event.data);
-        this.asignaturaSelected =  new Asignatura(this.comision.asignatura);
-        this.periodoSelected = new Periodo(this.comision.periodo);
-        this.docenteSelected = new Docente(this.comision.docente);
-        this.displayDialog = true;
-    }
-
-    save(){
-        this.comision.asignatura = new Asignatura(this.asignaturaSelected);
-        this.comision.periodo = new Periodo(this.periodoSelected);
-        this.comision.docente = new Docente(this.docenteSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar la comision?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.comisionStore.create(this.comision).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado la comision con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar la comision?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.comisionStore.update(this.comision).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se ha guardado la comision  con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-    }
-
-
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar la comision?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.comisionStore.delete(this.comision).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity:'success',
-                                summary:'Exito',
-                                detail:'Se ha borrado la comision con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: error.json().error.title,
-                                detail: error.json().error.detail
-                            });
-                    }
-                );
-            }
+    protected getDefaultNewEntity(): Comision {
+        return new Comision({
+            asignatura: this.asignaturas[0].value as Asignatura,
+            periodo: this.periodos[0].value as Periodo,
+            docente: this.docentes[0].value as Docente
         });
     }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        console.log(qo);
-
-        this.comisionStore.mergeQueryOptions(qo);
+    protected getEntityFromEvent(event: any): Comision {
+        return new Comision(event.data);
     }
 
-    sort(event) {
-        this.comisionStore.setSorts([event]);
+    protected getEntityReferencedLabel(): string {
+        return 'la comision ' + this.entity.asignatura.nombre + ' ' + this.entity.nombre;
     }
 
-    search(term: string): void {
-        this.searchTerms.next(term);
+    protected getSearchFields(): string[] {
+        return ['nombre', 'asignatura.nombre', 'periodo.descripcion', 'docente.nombre', 'docente.apellido']
     }
+/*
+    showDialogToAdd() {
+        this.asignaturaSelected = this.asignaturas[0].value as Asignatura;
+        this.periodoSelected = this.periodos[0].value as Periodo;
+        this.docenteSelected = this.docentes[0].value as Docente;
+        super.showDialogToAdd();
+    }
+*/
+/*
+    protected onSelect(comision: Comision): void {
+        this.asignaturaSelected = comision.asignatura;
+        this.periodoSelected = comision.periodo;
+        this.docenteSelected = comision.docente;
 
-
+    }
+*/
+/*
+    protected onCreate(comision: Comision): Comision {
+        comision.asignatura = this.asignaturaSelected;
+        comision.periodo = this.periodoSelected;
+        comision.docente = this.docenteSelected;
+        return comision;
+    }
+*/
+/*
+    protected onUpdate(comision: Comision): Comision {
+        comision.asignatura = this.asignaturaSelected;
+        comision.periodo = this.periodoSelected;
+        comision.docente = this.docenteSelected;
+        return comision;
+    }
+*/
 }	/**
  * Created by Federico on 17/11/2016.
  */

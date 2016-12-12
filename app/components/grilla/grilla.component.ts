@@ -133,11 +133,10 @@ export class GrillaComponent implements OnInit {
                 let qo = {
                     filters: {
                         'aula.edificio.id': fe.edificio.id,
-                        'fecha': fe.fecha.toISOString().split('T')[0]
+                        'fecha': toMySQLDate(fe.fecha)
                     },
                     page: -1
                 };
-                console.log('updateQO');console.log(qo);
                 self.claseStore.mergeQueryOptions(qo);
                 self.eventoStore.mergeQueryOptions(qo);
             });

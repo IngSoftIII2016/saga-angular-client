@@ -12,13 +12,17 @@
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="comisionStore.items | async" selectionMode="single"
+    <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Comisiones</header>
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="docente.apellido" header="Docente" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="docente.apellido" header="Docente" sortable="custom" (sortFunction)="sort($event)">
+            <template let-c="rowData" pTemplate type="body">
+                <span *ngIf="c.docente.apellido">{{c.docente.apellido + ', ' + c.docente.nombre}}</span>
+            </template>
+        </p-column>
         <p-column field="nombre" header="Comision" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="periodo.descripcion" header="Periodo" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
@@ -29,28 +33,34 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{comisionStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
+<!--
+    <comision-form [comision]="comision" [isNew]="isNew" [(visible)]="displayDialog"
+                   (onSave)="save()" (onCancel)="displayDialog=false" (onDelete)="delete()">
+    </comision-form>
+    -->
+
     <p-dialog header="Comision" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="comision">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="comision.nombre"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="entity.nombre"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="asignatura">Asignatura*</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas"
-                                [(ngModel)]="asignaturaSelected" [filter]="true" [style]="{width : '100%' }">
+                                [(ngModel)]="entity.asignatura" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="docente">Docente*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown  class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="docenteSelected"
+                    <p-dropdown  class="ui-grid-col-12" id="docente" [options]="docentes" [(ngModel)]="entity.docente"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -58,7 +68,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="periodo">Periodo*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="periodo" [options]="periodos" [(ngModel)]="periodoSelected"
+                    <p-dropdown class="ui-grid-col-12" id="periodo" [options]="periodos" [(ngModel)]="entity.periodo"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -72,4 +82,5 @@
             </div>
         </footer>
     </p-dialog>
+
 </div>
