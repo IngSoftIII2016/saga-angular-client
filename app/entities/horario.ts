@@ -32,7 +32,7 @@ export class Horario implements Entity {
     }
 
     public getDuracionDate(): Date {
-        return parseMySQLDate(this.duracion);
+        return parseMySQLTime(this.duracion);
     }
 
     public setDuracionDate(date: Date) {
