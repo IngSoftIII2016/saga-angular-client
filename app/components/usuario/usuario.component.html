@@ -14,7 +14,7 @@
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar">
     </div>
     <p-dataTable
-            [value]="usuarioStore.items | async"
+            [value]="store.items | async"
             selectionMode="single"
             [globalFilter]="gb"
             (onRowSelect)="onRowSelect($event)"
@@ -45,14 +45,6 @@
                 (sortFunction)="sort($event)">
         </p-column>
         <p-column
-                field="estado"
-                header="Estado"
-                [sortable]="true">
-            <template let-file="rowData" pTemplate type="body">
-                {{file.estado == 1 ? "Activo" : "Inactivo"}}
-            </template>
-        </p-column>
-        <p-column
                 field="telefono"
                 header="Telefono"
                 sortable="custom"
@@ -67,57 +59,41 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{usuarioStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
     <p-dialog header="Usuario" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="usuario">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre_usuario">Usuario*</label></div>
-                <div class="ui-grid-col-8"><input [disabled]="diseable"  pInputText id="nombre_usuario"  [(ngModel)]="usuario.nombre_usuario"/></div>
+                <div class="ui-grid-col-8"><input [disabled]="diseable"  pInputText id="nombre_usuario"  [(ngModel)]="entity.nombre_usuario"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre">Nombre*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="usuario.nombre"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="entity.nombre"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="apellido">Apellido*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="apellido" [(ngModel)]="usuario.apellido"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="apellido" [(ngModel)]="entity.apellido"/></div>
             </div>
              <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="apellido">Email*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="usuario.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="entity.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="telefono">Telefono</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="telefono" [(ngModel)]="usuario.telefono"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="telefono" [(ngModel)]="entity.telefono"/></div>
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label >Estado</label></div>
-                    <div *ngIf="!isNew" class="ui-grid-col-8"><p-radioButton [value]="1"  [(ngModel)]="usuario.estado"></p-radioButton>Activo</div>
-                    <div *ngIf="!isNew"  class="ui-grid-col-8"><p-radioButton  [value]="0"  [(ngModel)]="usuario.estado"></p-radioButton>Inactivo</div>          
-                    <div *ngIf="isNew" class="ui-grid-col-8"><p-radioButton [value]="1"    [(ngModel)]="selectedValue"  ></p-radioButton >Activo</div>
-               
-                </div>
-               
 
             <div  *ngIf="isNew" class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="contraseña">Contraseña*</label></div>
-                <div class="ui-grid-col-8"><input  pPassword type="password" [(ngModel)]="usuario.contrasenia"  /></div>
+                <div class="ui-grid-col-8"><input  pPassword type="password" [(ngModel)]="entity.contrasenia"  /></div>
 
             </div>
-            <!--
-            <div  *ngIf="isNew" class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="contraseña">Confirmar contraseña*</label></div>
-                <div class="ui-grid-col-8"><input pInputText  [(ngModel)]="usuario.contrasena"  required validateEqual="password" reverse="true" #password="ngModel"/></div>
-
-            </div>
-            -->
-
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

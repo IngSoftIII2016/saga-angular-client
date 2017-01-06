@@ -3,6 +3,7 @@ import {Grupo} from "../../entities/grupo";
 import {GrupoService} from "../../services/grupo.service";
 import {Message, ConfirmationService} from "primeng/components/common/api";
 import {GrupoStore} from "../../services/grupo.store";
+import {CRUD} from "../../commons/crud";
 
 
 
@@ -12,95 +13,29 @@ import {GrupoStore} from "../../services/grupo.store";
     selector: 'grupo',
     providers: [GrupoStore, ConfirmationService]
 })
-export class GrupoComponent {
-
-    grupo: Grupo = new Grupo();
-
-    msgs: Message[] = [];
-
-    isNew = false;
-
-    displayDialog: boolean;
-
-    constructor(private grupoStore: GrupoStore,  private confirmationService : ConfirmationService) { }
+export class GrupoComponent extends CRUD<Grupo, GrupoService, GrupoStore>{
 
 
-
-    showDialogToAdd() {
-        this.isNew = true;
-        this.grupo = new Grupo();
-        this.displayDialog = true;
-    }
-
-    onRowSelect(event) {
-        this.isNew = false;
-        this.grupo =new Grupo(event.data);
-        this.displayDialog = true;
-    }
-
-    save() {
-        this.grupoStore.save(this.grupo).subscribe(
-            guardada => {
-                this.displayDialog = false;
-                this.msgs.push(
-                    {
-                        severity:'success',
-                        summary:'Guardado',
-                        detail:'Se ha guardado el grupo '+ guardada.nombre + ' con exito!'
-                    })
-            },
-            error => {
-                this.msgs.push(
-                    {
-                        severity:'error',
-                        summary: error.json().error.error.title,
-                        detail: error.json().error.error.detail
-                    });
-            });
+    constructor(private grupoStore: GrupoStore,  private confirmationService : ConfirmationService) {
+        super(grupoStore, confirmationService);
     }
 
 
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el rol?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.grupoStore.delete(this.grupo).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity:'success',
-                                summary:'Exito',
-                                detail:'Se ha borrado el rol '+ borrada.nombre + ' con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity:'error',
-                                summary: error.json().error.error.title,
-                                detail: error.json().error.error.detail
-                            });
-                    }
-                );
-            }
-        });
+    protected getDefaultNewEntity(): Grupo {
+        return new Grupo();
     }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        console.log(qo);
-
-        this.grupoStore.mergeQueryOptions(qo);
+    protected getEntityFromEvent(event: any): Grupo {
+        return new Grupo(event.data);
     }
 
-    sort(event) {
-        this.grupoStore.setSorts([event]);
+    protected getEntityReferencedLabel(): string {
+        return 'el rol ' + this.entity.nombre  ;
     }
+
+    protected getSearchFields(): string[] {
+        return ['nombre', 'descripcion']
+    }
+
 
 }

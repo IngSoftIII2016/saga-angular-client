@@ -23,15 +23,9 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
 
     asignaturas: SelectItem[] = [];
 
-    //asignaturaSelected: Asignatura;
-
     periodos: SelectItem[] = [];
 
-    //periodoSelected: Periodo;
-
     docentes: SelectItem[] = [];
-
-    //docenteSelected: Docente;
 
     constructor(private comisionStore: ComisionStore,
                 private asignaturaService: AsignaturaService,
@@ -84,38 +78,7 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
     protected getSearchFields(): string[] {
         return ['nombre', 'asignatura.nombre', 'periodo.descripcion', 'docente.nombre', 'docente.apellido']
     }
-/*
-    showDialogToAdd() {
-        this.asignaturaSelected = this.asignaturas[0].value as Asignatura;
-        this.periodoSelected = this.periodos[0].value as Periodo;
-        this.docenteSelected = this.docentes[0].value as Docente;
-        super.showDialogToAdd();
-    }
-*/
-/*
-    protected onSelect(comision: Comision): void {
-        this.asignaturaSelected = comision.asignatura;
-        this.periodoSelected = comision.periodo;
-        this.docenteSelected = comision.docente;
 
-    }
-*/
-/*
-    protected onCreate(comision: Comision): Comision {
-        comision.asignatura = this.asignaturaSelected;
-        comision.periodo = this.periodoSelected;
-        comision.docente = this.docenteSelected;
-        return comision;
-    }
-*/
-/*
-    protected onUpdate(comision: Comision): Comision {
-        comision.asignatura = this.asignaturaSelected;
-        comision.periodo = this.periodoSelected;
-        comision.docente = this.docenteSelected;
-        return comision;
-    }
-*/
 }	/**
  * Created by Federico on 17/11/2016.
  */

@@ -6,6 +6,8 @@ import {Subject} from "rxjs";
 import {AulaService} from "../../services/aula.service";
 import {Aula} from "../../entities/aula";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
+import {EventoService} from "../../services/evento.service";
+import {CRUD} from "../../commons/crud";
 
 
 @Component({
@@ -14,192 +16,51 @@ import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
     selector: 'evento',
     providers:[EventoStore, AulaService, ConfirmationService]
 })
-export class EventoComponent {
-
-    validaciones: Message[] = [];
-
-    msgs: Message[] = [];
-
-    displayDialog: boolean;
-
-    evento: Evento= new Evento();
-
-    isNew: boolean;
+export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
     aulas: SelectItem[] = [];
 
-    aulaSelected: Aula;
-
-    fecha: Date;
+   /* fecha: Date;
     hora_inicio: Date;
     hora_fin: Date;
     es: any = CALENDAR_LOCALE_ES;
-
-    private searchTerms = new Subject<string>();
-
-    constructor(private eventoStore: EventoStore,  private aulaService: AulaService,  private confirmationService : ConfirmationService) { }
+*/
+    constructor(private eventoStore: EventoStore,
+                private aulaService: AulaService,
+                private confirmationService : ConfirmationService) {
+        super(eventoStore,confirmationService);
+    }
 
     ngOnInit() {
+        super.ngOnInit();
         var sel = this;
         this.aulaService.getAll().subscribe(aulas => {
-            aulas.forEach(aula => {
-                    sel.aulas.push({
-                            label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: new Aula (aula)
-                        }
-                    )
+            sel.aulas = aulas.map(aula => {
+                return {label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: aula}
                 }
             )
         });
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(terms =>
-                this.eventoStore.setLikes(terms.length > 0 ? {
-                    motivo: '*'+terms+'*', 'aula.nombre': '*'+terms+'*'} : {})
-    )
     }
 
-    showDialogToAdd() {
-        this.validaciones = [];
-        this.isNew = true;
-        this.evento = new Evento();
-        this.fecha = new Date();
-        this.hora_inicio = this.evento.getHoraInicioDate();
-        this.hora_fin = this.evento.getHoraFinDate();
-        this.aulaSelected = this.aulas[0].value;
-        this.displayDialog = true;
-    }
-
-    onRowSelect(event) {
-        this.validaciones = [];
-        this.isNew = false;
-        this.evento =new Evento(event.data);
-        this.fecha = this.evento.getFechaDate();
-        this.hora_inicio = this.evento.getHoraInicioDate();
-        this.hora_fin = this.evento.getHoraFinDate();
-        this.aulaSelected = new Aula(this.evento.aula);
-        this.displayDialog = true;
-    }
-
-    save() {
-        if (!this.hora_inicio || !this.hora_fin || !this.evento.motivo) {
-            this.validaciones[0] ={
-                severity:'error',
-                summary:'Error',
-                detail:'Complete los campos requeridos'
-            };
-        }
-        else {
-            this.evento.fecha = this.fecha.toISOString().split('T')[0];
-            this.evento.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
-            this.evento.hora_fin = this.hora_fin.toTimeString().split(' ')[0];
-            this.evento.aula = new Aula(this.aulaSelected);
-            if (this.isNew)
-                this.confirmationService.confirm({
-                    message: 'Estas seguro que desea agregar un evento?',
-                    header: 'Confirmar ',
-                    icon: 'fa ui-icon-warning',
-                    accept: () => {
-                        this.eventoStore.create(this.evento).subscribe(
-                            creada => {
-                                this.displayDialog = false;
-                                this.msgs.push(
-                                    {
-                                        severity: 'success',
-                                        summary: 'Creada',
-                                        detail: 'Se ha agregado el evento ' + creada.aula.nombre + ' con exito!'
-                                    })
-                            },
-                            error => {
-                                this.msgs.push(
-                                    {
-                                        severity: 'error',
-                                        summary: error.json().error.title,
-                                        detail: error.json().error.detail
-                                    });
-                            });
-                    }
-                });
-            //update
-            else
-                this.confirmationService.confirm({
-                    message: 'Estas seguro que desea modificar el evento?',
-                    header: 'Confirmar modificacion',
-                    icon: 'fa ui-icon-warning',
-                    accept: () => {
-                        this.eventoStore.update(this.evento).subscribe(
-                            guardada => {
-                                this.displayDialog = false;
-                                this.msgs.push(
-                                    {
-                                        severity: 'success',
-                                        summary: 'Guardada',
-                                        detail: 'Se han guardado los cambios a ' + guardada.aula.nombre + ' con exito!'
-                                    })
-                            },
-                            error => {
-                                this.msgs.push(
-                                    {
-                                        severity: 'error',
-                                        summary: error.json().error.title,
-                                        detail: error.json().error.detail
-                                    });
-                            });
-                    }
-                });
-        }
-    }
-
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el evento?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.eventoStore.delete(this.evento).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity:'success',
-                                summary:'Exito',
-                                detail:'Se ha borrado el evento '+ borrada.motivo + ' con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: error.json().error.title,
-                                detail: error.json().error.detail
-                            });
-                    }
-                );
-            }
+    protected getDefaultNewEntity(): Evento {
+        return new Evento({
+            aula: this.aulas[0].value as Aula
         });
     }
 
-    message(evento: string) {
-        this.msgs = [];
-        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Evento ' + evento + ' con exito!'});
+    protected getEntityFromEvent(event: any): Evento {
+        return new Evento(event.data);
     }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        console.log(qo);
-
-        this.eventoStore.mergeQueryOptions(qo);
+    protected getEntityReferencedLabel(): string {
+        return 'el evento del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.fecha ;
     }
 
-    sort(event) {
-        this.eventoStore.setSorts([event]);
+    protected getSearchFields(): string[] {
+        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'motivo']
     }
-    search(term: string): void {
-        this.searchTerms.next(term);
-    }
+
+
 
 }
 /**

@@ -1561,7 +1561,8 @@ body .layout-wrapper.layout-compact {
   body .layout-wrapper.layout-compact .layout-container .layout-menu > .nano > .nano-content > ul:last-child {
     margin-top: 14px; }
   body .layout-wrapper.layout-compact .ui-widget-content {
-    font-size: 14px; }
+    font-size: 14px;
+    color: black;}
   body .layout-wrapper.layout-compact .ui-widget-header {
     font-size: 14px; }
   body .layout-wrapper.layout-compact .fa {
