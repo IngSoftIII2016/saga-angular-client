@@ -4,6 +4,7 @@ import {Entity} from "../commons/entity";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es"
 
 import {parseMySQLDate, parseMySQLTime, toMySQLTime} from "../commons/utils";
+import {toHoraString} from "../commons/utils";
 
 export class Horario implements Entity {
     id: number = null;
@@ -37,6 +38,12 @@ export class Horario implements Entity {
 
     public setDuracionDate(date: Date) {
         this.duracion = toMySQLTime(date);
+    }
+
+    public toString(): string {
+        let inicio = this.getHoraInicioDate();
+        let fin = new Date(this.getHoraInicioDate().getTime() + this.getDuracionDate().getTime());
+        return this.diaString() + ' de ' + toHoraString(inicio) + ' a ' + toHoraString(fin);
     }
 
 }

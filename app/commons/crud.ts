@@ -51,6 +51,9 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return [];
     };
 
+    protected onOpenDialog(entity): void {
+    }
+
     protected onBeforeCreate(): boolean {
         return true
     };
@@ -64,12 +67,16 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     };
 
     protected onCreate(entity: E): E {
-        return entity
+        return this.onSave(entity);
     };
 
     protected onUpdate(entity: E): E {
-        return entity
+        return this.onSave(entity);
     };
+
+    protected onSave(entity: E): E {
+        return entity;
+    }
 
     protected onDelete(entity: E): E {
         return entity
@@ -122,7 +129,8 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         this.openDialog();
     }
 
-    protected openDialog() {
+    protected openDialog(){
+        this.onOpenDialog(this.entity);
         this.validaciones = [];
         this.displayDialog = true;
     }

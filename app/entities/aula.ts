@@ -11,4 +11,8 @@ export class Aula implements Entity {
     constructor(value : Object = {}) {
         Object.assign(this, value);
     }
+
+    toString(): string {
+        return this.nombre + ' ' + this.edificio.nombre;
+    }
 }

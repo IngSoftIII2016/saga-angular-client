@@ -107,9 +107,9 @@ const appRoutes: Routes = [
         path: 'usuario-rol',
         component: UsuarioGrupoComponent, canActivate: [AuthGuard]
     },
-    {path: '404', component: NotFoundComponent},
+    //{path: '404', component: NotFoundComponent},
 
-    {path: '**', redirectTo: '404'}
+    {path: '**', component: NotFoundComponent}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: true });

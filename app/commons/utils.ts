@@ -22,3 +22,11 @@ export function toMySQLDate(date: Date): string {
 export function toMySQLTime(date: Date): string {
     return moment(date).format('HH:mm:ss');
 }
+
+export function toFechaString(date: Date): string {
+    return moment(date).format('L');
+}
+
+export function toHoraString(date: Date): string {
+    return moment(date).format('LT')
+}
