@@ -9,8 +9,8 @@ import {CRUD} from "../../commons/crud";
 
 
 @Component({
-	templateUrl: 'app/components/periodo/periodo.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+	templateUrl: '/periodo.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
 	selector: 'periodo',
 	providers:[PeriodoStore, ConfirmationService]
 })

@@ -13,8 +13,8 @@ import {ComisionService} from "../../services/comision.service";
 
 
 @Component({
-    templateUrl: 'app/components/comision/comision.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    templateUrl: '/comision.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
     selector: 'comision',
     providers:[ComisionStore, AsignaturaService, PeriodoService,DocenteService, ConfirmationService]
 })

@@ -14,8 +14,8 @@ import {CRUD} from "../../commons/crud";
 //}
 
 @Component({
-    templateUrl: 'app/components/localidad/localidad.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    templateUrl: '/localidad.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
     selector: 'localidad',
     providers: [LocalidadStore, SedeService, ConfirmationService]
 })

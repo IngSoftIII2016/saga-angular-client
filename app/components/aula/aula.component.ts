@@ -11,8 +11,8 @@ import {CRUD} from "../../commons/crud";
 import {AulaService} from "../../services/aula.service";
 
 @Component({
-    templateUrl: 'app/components/aula/aula.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    templateUrl: '/aula.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
     selector: 'aula',
     providers: [AulaStore, EdificioService, ConfirmationService]
 })

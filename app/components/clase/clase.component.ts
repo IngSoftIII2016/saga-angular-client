@@ -11,8 +11,8 @@ import {ClaseService} from "../../services/clase.service";
 
 
 @Component({
-    templateUrl: 'app/components/clase/clase.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    templateUrl: '/clase.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
     selector: 'clase',
     providers:[ClaseStore,AulaService, ConfirmationService]
 })

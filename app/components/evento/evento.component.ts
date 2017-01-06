@@ -11,8 +11,8 @@ import {CRUD} from "../../commons/crud";
 
 
 @Component({
-    templateUrl: 'app/components/evento/evento.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    templateUrl: '/evento.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
     selector: 'evento',
     providers:[EventoStore, AulaService, ConfirmationService]
 })

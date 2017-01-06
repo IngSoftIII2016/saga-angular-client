@@ -11,8 +11,8 @@ import {DocenteService} from "../../services/docente.service";
 }
 */
 @Component({
-	templateUrl: 'app/components/docente/docente.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+	templateUrl: '/docente.component.html',
+    styleUrls: ['../../../resources/demo/css/dialog.css'],
 	selector: 'docente',
 	providers:[DocenteStore, ConfirmationService]
 })
