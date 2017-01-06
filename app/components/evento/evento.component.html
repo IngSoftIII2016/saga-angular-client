@@ -12,7 +12,7 @@
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="eventoStore.items | async" [globalFilter]="gb" selectionMode="single"
+    <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Eventos</header>
         <p-column field="aula.nombre" header="Aula"  sortable="custom" (sortFunction)="sort($event)"></p-column>
@@ -30,19 +30,19 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{eventoStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
     <p-dialog header="Evento" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="evento">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas" [(ngModel)]="aulaSelected"
+                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas" [(ngModel)]="entity.aula"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -50,7 +50,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha">Fecha*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="fecha" [(ngModel)]="fecha" [locale]="es" dateFormat="dd/mm/yy"
+                    <p-calendar id="fecha" [(ngModel)]="entity.fechaCalendar" [locale]="es" dateFormat="dd/mm/yy"
                                 readonlyInput="readonlyInput">
                     </p-calendar>
                 </div>
@@ -58,18 +58,18 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="hora_inicio" [(ngModel)]="hora_inicio" [timeOnly]="true" hourFormat="24"></p-calendar>
+                    <p-calendar id="hora_inicio" [(ngModel)]="entity.hora_inicio" [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="hora_fin">Hora Fin*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar  id="hora_fin" [(ngModel)]="hora_fin"  [timeOnly]="true" hourFormat="24"></p-calendar>
+                    <p-calendar  id="hora_fin" [(ngModel)]="entity.hora_fin"  [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="motivo">Motivo*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="evento.motivo"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="entity.motivo"/></div>
             </div>
         </div>
         <footer>

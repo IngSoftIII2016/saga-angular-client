@@ -14,7 +14,7 @@
     color: white !important;;
 }
 .guardar:hover{
-    background-color: #009b1e !important;;
+    background-color: #009b1e !important;
     color: white !important;
 }
 
@@ -23,7 +23,7 @@
     color: white !important;;
 }
 .yes{
-    background-color: #00ce21 !important;;
+    background-color: #00ce21 !important;
     color: white !important;
 }
 .no:hover {
@@ -31,6 +31,6 @@
     color: white !important;;
 }
 .yes:hover{
-    background-color: #009b1e !important;;
+    background-color: #009b1e !important;
     color: white !important;
 }

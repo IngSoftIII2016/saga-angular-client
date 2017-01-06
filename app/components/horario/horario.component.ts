@@ -15,6 +15,8 @@ import {Horario} from "../../entities/horario";
 import {Aula} from "../../entities/aula";
 import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
+import {CRUD} from "../../commons/crud";
+import {HorarioService} from "../../services/horario.service";
 
 
 @Component({
@@ -23,215 +25,63 @@ import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
     selector: 'horario',
     providers: [HorarioStore, ComisionService, AulaService, ConfirmationService]
 })
-export class HorarioComponent {
-
-    validaciones: Message[] = [];
-
-    msgs: Message[] = [];
-
-    displayDialog: boolean;
-
-    horario: Horario = new Horario();
-
-    isNew: boolean;
-
-    hora_inicio: Date;
-
-    duracion: Date;
-
-    es: any = CALENDAR_LOCALE_ES;
-
-    dias: SelectItem[] = [];
-
-    diaSelected: number;
+export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
 
     aulas: SelectItem[] = [];
 
-    aulaSelected: Aula;
-
     comisiones: SelectItem[] = [];
 
-    comisionSelected: Comision;
+    dias: SelectItem[] = [];
 
-    private searchTerms = new Subject<string>();
+    es = CALENDAR_LOCALE_ES;
 
     constructor(private horarioStore: HorarioStore,
                 private aulaService: AulaService,
                 private comisionService: ComisionService,
                 private confirmationService: ConfirmationService) {
+        super(horarioStore, confirmationService);
     }
 
     ngOnInit() {
+        super.ngOnInit();
         var self = this;
         this.aulaService.getAll().subscribe(aulas => {
-            aulas.forEach(aula => {
-                    self.aulas.push({
-                            label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: new Aula(aula)
-                        }
-                    )
-                }
+           self.aulas = aulas.map(aula => {
+                    return {label: aula.nombre + ' - ' + aula.capacidad + ' - ' + aula.edificio.nombre, value: aula}
+               }
             )
         });
         this.comisionService.getAll().subscribe(comisiones => {
-            comisiones.forEach(comision => {
-                    self.comisiones.push({
-                            label: comision.asignatura.nombre + ', ' + comision.periodo.descripcion,
-                            value: new Comision(comision)
-                        }
-                    )
+           self.comisiones = comisiones.map(comision => {
+                    return { label: comision.asignatura.nombre + ', ' + comision.periodo.descripcion,
+                            value: comision}
                 }
             )
         });
         for (let i = 1; i < 7; i++)
             this.dias.push({label: self.es.dayNames[i], value: i});
 
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(terms =>
-                this.horarioStore.setLikes(terms.length > 0 ?
-                    {
-                        'comision.asignatura.nombre': '*' + terms + '*',
-                        'aula.nombre': '*' + terms + '*',
-                        'comision.periodo.descripcion': '*' + terms + '*',
-                        'aula.edificio.nombre': '*' + terms + '*',
-                        'comision.docente.apellido': '*' + terms + '*',
-                        'comision.docente.nombre': '*' + terms + '*'
-                    } : {}))
-    }
+        }
 
-    showDialogToAdd() {
-        this.validaciones = [];
-        this.isNew = true;
-        this.horario = new Horario();
-        this.hora_inicio = this.horario.getHoraInicioDate();
-        this.duracion = this.horario.getDuracionDate();
-        this.displayDialog = true;
-        this.diaSelected = this.dias[0].value;
-        this.aulaSelected = this.aulas[0].value;
-        this.comisionSelected = this.comisiones[0].value;
-    }
-
-    onRowSelect(event) {
-        this.validaciones = [];
-        this.isNew = false;
-        this.horario = new Horario(event.data);
-        this.hora_inicio = this.horario.getHoraInicioDate();
-        this.duracion = this.horario.getDuracionDate();
-        this.diaSelected = this.horario.dia;
-        this.aulaSelected = new Aula(this.horario.aula);
-        this.comisionSelected = new Comision(this.horario.comision);
-        this.displayDialog = true;
-    }
-
-    save() {
-
-        this.horario.hora_inicio = this.hora_inicio.toTimeString().split(' ')[0];
-        this.horario.duracion = this.duracion.toTimeString().split(' ')[0];
-        this.horario.dia = this.diaSelected;
-        this.horario.aula = new Aula(this.aulaSelected);
-        this.horario.comision = new Comision(this.comisionSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el horario?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.horarioStore.create(this.horario).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado el horario con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar la comision?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.horarioStore.update(this.horario).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se ha guardado el horario con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-    }
-
-
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el horario?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.horarioStore.delete(this.horario).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity: 'success',
-                                summary: 'Exito',
-                                detail: 'Se ha borrado el horario con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: error.json().error.title,
-                                detail: error.json().error.detail
-                            });
-                    }
-                );
-            }
+    protected getDefaultNewEntity(): Horario {
+        return new Horario({
+            aula: this.aulas[0].value as Aula,
+            comision: this.comisiones[0].value as Comision
         });
     }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        console.log(qo);
-
-        this.horarioStore.mergeQueryOptions(qo);
+    protected getEntityFromEvent(event: any): Horario {
+        return new Horario(event.data);
     }
 
-    sort(event) {
-        this.horarioStore.setSorts([event]);
+    protected getEntityReferencedLabel(): string {
+        return 'el horario con dia ' + this.entity.dia + ' y hora ' + this.entity.hora_inicio;
     }
 
-    search(term: string): void {
-        this.searchTerms.next(term);
+    protected getSearchFields(): string[] {
+        return ['dia' , 'duracion', 'hora_inicio', 'aula.nombre', 'aula.edificio.nombre', 'comision.asignatura.nombre', 'comision.periodo.descripcion']
     }
+
 
 
 }

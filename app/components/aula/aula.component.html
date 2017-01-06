@@ -12,7 +12,7 @@
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="aulaStore.items | async" [globalFilter]="gb" selectionMode="single"
+    <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Aulas</header>
         <p-column field="nombre" header="Nombre" sortable="custom" (sortFunction)="sort($event)"></p-column>
@@ -29,28 +29,28 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{aulaStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
     <p-dialog header="Aulas" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="aula">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="nombre">Nombre*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="aula.nombre"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="entity.nombre"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="capacidad">Capacidad*</label></div>
-                <div class="ui-grid-col-8"><input pInputText type="number" id="capacidad" [(ngModel)]="aula.capacidad"/></div>
+                <div class="ui-grid-col-8"><input pInputText type="number" id="capacidad" [(ngModel)]="entity.capacidad"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="edificio">Edificio*</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown  class="ui-grid-col-12" id="edificio" [options]="edificios"
-                                [(ngModel)]="edificioSelected" [filter]="true" [style]="{width : '100%' }">
+                                [(ngModel)]="entity.edificio" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>

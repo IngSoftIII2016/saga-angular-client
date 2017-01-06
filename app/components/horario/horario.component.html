@@ -12,10 +12,10 @@
         <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="horarioStore.items | async" selectionMode="single"
+    <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header>Horarios</header>
-        <p-column header="Dia" sortable="custom" (sortFunction)="sort($event)">
+       <p-column header="Dia" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate type="body">
                 <span>{{es.dayNames[h.dia]}}</span>
             </template>
@@ -37,21 +37,21 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{horarioStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
 
     <p-dialog header="Horario" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="horario">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="comision">Comision*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="comision" [options]="comisiones" [(ngModel)]="comisionSelected"
+                    <p-dropdown class="ui-grid-col-12" id="comision" [options]="comisiones" [(ngModel)]="entity.comision"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -61,7 +61,7 @@
                     <label for="dia">Dia</label>
                 </div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="dia" [options]="dias" [(ngModel)]="diaSelected"
+                    <p-dropdown class="ui-grid-col-12" id="dia" [options]="dias" [(ngModel)]="entity.dia"
                                 [filter]="true" [style]="{width : '100%' }" required>
                     </p-dropdown>
                 </div>
@@ -75,21 +75,21 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="duracion">Duracion*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="duracion" [(ngModel)]="duracion" [timeOnly]="true" hourFormat="24"></p-calendar>
+                    <p-calendar id="duracion" [(ngModel)]="entity.duracion" [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas"
-                                [(ngModel)]="aulaSelected" [filter]="true" [style]="{width : '100%' }">
+                                [(ngModel)]="entity.aula" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="descripcion">Descripcion</label></div>
                 <div class="ui-grid-col-8">
-                    <input pInputText class="ui-grid-col-12" type="text" id="descripcion" [(ngModel)]="horario.descripcion"/>
+                    <input pInputText class="ui-grid-col-12" type="text" id="descripcion" [(ngModel)]="entity.descripcion"/>
                 </div>
             </div>
         </div>

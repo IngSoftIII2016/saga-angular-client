@@ -13,7 +13,7 @@
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
     <p-dataTable
-            [value]="periodoStore.items | async"
+            [value]="store.items | async"
             selectionMode="single"
             [globalFilter]="gb"
             (onRowSelect)="onRowSelect($event)"
@@ -32,32 +32,32 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{periodoStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
     <p-dialog header="Periodo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad"  *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="descripcion">Descripción*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="periodo.descripcion"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="descripcion" [(ngModel)]="entity.descripcion"/></div>
             </div>
 
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha_inicio">Fecha Inicio*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="fecha_inicio" [(ngModel)]="fechaInicio" [locale]="es" dateFormat="dd/mm/yy"
+                    <p-calendar id="fecha_inicio" [(ngModel)]="entity.fechaInicio" [locale]="es" dateFormat="dd/mm/yy"
                                 readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="fecha_fin">Fecha Fin*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="fecha_fin" [(ngModel)]="fechaFin" [locale]="es" dateFormat="dd/mm/yy"
+                    <p-calendar id="fecha_fin" [(ngModel)]="fecha_fin" [locale]="es" dateFormat="dd/mm/yy"
                                 readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>

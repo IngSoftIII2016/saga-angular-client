@@ -7,6 +7,8 @@ import {Edificio} from "../../entities/edificio";
 import {Observable, Subject} from "rxjs";
 import {forEach} from "@angular/router/src/utils/collection";
 import {QueryOptions} from "../../commons/generic.service";
+import {CRUD} from "../../commons/crud";
+import {AulaService} from "../../services/aula.service";
 
 @Component({
     templateUrl: 'app/components/aula/aula.component.html',
@@ -14,180 +16,48 @@ import {QueryOptions} from "../../commons/generic.service";
     selector: 'aula',
     providers: [AulaStore, EdificioService, ConfirmationService]
 })
-export class AulaComponent {
+export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
 
-    validaciones: Message[] = [];
-
-    msgs: Message[] = [];
-
-    displayDialog: boolean;
-
-    aula: Aula = new Aula();
-
-    isNew: boolean;
 
     edificios: SelectItem[] = [];
 
-    edificioSelected: Edificio ;
 
-    private searchTerms = new Subject<string>();
 
     constructor(private aulaStore: AulaStore,
                 private edificioService: EdificioService,
                 private confirmationService: ConfirmationService) {
+        super(aulaStore,confirmationService);
     }
 
     ngOnInit() {
+        super.ngOnInit();
         var sel = this;
-        this.edificioService.getAll().subscribe(edificios => {
-            edificios.forEach(edificio => {
-                    sel.edificios.push({
-                            label: edificio.nombre + ' - ' + edificio.localidad.nombre, value: new Edificio (edificio)
-                        }
-                    )
-                }
-            )
-        });
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(terms =>
-                this.aulaStore.setLikes(terms.length > 0 ? {
-                    nombre: '*'+terms+'*',
-                    'edificio.nombre' : '*'+terms+'*',
-                    'edificio.localidad.nombre' : '*'+terms+'*',
-                } : {}))
-    }
-
-    showDialogToAdd() {
-        this.validaciones = [];
-        this.isNew = true;
-        this.aula = new Aula();
-        this.edificioSelected = this.edificios[0].value;
-        this.displayDialog = true;
-    }
-
-    onRowSelect(event) {
-        this.validaciones = [];
-        this.isNew = false;
-        this.aula = new Aula(event.data);
-        this.edificioSelected = new Edificio (this.aula.edificio);
-        this.displayDialog = true;
-    }
-
-    save() {
-        if (!this.aula.nombre || !this.aula.capacidad) {
-            this.validaciones.pop();
-            this.validaciones.push({
-                severity:'error',
-                summary:'Error',
-                detail:'Complete los campos requeridos'
+            this.edificioService.getAll().subscribe(edificios => {
+                sel.edificios= edificios.map(edificio => {
+                        return { label: edificio.nombre + ', ' + edificio.localidad.nombre, value: edificio}
+                    }
+                )
             });
-        }
-        else {
-            this.aula.edificio = new Edificio(this.edificioSelected);
-            if (this.isNew)
-                this.confirmationService.confirm({
-                    message: 'Estas seguro que desea agregar el aula?',
-                    header: 'Confirmar ',
-                    icon: 'fa ui-icon-warning',
-                    accept: () => {
-                        this.aula.ubicacion = 0;
-                        this.aulaStore.create(this.aula).subscribe(
-                            creada => {
-                                this.displayDialog = false;
-                                this.msgs.push(
-                                    {
-                                        severity: 'success',
-                                        summary: 'Creada',
-                                        detail: 'Se ha agregado el aula ' + creada.nombre + ' con exito!'
-                                    })
-                            },
-                            error => {
-                                this.msgs.push(
-                                    {
-                                        severity: 'error',
-                                        summary: error.json().error.title,
-                                        detail: error.json().error.detail
-                                    });
-                            });
-                    }
-                });
-            //update
-            else
-                this.confirmationService.confirm({
-                    message: 'Estas seguro que desea modificar el aula?',
-                    header: 'Confirmar modificacion',
-                    icon: 'fa ui-icon-warning',
-                    accept: () => {
-                        this.aulaStore.update(this.aula).subscribe(
-                            guardada => {
-                                this.displayDialog = false;
-                                this.msgs.push(
-                                    {
-                                        severity: 'success',
-                                        summary: 'Guardada',
-                                        detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
-                                    })
-                            },
-                            error => {
-                                this.msgs.push(
-                                    {
-                                        severity: 'error',
-                                        summary: error.json().error.title,
-                                        detail: error.json().error.detail
-                                    });
-                            });
-                    }
-                });
-        }
     }
 
-
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el aula?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.aulaStore.delete(this.aula).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity: 'success',
-                                summary: 'Borrado',
-                                detail: 'Se ha borrado el ' + borrada.nombre + ' con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: error.json().error.title,
-                                detail: error.json().error.detail
-                            });
-                    }
-                );
-            }
+    protected getDefaultNewEntity(): Aula {
+        return new Aula({
+            edificio: this.edificios[0].value as Edificio
         });
     }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        this.aulaStore.mergeQueryOptions(qo);
+    protected getEntityFromEvent(event: any): Aula {
+        return new Aula(event.data);
     }
 
-    sort(event) {
-        this.aulaStore.setSorts([event]);
+    protected getEntityReferencedLabel(): string {
+        return 'el aula ' + this.entity.nombre ;
     }
 
-    search(term: string): void {
-        this.searchTerms.next(term);
+    protected getSearchFields(): string[] {
+        return ['nombre' , 'capacidad', 'edificio.nombre', 'edificio.localidad.nombre']
     }
+
 
 }
 /**

@@ -5,6 +5,8 @@ import {EdificioStore} from "../../services/edificio.store";
 import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
 import {Subject} from "rxjs";
 import {Localidad} from "../../entities/localidad";
+import {CRUD} from "../../commons/crud";
+import {EdificioService} from "../../services/edificio.service";
 
 @Component({
 	templateUrl: 'app/components/edificio/edificio.component.html',
@@ -12,184 +14,44 @@ import {Localidad} from "../../entities/localidad";
 	selector: 'edificio',
 	providers:[EdificioStore, LocalidadService, ConfirmationService]
 })
-export class EdificioComponent {
-
-    validaciones: Message[] = [];
-
-    msgs: Message[] = [];
-
-    displayDialog: boolean;
-
-    edificio: Edificio = new Edificio();
-
-    isNew: boolean;
+export class EdificioComponent  extends CRUD<Edificio, EdificioService, EdificioStore>{
 
     localidades: SelectItem[] = [];
-
-    localidadSelected: Localidad;
-
-    private searchTerms = new Subject<string>();
 
     constructor(private edificioStore: EdificioStore,
                 private localidadService: LocalidadService,
                 private confirmationService: ConfirmationService) {
+        super(edificioStore,confirmationService);
     }
 
     ngOnInit() {
+        super.ngOnInit();
         var sel = this;
         this.localidadService.getAll().subscribe(localidades => {
-            localidades.forEach(localidad => {
-                    sel.localidades.push({
-                            label: localidad.nombre + ' - ' + localidad.sede.nombre, value: new Localidad(localidad)
-                        }
-                    )
+            sel.localidades = localidades.map(localidad => {
+                return { label: localidad.nombre + ' - ' + localidad.sede.nombre, value: localidad}
                 }
             )
         });
-        this.searchTerms
-            .debounceTime(300)
-            .distinctUntilChanged()
-            .subscribe(terms =>
-                this.edificioStore.setLikes(terms.length > 0 ? {
-                    nombre: '*'+terms+'*',
-                    'localidad.nombre': '*'+terms+'*',
-                    'localidad.sede.nombre': '*'+terms+'*'} : {}))
     }
 
-    showDialogToAdd() {
-        this.validaciones = [];
-        this.isNew = true;
-        this.edificio = new Edificio();
-        this.localidadSelected = this.localidades[0].value;
-        this.displayDialog = true;
-
+    protected getDefaultNewEntity(): Edificio {
+        return new Edificio({
+            localidad: this.localidades[0].value as Localidad}
+        );
     }
 
-    onRowSelect(event) {
-        this.validaciones = [];
-        this.isNew = false;
-        this.displayDialog = true;
-        this.edificio = new Edificio(event.data);
-        this.localidadSelected =  new Localidad(this.edificio.localidad);
-
+    protected getEntityFromEvent(event: any): Edificio {
+        return new Edificio(event.data);
     }
 
-    save() {
-        if (!this.edificio.nombre) {
-            this.validaciones[0] = {
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Complete los campos requeridos'
-            };
-        }
-        else {
-        this.edificio.localidad = new Localidad(this.localidadSelected);
-        if (this.isNew)
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea agregar el edificio?',
-                header: 'Confirmar ',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.edificioStore.create(this.edificio).subscribe(
-                        creada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Creada',
-                                    detail: 'Se ha agregado el edificio ' + creada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-        //update
-        else
-            this.confirmationService.confirm({
-                message: 'Estas seguro que desea modificar el edificio?',
-                header: 'Confirmar modificacion',
-                icon: 'fa ui-icon-warning',
-                accept: () => {
-                    this.edificioStore.update(this.edificio).subscribe(
-                        guardada => {
-                            this.displayDialog = false;
-                            this.msgs.push(
-                                {
-                                    severity: 'success',
-                                    summary: 'Guardada',
-                                    detail: 'Se han guardado los cambios a ' + guardada.nombre + ' con exito!'
-                                })
-                        },
-                        error => {
-                            console.log(error.json());
-                            this.msgs.push(
-                                {
-                                    severity: 'error',
-                                    summary: error.json().error.title,
-                                    detail: error.json().error.detail
-                                });
-                        });
-                }
-            });
-        }
+    protected getEntityReferencedLabel(): string {
+        return 'el edificio ' + this.entity.nombre + ' de la localidad de ' + this.entity.localidad.nombre + ' ';
     }
 
-    delete() {
-        this.confirmationService.confirm({
-            message: 'Estas seguro que desea eliminar el edificio?',
-            header: 'Confirmar eliminacion',
-            icon: 'fa ui-icon-delete',
-            accept: () => {
-                this.edificioStore.delete(this.edificio).subscribe(
-                    borrada => {
-                        this.displayDialog = false;
-                        this.msgs.push(
-                            {
-                                severity: 'success',
-                                summary: 'Borrado',
-                                detail: 'Se ha borrado el ' + borrada.nombre + ' con exito!'
-                            })
-                    },
-                    error => {
-                        this.msgs.push(
-                            {
-                                severity: 'error',
-                                summary: error.json().error.title,
-                                detail: error.json().error.detail
-                            });
-                    }
-                );
-            }
-        });
+    protected getSearchFields(): string[] {
+        return ['nombre', 'localidad.nombre', 'localidad.sede.nombre']
     }
 
-    message(evento: string) {
-        this.msgs = [];
-        this.msgs.push({severity: 'success', summary: 'Exito', detail: 'Edificio ' + evento + ' con exito!'});
-    }
 
-    pageChange(event) {
-        let qo = {
-            size: event.rows,
-            page: event.page + 1
-        };
-        console.log(qo);
-
-        this.edificioStore.mergeQueryOptions(qo);
-    }
-
-    sort(event) {
-        this.edificioStore.setSorts([event]);
-    }
-
-    search(term: string): void {
-        this.searchTerms.next(term);
-    }
 }

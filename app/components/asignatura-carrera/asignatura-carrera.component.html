@@ -13,11 +13,17 @@
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
                placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
-    <p-dataTable [value]="asignaturaCarreraStore.items | async" selectionMode="single"
+    <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header>Aulas</header>
+        <header  style="height:14px;">
+            <div class="ui-grid-col-7">Planes de estudios</div>
+            <div class="ui-grid-col-5">
+                <div class="ui-grid-col-2"><label >Filtrar</label></div>
+           <p-dropdown class="ui-grid-col-10" id="carrerafiltro" (onChange)="filterChange(carreras)" [options]="carreras"   [filter]="true" [style]="{width : '100%' }">
+           </p-dropdown>
+            </div>
+        </header>
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="carrera.nombre" header="Carrera" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column header="Regimen" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate type="body">
@@ -34,41 +40,41 @@
     <p-paginator
             styleClass="ui-paginator-bottom"
             rows="10"
-            totalRecords="{{asignaturaCarreraStore.service.totalRows | async}}"
+            totalRecords="{{store.service.totalRows | async}}"
             [rowsPerPageOptions]="[5,10,20]"
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
-    <p-dialog header="Planes de estudios" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="asignaturaCarrera">
+    <p-dialog header="Plan de estudio" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="asignatura">Asignatura*</label></div>
+                <div class="ui-grid-col-4"><label for="carrera">Carrera</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" [disabled]="diseable" id="asignatura" [options]="asignaturas" [(ngModel)]="asignaturaSelected" [filter]="true" [style]="{width : '100%' }">
+                    <p-dropdown class="ui-grid-col-12" [disabled]="true" id="carrera" [options]="carreras"
+                                [(ngModel)]="entity.carrera" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="carrera">Carrera*</label></div>
+                <div class="ui-grid-col-4"><label for="asignatura">Asignatura</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" [disabled]="diseable" id="carrera" [options]="carreras"
-                                [(ngModel)]="carreraSelected" [filter]="true" [style]="{width : '100%' }">
+                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas" [(ngModel)]="entity.asignatura" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="anio">Año*</label></div>
-                <div class="ui-grid-col-8"><input pInputText type="number" id="anio" [(ngModel)]="asignaturaCarrera.anio"/></div>
+                <div class="ui-grid-col-8"><input pInputText type="number" id="anio" [(ngModel)]="entity.anio"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
                     <label for="regimen">Regimen*</label>
                 </div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="regimen" [options]="regimenes" [(ngModel)]="regimenSelected"
+                    <p-dropdown class="ui-grid-col-12" id="regimen" [options]="regimenes" [(ngModel)]="entity.regimen"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
