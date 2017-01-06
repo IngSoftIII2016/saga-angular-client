@@ -15,8 +15,8 @@ import {CRUD} from "../../commons/crud";
 import {AsignaturaCarreraService} from "../../services/asignatura-carrera.service";
 
 @Component({
-    templateUrl: '/asignatura-carrera.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+    templateUrl: 'app/components/asignatura-carrera/asignatura-carrera.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'asignatura-carrera',
     providers: [AsignaturaCarreraStore, CarreraService,AsignaturaService, ConfirmationService]
 })

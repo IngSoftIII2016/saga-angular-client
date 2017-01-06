@@ -9,8 +9,8 @@ import {CRUD} from "../../commons/crud";
 import {EdificioService} from "../../services/edificio.service";
 
 @Component({
-	templateUrl: '/edificio.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+	templateUrl: 'app/components/edificio/edificio.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'edificio',
 	providers:[EdificioStore, LocalidadService, ConfirmationService]
 })

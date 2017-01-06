@@ -7,8 +7,8 @@ import {CRUD} from "../../commons/crud";
 import {SedeService} from "../../services/sede.service";
 
 @Component({
-	templateUrl: '/sede.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+	templateUrl: 'app/components/sede/sede.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'sede',
 	providers:[SedeStore, ConfirmationService]
 })

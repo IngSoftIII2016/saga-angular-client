@@ -11,8 +11,8 @@ import {ClaseService} from "../../services/clase.service";
 
 
 @Component({
-    templateUrl: '/clase.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+    templateUrl: 'app/components/clase/clase.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'clase',
     providers:[ClaseStore,AulaService, ConfirmationService]
 })
@@ -54,7 +54,7 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'la clase del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.fecha ;
+        return 'la clase del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.fecha;
     }
 
     protected getSearchFields(): string[] {

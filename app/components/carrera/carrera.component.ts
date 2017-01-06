@@ -14,8 +14,8 @@ import {CarreraService} from "../../services/carrera.service";
 
 
 @Component({
-	templateUrl: '/carrera.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+	templateUrl: 'app/components/carrera/carrera.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'carrera',
 	providers:[CarreraStore,ConfirmationService, AsignaturaCarreraStore]
 })

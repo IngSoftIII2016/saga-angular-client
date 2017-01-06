@@ -12,8 +12,8 @@ import {CRUD} from "../../commons/crud";
 
 
 @Component({
-    templateUrl: '/usuario.component.html',
-    styleUrls: ['../../../resources/demo/css/dialog.css'],
+    templateUrl: 'app/components/usuario/usuario.component.html',
+    styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'usuario',
     providers: [UsuarioStore,UsuarioGrupoStore, ConfirmationService]
 })
