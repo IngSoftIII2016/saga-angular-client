@@ -20,11 +20,14 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
     aulas: SelectItem[] = [];
 
-   /* fecha: Date;
+    fecha: Date;
+
     hora_inicio: Date;
+
     hora_fin: Date;
+
     es: any = CALENDAR_LOCALE_ES;
-*/
+
     constructor(private eventoStore: EventoStore,
                 private aulaService: AulaService,
                 private confirmationService : ConfirmationService) {
@@ -58,6 +61,19 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
     protected getSearchFields(): string[] {
         return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'motivo']
+    }
+
+    protected onOpenDialog(evento: Evento): void {
+        this.hora_inicio = evento.getHoraInicioDate();
+        this.hora_fin = evento.getHoraFinDate();
+        this.fecha = evento.getFechaDate();
+    }
+
+    protected onSave(evento: Evento): Evento {
+        evento.setHoraInicioDate(this.hora_inicio);
+        evento.setHoraFinDate(this.hora_fin);
+        evento.setFechaDate(this.fecha);
+        return evento;
     }
 
 

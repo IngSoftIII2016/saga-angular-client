@@ -16,8 +16,9 @@ import {CRUD} from "../../commons/crud";
 })
 export class PeriodoComponent extends CRUD<Periodo, PeriodoService, PeriodoStore>{
 
-    fechaInicio: Date;
-    fechaFin: Date;
+    fecha_inicio: Date;
+
+    fecha_fin: Date;
 
     es: any = CALENDAR_LOCALE_ES;
 
@@ -47,5 +48,15 @@ export class PeriodoComponent extends CRUD<Periodo, PeriodoService, PeriodoStore
         return ['nombre' , 'fecha_inicio', 'fecha_fin']
     }
 
+    protected onOpenDialog(periodo: Periodo): void {
+        this.fecha_inicio = periodo.getFechaInicioDate();
+        this.fecha_fin = periodo.getFechaFinDate();
+    }
+
+    protected onSave(periodo: Periodo): Periodo {
+        periodo.setFechaInicioDate(this.fecha_inicio);
+        periodo.setFechaFinDate(this.fecha_fin);
+        return periodo;
+    }
 
 }	

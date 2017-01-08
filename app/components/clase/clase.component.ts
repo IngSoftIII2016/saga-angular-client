@@ -60,7 +60,18 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     protected getSearchFields(): string[] {
         return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
     }
+    protected onOpenDialog(clase: Clase): void {
+        this.hora_inicio = clase.getHoraInicioDate();
+        this.hora_fin = clase.getHoraFinDate();
+        this.fecha = clase.getFechaDate();
+    }
 
+    protected onSave(clase: Clase): Clase {
+        clase.setHoraInicioDate(this.hora_inicio);
+        clase.setHoraFinDate(this.hora_fin);
+        clase.setFechaDate(this.fecha);
+        return clase;
+    }
 
 }
 /**

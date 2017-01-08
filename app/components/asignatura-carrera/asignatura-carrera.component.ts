@@ -26,11 +26,8 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     carreras: SelectItem[] = [];
 
-    //carreraSelected: Carrera;
 
     asignaturas: SelectItem[] = [];
-
-    //asignaturaSelected: Asignatura;
 
     regimenes: SelectItem[] = [];
 
