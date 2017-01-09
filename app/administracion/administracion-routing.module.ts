@@ -127,4 +127,4 @@ const adminRoutes: Routes = [
         RouterModule
     ]
 })
-export class AdministracionModule {}
+export class AdministracionRoutingModule {}

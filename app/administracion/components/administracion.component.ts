@@ -7,4 +7,5 @@ import {Component} from "@angular/core";
     styleUrls: ['app/administracion/components/administracion.component.css'],
     selector: 'administracion'
 })
-export class AdministracionComponent {}
+export class AdministracionComponent {
+}

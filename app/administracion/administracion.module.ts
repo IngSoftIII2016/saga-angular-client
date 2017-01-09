@@ -27,7 +27,6 @@ import {
     UsuarioGrupoComponent
 } from "../components";
 
-import {AppComponent} from "../components/app.component";
 import {HttpModule} from "@angular/http";
 import {PasswordModule} from "primeng/components/password/password";
 import {RadioButtonModule} from "primeng/components/radiobutton/radiobutton";
@@ -60,9 +59,13 @@ import {ConfirmationService} from "primeng/components/common/api";
 import {UsuarioService} from "../services/usuario.service";
 import {UsuarioGrupoService} from "../services/usuario-grupo.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
+import {AdministracionComponent} from "./components/administracion.component";
+import {AdministracionRoutingModule} from "./administracion-routing.module";
 
 @NgModule({
     imports: [
+        AdministracionRoutingModule,
+        CommonModule,
         FormsModule,
         HttpModule,
         InputTextModule,
@@ -80,7 +83,7 @@ import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.co
         PasswordModule
     ],
     declarations: [
-        AppComponent,
+        AdministracionComponent,
         AsignaturaComponent,
         AsignaturaCarreraComponent,
         AulaComponent,

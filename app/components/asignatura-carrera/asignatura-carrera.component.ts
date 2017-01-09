@@ -10,7 +10,6 @@ import {Carrera} from "../../entities/carrera";
 import {Subject} from "rxjs";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {Asignatura} from "../../entities/asignatura";
-import {AsignaturaCarreraStore} from "../../services/asignatura-carrera.store";
 import {CRUD} from "../../commons/crud";
 import {AsignaturaCarreraService} from "../../services/asignatura-carrera.service";
 

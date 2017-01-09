@@ -35,10 +35,11 @@ const appRoutes: Routes = [
         path: 'asignaturas',
         component: AsignaturaComponent, canActivate: [AuthGuard]
     },
-    {
+/*    {
         path: 'composite-asignaturas',
         component: CompositeAsignaturaComponent, canActivate: [AuthGuard]
     },
+    */
     {
         path: 'asignatura-carrera',
         component: AsignaturaCarreraComponent, canActivate: [AuthGuard]

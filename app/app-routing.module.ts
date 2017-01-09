@@ -24,7 +24,6 @@ import { ComisionComponent } from "./components/comision/comision.component";
 import { AsignaturaCarreraComponent } from "./components/asignatura-carrera/asignatura-carrera.component";
 import { UsuarioGrupoComponent } from "./components/usuario-grupo/usuario-grupo.component";
 import { HorarioComponent } from "./components/horario/horario.component";
-import { CompositeAsignaturaComponent } from "./components/composite-asignatura/composite-asignatura.component";
 
 const appRoutes: Routes = [
     {
@@ -33,13 +32,13 @@ const appRoutes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [LoginGuard]
+    },
+/*    {
         path: 'asignaturas',
         component: AsignaturaComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'composite-asignaturas',
-        component: CompositeAsignaturaComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -102,11 +101,7 @@ const appRoutes: Routes = [
         component: HorarioComponent,
         canActivate: [AuthGuard]
     },
-    {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [LoginGuard]
-    },
+
     {
         path: 'periodos',
         component: PeriodoComponent,
@@ -130,7 +125,7 @@ const appRoutes: Routes = [
     {
         path: '**',
         component: NotFoundComponent
-    }
+    }*/
 ];
 
 @NgModule({

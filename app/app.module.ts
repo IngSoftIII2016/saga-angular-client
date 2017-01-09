@@ -4,8 +4,6 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID } from '@angular/core';
 
-
-
 import {
     InputTextModule,
     DataTableModule,
@@ -31,12 +29,8 @@ import {
 
 import {AuthenticationService} from "./services/authentication.service";
 
-import {TimelineDaySchedule} from "./components/grilla/timeline-day-schedule.component";
-
 import {AppRoutingModule} from "./app-routing.module";
 import {AdministracionModule} from "./administracion/administracion.module";
-
-
 
 @NgModule({
   imports: [
@@ -60,6 +54,7 @@ import {AdministracionModule} from "./administracion/administracion.module";
       PasswordModule
   ],
   declarations: [
+      AppComponent,
       LoginComponent,
       NotFoundComponent
   ],

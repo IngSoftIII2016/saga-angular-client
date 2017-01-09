@@ -19,5 +19,4 @@ export class AsignaturaService extends GenericService<Asignatura> {
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions();
     }
-
 }
