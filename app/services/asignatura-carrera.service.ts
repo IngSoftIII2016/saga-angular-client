@@ -1,16 +1,17 @@
 import {Injectable} from "@angular/core";
-import {RelationService} from "../commons/RelationService";
+import {RelationService} from "../commons/relation.service";
 import {AsignaturaCarrera} from "../entities/asignatura-carrera";
 import {QueryOptions} from "../commons/generic.service";
 import {Http} from "@angular/http";
+import {Router} from "@angular/router";
 /**
  * Created by juan on 24/11/16.
  */
 @Injectable()
 export class AsignaturaCarreraService extends RelationService<AsignaturaCarrera> {
 
-    constructor(http: Http) {
-        super(http)
+    constructor(http: Http, router: Router) {
+        super(http, router)
     }
 
     protected getResourcePath(): string {

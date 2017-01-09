@@ -7,6 +7,7 @@ import {GenericService} from "../commons/generic.service";
 import {Aula} from "../entities/aula";
 import {Edificio} from "../entities/edificio";
 import {QueryOptions} from "../commons/generic.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AulaService extends GenericService<Aula> {
@@ -14,8 +15,8 @@ export class AulaService extends GenericService<Aula> {
     private url = 'http://localhost/saga/api/aulas';
     private options = new BaseRequestOptions();
 
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, router: Router) {
+        super(http, router);
     }
 
     protected getResourcePath(): string {

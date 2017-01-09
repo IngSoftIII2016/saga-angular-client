@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Asignatura} from "../entities/asignatura";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AsignaturaService extends GenericService<Asignatura> {
 
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, router: Router) {
+        super(http, router);
     }
 
     protected getResourcePath(): string {

@@ -35,87 +35,87 @@ const adminRoutes: Routes = [
     {
         path: 'asignaturas',
         component: AsignaturaComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'asignatura-carrera',
         component: AsignaturaCarreraComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'aulas',
         component: AulaComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'carreras',
         component: CarreraComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'clases',
         component: ClaseComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'comision',
         component: ComisionComponent,
-        canActivate: [AuthGuard]
+  //      canActivate: [AuthGuard]
     },
     {
         path: 'docentes',
         component: DocenteComponent ,
-        canActivate: [AuthGuard]
+ //       canActivate: [AuthGuard]
     },
     {
         path: 'edificios',
         component: EdificioComponent ,
-        canActivate: [AuthGuard]
+  //      canActivate: [AuthGuard]
     },
     {
         path: 'eventos',
         component: EventoComponent,
-        canActivate: [AuthGuard]
+    //    canActivate: [AuthGuard]
     },
     {
         path: 'grilla',
         component: GrillaComponent,
-        canActivate: [AuthGuard]
+      //  canActivate: [AuthGuard]
     },
     {
         path: 'roles',
         component: GrupoComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: 'localidades',
         component: LocalidadComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: 'horarios',
         component: HorarioComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: 'periodos',
         component: PeriodoComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'usuarios',
         component: UsuarioComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'sedes',
         component: SedeComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     },
     {
         path: 'usuario-rol',
         component: UsuarioGrupoComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     }
 ];
 

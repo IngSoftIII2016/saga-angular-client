@@ -5,12 +5,13 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Horario} from "../entities/horario";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class HorarioService extends GenericService<Horario> {
 
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, router: Router) {
+        super(http, router);
     }
 
     protected getResourcePath(): string {

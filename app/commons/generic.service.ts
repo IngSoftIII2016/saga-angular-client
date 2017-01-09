@@ -1,10 +1,12 @@
 import {Observable, BehaviorSubject} from "rxjs";
 import {
     RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http,
-    URLSearchParams
+    URLSearchParams, Response
 } from "@angular/http";
 import {Inject, Injectable} from "@angular/core";
 import {Entity} from "./entity";
+import {Router} from "@angular/router";
+import _ = core._;
 
 /**
  * Created by juan on 12/11/16.
@@ -37,8 +39,7 @@ export abstract class GenericService<T extends Entity> {
 
     private rowCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
-
-    constructor(protected http: Http) {
+    constructor(protected http: Http, protected router: Router) {
         this.totalRows = this.rowCount.asObservable().distinctUntilChanged();
     }
 
@@ -50,7 +51,7 @@ export abstract class GenericService<T extends Entity> {
         let reqOptions = this.getQueryRequestOptions(queryOptions);
         reqOptions.url = this.baseUrl + this.getResourcePath();
         let req = new Request(reqOptions);
-        return this.http.request(req)
+        return this.intercept(this.http.request(req))
             .map(res => res.json())
             .do(json => this.rowCount.next(json.rowCount))
             .map(json => json.data);
@@ -66,14 +67,14 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Get;
         reqOptions.url += '/' + id.toString();
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
     }
 
     private getRowsCount(): Observable<number> {
         let reqOptions = this.getBaseRequestOptions();
         reqOptions.url += '/0';
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as number);
+        return this.intercept(this.http.request(req)).map(res => res.json().data as number);
     }
 
     public create(t: T): Observable<T> {
@@ -81,7 +82,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Post;
         reqOptions.body = JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
     }
 
     public update(t: T): Observable<T> {
@@ -89,7 +90,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Put;
         reqOptions.body = JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
     }
 
     public delete(t: T): Observable<T> {
@@ -97,7 +98,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.url += '/' + t.id;
         reqOptions.method = RequestMethod.Delete;
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
     }
 
     protected getBaseRequestOptions(): RequestOptions {
@@ -147,5 +148,17 @@ export abstract class GenericService<T extends Entity> {
             reqOptions.search.set('like', likes.join(','));
 
         return reqOptions;
+    }
+
+    intercept(observable: Observable<Response>): Observable<Response> {
+        return observable.catch((err, source) => {
+            if (err.status  == 401 ) {
+                this.router.navigate(['/login']);
+                return Observable.empty();
+            } else {
+                return Observable.throw(err);
+            }
+        });
+
     }
 }

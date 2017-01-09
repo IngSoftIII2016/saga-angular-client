@@ -25,7 +25,7 @@
         </header>
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column header="Regimen" sortable="custom" (sortFunction)="sort($event)">
+        <p-column field="regimen" header="Regimen" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate type="body">
                 <span>{{regimenesTabla[h.regimen]}}</span>
             </template>

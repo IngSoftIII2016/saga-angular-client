@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {GenericService} from "../commons/generic.service";
 import {QueryOptions} from "../commons/generic.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class SedeService extends GenericService<Sede> {
 
-    constructor(@Inject(Http) http: Http) {
-        super(http);
+    constructor(http: Http, router: Router) {
+        super(http, router);
     }
 
     protected getResourcePath(): string {

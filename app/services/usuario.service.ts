@@ -4,12 +4,13 @@ import {Headers, Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Usuario} from "../entities/usuario";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class UsuarioService extends GenericService<Usuario> {
 
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, router: Router) {
+        super(http, router);
     }
 
     protected getResourcePath(): string {

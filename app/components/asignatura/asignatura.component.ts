@@ -20,10 +20,6 @@ export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, As
         super(asignaturaStore, confirmationService);
     }
 
-    ngOnInit() {
-        super.ngOnInit();
-    }
-
     protected getDefaultNewEntity(): Asignatura {
         return new Asignatura();
     }

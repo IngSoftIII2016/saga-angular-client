@@ -2,6 +2,7 @@
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
