@@ -44,5 +44,18 @@ export class LoginComponent implements OnInit {
 
     resetear() {
         console.log('resetear!');
+        this.authenticationService.reset(this.model.username)
+            .subscribe(result => {
+                this.error = 'Reseteo de contraseña exitoso. Revise su correo';
+            }, err => {
+                if (err.status == 0) {
+                    this.error = 'No se puede establecer la conexión con el servidor.';
+                    this.loading = false;
+                }
+                else {
+                    this.error = err.json().message;
+                    this.loading = false;
+                }
+            });
     }
 }
