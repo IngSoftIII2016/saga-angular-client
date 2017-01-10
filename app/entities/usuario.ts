@@ -6,7 +6,6 @@ export class Usuario implements Entity {
     nombre: string;
     apellido: string;
     email: string;
-    telefono: number;
     contrasenia: string;
     estado: number = 1;
 
