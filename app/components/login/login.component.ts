@@ -42,4 +42,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
+    resetear() {
+        console.log('resetear!');
+    }
+
 }

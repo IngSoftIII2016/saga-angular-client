@@ -36,6 +36,10 @@ const appRoutes: Routes = [
         component: LoginComponent,
         canActivate: [LoginGuard]
     },
+    {
+        path: '**',
+        component: NotFoundComponent
+    }
 /*    {
         path: 'asignaturas',
         component: AsignaturaComponent,
@@ -101,7 +105,6 @@ const appRoutes: Routes = [
         component: HorarioComponent,
         canActivate: [AuthGuard]
     },
-
     {
         path: 'periodos',
         component: PeriodoComponent,
@@ -121,10 +124,6 @@ const appRoutes: Routes = [
         path: 'usuario-rol',
         component: UsuarioGrupoComponent,
         canActivate: [AuthGuard]
-    },
-    {
-        path: '**',
-        component: NotFoundComponent
     }*/
 ];
 
