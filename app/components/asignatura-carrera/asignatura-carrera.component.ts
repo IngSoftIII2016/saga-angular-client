@@ -25,7 +25,6 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     carreras: SelectItem[] = [];
 
-
     asignaturas: SelectItem[] = [];
 
     regimenes: SelectItem[] = [];
@@ -84,7 +83,7 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
     }
 
     protected getSearchFields(): string[] {
-        return ['asignatura.nombre', 'anio', 'regimen']
+        return ['carrera.nombre', 'asignatura.nombre', 'anio', 'regimen']
     }
 
 }

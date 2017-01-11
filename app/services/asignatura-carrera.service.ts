@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {RelationService} from "../commons/relation.service";
 import {AsignaturaCarrera} from "../entities/asignatura-carrera";
 import {QueryOptions} from "../commons/generic.service";
 import {Http} from "@angular/http";
 import {Router} from "@angular/router";
+import {RelationService} from "../commons/relation.service";
 /**
  * Created by juan on 24/11/16.
  */
