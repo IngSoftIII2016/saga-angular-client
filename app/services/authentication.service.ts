@@ -27,7 +27,6 @@ export class AuthenticationService {
                     localStorage.setItem('Usuario', usuario);
 					localStorage.setItem('Nombre_Apellido', nombre_apellido);
 
-
                     // return true to indicate successful login
                     return true;
                 } else {

@@ -8,7 +8,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
     selector: 'login-component',
     templateUrl: 'app/components/login/login.component.html'
-
 })
 export class LoginComponent implements OnInit {
 	model: any = {};
