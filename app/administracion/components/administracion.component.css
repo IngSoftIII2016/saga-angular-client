@@ -1,0 +1,32 @@
+#header{
+    background-color: #881300;
+    color: #eeeeee;
+    padding: 16px;
+}
+
+#header .title a{
+    font-size: large;
+    font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: white;
+    text-decoration: none;
+}
+.layout-container .topbar .topbar-left {
+    padding-top: 0;
+    padding-left:0;
+}
+
+#logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+    height: 75px;
+    background: url("/app/resources/logo-saga.png") top left no-repeat;
+    background-size: 250px 75px ;
+}
+.layout-container .layout-menu .profile {
+    box-sizing: border-box;
+    padding-top: 10px;
+    width: 250px;
+    height: 35px;
+    font:bold 11px "Arial";
+}

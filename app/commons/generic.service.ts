@@ -6,7 +6,7 @@ import {
 import {Inject, Injectable} from "@angular/core";
 import {Entity} from "./entity";
 import {Router} from "@angular/router";
-import _ = core._;
+
 
 /**
  * Created by juan on 12/11/16.

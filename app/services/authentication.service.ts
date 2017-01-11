@@ -11,8 +11,8 @@ export class AuthenticationService {
 
     }
 
-    login(username, password): Observable<boolean> {
-        return this.http.post('http://localhost/saga/api/UsuarioEndpoint/login', ({'data':{ 'usuario': username,'contraseña':password }}))
+    login(email, password): Observable<boolean> {
+        return this.http.post('http://localhost/saga/api/UsuarioEndpoint/login', ({'data':{ 'usuario': email,'contraseña':password }}))
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let token = response.json() && response.json().body.token;
@@ -27,7 +27,6 @@ export class AuthenticationService {
                     localStorage.setItem('Usuario', usuario);
 					localStorage.setItem('Nombre_Apellido', nombre_apellido);
 
-
                     // return true to indicate successful login
                     return true;
                 } else {
@@ -37,5 +36,10 @@ export class AuthenticationService {
             });
     }
 
-   
+   reset(email): Observable<boolean> {
+       return this.http.post('http://localhost/saga/api/UsuarioEndpoint/reset_pass_post', ({'data':{ 'email': email}}))
+           .map((response: Response) => {
+               return true;
+           });
+   }
 }

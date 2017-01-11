@@ -8,7 +8,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
     selector: 'login-component',
     templateUrl: 'app/components/login/login.component.html'
-
 })
 export class LoginComponent implements OnInit {
 	model: any = {};
@@ -42,4 +41,20 @@ export class LoginComponent implements OnInit {
             });
     }
 
+    resetear() {
+        console.log('resetear!');
+        this.authenticationService.reset(this.model.username)
+            .subscribe(result => {
+                this.error = 'Reseteo de contraseña exitoso. Revise su correo';
+            }, err => {
+                if (err.status == 0) {
+                    this.error = 'No se puede establecer la conexión con el servidor.';
+                    this.loading = false;
+                }
+                else {
+                    this.error = err.json().message;
+                    this.loading = false;
+                }
+            });
+    }
 }

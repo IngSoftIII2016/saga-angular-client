@@ -1,16 +1,15 @@
 import {Component, ElementRef} from "@angular/core";
 import {Router} from '@angular/router';
-declare var Ultima: any;
+    declare var Ultima: any;
 
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/components/app.component.html',
     styleUrls: ['app/components/app.component.css']
-
 })
 export class AppComponent {
-
+/*
     layoutCompact: boolean = true;
 
     layoutMode: string = 'static';
@@ -19,7 +18,7 @@ export class AppComponent {
     
     profileMode: string = 'inline';
 
-    displayLayout:string;
+    displayLayout: string;
 
     ultima: boolean = false;
 	 
@@ -31,12 +30,12 @@ export class AppComponent {
     ngAfterViewChecked(): void {
         if(this.mostrar()) {
             if (!this.ultima) {
-                console.log('Inicializando ultima')
+                console.log('Inicializando ultima');
                 Ultima.init(this.el.nativeElement);
                 this.ultima = true;
             }
         }else{
-            console.log('DesInicializando ultima')
+            console.log('DesInicializando ultima');
             this.ultima = false;
         }
 
@@ -55,5 +54,5 @@ export class AppComponent {
 
         this.router.navigate(['/login']);
     }
-
+*/
 }

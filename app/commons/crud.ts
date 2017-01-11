@@ -100,7 +100,6 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     ngOnInit() {
-        console.log("parent called");
 
         this.searchTerms
             .debounceTime(300)

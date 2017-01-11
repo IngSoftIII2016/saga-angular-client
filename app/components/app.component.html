@@ -1,8 +1,9 @@
+<!--
 <div class="layout-wrapper layout-compact">
 
     <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
-        <!-- Top Bar -->
+
         <div *ngIf="mostrar()">
 
             <div class="topbar clearfix">
@@ -14,7 +15,7 @@
                     <a id="menu-button">
                         <i></i>
                     </a>
-                   
+
 				   <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
                         <i class="material-icons">power_settings_new</i>
                     </a>
@@ -40,7 +41,6 @@
                 </div>
             </div>
 
-            <!-- Menu -->
             <div class="layout-menu">
                 <div class="nano">
                     <div class="nano-content menu-scroll-content">
@@ -48,21 +48,21 @@
                            <i class="fa ui-icon-person"></i>  <span class="profile-name">{{nombre_apellido}}</span>
 						</div>
                         <ul class="ultima-menu clearfix" id="main-menu">
-                            <li role="menuitem"><a [routerLink]="['localidades']"><span>Localidad</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['sedes']"><span>Sedes</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['edificios']"><span>Edificios</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['carreras']"><span>Carreras</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['asignatura-carrera']"><span>Planes de Estudio</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['asignaturas']"><span>Asignaturas</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['aulas']"><span>Aulas</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['clases']"><span>Clases</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['eventos']"><span>Eventos</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['periodos']"><span>Periodos</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['comision']"><span>Comision</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['horarios']"><span>Horarios</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['docentes']"><span>Docentes</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['usuarios']"><span>Usuario</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['usuario-rol']"><span>Permisos</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','localidades']"><span>Localidad</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','sedes']"><span>Sedes</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','edificios']"><span>Edificios</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','carreras']"><span>Carreras</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','asignatura-carrera']"><span>Planes de Estudio</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','asignaturas']"><span>Asignaturas</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','aulas']"><span>Aulas</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','clases']"><span>Clases</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','eventos']"><span>Eventos</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','periodos']"><span>Periodos</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','comision']"><span>Comision</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','horarios']"><span>Horarios</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','docentes']"><span>Docentes</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','usuarios']"><span>Usuario</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['administracion','usuario-rol']"><span>Permisos</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,9 +70,9 @@
         </div>
 
         <div [ngClass]="{'layout-main': mostrar()}">
-
+-->
             <router-outlet></router-outlet>
-
+<!--
             <div *ngIf="mostrar()" class="footer">
                 <div class="card clearfix">
                     <span class="footer-text-left">SAGA</span>
@@ -82,3 +82,4 @@
         </div>
     </div>
 </div>
+-->

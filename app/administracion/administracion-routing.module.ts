@@ -1,8 +1,8 @@
 /**
  * Created by juan on 05/01/17.
  */
-import { NgModule }              from '@angular/core';
-import { RouterModule, Routes }  from '@angular/router';
+import {NgModule}              from '@angular/core';
+import {RouterModule, Routes}  from '@angular/router';
 
 import {
     AsignaturaComponent,
@@ -24,99 +24,74 @@ import {
     UsuarioGrupoComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
+import {AdministracionComponent} from "./components/administracion.component";
 
 const adminRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'grilla',
+        redirectTo: 'administracion/grilla',
         pathMatch: 'full'
     },
+    {
+        path: 'administracion',
+        component: AdministracionComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'asignaturas',
+                component: AsignaturaComponent
+            }, {
+                path: 'asignatura-carrera',
+                component: AsignaturaCarreraComponent
+            }, {
+                path: 'aulas',
+                component: AulaComponent
+            }, {
+                path: 'carreras',
+                component: CarreraComponent
+            }, {
+                path: 'clases',
+                component: ClaseComponent
+            }, {
+                path: 'comision',
+                component: ComisionComponent
+            }, {
+                path: 'docentes',
+                component: DocenteComponent
+            }, {
+                path: 'edificios',
+                component: EdificioComponent
+            }, {
+                path: 'eventos',
+                component: EventoComponent
+            }, {
+                path: 'grilla',
+                component: GrillaComponent
+            }, {
+                path: 'roles',
+                component: GrupoComponent
+            }, {
+                path: 'localidades',
+                component: LocalidadComponent
+            }, {
+                path: 'horarios',
+                component: HorarioComponent
+            }, {
+                path: 'periodos',
+                component: PeriodoComponent
+            }, {
+                path: 'usuarios',
+                component: UsuarioComponent
+            }, {
+                path: 'sedes',
+                component: SedeComponent
+            }, {
+                path: 'usuario-rol',
+                component: UsuarioGrupoComponent
+            }
+        ]
+    },
 
-    {
-        path: 'asignaturas',
-        component: AsignaturaComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'asignatura-carrera',
-        component: AsignaturaCarreraComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'aulas',
-        component: AulaComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'carreras',
-        component: CarreraComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'clases',
-        component: ClaseComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'comision',
-        component: ComisionComponent,
-  //      canActivate: [AuthGuard]
-    },
-    {
-        path: 'docentes',
-        component: DocenteComponent ,
- //       canActivate: [AuthGuard]
-    },
-    {
-        path: 'edificios',
-        component: EdificioComponent ,
-  //      canActivate: [AuthGuard]
-    },
-    {
-        path: 'eventos',
-        component: EventoComponent,
-    //    canActivate: [AuthGuard]
-    },
-    {
-        path: 'grilla',
-        component: GrillaComponent,
-      //  canActivate: [AuthGuard]
-    },
-    {
-        path: 'roles',
-        component: GrupoComponent,
-        //canActivate: [AuthGuard]
-    },
-    {
-        path: 'localidades',
-        component: LocalidadComponent,
-        //canActivate: [AuthGuard]
-    },
-    {
-        path: 'horarios',
-        component: HorarioComponent,
-        //canActivate: [AuthGuard]
-    },
-    {
-        path: 'periodos',
-        component: PeriodoComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'usuarios',
-        component: UsuarioComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'sedes',
-        component: SedeComponent,
-//        canActivate: [AuthGuard]
-    },
-    {
-        path: 'usuario-rol',
-        component: UsuarioGrupoComponent,
-//        canActivate: [AuthGuard]
-    }
 ];
 
 @NgModule({
@@ -127,4 +102,5 @@ const adminRoutes: Routes = [
         RouterModule
     ]
 })
-export class AdministracionRoutingModule {}
+export class AdministracionRoutingModule {
+}

@@ -9,7 +9,7 @@ import {AulaService} from "../../services/aula.service";
 import {Evento} from "../../entities/evento";
 import {ClaseStore} from "../../services/clase.store";
 import {EventoStore} from "../../services/evento.store";
-import {parseMySQLDate, parseMySQLTime, toMySQLDate, toMySQLTime} from "../../commons/utils";
+import {toMySQLDate} from "../../commons/utils";
 
 import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
 import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
@@ -31,6 +31,8 @@ export class GrillaComponent implements OnInit {
     edificio: Subject<Edificio>;
 
     edificios: SelectItem[];
+
+    edificioSelected: Edificio;
 
     aulas: Observable<Aula[]>;
 
@@ -85,7 +87,6 @@ export class GrillaComponent implements OnInit {
 
     finSelected: Date;
 
-
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
@@ -102,8 +103,6 @@ export class GrillaComponent implements OnInit {
 
         this.scrollTime = moment().format('HH:mm:ss');
 
-        //this.edificio = this.route.params.flatMap(params => this.edificioService.get(params['id']));
-
         this.edificio = new Subject<Edificio>();
 
         this.edificioService.getAll()
@@ -111,7 +110,10 @@ export class GrillaComponent implements OnInit {
                 self.edificios = edificios.map(edificio => {
                     return {label: edificio.nombre, value: edificio}
                 })
-                self.edificio.next(edificios[0]);
+                if(localStorage.getItem('edificio'))
+                    self.edificio.next(JSON.parse(localStorage.getItem('edificio')) as Edificio);
+                else
+                    self.edificio.next(edificios[0]);
             });
 
         this.aulas = this.edificio
@@ -174,11 +176,15 @@ export class GrillaComponent implements OnInit {
                 self.aulasOptions = aulas
                     .map(aula => {return {label: aula.nombre + ' - ' + aula.edificio.nombre, value: new Aula(aula)}});
             })
+
+        this.edificio.subscribe(edificio => self.edificioSelected = edificio);
     }
 
     onChangeEdificio(event): void {
         //console.log(event);
-        this.edificio.next(event.value as Edificio);
+        let edificio: Edificio = event.value as Edificio;
+        localStorage.setItem('edificio', JSON.stringify(edificio))
+        this.edificio.next(edificio);
     }
 
     saveClase() {
