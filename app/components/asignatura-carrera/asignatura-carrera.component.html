@@ -54,7 +54,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="carrera">Carrera</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" [disabled]="true" id="carrera" [options]="carreras"
+                    <p-dropdown class="ui-grid-col-12" [disabled]="!isNew" id="carrera" [options]="carreras"
                                 [(ngModel)]="entity.carrera" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
