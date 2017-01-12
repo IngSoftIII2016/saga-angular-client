@@ -24,7 +24,7 @@ export class AdministracionComponent {
     nombre_apellido: string;
 
     constructor(private router: Router, private el: ElementRef) {
-        this.nombre_apellido = localStorage.getItem('Nombre_Apellido');
+        this.nombre_apellido = JSON.parse(localStorage.getItem('Usuario')).nombre_apellido;
     }
 
     ngAfterViewInit() {
@@ -34,7 +34,6 @@ export class AdministracionComponent {
     logout(): void {
         localStorage.removeItem('Authorization');
         localStorage.removeItem('Usuario');
-        localStorage.removeItem('Nombre_Apellido');
         this.router.navigate(['/login']);
     }
 }

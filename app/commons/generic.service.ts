@@ -105,7 +105,7 @@ export abstract class GenericService<T extends Entity> {
         let reqOptions = new BaseRequestOptions();
         reqOptions.url = this.baseUrl + this.getResourcePath();
         reqOptions.headers.set('Content-Type', 'application/json');
-        reqOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
+        reqOptions.headers.set('Authorization', 'Bearer ' + localStorage.getItem('Authorization'));
         reqOptions.search = new URLSearchParams();
         return reqOptions;
     }
@@ -153,6 +153,7 @@ export abstract class GenericService<T extends Entity> {
     intercept(observable: Observable<Response>): Observable<Response> {
         return observable.catch((err, source) => {
             if (err.status  == 401 ) {
+                localStorage.removeItem('Authorization');
                 this.router.navigate(['/login']);
                 return Observable.empty();
             } else {

@@ -3,10 +3,12 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {Router} from "@angular/router";
+import {JwtHelper} from "angular2-jwt";
+import {Usuario} from "../entities/usuario";
 
 @Injectable()
 export class AuthenticationService {
-
+    jwtHelper: JwtHelper = new JwtHelper();
     constructor(private http: Http) {
 
     }
@@ -15,17 +17,15 @@ export class AuthenticationService {
         return this.http.post('http://localhost/saga/api/AuthEndpoint/login', ({'data':{ 'usuario': email,'contraseña':password }}))
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
-                let token = response.json() && response.json().body.token;
+                let token = response.json().body.token;
 
                 if (token) {
-                    // set token property
-					let usuario = response.json().body.usuario;
-					let nombre_apellido = response.json().body.nombre_apellido;
+
+					let usuario = JSON.stringify(this.jwtHelper.decodeToken(token).data);
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('Authorization', JSON.stringify( token ));
+                    localStorage.setItem('Authorization',  token);
                     localStorage.setItem('Usuario', usuario);
-					localStorage.setItem('Nombre_Apellido', nombre_apellido);
 
                     // return true to indicate successful login
                     return true;
