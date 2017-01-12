@@ -12,7 +12,7 @@ export class AuthenticationService {
     }
 
     login(email, password): Observable<boolean> {
-        return this.http.post('http://localhost/saga/api/UsuarioEndpoint/login', ({'data':{ 'usuario': email,'contraseña':password }}))
+        return this.http.post('http://localhost/saga/api/AuthEndpoint/login', ({'data':{ 'usuario': email,'contraseña':password }}))
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let token = response.json() && response.json().body.token;
