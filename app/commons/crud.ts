@@ -115,6 +115,12 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
             })
     }
 
+    filter(value, field){
+        let queryOptions = {};
+        queryOptions['filters'][field] = value ;
+        this.store.mergeQueryOptions(queryOptions);
+    }
+
     showDialogToAdd() {
         this.isNew = true;
         this.entity = this.getDefaultNewEntity();
