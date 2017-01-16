@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {ComisionService} from "../../services/comision.service";
 import {AulaService} from "../../services/aula.service";
@@ -7,6 +7,7 @@ import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {HorarioService} from "../../services/horario.service";
+import {Comision} from "../../entities/comision";
 
 
 @Component({

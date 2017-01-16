@@ -24,7 +24,8 @@ export class AdministracionComponent {
     nombre_apellido: string;
 
     constructor(private router: Router, private el: ElementRef) {
-        this.nombre_apellido = JSON.parse(localStorage.getItem('Usuario')).nombre_apellido;
+        let user = JSON.parse(localStorage.getItem('Usuario'));
+        this.nombre_apellido = user.nombre + ' ' + user.apellido;
     }
 
     ngAfterViewInit() {

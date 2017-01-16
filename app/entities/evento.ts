@@ -27,7 +27,7 @@ export class Evento implements Entity {
     }
 
     getHoraInicioDate(): Date {
-        return parseMySQLDateTime(this.fecha, this.hora_inicio);
+        return parseMySQLTime(this.hora_inicio);
     }
 
     setHoraInicioDate(date: Date) {
@@ -35,7 +35,7 @@ export class Evento implements Entity {
     }
 
     getHoraFinDate(): Date {
-        return parseMySQLDateTime(this.fecha, this.hora_fin);
+        return parseMySQLTime(this.hora_fin);
     }
 
     setHoraFinDate(date: Date) {

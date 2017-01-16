@@ -14,7 +14,7 @@ import {EdificioService} from "../../services/edificio.service";
 	selector: 'edificio',
 	providers:[EdificioStore, LocalidadService, ConfirmationService]
 })
-export class EdificioComponent  extends CRUD<Edificio, EdificioService, EdificioStore>{
+export class EdificioComponent extends CRUD<Edificio, EdificioService, EdificioStore>{
 
     localidades: SelectItem[] = [];
 
