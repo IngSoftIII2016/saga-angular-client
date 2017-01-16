@@ -7,7 +7,6 @@ import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {HorarioService} from "../../services/horario.service";
-import {Comision} from "../../entities/comision";
 
 
 @Component({

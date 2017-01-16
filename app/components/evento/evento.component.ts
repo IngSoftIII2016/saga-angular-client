@@ -31,7 +31,7 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
     constructor(private eventoStore: EventoStore,
                 private aulaService: AulaService,
                 private confirmationService : ConfirmationService) {
-        super(eventoStore,confirmationService);
+        super(eventoStore, confirmationService);
     }
 
     ngOnInit() {
@@ -60,7 +60,7 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
     }
 
     protected getSearchFields(): string[] {
-        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'motivo']
+        return ['aula.nombre' , 'motivo']
     }
 
     protected onOpenDialog(evento: Evento): void {

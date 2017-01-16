@@ -20,7 +20,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected isNew: boolean;
 
-    protected msgs: Message[] = [];
+    public msgs: Message[] = [];
 
     protected validaciones: Message[] = [];
 
@@ -100,7 +100,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     ngOnInit() {
-
+        console.log(this.msgs);
         this.searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
@@ -115,7 +115,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
             })
     }
 
-    filter(value, field){
+    filter(value, field) {
         let queryOptions = {};
         queryOptions['filters'][field] = value ;
         this.store.mergeQueryOptions(queryOptions);
@@ -149,15 +149,16 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     create() {
         if (!this.onBeforeCreate()) return;
+        let self = this;
         this.confimCreate()
             .then(() => {
-                    this.entity = this.onCreate(this.entity);
-                    this.store.create(this.entity)
+                self.entity = self.onCreate(self.entity);
+                self.store.create(self.entity)
                         .subscribe(creada => {
-                                this.entity = creada;
-                                this.displayDialog = false;
-                                this.showOkCreateMessage();
-                            }, this.showFailCreateMessage
+                            self.entity = creada;
+                            self.displayDialog = false;
+                            self.showOkCreateMessage();
+                            }, error => self.showFailCreateMessage(error)
                         )
                 }
             )
@@ -165,29 +166,32 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     update() {
         if (!this.onBeforeUpdate()) return;
+        let self = this;
         this.confimUpdate().then(() => {
-            this.entity = this.onUpdate(this.entity);
-            this.store.update(this.entity)
+            self.entity = this.onUpdate(self.entity);
+            self.store.update(self.entity)
                 .subscribe(
                     guardada => {
-                        this.entity = guardada;
-                        this.displayDialog = false;
-                        this.showOkUpdateMessage()
-                    }, this.showFailUpdateMessage);
+                        self.entity = guardada;
+                        self.displayDialog = false;
+                        self.showOkUpdateMessage();
+                    }, error => self.showFailUpdateMessage(error)
+                );
         });
     }
 
 
     delete(): void {
         if (!this.onBeforeDelete()) return;
+        let self = this;
         this.confimDelete().then(() => {
-            this.entity = this.onDelete(this.entity);
-            this.store.delete(this.entity).subscribe(
+            self.entity = self.onDelete(self.entity);
+            self.store.delete(self.entity).subscribe(
                 borrada => {
-                    this.entity = borrada;
-                    this.displayDialog = false;
-                    this.showOkDeleteMessage()
-                }, this.showFailDeleteMessage
+                    self.entity = borrada;
+                    self.displayDialog = false;
+                    self.showOkDeleteMessage();
+                }, error => self.showFailDeleteMessage(error)
             );
         });
     }
@@ -301,6 +305,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected showFailDeleteMessage(error) {
         let err = error.json().error;
+        console.log(this);
         this.msgs.push(
             {
                 severity: 'error',
