@@ -30,8 +30,8 @@ export class AuthenticationService {
                     // return true to indicate successful login
                     return true;
                 } else {
-                    // return false to indicate failed login 
-                    return false; 
+                    // return false to indicate failed login
+                    return false;
                 }
             });
     }

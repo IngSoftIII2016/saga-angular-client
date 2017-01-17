@@ -6,6 +6,7 @@ import {
 import {Inject, Injectable} from "@angular/core";
 import {Entity} from "./entity";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 
 
 /**
@@ -161,5 +162,10 @@ export abstract class GenericService<T extends Entity> {
             }
         });
 
+    }
+
+    invitadoLogIn(): void {
+        let authService = new AuthenticationService(this.http);
+        authService.login('invitado', 'invitado');
     }
 }
