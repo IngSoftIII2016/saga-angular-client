@@ -23,6 +23,7 @@ import {
     UsuarioComponent,
     UsuarioGrupoComponent,
     AccionRolComponent,
+    AccionComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -93,6 +94,10 @@ const adminRoutes: Routes = [
             {
                 path: 'accion-rol',
                 component: AccionRolComponent
+            },
+            {
+                path: 'accion',
+                component: AccionComponent
             }
         ]
     },

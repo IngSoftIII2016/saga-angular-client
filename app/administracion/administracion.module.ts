@@ -66,6 +66,7 @@ import {UsuarioGrupoService} from "../services/usuario-grupo.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
+import {AccionComponent} from "../components/accion/accion.component";
 
 @NgModule({
     imports: [
@@ -107,7 +108,8 @@ import {AdministracionRoutingModule} from "./administracion-routing.module";
         TimelineDaySchedule,
         UsuarioComponent,
         UsuarioGrupoComponent,
-        AccionRolComponent
+        AccionRolComponent,
+        AccionComponent
     ],
     providers: [
         AsignaturaService,
