@@ -28,7 +28,7 @@ import { HorarioComponent } from "./components/horario/horario.component";
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'grilla',
+        redirectTo: 'administracion/grilla',
         pathMatch: 'full'
     },
     {

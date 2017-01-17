@@ -21,8 +21,6 @@ import {AsignaturaCarreraService} from "../../services/asignatura-carrera.servic
 })
 export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, AsignaturaCarreraService, AsignaturaCarreraStore> {
 
-
-
     carreras: SelectItem[] = [];
 
     asignaturas: SelectItem[] = [];

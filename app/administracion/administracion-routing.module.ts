@@ -28,9 +28,9 @@ import {AdministracionComponent} from "./components/administracion.component";
 
 const adminRoutes: Routes = [
     {
-        path: '',
+        path: 'administracion',
         redirectTo: 'administracion/grilla',
-        pathMatch: 'full'
+        pathMatch: 'prefix'
     },
     {
         path: 'administracion',
