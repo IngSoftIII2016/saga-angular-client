@@ -21,6 +21,7 @@ import {ComisionComponent} from "./components/comision/comision.component";
 import {AsignaturaCarreraComponent} from "./components/asignatura-carrera/asignatura-carrera.component";
 import {UsuarioGrupoComponent} from "./components/usuario-grupo/usuario-grupo.component";
 import {HorarioComponent} from "./components/horario/horario.component";
+import {AccionRolComponent} from "./components/accion-rol/accion-rol.component";
 import {CompositeAsignaturaComponent} from "./components/composite-asignatura/composite-asignatura.component";
 
 
@@ -107,6 +108,10 @@ const appRoutes: Routes = [
      {
         path: 'usuario-rol',
         component: UsuarioGrupoComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'accion-rol',
+        component: AccionRolComponent, canActivate: [AuthGuard]
     },
     //{path: '404', component: NotFoundComponent},
 

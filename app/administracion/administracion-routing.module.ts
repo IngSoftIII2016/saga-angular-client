@@ -21,7 +21,8 @@ import {
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    UsuarioGrupoComponent
+    UsuarioGrupoComponent,
+    AccionRolComponent,
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -88,6 +89,10 @@ const adminRoutes: Routes = [
             }, {
                 path: 'usuario-rol',
                 component: UsuarioGrupoComponent
+            },
+            {
+                path: 'accion-rol',
+                component: AccionRolComponent
             }
         ]
     },

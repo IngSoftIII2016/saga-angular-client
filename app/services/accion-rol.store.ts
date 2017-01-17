@@ -6,7 +6,8 @@ import {AccionRolService} from "./accion-rol.service";
  * Created by juan on 24/11/16.
  */
 @Injectable()
-export class AsignaturaCarreraStore extends GenericStore<AccionRol, AccionRolService> {
+export class AccionRolStore extends GenericStore<AccionRol, AccionRolService> {
+
 
     constructor(private accionRolService: AccionRolService) {
         super(accionRolService);

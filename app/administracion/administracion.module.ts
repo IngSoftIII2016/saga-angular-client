@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+//noinspection TypeScriptCheckImport
 import {
     AsignaturaComponent,
     AsignaturaCarreraComponent,
@@ -24,7 +25,8 @@ import {
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    UsuarioGrupoComponent
+    UsuarioGrupoComponent,
+    AccionRolComponent
 } from "../components";
 
 import {HttpModule} from "@angular/http";
@@ -57,6 +59,9 @@ import {PeriodoService} from "../services/periodo.service";
 import {SedeService} from "../services/sede.service";
 import {ConfirmationService} from "primeng/components/common/api";
 import {UsuarioService} from "../services/usuario.service";
+import {AccionService} from "../services/accion.service";
+import {RolService} from "../services/rol.service";
+import {AccionRolService} from "../services/accion-rol.service";
 import {UsuarioGrupoService} from "../services/usuario-grupo.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -101,7 +106,8 @@ import {AdministracionRoutingModule} from "./administracion-routing.module";
         SedeComponent,
         TimelineDaySchedule,
         UsuarioComponent,
-        UsuarioGrupoComponent
+        UsuarioGrupoComponent,
+        AccionRolComponent
     ],
     providers: [
         AsignaturaService,
@@ -121,6 +127,9 @@ import {AdministracionRoutingModule} from "./administracion-routing.module";
         SedeService,
         UsuarioGrupoService,
         UsuarioService,
+        AccionService,
+        RolService,
+        AccionRolService
     ]
 })
 export class AdministracionModule {}
