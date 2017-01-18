@@ -51,10 +51,10 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
             )
         });
 
-        self.metodoTabla['GET'] = 'Consulta';
-        self.metodoTabla['POST'] = 'Alta';
-        self.metodoTabla['PUT'] = 'Modificación';
-        self.metodoTabla['DELETE'] = 'Baja';
+        this.metodoTabla['GET'] = 'Consulta';
+        this.metodoTabla['POST'] = 'Alta';
+        this.metodoTabla['PUT'] = 'Modificación';
+        this.metodoTabla['DELETE'] = 'Baja';
 
 
     }

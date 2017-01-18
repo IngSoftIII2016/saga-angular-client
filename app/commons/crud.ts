@@ -12,7 +12,7 @@ import {PreActivation} from "@angular/router/src/router";
 
 export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST extends GenericStore<E, SV>> implements OnInit {
 
-    protected entity: E;
+    public entity: E;
 
     protected store: ST;
 
@@ -116,8 +116,8 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     filter(field, value) {
-        let queryOptions = {};
-        queryOptions['filters'][field] = value ;
+        let queryOptions = {filters : {} };
+        queryOptions.filters[field] = value;
         this.store.mergeQueryOptions(queryOptions);
     }
 

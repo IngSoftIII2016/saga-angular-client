@@ -46,13 +46,13 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
             )
         });
         this.periodoService.getAll().subscribe(periodos => {
-            this.periodos = periodos.map(periodo => {
+            self.periodos = periodos.map(periodo => {
                     return { label: periodo.descripcion, value: periodo }
                 }
             )
         });
         this.docenteService.getAll().subscribe(docentes => {
-            this.docentes = docentes.map(docente => {
+            self.docentes = docentes.map(docente => {
                     return { label: docente.apellido + ', ' + docente.nombre, value: docente }
                 }
             )
@@ -60,11 +60,7 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
     }
 
     protected getDefaultNewEntity(): Comision {
-        return new Comision({
-            asignatura: this.asignaturas[0].value as Asignatura,
-            periodo: this.periodos[0].value as Periodo,
-            docente: this.docentes[0].value as Docente
-        });
+        return new Comision();
     }
 
     protected getEntityFromEvent(event: any): Comision {
