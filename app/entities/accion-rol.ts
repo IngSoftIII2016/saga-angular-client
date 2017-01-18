@@ -7,8 +7,6 @@ import {Accion} from "./accion";
 export class AccionRol implements Entity {
 
     id: number = null;
-    anio: number;
-    regimen: string;
     accion: Accion = new Accion();
     rol: Rol = new Rol();
 

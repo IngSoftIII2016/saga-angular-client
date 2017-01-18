@@ -21,18 +21,11 @@ import {AccionRolStore} from "../../services/accion-rol.store";
 })
 export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, AccionRolStore> {
 
-
-
     roles: SelectItem[] = [];
-
 
     acciones: SelectItem[] = [];
 
-    metodos: SelectItem[] = [];
-
-    metodoTabla = new Array();
-
-    metodoSelected: string;
+    metodoTabla = [];
 
     constructor(private accionRolStore: AccionRolStore,
                 private accionService: AccionService,
@@ -43,43 +36,31 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
 
     ngOnInit() {
         super.ngOnInit();
-        var sel = this;
+        let self = this;
 
         this.rolService.getAll().subscribe(roles => {
-            sel.roles= roles.map(rol => {
+            self.roles = roles.map(rol => {
                 return { label: rol.nombre, value: rol}
-            }
-            )
+            });
         });
 
-
-
-
-        sel.metodos.push({label: 'Lectura', value: 'GET'});
-        sel.metodos.push({label: 'Escritura', value: 'POST'});
-        sel.metodos.push({label: 'Modificacíon', value: 'PUT'});
-        sel.metodos.push({label: 'Eliminacíon', value: 'DELETE'});
-
-        sel.metodoTabla['GET'] = 'Lectura';
-        sel.metodoTabla['POST'] = 'Escritura';
-        sel.metodoTabla['PUT'] = 'Modificacíon';
-        sel.metodoTabla['DELETE'] = 'Eliminacíon';
-
         this.accionService.getAll().subscribe(acciones => {
-            this.acciones = acciones.map(accion => {
-                    return { label: sel.metodoTabla[accion.metodo] + ' ' + accion.recurso, value: accion }
+            self.acciones = acciones.map(accion => {
+                    return { label: self.metodoTabla[accion.metodo] + ' de ' + accion.recurso, value: accion }
                 }
             )
         });
 
+        self.metodoTabla['GET'] = 'Consulta';
+        self.metodoTabla['POST'] = 'Alta';
+        self.metodoTabla['PUT'] = 'Modificación';
+        self.metodoTabla['DELETE'] = 'Baja';
+
+
     }
 
-
     protected getDefaultNewEntity(): AccionRol {
-        return new AccionRol({
-            accion: this.acciones[0].value as Accion,
-            rol: this.roles[0].value as Rol
-        });
+        return new AccionRol();
     }
 
     protected getEntityFromEvent(event: any): AccionRol {
@@ -87,11 +68,11 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'el Rol ' + this.entity.rol.nombre + ' para la Accíon ' + this.entity.accion.metodo;
+        return 'la acción ' + this.metodoTabla[this.entity.accion.metodo] + ' al rol ' + this.entity.rol.nombre;
     }
 
     protected getSearchFields(): string[] {
-        return ['rol.nombre', 'metodo', 'accion.url', 'accion.recurso']
+        return ['metodo', 'accion.url', 'accion.recurso']
     }
 
 }

@@ -100,7 +100,6 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     ngOnInit() {
-        console.log(this.msgs);
         this.searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
@@ -113,9 +112,10 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                 }
                 this.store.setLikes(likes)
             })
+        this.entity = this.getDefaultNewEntity();
     }
 
-    filter(value, field) {
+    filter(field, value) {
         let queryOptions = {};
         queryOptions['filters'][field] = value ;
         this.store.mergeQueryOptions(queryOptions);
