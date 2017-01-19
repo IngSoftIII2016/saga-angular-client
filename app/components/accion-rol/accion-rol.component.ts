@@ -22,7 +22,7 @@ import {AccionRolStore} from "../../services/accion-rol.store";
 export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, AccionRolStore> {
 
     roles: SelectItem[] = [];
-
+    rol : Rol;
     acciones: SelectItem[] = [];
 
     metodoTabla = [];
@@ -73,6 +73,11 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
 
     protected getSearchFields(): string[] {
         return ['metodo', 'accion.url', 'accion.recurso']
+    }
+
+    onOpenDialog(entity): void {
+        entity.rol = this.rol;
+        console.log(entity);
     }
 
 }

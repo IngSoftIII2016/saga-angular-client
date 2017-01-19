@@ -12,7 +12,7 @@
         <div class="ui-widget-header ui-helper-clearfix">
             <label for="rol">Rol</label>
             <p-dropdown id="rol" [style]="{width : '100%'}"
-                        [options]="roles" [(ngModel)]="entity.rol" (onChange)="filter('rol.id', entity.rol.id)">
+                        [options]="roles" [(ngModel)]="rol" (onChange)="filter('rol.id', rol.id)">
             </p-dropdown>
         </div>
         <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
@@ -50,7 +50,6 @@
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
-
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
                     <label for="accion">Accion</label>
