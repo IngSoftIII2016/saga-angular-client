@@ -112,7 +112,6 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                 }
                 this.store.setLikes(likes)
             })
-        this.entity = this.getDefaultNewEntity();
     }
 
     filter(field, value) {

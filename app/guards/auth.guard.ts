@@ -12,7 +12,8 @@ export class AuthGuard implements CanActivate {
             let self = this;
             this.authService.login('invitado', 'invitado')
                 .subscribe(
-                    res => self.router.navigate(['administracion']),
+                    res =>
+                        self.router.navigateByUrl(''),
                     err => self.router.navigate([''])
             );
             return false;
