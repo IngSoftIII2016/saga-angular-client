@@ -17,19 +17,19 @@ import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
     templateUrl: 'app/components/asignatura-carrera/asignatura-carrera.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'asignatura-carrera',
-    providers: [AsignaturaCarreraStore, CarreraService,AsignaturaService, ConfirmationService]
+    providers: [AsignaturaCarreraStore, CarreraService, AsignaturaService, ConfirmationService]
 })
 export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, AsignaturaCarreraService, AsignaturaCarreraStore> {
 
     carreras: SelectItem[] = [];
 
-    carrera : Carrera;
+    carrera: Carrera;
 
     asignaturas: SelectItem[] = [];
 
     regimenes: SelectItem[] = [];
 
-    regimenesTabla = new Array();
+    regimenesTabla = [];
 
     isFilter: boolean = false;
 
@@ -39,45 +39,48 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
                 private carreraService: CarreraService,
                 private asignaturaService: AsignaturaService,
                 private confirmationService: ConfirmationService) {
-    super(asignaturaCarreraStore, confirmationService);
+        super(asignaturaCarreraStore, confirmationService);
     }
 
-    protected activeFilter(){
+    protected activeFilter() {
         this.isFilter = !this.isFilter;
     }
 
-    onOpenDialog(entity: AsignaturaCarrera){
+    onOpenDialog(entity: AsignaturaCarrera) {
         entity.carrera = this.carrera;
     }
 
     ngOnInit() {
         super.ngOnInit();
-        var sel = this;
+        let self = this;
         this.carreraService.getAll().subscribe(carreras => {
-            sel.carreras= carreras.map(carrera => {
-                return { label: carrera.nombre, value: carrera}
-            }
-            )
+            self.carreras = carreras.map(carrera => {
+                return {label: carrera.nombre, value: carrera}
+            })
+            self.carrera = carreras[0];
+            self.filtrarCarrera();
         });
         this.asignaturaService.getAll().subscribe(asignaturas => {
-                sel.asignaturas= asignaturas.map(asignatura => {
-                    return { label: asignatura.nombre, value: asignatura}
-                }
-                )
+            self.asignaturas = asignaturas.map(asignatura => {
+                return {label: asignatura.nombre, value: asignatura}
+            });
+            self.asignaturas.unshift({label: 'Todas', value: ''});
         });
-        sel.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
-        sel.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});
-        sel.regimenes.push({label: 'Cuatrimestral', value: 'C'});
-        sel.regimenes.push({label: 'Anual', value: 'Anual'});
-        sel.regimenesTabla['1C'] = 'Primer Cuatrimestre';
-        sel.regimenesTabla['2C'] = 'Segundo Cuatrimestre';
-        sel.regimenesTabla['C'] = 'Cuatrimestral';
-        sel.regimenesTabla['Anual'] = 'Anual';
 
+
+        self.regimenes.push({label: 'Todos', value: ''});
+        self.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
+        self.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});
+        self.regimenes.push({label: 'Cuatrimestral', value: 'C'});
+        self.regimenes.push({label: 'Anual', value: 'Anual'});
+        self.regimenesTabla['1C'] = 'Primer Cuatrimestre';
+        self.regimenesTabla['2C'] = 'Segundo Cuatrimestre';
+        self.regimenesTabla['C'] = 'Cuatrimestral';
+        self.regimenesTabla['Anual'] = 'Anual';
+
+        this.anios.push({label: 'Todos', value: ''});
         for (let i = 1; i < 7; i++)
-            this.anios.push({label: i.toString() ,value: i});
-
-
+            this.anios.push({label: i.toString(), value: i});
     }
 
     protected getDefaultNewEntity(): AsignaturaCarrera {
@@ -97,6 +100,10 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     protected getSearchFields(): string[] {
         return ['carrera.nombre', 'asignatura.nombre', 'anio', 'regimen']
+    }
+
+    public filtrarCarrera() : void {
+        this.filter('carrera.id', this.carrera.id);
     }
 
 }

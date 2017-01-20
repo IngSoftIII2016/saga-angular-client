@@ -114,11 +114,6 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
             })
     }
 
-    filter(field, value) {
-        let queryOptions = {filters : {} };
-        queryOptions.filters[field] = value;
-        this.store.mergeQueryOptions(queryOptions);
-    }
 
     showDialogToAdd() {
         this.isNew = true;
@@ -202,6 +197,12 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
             page: event.page + 1
         };
         this.store.mergeQueryOptions(qo);
+    }
+
+
+    filter(field, value) {
+        if(value === '') this.store.removeFilter(field);
+        else this.store.setFilter(field, value);
     }
 
     sort(event) {

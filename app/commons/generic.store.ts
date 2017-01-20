@@ -34,7 +34,6 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
     public mergeQueryOptions(options: Object = {}) {
         let qo = this.queryOptions.getValue();
         qo.merge(options);
-        //console.log(qo);
         this.setQueryOptions(qo);
     }
 
@@ -71,6 +70,28 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
 
     public setFilters(filters: Object = {}) {
         this.mergeQueryOptions({filters : filters });
+    }
+
+    /**
+     * Agrega un filtro para el campo field y valor value,
+     * o reemplaza el valor value en caso de estar seteado field.
+     * @param field
+     * @param value
+     */
+    public setFilter(field: string, value: any) : void {
+        let filters = this.getFilters();
+        filters[field] = value;
+        this.setFilters(filters);
+    }
+
+    /**
+     *
+     * @param field
+     */
+    public removeFilter(field: string) : void {
+        let filters = this.getFilters();
+        delete filters[field];
+        this.setFilters(filters);
     }
 
     public getSorts() : Object[] {

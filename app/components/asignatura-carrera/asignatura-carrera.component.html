@@ -12,7 +12,8 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-1"><label for="carreraFiltro">Carrera</label></div>
             <div class="ui-grid-col-4">
-                <p-dropdown class="ui-grid-col-11"  id="carreraFiltro" (onChange)="filter('carrera.id', carrera.id)" [options]="carreras"
+                <p-dropdown class="ui-grid-col-11" id="carreraFiltro" (onChange)="filtrarCarrera()"
+                            [options]="carreras"
                             [(ngModel)]="carrera"
                             [filter]="true" [style]="{width : '100%' }">
                 </p-dropdown>
@@ -21,42 +22,44 @@
             <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
                    placeholder="Buscar" (keyup)="search(gb.value)">
         </div>
-            <button type="button" class="guardar" pButton icon="fa-search" (click)="activeFilter()" style="float: left"></button>
+        <button type="button" class="guardar" pButton icon="fa-search" (click)="activeFilter()"
+                style="float: left"></button>
 
     </div>
     <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
 
-        <header>Planes de estudios
-                <div class="ui-grid-row" *ngIf="isFilter" >
-                    <div class="ui-grid-col-4"><label for="asignaturaFiltro">Asignatura</label></div>
-                    <div class="ui-grid-col-4"><label for="anioFiltro">Año</label></div>
-                    <div class="ui-grid-col-4"><label for="regimenFiltro">Regimen</label></div>
-                    <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11"  id="asignaturaFiltro" [options]="asignaturas"
-                                    (onChange)="filter('asignatura.id', $event.value.id)"
-                                    [filter]="true" [style]="{width : '100%' }">
-                        </p-dropdown>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11" id="anioFiltro" [options]="anios"
-                                    (onChange)="filter('anio', $event.value)"
-                                    [filter]="true" [style]="{width : '100%' }">
-                        </p-dropdown>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11" id="regimenFiltro" [options]="regimenes"
-                                    (onChange)="filter('regimen', $event.value)"
-                                    [filter]="true" [style]="{width : '100%' }">
-                        </p-dropdown>
-                    </div>
+        <header><h2>Planes de estudios</h2>
+            <div class="ui-grid-row" *ngIf="isFilter">
+                <div class="ui-grid-col-4"><label for="asignaturaFiltro">Asignatura</label></div>
+                <div class="ui-grid-col-4"><label for="anioFiltro">Año</label></div>
+                <div class="ui-grid-col-4"><label for="regimenFiltro">Regimen</label></div>
+                <div class="ui-grid-col-4">
+                    <p-dropdown class="ui-grid-col-11" id="asignaturaFiltro" [options]="asignaturas"
+                                (onChange)="filter('asignatura.id', $event.value.id)"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-dropdown class="ui-grid-col-11" id="anioFiltro" [options]="anios"
+                                (onChange)="filter('anio', $event.value)"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-dropdown class="ui-grid-col-11" id="regimenFiltro" [options]="regimenes"
+                                (onChange)="filter('regimen', $event.value)"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
         </header>
-        <p-column field="carrera.nombre" header="Carrera" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <!--<p-column field="carrera.nombre" header="Carrera" sortable="custom" (sortFunction)="sort($event)"></p-column>-->
+        <p-column field="asignatura.nombre" header="Asignatura" sortable="custom"
+                  (sortFunction)="sort($event)"></p-column>
         <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="regimen" header="Regimen" sortable="custom" (sortFunction)="sort($event)">
-            <template let-h="rowData" pTemplate type="body">
+            <template let-h="rowData" pTemplate="type">
                 <span>{{regimenesTabla[h.regimen]}}</span>
             </template>
         </p-column>
@@ -91,7 +94,8 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="asignatura">Asignatura</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas" [(ngModel)]="entity.asignatura" [filter]="true" [style]="{width : '100%' }">
+                    <p-dropdown class="ui-grid-col-12" id="asignatura" [options]="asignaturas"
+                                [(ngModel)]="entity.asignatura" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
