@@ -201,7 +201,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
 
     filter(field, value) {
-        if(value === '') this.store.removeFilter(field);
+        if(!value) this.store.removeFilter(field);
         else this.store.setFilter(field, value);
     }
 

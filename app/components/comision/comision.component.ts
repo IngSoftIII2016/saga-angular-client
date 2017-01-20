@@ -40,7 +40,7 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
     }
 
 
-    protected activeFilter(){
+    protected toggleFilter(){
         this.isFilter = !this.isFilter;
     }
 

@@ -42,7 +42,7 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         super(asignaturaCarreraStore, confirmationService);
     }
 
-    protected activeFilter() {
+    protected toggleFilter() {
         this.isFilter = !this.isFilter;
     }
 
@@ -62,13 +62,13 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         });
         this.asignaturaService.getAll().subscribe(asignaturas => {
             self.asignaturas = asignaturas.map(asignatura => {
-                return {label: asignatura.nombre, value: asignatura}
+                return {label: asignatura.nombre, value: asignatura.id}
             });
-            self.asignaturas.unshift({label: 'Todas', value: ''});
+            self.asignaturas.unshift({label: 'Todas', value: null});
         });
 
 
-        self.regimenes.push({label: 'Todos', value: ''});
+        self.regimenes.push({label: 'Todos', value: null});
         self.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
         self.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});
         self.regimenes.push({label: 'Cuatrimestral', value: 'C'});
@@ -78,7 +78,7 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         self.regimenesTabla['C'] = 'Cuatrimestral';
         self.regimenesTabla['Anual'] = 'Anual';
 
-        this.anios.push({label: 'Todos', value: ''});
+        this.anios.push({label: 'Todos', value: null});
         for (let i = 1; i < 7; i++)
             this.anios.push({label: i.toString(), value: i});
     }

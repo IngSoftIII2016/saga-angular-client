@@ -121,7 +121,7 @@ export abstract class GenericService<T extends Entity> {
 
         for (let key in queryOptions.filters)
             if (queryOptions.filters.hasOwnProperty(key))
-                reqOptions.search.set(key, queryOptions.filters[key].toString());
+                reqOptions.search.set(key, queryOptions.filters[key] + '');
 
         if (queryOptions.includes.length > 0)
             reqOptions.search.set('include', queryOptions.includes.join(','));

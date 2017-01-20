@@ -47,7 +47,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         super(horarioStore, confirmationService);
     }
 
-    activeFilter(){
+    toggleFilter(){
         this.isFilter = !this.isFilter;
     }
 
