@@ -95,8 +95,9 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'el plan de estudio de la carrera ' + this.entity.carrera.nombre + ' y la asignatura ' + this.entity.asignatura.nombre;
-    }
+        return 'la asignatura ' + this.entity.asignatura.nombre +
+            ' para el plan de estudio de la carrera ' + this.entity.carrera.nombre;
+}
 
     protected getSearchFields(): string[] {
         return ['carrera.nombre', 'asignatura.nombre', 'anio', 'regimen']
