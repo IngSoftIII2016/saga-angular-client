@@ -27,6 +27,9 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
 
     docentes: SelectItem[] = [];
 
+    isFilter: boolean = false;
+
+
     constructor(private comisionStore: ComisionStore,
                 private asignaturaService: AsignaturaService,
                 private periodoService: PeriodoService,
@@ -34,6 +37,11 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
                 private confirmationService : ConfirmationService)
     {
         super(comisionStore, confirmationService);
+    }
+
+
+    protected activeFilter(){
+        this.isFilter = !this.isFilter;
     }
 
     ngOnInit() {
@@ -59,8 +67,12 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
         });
     }
 
-    protected getDefaultNewEntity(): Comision {
-        return new Comision();
+   protected getDefaultNewEntity(): Comision {
+        return new Comision({
+            asignatura: this.asignaturas[0].value as Asignatura,
+            periodo: this.periodos[0].value as Periodo,
+            docente: this.docentes[0].value as Docente
+         });
     }
 
     protected getEntityFromEvent(event: any): Comision {
@@ -68,7 +80,7 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'la comision ' + this.entity.asignatura.nombre + ' ' + this.entity.nombre;
+        return 'la comision ' + this.entity.nombre+ ' a la asignatura ' + this.entity.asignatura.nombre ;
     }
 
     protected getSearchFields(): string[] {

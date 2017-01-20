@@ -5,6 +5,7 @@ import {Calendar} from "primeng/components/calendar/calendar";
 import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es";
 import {parseMySQLDate, parseMySQLTime, toMySQLDate, toMySQLTime} from "../commons/utils";
 import {parseMySQLDateTime} from "../commons/utils";
+import {toFechaString} from "../commons/utils";
 
 export class Clase implements Entity {
 
@@ -29,7 +30,7 @@ export class Clase implements Entity {
     }
 
     getHoraInicioDate(): Date {
-        return parseMySQLDateTime(this.fecha, this.hora_inicio);
+        return parseMySQLTime(this.hora_inicio);
     }
 
     setHoraInicioDate(date: Date) {
@@ -37,10 +38,14 @@ export class Clase implements Entity {
     }
 
     getHoraFinDate(): Date {
-        return parseMySQLDateTime(this.fecha, this.hora_fin);
+        return parseMySQLTime(this.hora_fin);
     }
 
     setHoraFinDate(date: Date) {
         this.hora_fin = toMySQLTime(date);
+    }
+
+    public getFechaString(): string {
+        return toFechaString(parseMySQLDate(this.fecha));
     }
 }

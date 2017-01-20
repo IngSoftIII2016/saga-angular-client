@@ -27,6 +27,13 @@ export class Periodo implements Entity {
     public setFechaFinDate(date: Date) {
         this.fecha_fin = toMySQLDate(date);
     }
+    public getFechaInicioString(): string {
+        return toFechaString(parseMySQLDate(this.fecha_inicio));
+    }
+
+    public getFechaFinString(): string {
+        return toFechaString(parseMySQLDate(this.fecha_fin));
+    }
 
     public toString(): string {
 	    return this.descripcion + '(' + toFechaString(parseMySQLDate(this.fecha_inicio)) + ' - ' + toFechaString(parseMySQLDate(this.fecha_fin)) + ')';

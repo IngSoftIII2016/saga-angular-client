@@ -15,7 +15,6 @@ import {CRUD} from "../../commons/crud";
 })
 export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, AsignaturaStore> {
 
-
     constructor(private asignaturaStore: AsignaturaStore,  private confirmationService : ConfirmationService) {
         super(asignaturaStore, confirmationService);
     }
@@ -24,7 +23,7 @@ export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, As
         return new Asignatura();
     }
 
-    protected getEntityFromEvent(event: any): Asignatura {
+   protected getEntityFromEvent(event: any): Asignatura {
         return new Asignatura(event.data);
     }
 

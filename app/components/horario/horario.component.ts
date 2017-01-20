@@ -7,13 +7,17 @@ import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {HorarioService} from "../../services/horario.service";
+import {Comision} from "../../entities/comision";
+import {Aula} from "../../entities/aula";
+import {EdificioService} from "../../services/edificio.service";
+import {PeriodoService} from "../../services/periodo.service";
 
 
 @Component({
     templateUrl: 'app/components/horario/horario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'horario',
-    providers: [HorarioStore, ComisionService, AulaService, ConfirmationService]
+    providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService]
 })
 export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
 
@@ -30,15 +34,28 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     comisiones: SelectItem[] = [];
 
+    periodos: SelectItem[] = [];
+
+
+    isFilter : boolean = false;
+
     constructor(private horarioStore: HorarioStore,
                 private aulaService: AulaService,
+                private periodoService: PeriodoService,
                 private comisionService: ComisionService,
                 private confirmationService: ConfirmationService) {
         super(horarioStore, confirmationService);
     }
 
+    activeFilter(){
+        this.isFilter = !this.isFilter;
+    }
+
     protected getDefaultNewEntity(): Horario {
-        return new Horario();
+        return new Horario({
+            aula: this.aulas[0].value as Aula,
+            comision: this.comisiones[0].value as Comision
+        });
     }
 
     protected getEntityFromEvent(event: any): Horario {
@@ -46,8 +63,8 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'el horario de los ' + this.entity.toString()
-            + ', comision ' + this.entity.comision.toString() + ' en ' + this.entity.aula.toString();
+        return 'el horario del ' +  this.entity.toString()
+            + ', comision ' + this.entity.comision.asignatura.nombre + ' en ' + this.entity.aula.nombre;
     }
 
     protected getSearchFields(): string[] {
@@ -84,6 +101,13 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
                 return {
                     label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
                     value: comision }
+            })
+        });
+
+        this.periodoService.getAll().subscribe(periodos => {
+            self.periodos = periodos.map(periodo => {
+                return {
+                    label: periodo.descripcion, value: periodo }
             })
         });
         for (let i = 1; i < 7; i++)

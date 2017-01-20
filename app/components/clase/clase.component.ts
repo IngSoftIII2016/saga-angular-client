@@ -21,7 +21,6 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
 
     aulas: SelectItem[] = [];
 
-
     fecha: Date;
     hora_inicio: Date;
     hora_fin: Date;
@@ -54,7 +53,7 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     }
 
     protected getEntityReferencedLabel(): string {
-        return 'la clase del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.fecha;
+        return 'la clase del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.getFechaString();
     }
 
     protected getSearchFields(): string[] {

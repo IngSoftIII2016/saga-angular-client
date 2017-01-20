@@ -9,18 +9,47 @@
 </div>
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
-        <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
-        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
-               placeholder="Buscar" (keyup)="search(gb.value)">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-1"><label for="carreraFiltro">Carrera</label></div>
+            <div class="ui-grid-col-4">
+                <p-dropdown class="ui-grid-col-11"  id="carreraFiltro" (onChange)="filter('carrera.id', carrera.id)" [options]="carreras"
+                            [(ngModel)]="carrera"
+                            [filter]="true" [style]="{width : '100%' }">
+                </p-dropdown>
+            </div>
+            <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
+            <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
+                   placeholder="Buscar" (keyup)="search(gb.value)">
+        </div>
+            <button type="button" class="guardar" pButton icon="fa-search" (click)="activeFilter()" style="float: left"></button>
+
     </div>
     <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header  style="height:14px;">
-            <div class="ui-grid-col-7">Planes de estudios</div>
-            <div class="ui-grid-col-5">
-                <div class="ui-grid-col-2"><label>Carrera</label></div>
-           <p-dropdown class="ui-grid-col-10" id="carrerafiltro" (onChange)="filterChange(carreras)" [options]="carreras"   [filter]="true" [style]="{width : '100%' }">
-           </p-dropdown>
+
+        <header>Planes de estudios
+                <div class="ui-grid-row" *ngIf="isFilter" >
+                    <div class="ui-grid-col-4"><label for="asignaturaFiltro">Asignatura</label></div>
+                    <div class="ui-grid-col-4"><label for="anioFiltro">Año</label></div>
+                    <div class="ui-grid-col-4"><label for="regimenFiltro">Regimen</label></div>
+                    <div class="ui-grid-col-4">
+                        <p-dropdown class="ui-grid-col-11"  id="asignaturaFiltro" [options]="asignaturas"
+                                    (onChange)="filter('asignatura.id', $event.value.id)"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-dropdown class="ui-grid-col-11" id="anioFiltro" [options]="anios"
+                                    (onChange)="filter('anio', $event.value)"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-dropdown class="ui-grid-col-11" id="regimenFiltro" [options]="regimenes"
+                                    (onChange)="filter('regimen', $event.value)"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
             </div>
         </header>
         <p-column field="carrera.nombre" header="Carrera" sortable="custom" (sortFunction)="sort($event)"></p-column>

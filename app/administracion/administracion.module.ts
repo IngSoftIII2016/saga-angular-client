@@ -67,6 +67,7 @@ import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.co
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
 import {AccionComponent} from "../components/accion/accion.component";
+import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
 
 @NgModule({
     imports: [

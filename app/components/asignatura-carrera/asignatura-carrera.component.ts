@@ -3,7 +3,6 @@
  */
 import {Component} from '@angular/core';
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
-import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
 import {AsignaturaCarreraStore} from "../../services/asignatura-carrera.store";
 import {CarreraService} from "../../services/carrera.service";
 import {Carrera} from "../../entities/carrera";
@@ -12,6 +11,7 @@ import {AsignaturaService} from "../../services/asignatura.service";
 import {Asignatura} from "../../entities/asignatura";
 import {CRUD} from "../../commons/crud";
 import {AsignaturaCarreraService} from "../../services/asignatura-carrera.service";
+import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
 
 @Component({
     templateUrl: 'app/components/asignatura-carrera/asignatura-carrera.component.html',
@@ -23,19 +23,31 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     carreras: SelectItem[] = [];
 
+    carrera : Carrera;
+
     asignaturas: SelectItem[] = [];
 
     regimenes: SelectItem[] = [];
 
     regimenesTabla = new Array();
 
-    regimenSelected: string;
+    isFilter: boolean = false;
+
+    anios: SelectItem[] = [];
 
     constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
                 private carreraService: CarreraService,
                 private asignaturaService: AsignaturaService,
                 private confirmationService: ConfirmationService) {
     super(asignaturaCarreraStore, confirmationService);
+    }
+
+    protected activeFilter(){
+        this.isFilter = !this.isFilter;
+    }
+
+    onOpenDialog(entity: AsignaturaCarrera){
+        entity.carrera = this.carrera;
     }
 
     ngOnInit() {
@@ -62,13 +74,16 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         sel.regimenesTabla['C'] = 'Cuatrimestral';
         sel.regimenesTabla['Anual'] = 'Anual';
 
-    }
+        for (let i = 1; i < 7; i++)
+            this.anios.push({label: i.toString() ,value: i});
 
+
+    }
 
     protected getDefaultNewEntity(): AsignaturaCarrera {
         return new AsignaturaCarrera({
-            asignatura: this.asignaturas[0].value as Asignatura,
-            carrera: this.carreras[0].value as Carrera
+            carrera: this.carreras[0].value as Carrera,
+            asignatura: this.asignaturas[0].value as Asignatura
         });
     }
 

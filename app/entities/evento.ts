@@ -1,5 +1,6 @@
 import {Aula} from "./aula";
 import {Entity} from "../commons/entity";
+import {toFechaString} from "../commons/utils";
 
 import {parseMySQLDate, parseMySQLTime, toMySQLDate, toMySQLTime} from "../commons/utils";
 import {parseMySQLDateTime} from "../commons/utils";
@@ -40,5 +41,8 @@ export class Evento implements Entity {
 
     setHoraFinDate(date: Date) {
         this.hora_fin = toMySQLTime(date);
+    }
+    public getFechaString(): string {
+        return toFechaString(parseMySQLDate(this.fecha));
     }
 }
