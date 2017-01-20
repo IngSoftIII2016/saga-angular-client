@@ -42,6 +42,8 @@ export class AdministracionComponent {
     logout(): void {
         localStorage.removeItem('Authorization');
         localStorage.removeItem('Usuario');
+        this.usuario = null;
+        this.nombre_apellido = '';
         this.router.navigate(['/']);
     }
 }
