@@ -7,7 +7,7 @@
 
             <div class="topbar clearfix">
                 <div class="topbar-left">
-                    <a [routerLink]="['']" id="logo"></a>
+                    <a [routerLink]="['/']" id="logo"></a>
                 </div>
 
                 <div class="topbar-right">
@@ -15,26 +15,16 @@
                         <i></i>
                     </a>
 
-                    <a id="topbar-menu-button" (click)="logout()" href="#" class="ripplelink">
-                        <i class="material-icons">power_settings_new</i>
-                    </a>
-
                     <ul class="topbar-items fadeInDown animated">
-
                         <li>
-                            <a (click)="logout()" href="#" class="ripplelink">
-                                <i style="    color: white;
-    font-size: 40px;" class="material-icons">power_settings_new</i>
+                            <a *ngIf="!isInvitado()" (click)="logout()" href="#" class="ripplelink">
+                                <i style=" color: white; font-size: 40px;" class="material-icons">power_settings_new</i>
                             </a>
-
-                            <ul class="ultima-menu animated">
-                                <li role="menuitem">
-                                    <a href="#" class="ripplelink">
-                                        <i class="material-icons">power_settings_new</i>
-                                        <span (click)="logout()">Salir</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li>
+                            <a (click)="login()" href="#" class="ripplelink">
+                                <i style=" color: white; font-size: 40px;" class="material-icons">account_box</i>
+                            </a>
                         </li>
                     </ul>
                 </div>

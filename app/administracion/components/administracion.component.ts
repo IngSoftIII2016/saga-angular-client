@@ -39,6 +39,11 @@ export class AdministracionComponent {
         return this.usuario.rol.id == 1;
     }
 
+    login(): void {
+        this.router.navigate(['../login']);
+
+    }
+
     logout(): void {
         localStorage.removeItem('Authorization');
         localStorage.removeItem('Usuario');
