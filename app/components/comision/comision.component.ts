@@ -27,6 +27,18 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
 
     docentes: SelectItem[] = [];
 
+    asignaturasFilter: SelectItem[] = [];
+
+    periodosFilter: SelectItem[] = [];
+
+    docentesFilter: SelectItem[] = [];
+
+    asignaturaFilter: Asignatura;
+
+    periodoFilter: Periodo;
+
+    docenteFilter: Docente;
+
     isFilter: boolean = false;
 
 
@@ -48,22 +60,40 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
         super.ngOnInit();
         var self = this;
         this.asignaturaService.getAll().subscribe(asignaturas => {
+            self.asignaturasFilter = asignaturas.map(asignatura => {
+                    return { label: asignatura.nombre, value: asignatura.id }
+                });
+            self.asignaturasFilter.unshift({label: 'Todas', value: null});
+            self.asignaturaFilter = self.asignaturasFilter[0].value;
+        });
+        this.periodoService.getAll().subscribe(periodos => {
+            self.periodosFilter = periodos.map(periodo => {
+                    return { label: periodo.descripcion, value: periodo.id }
+                });
+            self.periodosFilter.unshift({label: 'Todos', value: null});
+            self.periodoFilter = self.periodosFilter[0].value;
+        });
+        this.docenteService.getAll().subscribe(docentes => {
+            self.docentesFilter = docentes.map(docente => {
+                    return { label: docente.apellido + ', ' + docente.nombre, value: docente.id }
+                });
+            self.docentesFilter.unshift({label: 'Todos', value: null});
+            self.docenteFilter = self.docentesFilter[0].value;
+        });
+        this.asignaturaService.getAll().subscribe(asignaturas => {
             self.asignaturas = asignaturas.map(asignatura => {
-                    return { label: asignatura.nombre, value: asignatura }
-                }
-            )
+                return { label: asignatura.nombre, value: asignatura }
+            });
         });
         this.periodoService.getAll().subscribe(periodos => {
             self.periodos = periodos.map(periodo => {
-                    return { label: periodo.descripcion, value: periodo }
-                }
-            )
+                return { label: periodo.descripcion, value: periodo }
+            });
         });
         this.docenteService.getAll().subscribe(docentes => {
             self.docentes = docentes.map(docente => {
-                    return { label: docente.apellido + ', ' + docente.nombre, value: docente }
-                }
-            )
+                return { label: docente.apellido + ', ' + docente.nombre, value: docente }
+            });
         });
     }
 

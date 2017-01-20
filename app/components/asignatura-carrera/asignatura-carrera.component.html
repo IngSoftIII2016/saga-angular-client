@@ -31,26 +31,25 @@
 
         <header><h2>Planes de estudios</h2>
             <div class="ui-grid-row" *ngIf="isFilter">
-                <div class="ui-grid-col-4"><label for="asignaturaFiltro">Asignatura</label></div>
-                <div class="ui-grid-col-4"><label for="anioFiltro">Año</label></div>
-                <div class="ui-grid-col-4"><label for="regimenFiltro">Regimen</label></div>
-                <div class="ui-grid-col-4">
-                    <p-dropdown class="ui-grid-col-11" id="asignaturaFiltro" [options]="asignaturas"
-                                (onChange)="filter('asignatura.id', $event.value)"
-                                [filter]="true" [style]="{width : '100%' }">
-                    </p-dropdown>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3 saga-filtro"><label for="anioFiltro">Año</label></div>
+                    <div class="ui-grid-col-3"><label for="regimenFiltro">Regimen</label></div>
                 </div>
-                <div class="ui-grid-col-4">
-                    <p-dropdown class="ui-grid-col-11" id="anioFiltro" [options]="anios"
-                                (onChange)="filter('anio', $event.value)"
-                                [filter]="true" [style]="{width : '100%' }">
-                    </p-dropdown>
-                </div>
-                <div class="ui-grid-col-4">
-                    <p-dropdown class="ui-grid-col-11" id="regimenFiltro" [options]="regimenes"
-                                (onChange)="filter('regimen', $event.value)"
-                                [filter]="true" [style]="{width : '100%' }">
-                    </p-dropdown>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                        <p-dropdown class="ui-grid-col-11" id="anioFiltro" [options]="aniosFiltro"
+                                    [(ngModel)]="anioFiltro"
+                                    (onChange)="filter('anio', $event.value)"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-grid-col-3">
+                        <p-dropdown class="ui-grid-col-11" id="regimenFiltro" [options]="regimenesFiltro"
+                                    [(ngModel)]="regimenFiltro"
+                                    (onChange)="filter('regimen', $event.value)"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
                 </div>
             </div>
         </header>

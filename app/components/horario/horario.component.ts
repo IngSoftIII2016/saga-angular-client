@@ -11,6 +11,7 @@ import {Comision} from "../../entities/comision";
 import {Aula} from "../../entities/aula";
 import {EdificioService} from "../../services/edificio.service";
 import {PeriodoService} from "../../services/periodo.service";
+import {Periodo} from "../../entities/periodo";
 
 
 @Component({
@@ -34,8 +35,21 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     comisiones: SelectItem[] = [];
 
-    periodos: SelectItem[] = [];
+    diasFilter: SelectItem[] = [];
 
+    aulasFilter: SelectItem[] = [];
+
+    comisionesFilter: SelectItem[] = [];
+
+    periodosFilter: SelectItem[] = [];
+
+    diaFilter: String;
+
+    aulaFilter: Aula;
+
+    comisionFilter: Comision;
+
+    periodoFilter: Periodo;
 
     isFilter : boolean = false;
 
@@ -94,25 +108,47 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         this.aulaService.getAll().subscribe(aulas => {
             self.aulas = aulas.map(aula => {
                 return {label: aula.nombre + ' - ' +  aula.edificio.nombre, value: aula}
-            })
+            });
         })
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
                 return {
                     label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
-                    value: comision }
-            })
+                    value: comision}
+            });
+        });
+        this.aulaService.getAll().subscribe(aulas => {
+            self.aulasFilter = aulas.map(aula => {
+                return {label: aula.nombre + ' - ' +  aula.edificio.nombre, value: aula.id}
+            });
+            self.aulasFilter.unshift({label: 'Todas', value: null});
+            self.aulaFilter = self.aulasFilter[0].value;
+        })
+        this.comisionService.getAll().subscribe(comisiones => {
+            self.comisionesFilter = comisiones.map(comision => {
+                return {
+                    label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
+                    value: comision.id}
+            });
+            self.comisionesFilter.unshift({label: 'Todas', value: null});
+            self.comisionFilter = self.comisionesFilter[0].value;
         });
 
         this.periodoService.getAll().subscribe(periodos => {
-            self.periodos = periodos.map(periodo => {
+            self.periodosFilter = periodos.map(periodo => {
                 return {
-                    label: periodo.descripcion, value: periodo }
-            })
+                    label: periodo.descripcion, value: periodo.id }
+            });
+            self.periodosFilter.unshift({label: 'Todos', value: null});
+            self.periodoFilter = self.periodosFilter[0].value;
         });
-        for (let i = 1; i < 7; i++)
-            this.dias.push({label: this.es.dayNames[i], value: i});
 
+       this.diasFilter.push({label: 'Todos', value: null});
+        for (let i = 1; i < 7; i++) {
+            this.dias.push({label: this.es.dayNames[i], value: i});
+            this.diasFilter.push({label: this.es.dayNames[i], value: i});
+        }
+        self.diaFilter = self.diasFilter[0].value;
     }
 
 

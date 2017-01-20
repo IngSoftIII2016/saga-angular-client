@@ -15,7 +15,7 @@
     </div>
     <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header>Permisos</header>
+        <header><h2>Permisos</h2></header>
         <p-column field="usuario.nombre" header="Usuario" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="grupo.nombre" header="Rol" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>

@@ -18,7 +18,7 @@
             [globalFilter]="gb"
             (onRowSelect)="onRowSelect($event)"
             [rows]="10" [responsive]="true">
-        <header>Periodos</header>
+        <header><h2>Periodos</h2></header>
         <p-column field="descripcion" header="Descripción" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="fecha_inicio" header="Fecha Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="fecha_fin" header="Fecha Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>

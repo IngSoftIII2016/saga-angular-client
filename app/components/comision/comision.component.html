@@ -15,26 +15,29 @@
     </div>
     <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header>Comisiones
+        <header><h2>Comisiones</h2>
            <div class="ui-grid-row" *ngIf="isFilter" >
-                    <div class="ui-grid-col-4"><label for="asignaturaFiltro">Asignatura</label></div>
+                    <div class="ui-grid-col-4 saga-filtro"><label for="asignaturaFiltro">Asignatura</label></div>
                     <div class="ui-grid-col-4"><label for="docenteFiltro">Docente</label></div>
                     <div class="ui-grid-col-4"><label for="periodoFiltro">Periodo</label></div>
                     <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11"  id="asignaturaFiltro" [options]="asignaturas"
-                                    (onChange)="filter('asignatura.id', $event.value.id)"
+                        <p-dropdown class="ui-grid-col-11"  id="asignaturaFiltro" [options]="asignaturasFilter"
+                                    [(ngModel)]="asignaturaFilter"
+                                    (onChange)="filter('asignatura.id', $event.value)"
                                     [filter]="true" [style]="{width : '100%', color: 'white'}">
                         </p-dropdown>
                     </div>
                     <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11" id="docenteFiltro" [options]="docentes"
-                                    (onChange)="filter('docente.id', $event.value.id)"
+                        <p-dropdown class="ui-grid-col-11" id="docenteFiltro" [options]="docentesFilter"
+                                    [(ngModel)]="docenteFilter"
+                                    (onChange)="filter('docente.id', $event.value)"
                                     [filter]="true" [style]="{width : '100%' }">
                         </p-dropdown>
                     </div>
                     <div class="ui-grid-col-4">
-                        <p-dropdown class="ui-grid-col-11"  id="periodoFiltro" [options]="periodos"
-                                    (onChange)="filter('periodo.id', $event.value.id)"
+                        <p-dropdown class="ui-grid-col-11"  id="periodoFiltro" [options]="periodosFilter"
+                                    [(ngModel)]="periodoFilter"
+                                    (onChange)="filter('periodo.id', $event.value)"
                                     [filter]="true" [style]="{width : '100%' }">
                         </p-dropdown>
                     </div>

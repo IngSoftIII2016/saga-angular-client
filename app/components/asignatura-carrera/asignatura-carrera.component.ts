@@ -29,11 +29,19 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     regimenes: SelectItem[] = [];
 
+    regimenesFiltro: SelectItem[] = [];
+
+    regimenFiltro = String;
+
     regimenesTabla = [];
 
     isFilter: boolean = false;
 
     anios: SelectItem[] = [];
+
+    aniosFiltro: SelectItem[] = [];
+
+    anioFiltro = String;
 
     constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
                 private carreraService: CarreraService,
@@ -64,23 +72,32 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
             self.asignaturas = asignaturas.map(asignatura => {
                 return {label: asignatura.nombre, value: asignatura.id}
             });
-            self.asignaturas.unshift({label: 'Todas', value: null});
         });
 
+        self.regimenesFiltro.push({label: 'Todos', value: null});
+        self.regimenesFiltro.push({label: 'Primer Cuatrimestre', value: '1C'});
+        self.regimenesFiltro.push({label: 'Segundo Cuatrimestre', value: '2C'});
+        self.regimenesFiltro.push({label: 'Cuatrimestral', value: 'C'});
+        self.regimenesFiltro.push({label: 'Anual', value: 'Anual'});
+        self.regimenFiltro = self.regimenesFiltro[0].value;
 
-        self.regimenes.push({label: 'Todos', value: null});
         self.regimenes.push({label: 'Primer Cuatrimestre', value: '1C'});
         self.regimenes.push({label: 'Segundo Cuatrimestre', value: '2C'});
         self.regimenes.push({label: 'Cuatrimestral', value: 'C'});
         self.regimenes.push({label: 'Anual', value: 'Anual'});
+
+
         self.regimenesTabla['1C'] = 'Primer Cuatrimestre';
         self.regimenesTabla['2C'] = 'Segundo Cuatrimestre';
         self.regimenesTabla['C'] = 'Cuatrimestral';
         self.regimenesTabla['Anual'] = 'Anual';
 
-        this.anios.push({label: 'Todos', value: null});
-        for (let i = 1; i < 7; i++)
+        this.aniosFiltro.push({label: 'Todos', value: null});
+        for (let i = 1; i < 7; i++) {
             this.anios.push({label: i.toString(), value: i});
+            this.aniosFiltro.push({label: i.toString(), value: i});
+        }
+        self.anioFiltro = self.aniosFiltro[0].value;
     }
 
     protected getDefaultNewEntity(): AsignaturaCarrera {

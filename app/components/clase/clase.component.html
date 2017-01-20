@@ -14,7 +14,7 @@
     </div>
     <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header>Clases</header>
+        <header><h2>Clases</h2></header>
         <p-column field="aula.nombre" header="Aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="fecha" header="Fecha" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
