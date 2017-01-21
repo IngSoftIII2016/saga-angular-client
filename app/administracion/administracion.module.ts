@@ -68,6 +68,7 @@ import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
 import {AccionComponent} from "../components/accion/accion.component";
 import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
+import {TooltipModule} from "primeng/components/tooltip/tooltip";
 
 @NgModule({
     imports: [
@@ -80,6 +81,7 @@ import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
         ButtonModule,
         DialogModule,
         DropdownModule,
+        TooltipModule,
         ScheduleModule,
         CalendarModule,
         GrowlModule,
