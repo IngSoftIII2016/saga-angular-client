@@ -9,7 +9,7 @@ import {toHoraString} from "../commons/utils";
 export class Horario implements Entity {
     id: number = null;
     frecuencia_semanas: number = 1;
-    dia: number;
+    dia: number = 1;
     hora_inicio: string = '09:00:00';
     duracion: string = '01:00:00';
     descripcion: string = "";
