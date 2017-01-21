@@ -1,5 +1,4 @@
 import {Entity} from "../commons/entity";
-import {Grupo} from "./grupo";
 import {Rol} from "./rol";
 export class Usuario implements Entity {
     id: number = null;

@@ -55,8 +55,8 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
         return new Evento(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el evento del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.getFechaString() ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'el evento del aula ' + entity.aula.nombre + ' con fecha ' + entity.getFechaString() ;
     }
 
     protected getSearchFields(): string[] {

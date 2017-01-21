@@ -50,8 +50,8 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
         return new Aula(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el aula ' + this.entity.nombre ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'el aula ' + entity.nombre ;
     }
 
     protected getSearchFields(): string[] {

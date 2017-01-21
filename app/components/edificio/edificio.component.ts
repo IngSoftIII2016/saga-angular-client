@@ -45,8 +45,8 @@ export class EdificioComponent extends CRUD<Edificio, EdificioService, EdificioS
         return new Edificio(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el edificio ' + this.entity.nombre + ' de la localidad de ' + this.entity.localidad.nombre + ' ';
+    protected getEntityReferencedLabel(entity): string {
+        return 'el edificio ' + entity.nombre + ' de la localidad de ' + entity.localidad.nombre + ' ';
     }
 
     protected getSearchFields(): string[] {

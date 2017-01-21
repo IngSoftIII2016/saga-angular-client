@@ -16,7 +16,7 @@ import {DocenteService} from "../../services/docente.service";
 	selector: 'docente',
 	providers:[DocenteStore, ConfirmationService]
 })
-export class DocenteComponent  extends CRUD<Docente, DocenteService, DocenteStore>{
+export class DocenteComponent extends CRUD<Docente, DocenteService, DocenteStore>{
 
     constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) {
         super(docenteStore,confirmationService);
@@ -35,8 +35,8 @@ export class DocenteComponent  extends CRUD<Docente, DocenteService, DocenteStor
         return new Docente(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el docente ' + this.entity.nombre + ' ' + this.entity.apellido + ' ';
+    protected getEntityReferencedLabel(entity): string {
+        return 'el docente ' + entity.nombre + ' ' + entity.apellido + ' ';
     }
 
     protected getSearchFields(): string[] {

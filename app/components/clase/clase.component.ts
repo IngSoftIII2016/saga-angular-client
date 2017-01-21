@@ -52,8 +52,8 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
         return new Clase(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la clase del aula ' + this.entity.aula.nombre + ' con fecha ' + this.entity.getFechaString();
+    protected getEntityReferencedLabel(entity): string {
+        return 'la clase del aula ' + entity.aula.nombre + ' con fecha ' + entity.getFechaString();
     }
 
     protected getSearchFields(): string[] {

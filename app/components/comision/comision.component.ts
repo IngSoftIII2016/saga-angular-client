@@ -16,7 +16,7 @@ import {ComisionService} from "../../services/comision.service";
     templateUrl: 'app/components/comision/comision.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision',
-    providers:[ComisionStore, AsignaturaService, PeriodoService,DocenteService, ConfirmationService]
+    providers: [ComisionStore, AsignaturaService, PeriodoService, DocenteService, ConfirmationService]
 })
 export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionStore> {
 
@@ -46,77 +46,88 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
                 private asignaturaService: AsignaturaService,
                 private periodoService: PeriodoService,
                 private docenteService: DocenteService,
-                private confirmationService : ConfirmationService)
-    {
+                private confirmationService: ConfirmationService) {
         super(comisionStore, confirmationService);
     }
 
 
-    protected toggleFilter(){
+    protected toggleFilter() {
         this.isFilter = !this.isFilter;
     }
 
     ngOnInit() {
         super.ngOnInit();
         var self = this;
+
+        // No era necesario pagarle al backend 2 veces para armar los dos arreglos de SelectItem
         this.asignaturaService.getAll().subscribe(asignaturas => {
-            self.asignaturasFilter = asignaturas.map(asignatura => {
-                    return { label: asignatura.nombre, value: asignatura.id }
-                });
+            asignaturas.forEach(asignatura => {
+                let item = {label: asignatura.nombre, value: asignatura.id};
+                self.asignaturas.push(item);
+                self.asignaturasFilter.push(item);
+            });
             self.asignaturasFilter.unshift({label: 'Todas', value: null});
             self.asignaturaFilter = self.asignaturasFilter[0].value;
         });
         this.periodoService.getAll().subscribe(periodos => {
-            self.periodosFilter = periodos.map(periodo => {
-                    return { label: periodo.descripcion, value: periodo.id }
-                });
+            periodos.forEach(periodo => {
+                let item = {label: periodo.descripcion, value: periodo.id}
+                self.periodos.push(item);
+                self.periodosFilter.push(item);
+            });
             self.periodosFilter.unshift({label: 'Todos', value: null});
             self.periodoFilter = self.periodosFilter[0].value;
         });
         this.docenteService.getAll().subscribe(docentes => {
-            self.docentesFilter = docentes.map(docente => {
-                    return { label: docente.apellido + ', ' + docente.nombre, value: docente.id }
-                });
+            docentes.forEach(docente => {
+                let item = {label: docente.apellido + ', ' + docente.nombre, value: docente.id}
+                self.docentes.push(item);
+                self.docentesFilter.push(item);
+            });
             self.docentesFilter.unshift({label: 'Todos', value: null});
             self.docenteFilter = self.docentesFilter[0].value;
         });
-        this.asignaturaService.getAll().subscribe(asignaturas => {
-            self.asignaturas = asignaturas.map(asignatura => {
-                return { label: asignatura.nombre, value: asignatura }
-            });
-        });
-        this.periodoService.getAll().subscribe(periodos => {
-            self.periodos = periodos.map(periodo => {
-                return { label: periodo.descripcion, value: periodo }
-            });
-        });
-        this.docenteService.getAll().subscribe(docentes => {
-            self.docentes = docentes.map(docente => {
-                return { label: docente.apellido + ', ' + docente.nombre, value: docente }
-            });
-        });
+
+        /*
+         this.asignaturaService.getAll().subscribe(asignaturas => {
+         self.asignaturas = asignaturas.map(asignatura => {
+         return { label: asignatura.nombre, value: asignatura }
+         });
+         });
+         this.periodoService.getAll().subscribe(periodos => {
+         self.periodos = periodos.map(periodo => {
+         return { label: periodo.descripcion, value: periodo }
+         });
+         });
+         this.docenteService.getAll().subscribe(docentes => {
+         self.docentes = docentes.map(docente => {
+         return { label: docente.apellido + ', ' + docente.nombre, value: docente }
+         });
+         });
+         */
     }
 
-   protected getDefaultNewEntity(): Comision {
+    protected getDefaultNewEntity(): Comision {
         return new Comision({
             asignatura: this.asignaturas[0].value as Asignatura,
             periodo: this.periodos[0].value as Periodo,
             docente: this.docentes[0].value as Docente
-         });
+        });
     }
 
     protected getEntityFromEvent(event: any): Comision {
         return new Comision(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la comision ' + this.entity.nombre+ ' a la asignatura ' + this.entity.asignatura.nombre ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'la comision ' + entity.nombre + ' a la asignatura ' + entity.asignatura.nombre;
     }
 
     protected getSearchFields(): string[] {
         return ['nombre', 'asignatura.nombre', 'periodo.descripcion', 'docente.nombre', 'docente.apellido']
     }
 
-}	/**
+}
+/**
  * Created by Federico on 17/11/2016.
  */

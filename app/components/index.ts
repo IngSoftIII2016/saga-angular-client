@@ -11,7 +11,7 @@ export * from './docente';
 export * from './edificio';
 export * from './evento';
 export * from './grilla'
-export * from './grupo';
+export * from './rol';
 export * from './horario';
 export * from './localidad';
 export * from './login';
@@ -19,7 +19,5 @@ export * from './not-found';
 export * from './periodo';
 export * from './sede';
 export * from './usuario';
-export * from './usuario-grupo';
 export * from './accion-rol';
-export * from './accion';
 export * from './';

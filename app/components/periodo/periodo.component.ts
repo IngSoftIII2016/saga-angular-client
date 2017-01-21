@@ -40,8 +40,8 @@ export class PeriodoComponent extends CRUD<Periodo, PeriodoService, PeriodoStore
         return new Periodo(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el periodo ' + this.entity.descripcion + ' desde ' + this.entity.getFechaInicioString() + ' hasta  ' + this.entity.getFechaFinString();
+    protected getEntityReferencedLabel(entity): string {
+        return 'el periodo ' + entity.descripcion + ' desde ' + entity.getFechaInicioString() + ' hasta  ' + entity.getFechaFinString();
     }
 
     protected getSearchFields(): string[] {

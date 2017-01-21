@@ -8,28 +8,30 @@
     </p-confirmDialog>
 </div>
 <div class="ContentSideSections Implementation">
-    <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-1"><label for="carreraFiltro">Carrera</label></div>
-            <div class="ui-grid-col-4">
-                <p-dropdown class="ui-grid-col-11" id="carreraFiltro" (onChange)="filtrarCarrera()"
-                            [options]="carreras"
-                            [(ngModel)]="carrera"
-                            [filter]="true" [style]="{width : '100%' }">
-                </p-dropdown>
-            </div>
-            <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
-            <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
-                   placeholder="Buscar" (keyup)="search(gb.value)">
-        </div>
-        <button type="button" class="guardar" pButton icon="fa-search" (click)="toggleFilter()"
-                style="float: left"></button>
 
-    </div>
     <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
 
         <header><h2>Planes de estudios</h2>
+
+            <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-1"><label for="carreraFiltro">Carrera</label></div>
+                    <div class="ui-grid-col-4">
+                        <p-dropdown class="ui-grid-col-11" id="carreraFiltro" (onChange)="filtrarCarrera()"
+                                    [options]="carreras"
+                                    [(ngModel)]="carrera"
+                                    [filter]="true" [style]="{width : '100%' }">
+                        </p-dropdown>
+                    </div>
+                    <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
+                    <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
+                           placeholder="Buscar" (keyup)="search(gb.value)">
+                </div>
+                <button type="button" class="guardar" pButton icon="fa-search" (click)="toggleFilter()"
+                        style="float: left"></button>
+
+            </div>
             <div class="ui-grid-row" *ngIf="isFilter">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3 saga-filtro"><label for="anioFiltro">Año</label></div>

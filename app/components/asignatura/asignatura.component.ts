@@ -27,8 +27,8 @@ export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, As
         return new Asignatura(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la asignatura ' + this.entity.nombre ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'la asignatura ' + entity.nombre ;
     }
 
     protected getSearchFields(): string[] {

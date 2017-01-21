@@ -51,7 +51,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     periodoFilter: Periodo;
 
-    isFilter : boolean = false;
+    isFilter: boolean = false;
 
     constructor(private horarioStore: HorarioStore,
                 private aulaService: AulaService,
@@ -61,7 +61,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         super(horarioStore, confirmationService);
     }
 
-    toggleFilter(){
+    toggleFilter() {
         this.isFilter = !this.isFilter;
     }
 
@@ -76,16 +76,15 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         return new Horario(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el horario del ' +  this.entity.toString()
-            + ', comision ' + this.entity.comision.asignatura.nombre + ' en ' + this.entity.aula.nombre;
+    protected getEntityReferencedLabel(entity): string {
+        return 'el horario del ' + entity.toString()
+            + ', comision ' + entity.comision.asignatura.nombre + ' en ' + entity.aula.nombre;
     }
 
     protected getSearchFields(): string[] {
         return [
             'comision.asignatura.nombre',
-            'aula.nombre',
-            'comision.periodo.descripcion',
+            'comision.nombre',
             'aula.edificio.nombre',
             'comision.docente.apellido',
             'comision.docente.nombre'];
@@ -106,29 +105,22 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         super.ngOnInit();
         var self = this;
         this.aulaService.getAll().subscribe(aulas => {
-            self.aulas = aulas.map(aula => {
-                return {label: aula.nombre + ' - ' +  aula.edificio.nombre, value: aula}
-            });
-        })
-        this.comisionService.getAll().subscribe(comisiones => {
-            self.comisiones = comisiones.map(comision => {
-                return {
-                    label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
-                    value: comision}
-            });
-        });
-        this.aulaService.getAll().subscribe(aulas => {
-            self.aulasFilter = aulas.map(aula => {
-                return {label: aula.nombre + ' - ' +  aula.edificio.nombre, value: aula.id}
+            aulas.forEach(aula => {
+                let item = {label: aula.nombre + ' - ' + aula.edificio.nombre, value: aula};
+                self.aulas.push(item);
+                self.aulasFilter.push(item);
             });
             self.aulasFilter.unshift({label: 'Todas', value: null});
             self.aulaFilter = self.aulasFilter[0].value;
-        })
+        });
         this.comisionService.getAll().subscribe(comisiones => {
-            self.comisionesFilter = comisiones.map(comision => {
-                return {
+            comisiones.forEach(comision => {
+                let item = {
                     label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
-                    value: comision.id}
+                    value: comision
+                };
+                self.comisiones.push(item);
+                self.comisionesFilter.push(item);
             });
             self.comisionesFilter.unshift({label: 'Todas', value: null});
             self.comisionFilter = self.comisionesFilter[0].value;
@@ -137,13 +129,14 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         this.periodoService.getAll().subscribe(periodos => {
             self.periodosFilter = periodos.map(periodo => {
                 return {
-                    label: periodo.descripcion, value: periodo.id }
+                    label: periodo.descripcion, value: periodo.id
+                }
             });
             self.periodosFilter.unshift({label: 'Todos', value: null});
             self.periodoFilter = self.periodosFilter[0].value;
         });
 
-       this.diasFilter.push({label: 'Todos', value: null});
+        this.diasFilter.push({label: 'Todos', value: null});
         for (let i = 1; i < 7; i++) {
             this.dias.push({label: this.es.dayNames[i], value: i});
             this.diasFilter.push({label: this.es.dayNames[i], value: i});

@@ -40,7 +40,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected abstract getEntityFromEvent(event: any): E;
 
-    protected abstract getEntityReferencedLabel(): string;
+    protected abstract getEntityReferencedLabel(entity: E): string;
 
     protected abstract getSearchFields(): string[];
 
@@ -144,15 +144,15 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     create() {
         if (!this.onBeforeCreate()) return;
         let self = this;
-        this.confimCreate()
+        this.confimCreate(this.entity)
             .then(() => {
                 self.entity = self.onCreate(self.entity);
                 self.store.create(self.entity)
                         .subscribe(creada => {
                             self.entity = creada;
                             self.displayDialog = false;
-                            self.showOkCreateMessage();
-                            }, error => self.showFailCreateMessage(error)
+                            self.showOkCreateMessage(self.entity);
+                            }, error => self.showFailCreateMessage(self.entity, error)
                         )
                 }
             )
@@ -161,15 +161,15 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     update() {
         if (!this.onBeforeUpdate()) return;
         let self = this;
-        this.confimUpdate().then(() => {
+        this.confimUpdate(this.entity).then(() => {
             self.entity = this.onUpdate(self.entity);
             self.store.update(self.entity)
                 .subscribe(
                     guardada => {
-                        self.entity = guardada;
+                        self.entity = guardada as E;
                         self.displayDialog = false;
-                        self.showOkUpdateMessage();
-                    }, error => self.showFailUpdateMessage(error)
+                        self.showOkUpdateMessage(self.entity);
+                    }, error => self.showFailUpdateMessage(self.entity, error)
                 );
         });
     }
@@ -178,14 +178,14 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     delete(): void {
         if (!this.onBeforeDelete()) return;
         let self = this;
-        this.confimDelete().then(() => {
+        this.confimDelete(this.entity).then(() => {
             self.entity = self.onDelete(self.entity);
             self.store.delete(self.entity).subscribe(
                 borrada => {
-                    self.entity = borrada;
+                    self.entity = borrada as E;
                     self.displayDialog = false;
-                    self.showOkDeleteMessage();
-                }, error => self.showFailDeleteMessage(error)
+                    self.showOkDeleteMessage(self.entity);
+                }, error => self.showFailDeleteMessage(self.entity, error)
             );
         });
     }
@@ -213,11 +213,11 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         this.searchTerms.next(term);
     }
 
-    confimCreate(): Promise<boolean> {
+    confimCreate(entity: E): Promise<boolean> {
         return new Promise((resolve, reject) => {
             if (this.confirmCreate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea agregar ' + this.getEntityReferencedLabel() + '?',
+                    message: '¿está seguro que desea agregar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -227,11 +227,11 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         })
     }
 
-    confimUpdate(): Promise<boolean> {
+    confimUpdate(entity: E): Promise<boolean> {
         return new Promise((resolve, reject) => {
             if (this.confirmUpdate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea modificar ' + this.getEntityReferencedLabel() + '?',
+                    message: '¿está seguro que desea modificar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -242,11 +242,11 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     }
 
-    confimDelete(): Promise<boolean> {
+    confimDelete(entity: E): Promise<boolean> {
         return new Promise((resolve, reject) => {
             if (this.confirmDelete && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea eliminar ' + this.getEntityReferencedLabel() + '?',
+                    message: '¿está seguro que desea eliminar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: resolve,
@@ -256,63 +256,61 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         })
     }
 
-    protected showOkCreateMessage() {
+    protected showOkCreateMessage(entity: E) {
         this.msgs.push(
             {
                 severity: 'success',
                 summary: 'Creada',
-                detail: 'Se ha agregado ' + this.getEntityReferencedLabel() + ' con exito!'
+                detail: 'Se ha agregado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
             });
     }
 
-    protected showFailCreateMessage(error) {
+    protected showFailCreateMessage(entity: E, error: any) {
         let err = error.json().error;
         this.msgs.push(
             {
                 severity: 'error',
                 summary: err.title,
-                detail: 'No se ha podido agregar ' + this.getEntityReferencedLabel() + ' debido a: ' + err.detail
+                detail: 'No se ha podido agregar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
             });
     }
 
-    protected showOkUpdateMessage() {
+    protected showOkUpdateMessage(entity: E) {
         this.msgs.push(
             {
                 severity: 'success',
                 summary: 'Guardada',
-                detail: 'Se modificado ' + this.getEntityReferencedLabel() + ' con exito!'
+                detail: 'Se modificado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
             })
     }
 
-    protected showFailUpdateMessage(error) {
+    protected showFailUpdateMessage(entity: E, error: any) {
         let err = error.json().error;
         this.msgs.push(
             {
                 severity: 'error',
                 summary: err.title,
-                detail: 'No se ha podido modificar ' + this.getEntityReferencedLabel() + ' debido a: ' + err.detail
+                detail: 'No se ha podido modificar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
             })
     }
 
-    protected showOkDeleteMessage() {
+    protected showOkDeleteMessage(entity: E) {
         this.msgs.push(
             {
                 severity: 'success',
                 summary: 'Exito',
-                detail: 'Se ha eleminado ' + this.getEntityReferencedLabel() + ' con exito!'
+                detail: 'Se ha eleminado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
             })
     }
 
-    protected showFailDeleteMessage(error) {
+    protected showFailDeleteMessage(entity: E, error) {
         let err = error.json().error;
         console.log(this);
         this.msgs.push(
             {
                 severity: 'error',
                 summary: err.title,
-                detail: 'No se ha podido eliminar ' + this.getEntityReferencedLabel() + ' debido a: ' + err.detail
+                detail: 'No se ha podido eliminar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
             });
     }
-
-
 }

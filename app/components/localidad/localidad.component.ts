@@ -4,8 +4,7 @@ import {LocalidadService} from "../../services/localidad.service";
 import {QueryOptions} from "../../commons/generic.service";
 import {LocalidadStore} from "../../services/localidad.store";
 import {SedeService} from "../../services/sede.service";
-import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
-import {Subject} from "rxjs";
+import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {Sede} from "../../entities/sede";
 import {CRUD} from "../../commons/crud";
 

@@ -49,8 +49,8 @@ export class CarreraComponent extends CRUD<Carrera, CarreraService, CarreraStore
         return new Carrera(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la carrera ' + this.entity.nombre ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'la carrera ' + entity.nombre ;
     }
 
     protected getSearchFields(): string[] {

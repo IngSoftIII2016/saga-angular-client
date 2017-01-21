@@ -1,21 +1,16 @@
 import {Component} from '@angular/core';
 import {Usuario} from "../../entities/usuario";
 import {UsuarioService} from "../../services/usuario.service";
-import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
+import {ConfirmationService} from "primeng/components/common/api";
 import {UsuarioStore} from "../../services/usuario.store";
-import {GrupoService} from "../../services/grupo.service";
-import {Grupo} from "../../entities/grupo";
-import {Subject} from "rxjs";
-import {UsuarioGrupoStore} from "../../services/usuario-grupo.store";
+
 import {CRUD} from "../../commons/crud";
-
-
 
 @Component({
     templateUrl: 'app/components/usuario/usuario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'usuario',
-    providers: [UsuarioStore,UsuarioGrupoStore, ConfirmationService]
+    providers: [UsuarioStore, ConfirmationService]
 })
 export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore>{
 
@@ -36,8 +31,8 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
         return new Usuario(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'el usuario ' + this.entity.nombre + ' ' + this.entity.apellido;
+    protected getEntityReferencedLabel(entity): string {
+        return 'el usuario ' + entity.nombre + ' ' + entity.apellido;
     }
 
     protected getSearchFields(): string[] {

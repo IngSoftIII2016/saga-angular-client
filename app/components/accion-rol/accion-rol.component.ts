@@ -55,8 +55,6 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         this.metodoTabla['POST'] = 'Alta';
         this.metodoTabla['PUT'] = 'Modificación';
         this.metodoTabla['DELETE'] = 'Baja';
-
-
     }
 
     protected getDefaultNewEntity(): AccionRol {
@@ -67,8 +65,8 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         return new AccionRol(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la acción ' + this.metodoTabla[this.entity.accion.metodo] + ' al rol ' + this.entity.rol.nombre;
+    protected getEntityReferencedLabel(entity): string {
+        return 'la acción ' + this.metodoTabla[entity.accion.metodo] + ' al rol ' + entity.rol.nombre;
     }
 
     protected getSearchFields(): string[] {

@@ -20,12 +20,11 @@ import {
     EventoComponent,
     HorarioComponent,
     GrillaComponent,
-    GrupoComponent,
+    RolComponent,
     LocalidadComponent,
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    UsuarioGrupoComponent,
     AccionRolComponent
 } from "../components";
 
@@ -52,7 +51,7 @@ import {ComisionService} from "../services/comision.service";
 import {DocenteService} from "../services/docente.service";
 import {EdificioService} from "../services/edificio.service";
 import {EventoService} from "../services/evento.service";
-import {GrupoService} from "../services/grupo.service";
+import {RolService} from "../services/rol.service";
 import {HorarioService} from "../services/horario.service";
 import {LocalidadService} from "../services/localidad.service";
 import {PeriodoService} from "../services/periodo.service";
@@ -60,14 +59,10 @@ import {SedeService} from "../services/sede.service";
 import {ConfirmationService} from "primeng/components/common/api";
 import {UsuarioService} from "../services/usuario.service";
 import {AccionService} from "../services/accion.service";
-import {RolService} from "../services/rol.service";
 import {AccionRolService} from "../services/accion-rol.service";
-import {UsuarioGrupoService} from "../services/usuario-grupo.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
-import {AccionComponent} from "../components/accion/accion.component";
-import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
 
 @NgModule({
     imports: [
@@ -102,15 +97,13 @@ import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
         EventoComponent,
         HorarioComponent,
         GrillaComponent,
-        GrupoComponent,
+        RolComponent,
         LocalidadComponent,
         PeriodoComponent,
         SedeComponent,
         TimelineDaySchedule,
         UsuarioComponent,
-        UsuarioGrupoComponent,
-        AccionRolComponent,
-        AccionComponent
+        AccionRolComponent
     ],
     providers: [
         AsignaturaService,
@@ -123,12 +116,11 @@ import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
         DocenteService,
         EdificioService,
         EventoService,
-        GrupoService,
+        RolService,
         HorarioService,
         LocalidadService,
         PeriodoService,
         SedeService,
-        UsuarioGrupoService,
         UsuarioService,
         AccionService,
         RolService,

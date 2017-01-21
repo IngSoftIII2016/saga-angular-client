@@ -32,8 +32,8 @@ export class SedeComponent extends CRUD<Sede, SedeService, SedeStore>{
         return new Sede(event.data);
     }
 
-    protected getEntityReferencedLabel(): string {
-        return 'la sede ' + this.entity.nombre  ;
+    protected getEntityReferencedLabel(entity): string {
+        return 'la sede ' + entity.nombre  ;
     }
 
     protected getSearchFields(): string[] {

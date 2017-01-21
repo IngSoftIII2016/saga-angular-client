@@ -16,14 +16,12 @@ import {
     EventoComponent,
     HorarioComponent,
     GrillaComponent,
-    GrupoComponent,
+    RolComponent,
     LocalidadComponent,
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    UsuarioGrupoComponent,
-    AccionRolComponent,
-    AccionComponent
+    AccionRolComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -40,6 +38,9 @@ const adminRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
+                path: 'accion-rol',
+                component: AccionRolComponent
+            }, {
                 path: 'asignaturas',
                 component: AsignaturaComponent
             }, {
@@ -71,7 +72,7 @@ const adminRoutes: Routes = [
                 component: GrillaComponent
             }, {
                 path: 'roles',
-                component: GrupoComponent
+                component: RolComponent
             }, {
                 path: 'localidades',
                 component: LocalidadComponent
@@ -87,17 +88,6 @@ const adminRoutes: Routes = [
             }, {
                 path: 'sedes',
                 component: SedeComponent
-            }, {
-                path: 'usuario-rol',
-                component: UsuarioGrupoComponent
-            },
-            {
-                path: 'accion-rol',
-                component: AccionRolComponent
-            },
-            {
-                path: 'accion',
-                component: AccionComponent
             }
         ]
     },
