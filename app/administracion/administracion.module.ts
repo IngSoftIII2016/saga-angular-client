@@ -63,6 +63,8 @@ import {AccionRolService} from "../services/accion-rol.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
+import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
+import {TooltipModule} from "primeng/components/tooltip/tooltip";
 
 @NgModule({
     imports: [
@@ -75,6 +77,7 @@ import {AdministracionRoutingModule} from "./administracion-routing.module";
         ButtonModule,
         DialogModule,
         DropdownModule,
+        TooltipModule,
         ScheduleModule,
         CalendarModule,
         GrowlModule,
