@@ -149,7 +149,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                 self.entity = self.onCreate(self.entity);
                 self.store.create(self.entity)
                         .subscribe(creada => {
-                            self.entity = creada;
+                            self.entity = creada as E;
                             self.displayDialog = false;
                             self.showOkCreateMessage(self.entity);
                             }, error => self.showFailCreateMessage(self.entity, error)

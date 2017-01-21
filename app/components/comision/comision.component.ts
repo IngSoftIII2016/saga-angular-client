@@ -57,32 +57,30 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
 
     ngOnInit() {
         super.ngOnInit();
-        var self = this;
+        let self = this;
 
         // No era necesario pagarle al backend 2 veces para armar los dos arreglos de SelectItem
         this.asignaturaService.getAll().subscribe(asignaturas => {
             asignaturas.forEach(asignatura => {
-                let item = {label: asignatura.nombre, value: asignatura.id};
-                self.asignaturas.push(item);
-                self.asignaturasFilter.push(item);
+                self.asignaturas.push({label: asignatura.nombre, value: asignatura});
+                self.asignaturasFilter.push({label: asignatura.nombre, value: asignatura.id});
             });
             self.asignaturasFilter.unshift({label: 'Todas', value: null});
             self.asignaturaFilter = self.asignaturasFilter[0].value;
         });
         this.periodoService.getAll().subscribe(periodos => {
             periodos.forEach(periodo => {
-                let item = {label: periodo.descripcion, value: periodo.id}
-                self.periodos.push(item);
-                self.periodosFilter.push(item);
+                self.periodos.push({label: periodo.descripcion, value: periodo});
+                self.periodosFilter.push({label: periodo.descripcion, value: periodo.id});
             });
             self.periodosFilter.unshift({label: 'Todos', value: null});
             self.periodoFilter = self.periodosFilter[0].value;
         });
         this.docenteService.getAll().subscribe(docentes => {
             docentes.forEach(docente => {
-                let item = {label: docente.apellido + ', ' + docente.nombre, value: docente.id}
-                self.docentes.push(item);
-                self.docentesFilter.push(item);
+                let label = docente.apellido + ', ' + docente.nombre;
+                self.docentes.push({label: label, value: docente});
+                self.docentesFilter.push({label: label, value: docente.id});
             });
             self.docentesFilter.unshift({label: 'Todos', value: null});
             self.docenteFilter = self.docentesFilter[0].value;
@@ -120,7 +118,8 @@ export class ComisionComponent extends CRUD<Comision, ComisionService, ComisionS
     }
 
     protected getEntityReferencedLabel(entity): string {
-        return 'la comision ' + entity.nombre + ' a la asignatura ' + entity.asignatura.nombre;
+        console.log(entity);
+        return 'la comision ' + entity.nombre + ' para asignatura ' + entity.asignatura.nombre;
     }
 
     protected getSearchFields(): string[] {

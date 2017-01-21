@@ -106,21 +106,18 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         var self = this;
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
-                let item = {label: aula.nombre + ' - ' + aula.edificio.nombre, value: aula};
-                self.aulas.push(item);
-                self.aulasFilter.push(item);
+                let label = aula.nombre + ' - ' + aula.edificio.nombre;
+                self.aulas.push({label: label, value: aula});
+                self.aulasFilter.push({label: label, value: aula.id});
             });
             self.aulasFilter.unshift({label: 'Todas', value: null});
             self.aulaFilter = self.aulasFilter[0].value;
         });
         this.comisionService.getAll().subscribe(comisiones => {
             comisiones.forEach(comision => {
-                let item = {
-                    label: comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion,
-                    value: comision
-                };
-                self.comisiones.push(item);
-                self.comisionesFilter.push(item);
+                let label = comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion;
+                self.comisiones.push({ label: label, value: comision});
+                self.comisionesFilter.push({ label: label, value: comision.id});
             });
             self.comisionesFilter.unshift({label: 'Todas', value: null});
             self.comisionFilter = self.comisionesFilter[0].value;
@@ -128,9 +125,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
         this.periodoService.getAll().subscribe(periodos => {
             self.periodosFilter = periodos.map(periodo => {
-                return {
-                    label: periodo.descripcion, value: periodo.id
-                }
+                return {label: periodo.descripcion, value: periodo.id}
             });
             self.periodosFilter.unshift({label: 'Todos', value: null});
             self.periodoFilter = self.periodosFilter[0].value;
