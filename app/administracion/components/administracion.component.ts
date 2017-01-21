@@ -41,7 +41,6 @@ export class AdministracionComponent {
 
     login(): void {
         this.router.navigate(['../login']);
-
     }
 
     logout(): void {
@@ -49,6 +48,6 @@ export class AdministracionComponent {
         localStorage.removeItem('Usuario');
         this.usuario = null;
         this.nombre_apellido = '';
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
     }
 }
