@@ -4,7 +4,7 @@ import {UsuarioService} from "../../services/usuario.service";
 import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {UsuarioStore} from "../../services/usuario.store";
 import {RolService} from "../../services/rol.service";
-import {Rol} from "../../entities/rol";\
+import {Rol} from "../../entities/rol";
 
 import { Http, Response } from '@angular/http';
 
@@ -57,7 +57,8 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
         return ['nombre_usuario' , 'nombre', 'apellido', 'email']
     }
 
-    resetPass(entity){
+    protected resetPass(entity){
+        console.log(entity);
         var email = entity.email;
         this.confirmationService.confirm({
             message: 'Esta seguro que quiere generar una nueva contraseña?',
