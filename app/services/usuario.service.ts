@@ -19,8 +19,7 @@ export class UsuarioService extends GenericService<Usuario> {
 
      public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions({
-            includes : ['grupo'],
-            page: -1
+            includes : ['rol']
         });
     }
 
