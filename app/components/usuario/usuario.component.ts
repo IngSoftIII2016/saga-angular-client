@@ -57,13 +57,14 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
         return ['nombre_usuario' , 'nombre', 'apellido', 'email']
     }
 
-    resetPass(){
+    resetPass(entity){
+        var email = entity.email;
         this.confirmationService.confirm({
             message: 'Esta seguro que quiere generar una nueva contraseña?',
             header: 'Confirmar ',
             icon: 'fa ui-icon-warning',
             accept: () => {
-                return this.http.post('http://localhost/saga/api/AuthEndpoint/reset_pass', ({'data':{ 'email': email}}))
+                return this.http.post('http://localhost/saga/api/UsuarioEndpoint/reset_pass', ({'data':{ 'email': email}}))
                     .map((response: Response) => {
                         return true;
                     });
