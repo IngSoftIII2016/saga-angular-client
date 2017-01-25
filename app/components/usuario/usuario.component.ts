@@ -24,7 +24,7 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
                   private confirmationService : ConfirmationService,
                   private rolService : RolService,
                   private http: Http) {
-      super(usuarioStore,confirmationService);
+      super(usuarioStore, confirmationService);
     }
 
     ngOnInit() {

@@ -68,11 +68,11 @@
                 <div class="ui-grid-col-4"><label for="email">Email*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="entity.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
             </div>
-            <div class="ui-grid-col-3">
-                <p-dropdown class="ui-grid-col-11" id="rolFiltro" [options]="rolFilter"
-                            [(ngModel)]="rolFilter"
-                            (onChange)="filter('rol.id', $event.value)"
-                            [filter]="true" [style]="{width : '100%' }">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="rol">Rol*</label></div>
+                <p-dropdown class="ui-grid-col-8" id="rol" [options]="roles"
+                            [(ngModel)]="entity.rol"
+                            [style]="{width : '100%' }">
                 </p-dropdown>
             </div>
         </div>

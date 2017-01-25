@@ -12,7 +12,7 @@ import {EventoStore} from "../../services/evento.store";
 import {toMySQLDate} from "../../commons/utils";
 
 import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
-import {ConfirmationService, Message, SelectItem} from "primeng/components/common/api";
+import {Message, SelectItem} from "primeng/components/common/api";
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 
 declare var moment: any;
@@ -20,7 +20,7 @@ declare var moment: any;
 @Component({
     selector: 'grilla',
     templateUrl: 'app/components/grilla/grilla.component.html',
-    styleUrls: ['app/resources/demo/css/dialog.css'],
+    styleUrls: ['app/components/grilla/grilla.component.css', 'app/resources/demo/css/dialog.css'],
     providers: [EdificioService, AulaService, ClaseStore, EventoStore]
 })
 export class GrillaComponent implements OnInit {
@@ -33,6 +33,8 @@ export class GrillaComponent implements OnInit {
     edificios: SelectItem[];
 
     edificioSelected: Edificio;
+
+    searchTerms = new BehaviorSubject<string>('');
 
     aulas: Observable<Aula[]>;
 
@@ -72,7 +74,7 @@ export class GrillaComponent implements OnInit {
 
     msgs: Message[] = [];
 
-    eventSubscription : Subscription = null;
+    eventSubscription: Subscription = null;
 
     buttonText = {
         today: 'Hoy',
@@ -98,8 +100,9 @@ export class GrillaComponent implements OnInit {
 
         var self = this;
 
+
         //this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
-        this.defaultDate =moment({h:0, m:0, s:0, ms:0}).utc();
+        this.defaultDate = moment({h: 0, m: 0, s: 0, ms: 0}).utc();
 
         this.scrollTime = moment().format('HH:mm:ss');
 
@@ -110,7 +113,7 @@ export class GrillaComponent implements OnInit {
                 self.edificios = edificios.map(edificio => {
                     return {label: edificio.nombre, value: edificio}
                 })
-                if(localStorage.getItem('edificio'))
+                if (localStorage.getItem('edificio'))
                     self.edificio.next(JSON.parse(localStorage.getItem('edificio')) as Edificio);
                 else
                     self.edificio.next(edificios[0]);
@@ -125,9 +128,9 @@ export class GrillaComponent implements OnInit {
                     return {id: aula.id, title: aula.nombre}
                 }));
 
-        this.fecha
+        this.fecha.distinctUntilChanged(null, x => Math.floor(x.getTime() / 86400000))
             .combineLatest(
-                self.edificio,
+                self.edificio.distinctUntilChanged(null, x => x.id),
                 function (fecha, edificio) {
                     return {edificio: edificio, fecha: fecha}
                 })
@@ -143,8 +146,11 @@ export class GrillaComponent implements OnInit {
                 self.eventoStore.mergeQueryOptions(qo);
             });
 
-        this.fecha
-            .do(fecha => {console.log('updateCalendar'); console.log(fecha)})
+        this.fecha.distinctUntilChanged(null, x => Math.floor(x.getTime() / 86400000))
+            .do(fecha => {
+                console.log('updateCalendar');
+                console.log(fecha)
+            })
             .subscribe(fecha => this.fechaCalendar = fecha);
 
         this.events = this.claseStore.items
@@ -155,7 +161,15 @@ export class GrillaComponent implements OnInit {
                 function (clases, eventos) {
                     return clases.concat(eventos);
                 }
-            );
+            ).combineLatest(self.searchTerms,
+                function (events, terms) {
+                    return events.map(function (e) {
+                        if (terms.length > 0 && e.title.search(terms) != -1)
+                            e.color = '#7f0000';
+                        return e;
+                    });
+                });
+
 
         this.scheduleHeader = {
             left: 'prev,next today',
@@ -174,10 +188,13 @@ export class GrillaComponent implements OnInit {
         this.aulaService.getAll()
             .subscribe(aulas => {
                 self.aulasOptions = aulas
-                    .map(aula => {return {label: aula.nombre + ' - ' + aula.edificio.nombre, value: new Aula(aula)}});
+                    .map(aula => {
+                        return {label: aula.nombre + ' - ' + aula.edificio.nombre, value: new Aula(aula)}
+                    });
             })
 
         this.edificio.subscribe(edificio => self.edificioSelected = edificio);
+
     }
 
     onChangeEdificio(event): void {
@@ -185,6 +202,10 @@ export class GrillaComponent implements OnInit {
         let edificio: Edificio = event.value as Edificio;
         localStorage.setItem('edificio', JSON.stringify(edificio))
         this.edificio.next(edificio);
+    }
+
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 
     saveClase() {
@@ -241,11 +262,9 @@ export class GrillaComponent implements OnInit {
     }
 
     getEvents(event): void {
-        console.log('GrillaComponent.getEvents()');
-        console.log(event.day);
-        console.log(event.timezone);
-        if(this.eventSubscription != null)
+        if (this.eventSubscription != null)
             this.eventSubscription.unsubscribe();
+
         this.fecha.next(event.day);
         this.eventSubscription = this.events.debounceTime(250).subscribe(event.callback);
     }
@@ -296,7 +315,8 @@ export class GrillaComponent implements OnInit {
     }
 
     selectEvent(event) {
-        console.log('selectEvent'); console.log(event);
+        console.log('selectEvent');
+        console.log(event);
         switch (event.type) {
             case 'Clase':
                 this.claseSelected = this.eventToClase(event);
@@ -316,8 +336,8 @@ export class GrillaComponent implements OnInit {
     }
 
     getAulaById(id: number): Aula {
-        for(let i in this.aulasOptions)
-            if(this.aulasOptions[i].value.id == id)
+        for (let i in this.aulasOptions)
+            if (this.aulasOptions[i].value.id == id)
                 return this.aulasOptions[i].value;
     }
 
@@ -327,13 +347,14 @@ export class GrillaComponent implements OnInit {
         clase.setFechaDate(event.start.toDate());
         clase.setHoraInicioDate(event.start.toDate());
         clase.setHoraFinDate(event.end.toDate());
-        console.log('eventToClase');console.log(clase);
+        console.log('eventToClase');
+        console.log(clase);
         return clase;
     }
 
     static claseToEvent(clase: Clase): any {
         return {
-            id: clase.id,
+            id: 'c' + clase.id,
             type: 'Clase',
             model: clase as any,
             resourceId: clase.aula.id,
@@ -355,7 +376,7 @@ export class GrillaComponent implements OnInit {
 
     static eventoToEvent(evento: Evento): any {
         return {
-            id: evento.id,
+            id: 'e' + evento.id,
             type: 'Evento',
             model: evento as any,
             resourceId: evento.aula.id,

@@ -13,4 +13,8 @@ export class Usuario implements Entity {
     constructor(value : Object = {}) {
         Object.assign(this, value);
     }
+
+    isInvitado(): boolean {
+        return this.rol.id == 1;
+    }
 }

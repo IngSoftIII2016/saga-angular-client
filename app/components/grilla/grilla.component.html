@@ -9,10 +9,13 @@
                             (onChange)="onChangeEdificio($event)">
                 </p-dropdown>
             </div>
-            <div class="ui-g-6 ui-md-6"></div>
+            <div class="ui-g-6 ui-md-6">
+                <input #gs type="text" pInputText size="50" placeholder="Buscar" (keyup)="search(gs.value); schedule.refetchEvents()">
+                <i></i>
+            </div>
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
-                            readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)">
+                            readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)" [showIcon]="true">
                 </p-calendar>
             </div>
         </div>

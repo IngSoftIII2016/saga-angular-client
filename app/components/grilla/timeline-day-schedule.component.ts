@@ -190,8 +190,6 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
             titleFormat: '[Clases y Eventos del] dddd D MMMM YYYY',
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             events: (start, end, timezone, callback) => {
-                console.log('TimelineDaySchedule.getEvents')
-                console.log(start);
                 this.onDayChanged.emit({
                     'day': start.local().toDate(),
                     'timezone': timezone,
