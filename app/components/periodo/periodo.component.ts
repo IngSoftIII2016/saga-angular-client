@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
 import {Periodo} from '../../entities/periodo';
 import {PeriodoStore} from "../../services/periodo.store";
+import {Component} from '@angular/core';
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {ConfirmationService, Message} from "primeng/components/common/api";
 import {Subject} from "rxjs";

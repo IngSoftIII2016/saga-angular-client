@@ -21,7 +21,8 @@ import {
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    AccionRolComponent
+    AccionRolComponent,
+    PresentismoComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -37,6 +38,10 @@ const adminRoutes: Routes = [
         component: AdministracionComponent,
         canActivate: [AuthGuard],
         children: [
+            {
+                path: 'presentismo',
+                component: PresentismoComponent
+            },
             {
                 path: 'accion-rol',
                 component: AccionRolComponent

@@ -117,7 +117,9 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 }
 
     protected getSearchFields(): string[] {
-        return ['carrera.nombre', 'asignatura.nombre', 'anio', 'regimen']
+        return [
+            'asignatura.nombre',
+            'anio']
     }
 
     public filtrarCarrera() : void {

@@ -65,6 +65,7 @@ import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
 import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
+import {PresentismoComponent} from "../components/presentismo/presentismo.component";
 
 @NgModule({
     imports: [
@@ -106,7 +107,8 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
         SedeComponent,
         TimelineDaySchedule,
         UsuarioComponent,
-        AccionRolComponent
+        AccionRolComponent,
+        PresentismoComponent
     ],
     providers: [
         AsignaturaService,

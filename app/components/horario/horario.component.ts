@@ -85,10 +85,11 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     protected getSearchFields(): string[] {
         return [
             'comision.asignatura.nombre',
-            'comision.nombre',
+            'comision.periodo.descripcion',
+            'aula.nombre',
             'aula.edificio.nombre',
-            'comision.docente.apellido',
-            'comision.docente.nombre'];
+            'duracion',
+            'hora_inicio'];
     }
 
     protected onOpenDialog(horario: Horario): void {

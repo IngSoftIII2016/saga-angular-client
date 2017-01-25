@@ -16,6 +16,7 @@ export class Clase implements Entity {
     horario: Horario = new Horario();
     aula: Aula = new Aula();
     comentario: string;
+    hora_llegada: string = '';
 
     constructor(value : Object = {}) {
         Object.assign(this, value);
@@ -43,6 +44,14 @@ export class Clase implements Entity {
 
     setHoraFinDate(date: Date) {
         this.hora_fin = toMySQLTime(date);
+    }
+
+    getHoraLlegada(): Date {
+        return parseMySQLTime(this.hora_llegada);
+    }
+
+    setHoraLlegada(date: Date) {
+        this.hora_llegada = toMySQLTime(date);
     }
 
     public getFechaString(): string {

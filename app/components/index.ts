@@ -20,4 +20,5 @@ export * from './periodo';
 export * from './sede';
 export * from './usuario';
 export * from './accion-rol';
+export * from './presentismo';
 export * from './';
