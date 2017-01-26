@@ -14,6 +14,10 @@ export class DocenteService extends GenericService<Docente> {
 		super(http, router);
 	}
 
+	protected valueToEntity(value: Object): Docente {
+		return new Docente(value);
+	}
+
 	protected getResourcePath(): string {
 		return 'docentes';
 	}

@@ -14,6 +14,10 @@ export class CarreraService extends GenericService<Carrera> {
 		super(http, router);
 	}
 
+	protected valueToEntity(value: Object): Carrera {
+		return new Carrera(value);
+	}
+
 	protected getResourcePath(): string {
 		return 'carreras';
 	}

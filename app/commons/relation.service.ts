@@ -17,6 +17,7 @@ export abstract class RelationService<T extends Entity> extends GenericService<T
         reqOptions.method = RequestMethod.Delete;
         reqOptions.body =  JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        return this.http.request(req).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req))
+            .map(res => this.valueToEntity(res.json().data));
     }
 }

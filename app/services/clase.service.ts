@@ -13,6 +13,10 @@ export class ClaseService extends GenericService<Clase> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Clase {
+        return new Clase(value);
+    }
+
     protected getResourcePath(): string {
         return 'clases';
     }

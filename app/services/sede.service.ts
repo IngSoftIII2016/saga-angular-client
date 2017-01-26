@@ -15,6 +15,10 @@ export class SedeService extends GenericService<Sede> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Sede {
+        return new Sede(value);
+    }
+
     protected getResourcePath(): string {
 		return 'sedes';
 	}

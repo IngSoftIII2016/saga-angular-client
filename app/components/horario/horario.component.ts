@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {ComisionService} from "../../services/comision.service";
 import {AulaService} from "../../services/aula.service";
@@ -7,11 +7,12 @@ import {HorarioStore} from "../../services/horario.store";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {HorarioService} from "../../services/horario.service";
-import {Comision} from "../../entities/comision";
 import {Aula} from "../../entities/aula";
-import {EdificioService} from "../../services/edificio.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
+import {Subject} from "rxjs";
+import {QueryOptions} from "../../commons/generic.service";
+import {Comision} from "../../entities/comision";
 
 
 @Component({
@@ -21,7 +22,6 @@ import {Periodo} from "../../entities/periodo";
     providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService]
 })
 export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
-
 
     hora_inicio: Date;
 
@@ -50,6 +50,8 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     comisionFilter: Comision;
 
     periodoFilter: Periodo;
+
+    periodoIdFilterSubject = new Subject<number>();
 
     isFilter: boolean = false;
 
@@ -115,15 +117,28 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             self.aulasFilter.unshift({label: 'Todas', value: null});
             self.aulaFilter = self.aulasFilter[0].value;
         });
+
         this.comisionService.getAll().subscribe(comisiones => {
-            comisiones.forEach(comision => {
-                let label = comision.asignatura.nombre + ' ' + comision.nombre + ', ' + comision.periodo.descripcion;
-                self.comisiones.push({ label: label, value: comision});
-                self.comisionesFilter.push({ label: label, value: comision.id});
+            self.comisiones = comisiones.map(comision => {
+                return {label: comision.etiqueta(), value: comision};
             });
-            self.comisionesFilter.unshift({label: 'Todas', value: null});
-            self.comisionFilter = self.comisionesFilter[0].value;
         });
+
+        this.periodoIdFilterSubject
+            .switchMap(periodoId => {
+                if (periodoId) {
+                    let qo = self.comisionService.getDefaultQueryOptions();
+                    qo.merge({filters: {'periodo.id': periodoId}, page: -1});
+                    return self.comisionService.query(qo);
+                } else
+                    return self.comisionService.getAll()
+            })
+            .subscribe(comisiones => {
+                self.comisionesFilter = comisiones.map(comision => {
+                    return {label: comision.etiqueta(), value: comision.id};
+                });
+                self.comisionesFilter.unshift({label: 'Todas', value: null});
+            });
 
         this.periodoService.getAll().subscribe(periodos => {
             self.periodosFilter = periodos.map(periodo => {
@@ -131,6 +146,11 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             });
             self.periodosFilter.unshift({label: 'Todos', value: null});
             self.periodoFilter = self.periodosFilter[0].value;
+            self.filterPeriodo(this.periodosFilter[0].value);
+        });
+
+        this.periodoIdFilterSubject.subscribe(periodoId => {
+            self.filter('comision.periodo.id', periodoId)
         });
 
         this.diasFilter.push({label: 'Todos', value: null});
@@ -138,7 +158,12 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             this.dias.push({label: this.es.dayNames[i], value: i});
             this.diasFilter.push({label: this.es.dayNames[i], value: i});
         }
-        self.diaFilter = self.diasFilter[0].value;
+        this.diaFilter = self.diasFilter[0].value;
+
+    }
+
+    filterPeriodo(periodoId: number) {
+        this.periodoIdFilterSubject.next(periodoId);
     }
 
 

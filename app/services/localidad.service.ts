@@ -14,6 +14,10 @@ export class LocalidadService extends GenericService<Localidad> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Localidad {
+        return new Localidad(value);
+    }
+
     protected getResourcePath(): string {
         return 'localidades';
     }

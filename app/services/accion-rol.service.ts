@@ -14,6 +14,10 @@ export class AccionRolService extends RelationService<AccionRol> {
         super(http, router)
     }
 
+    protected valueToEntity(value: Object): AccionRol {
+        return new AccionRol(value)
+    }
+
     protected getResourcePath(): string {
         return 'accionrol';
     }

@@ -14,6 +14,10 @@ export class RolService extends GenericService<Rol> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Rol {
+        return new Rol(value);
+    }
+
     protected getResourcePath(): string {
         return 'roles';
     }

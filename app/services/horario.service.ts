@@ -14,6 +14,10 @@ export class HorarioService extends GenericService<Horario> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Horario {
+        return new Horario(value);
+    }
+
     protected getResourcePath(): string {
         return 'horarios';
     }

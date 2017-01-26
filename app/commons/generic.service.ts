@@ -44,6 +44,8 @@ export abstract class GenericService<T extends Entity> {
         this.totalRows = this.rowCount.asObservable().distinctUntilChanged();
     }
 
+    protected abstract valueToEntity(value: Object): T;
+
     protected abstract getResourcePath(): string;
 
     public abstract getDefaultQueryOptions() : QueryOptions;
@@ -55,7 +57,7 @@ export abstract class GenericService<T extends Entity> {
         return this.intercept(this.http.request(req))
             .map(res => res.json())
             .do(json => this.rowCount.next(json.rowCount))
-            .map(json => json.data);
+            .map(json => json.data.map(t => this.valueToEntity(t)));
     }
 
     public getAll(qo : QueryOptions = this.getDefaultQueryOptions()) : Observable<T[]> {
@@ -68,7 +70,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Get;
         reqOptions.url += '/' + id.toString();
         let req = new Request(reqOptions);
-        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => this.valueToEntity(res.json().data));
     }
 
     private getRowsCount(): Observable<number> {
@@ -83,7 +85,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Post;
         reqOptions.body = JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => this.valueToEntity(res.json().data));
     }
 
     public update(t: T): Observable<T> {
@@ -91,7 +93,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.method = RequestMethod.Put;
         reqOptions.body = JSON.stringify({data: t});
         let req = new Request(reqOptions);
-        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => this.valueToEntity(res.json().data));
     }
 
     public delete(t: T): Observable<T> {
@@ -99,7 +101,7 @@ export abstract class GenericService<T extends Entity> {
         reqOptions.url += '/' + t.id;
         reqOptions.method = RequestMethod.Delete;
         let req = new Request(reqOptions);
-        return this.intercept(this.http.request(req)).map(res => res.json().data as T);
+        return this.intercept(this.http.request(req)).map(res => this.valueToEntity(res.json().data));
     }
 
     protected getBaseRequestOptions(): RequestOptions {

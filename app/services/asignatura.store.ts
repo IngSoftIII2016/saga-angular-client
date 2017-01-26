@@ -1,7 +1,6 @@
 import {AsignaturaService} from "./asignatura.service";
 import {Asignatura} from "../entities/asignatura";
 import {GenericStore} from "../commons/generic.store";
-import {QueryOptions} from "../commons/generic.service";
 import {Injectable} from "@angular/core";
 /**
  * Created by juan on 20/11/16.

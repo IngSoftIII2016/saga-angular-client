@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Asignatura} from "../entities/asignatura";
 import {Router} from "@angular/router";
@@ -13,6 +12,10 @@ export class AsignaturaService extends GenericService<Asignatura> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Asignatura {
+        return new Asignatura(value);
+    }
+
     protected getResourcePath(): string {
         return 'asignaturas';
     }
@@ -20,4 +23,5 @@ export class AsignaturaService extends GenericService<Asignatura> {
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions();
     }
+
 }

@@ -6,9 +6,7 @@ import {Entity} from "./entity";
 import {GenericStore} from "./generic.store";
 import {GenericService} from "./generic.service";
 import {Subject} from "rxjs";
-import {Asignatura} from "../entities/asignatura";
 import {Message, ConfirmationService} from "primeng/components/common/api";
-import {PreActivation} from "@angular/router/src/router";
 
 export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST extends GenericStore<E, SV>> implements OnInit {
 

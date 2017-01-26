@@ -15,6 +15,10 @@ export class EventoService extends GenericService<Evento> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Evento {
+        return new Evento(value);
+    }
+
     protected getResourcePath(): string {
         return 'eventos';
     }

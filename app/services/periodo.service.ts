@@ -10,12 +10,16 @@ import {Router} from "@angular/router";
 @Injectable()
 export class PeriodoService extends GenericService<Periodo> {
 
-	protected getResourcePath(): string {
-		return 'periodos';
-	}
-
 	constructor(http: Http, router: Router) {
 		super(http, router);
+	}
+
+    protected valueToEntity(value: Object): Periodo {
+	    return new Periodo(value);
+    }
+
+	protected getResourcePath(): string {
+		return 'periodos';
 	}
 
 	public getDefaultQueryOptions() : QueryOptions {

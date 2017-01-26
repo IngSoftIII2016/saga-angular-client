@@ -1,7 +1,6 @@
 import {AccionService} from "./accion.service";
 import {Accion} from "../entities/accion";
 import {GenericStore} from "../commons/generic.store";
-import {QueryOptions} from "../commons/generic.service";
 import {Injectable} from "@angular/core";
 
 

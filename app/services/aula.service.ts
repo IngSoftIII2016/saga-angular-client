@@ -19,6 +19,10 @@ export class AulaService extends GenericService<Aula> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Aula {
+        return new Aula(value);
+    }
+
     protected getResourcePath(): string {
         return 'aulas';
     }

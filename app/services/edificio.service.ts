@@ -15,6 +15,10 @@ export class EdificioService extends GenericService<Edificio> {
         super(http, router);
     }
 
+    protected valueToEntity(value: Object): Edificio {
+        return new Edificio(value);
+    }
+
     protected getResourcePath(): string {
         return 'edificios';
     }

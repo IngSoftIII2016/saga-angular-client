@@ -14,6 +14,10 @@ export class AsignaturaCarreraService extends RelationService<AsignaturaCarrera>
         super(http, router)
     }
 
+    protected valueToEntity(value: Object): AsignaturaCarrera {
+        return new AsignaturaCarrera(value);
+    }
+
     protected getResourcePath(): string {
         return 'asignaturacarrera';
     }

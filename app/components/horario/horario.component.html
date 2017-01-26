@@ -40,14 +40,13 @@
                     </div>
                     <div class="ui-grid-col-3">
                         <p-dropdown class="ui-grid-col-11" id="periodoFiltro" [options]="periodosFilter"
-                                    [(ngModel)]="periodoFilter"
-                                    (onChange)="filter('comision.periodo.id', $event.value)"
+                                    (onChange)="filterPeriodo($event.value)"
                                     [filter]="true" [style]="{width : '100%' }">
                         </p-dropdown>
                     </div>
                     <div class="ui-grid-col-3">
                         <p-dropdown class="ui-grid-col-11" id="comisionFiltro" [options]="comisionesFilter"
-                                    [(ngModel)]="comisionFilter"
+
                                     (onChange)="filter('comision.id', $event.value)"
                                     [filter]="true" [style]="{width : '100%' }">
                         </p-dropdown>

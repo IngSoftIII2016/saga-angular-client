@@ -41,8 +41,7 @@ const adminRoutes: Routes = [
             {
                 path: 'presentismo',
                 component: PresentismoComponent
-            },
-            {
+            }, {
                 path: 'accion-rol',
                 component: AccionRolComponent
             }, {

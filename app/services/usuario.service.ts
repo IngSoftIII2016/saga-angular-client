@@ -12,6 +12,9 @@ export class UsuarioService extends GenericService<Usuario> {
     constructor(http: Http, router: Router) {
         super(http, router);
     }
+    protected valueToEntity(value: Object): Usuario {
+        return new Usuario(value);
+    }
 
     protected getResourcePath(): string {
         return 'usuarios';
