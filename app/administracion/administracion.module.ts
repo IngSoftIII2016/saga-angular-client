@@ -66,6 +66,8 @@ import {AdministracionRoutingModule} from "./administracion-routing.module";
 import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {PresentismoComponent} from "../components/presentismo/presentismo.component";
+import {SliderModule} from "primeng/components/slider/slider";
+import {ChartModule} from "primeng/components/chart/chart";
 
 @NgModule({
     imports: [
@@ -86,7 +88,9 @@ import {PresentismoComponent} from "../components/presentismo/presentismo.compon
         ConfirmDialogModule,
         MessagesModule,
         RadioButtonModule,
-        PasswordModule
+        PasswordModule,
+        SliderModule,
+        ChartModule
     ],
     declarations: [
         AdministracionComponent,

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Clase} from "../../entities/clase";
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {Aula} from "../../entities/aula";
-import {Subject, Timestamp} from "rxjs";
+import {Subject, Timestamp, Observable} from "rxjs";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {ClaseService} from "../../services/clase.service";
@@ -12,6 +12,8 @@ import {Comision} from "../../entities/comision";
 import {ComisionService} from "../../services/comision.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
+import {setUpFormContainer} from "@angular/forms/src/directives/shared";
+import {UIChart} from "primeng/components/chart/chart";
 
 
 @Component({
@@ -30,6 +32,20 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
 
     comision: Comision;
 
+    private tolerancia= new Subject<number>();
+
+    toleranciaActual: number = 5;
+
+    cantidadTotal : number;
+
+    cantidadATiempo : number
+
+    cantidadTarde : number;
+
+    cantidadAusente : number;
+
+    data: any;
+
     es: any = CALENDAR_LOCALE_ES;
 
     constructor(private claseStore: ClaseStore,
@@ -39,7 +55,6 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
     }
 
     ngOnInit() {
-        super.ngOnInit();
         let self = this;
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
@@ -55,7 +70,50 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
             self.periodo = periodos[periodos.length - 1];
             self.filtrarPeriodo();
         });
+        this.tolerancia.subscribe(valor => self.toleranciaActual = valor);
+        this.tolerancia.combineLatest(this.store.items,
+            function(tolerancia: number, clases : Clase[]) {
+                var cantidadATiempo = 0;
+                var cantidadTarde = 0;
+                var cantidadAusente = 0;
+                for (let clase of clases ){
+                    if (clase.hora_llegada == null)
+                     cantidadAusente = cantidadAusente + 1;
+                     else {
+                     var min= Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
+                     if( min <= tolerancia)
+                     cantidadATiempo = cantidadATiempo + 1 ;
+                     else
+                     cantidadTarde = cantidadTarde + 1;
+                     }
+                }
+                return {cantidadATiempo : cantidadATiempo,
+                    cantidadTarde: cantidadTarde,
+                    cantidadAusente: cantidadAusente,
+                    cantidadTotal: clases.length};
+            }).subscribe(cant => {this.cantidadATiempo = cant.cantidadATiempo,
+            this.cantidadTarde = cant.cantidadTarde,
+            this.cantidadAusente = cant.cantidadAusente,
+            this.cantidadTotal = cant.cantidadTotal});
+        this.data = {
+            labels: ['A tiempo','Tarde','Ausente'],
+            datasets: [
+                {
+                    data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+        };
     }
+
     protected getDefaultNewEntity(): Clase {
         return new Clase();
     }
@@ -85,6 +143,46 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
     public filtrarPeriodo() : void {
         this.filter('horario.comision.periodo.id', this.periodo.id);
     }
+
+    public filtrarComisionGrafico(chart : UIChart) : void {
+        this.filter('horario.comision.id', this.comision.id);
+        this.actualizar(chart);
+    }
+
+    public filtrarPeriodoGrafico(chart : UIChart) : void {
+        this.filter('horario.comision.periodo.id', this.periodo.id);
+        this.actualizar(chart);
+    }
+
+
+    private actualizar(chart : UIChart){
+        this.data = {
+            labels: ['A tiempo','Tarde','Ausente'],
+            datasets: [
+                {
+                    data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+        };
+        console.log('total ' +this.cantidadTotal);
+        chart.refresh();
+    }
+
+    public updateTolerancia(toleranciaActual : number, chart :UIChart){
+        console.log('Actual' + toleranciaActual);
+        this.tolerancia.next(toleranciaActual);
+        this.actualizar(chart);
+    }
+
 
 }
 /**
