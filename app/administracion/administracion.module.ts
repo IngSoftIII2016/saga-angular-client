@@ -25,7 +25,8 @@ import {
     PeriodoComponent,
     SedeComponent,
     UsuarioComponent,
-    AccionRolComponent
+    AccionRolComponent,
+    PerfilComponent
 } from "../components";
 
 import {HttpModule} from "@angular/http";
@@ -112,7 +113,8 @@ import {ChartModule} from "primeng/components/chart/chart";
         TimelineDaySchedule,
         UsuarioComponent,
         AccionRolComponent,
-        PresentismoComponent
+        PresentismoComponent,
+        PerfilComponent
     ],
     providers: [
         AsignaturaService,
