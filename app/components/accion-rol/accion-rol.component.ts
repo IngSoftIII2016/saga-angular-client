@@ -31,7 +31,7 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
                 private accionService: AccionService,
                 private rolService: RolService,
                 private confirmationService: ConfirmationService) {
-    super(accionRolStore, confirmationService);
+        super(accionRolStore, confirmationService);
     }
 
     ngOnInit() {
@@ -77,5 +77,6 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         entity.rol = this.rol;
         console.log(entity);
     }
+
 
 }
