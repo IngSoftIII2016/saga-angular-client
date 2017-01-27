@@ -56,6 +56,7 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
                 private comisionService: ComisionService,
                 private periodoService: PeriodoService) {
         super(claseStore);
+        claseStore.setPage(-1);
     }
 
     ngOnInit() {
