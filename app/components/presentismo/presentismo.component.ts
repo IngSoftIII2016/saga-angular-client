@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Clase} from "../../entities/clase";
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {Aula} from "../../entities/aula";
@@ -12,7 +12,6 @@ import {Comision} from "../../entities/comision";
 import {ComisionService} from "../../services/comision.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
-import {setUpFormContainer} from "@angular/forms/src/directives/shared";
 import {UIChart} from "primeng/components/chart/chart";
 
 
@@ -24,6 +23,9 @@ import {UIChart} from "primeng/components/chart/chart";
 })
 export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
 
+    @ViewChild(UIChart)
+    private chart: UIChart;
+
     periodos: SelectItem[] = [];
 
     periodo: Periodo;
@@ -34,11 +36,13 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
 
     private tolerancia= new Subject<number>();
 
+    periodoIdFilterSubject = new Subject<number>();
+
     toleranciaActual: number = 5;
 
     cantidadTotal : number;
 
-    cantidadATiempo : number
+    cantidadATiempo : number;
 
     cantidadTarde : number;
 
@@ -55,22 +59,42 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
     }
 
     ngOnInit() {
-        let self = this;
+        super.ngOnInit();
+        var self = this;
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
-                return {label: comision.asignatura.nombre, value: comision}
-            })
-            self.comision = comisiones[0];
-            self.filtrarComision();
+                return {label: comision.etiqueta(), value: comision};
+            });
         });
+        this.periodoIdFilterSubject
+            .switchMap(periodoId => {
+                if (periodoId) { //Selecciono uno distinto de 'todos'
+                    let qo = self.comisionService.getDefaultQueryOptions();
+                    qo.merge({filters: {'periodo.id': periodoId}, page: -1});
+                    return self.comisionService.query(qo);
+                } else //todos
+                    return self.comisionService.getAll()
+            })
+            .subscribe(comisiones => { //Actualizo las comisiones
+                self.comisiones = comisiones.map(comision => {
+                    return {label: comision.etiqueta(), value: comision.id};
+                });
+                self.filter('horario.comision.id', self.comisiones[0].value.id);
+            });
         this.periodoService.getAll().subscribe(periodos => {
             self.periodos = periodos.map(periodo => {
-                return {label: periodo.descripcion, value: periodo}
-            })
-            self.periodo = periodos[periodos.length - 1];
-            self.filtrarPeriodo();
+                return {label: periodo.descripcion, value: periodo.id}
+            });
+            self.periodos.unshift({label: 'Todos', value: null});
+            self.periodo = self.periodos[0].value;
+            self.filterPeriodo(this.periodos[0].value);
         });
-        this.tolerancia.subscribe(valor => self.toleranciaActual = valor);
+        this.periodoIdFilterSubject.subscribe(periodoId => {
+            self.filter('horario.comision.periodo.id', periodoId);
+        });
+        this.tolerancia.subscribe(valor => {
+            self.toleranciaActual = valor;
+        });
         this.tolerancia.combineLatest(this.store.items,
             function(tolerancia: number, clases : Clase[]) {
                 var cantidadATiempo = 0;
@@ -91,24 +115,27 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
                     cantidadTarde: cantidadTarde,
                     cantidadAusente: cantidadAusente,
                     cantidadTotal: clases.length};
-            }).subscribe(cant => {this.cantidadATiempo = cant.cantidadATiempo,
-            this.cantidadTarde = cant.cantidadTarde,
-            this.cantidadAusente = cant.cantidadAusente,
-            this.cantidadTotal = cant.cantidadTotal});
+            }).subscribe(cant => {
+                self.cantidadATiempo = cant.cantidadATiempo;
+                self.cantidadTarde = cant.cantidadTarde;
+                self.cantidadAusente = cant.cantidadAusente;
+                self.cantidadTotal = cant.cantidadTotal;
+            self.actualizar(self.chart);
+            });
         this.data = {
             labels: ['A tiempo','Tarde','Ausente'],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#73ce46",
+                        "#ffc107",
+                        "#e62a10"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#73ce46",
+                        "#ffc107",
+                        "#e62a10"
                     ]
                 }]
         };
@@ -136,24 +163,13 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
         return clase;
     }
 
-    public filtrarComision() : void {
+   public filtrarComision() : void {
         this.filter('horario.comision.id', this.comision.id);
     }
 
-    public filtrarPeriodo() : void {
-        this.filter('horario.comision.periodo.id', this.periodo.id);
+    filterPeriodo(periodoId: number) {
+        this.periodoIdFilterSubject.next(periodoId);
     }
-
-    public filtrarComisionGrafico(chart : UIChart) : void {
-        this.filter('horario.comision.id', this.comision.id);
-        this.actualizar(chart);
-    }
-
-    public filtrarPeriodoGrafico(chart : UIChart) : void {
-        this.filter('horario.comision.periodo.id', this.periodo.id);
-        this.actualizar(chart);
-    }
-
 
     private actualizar(chart : UIChart){
         this.data = {
@@ -173,14 +189,11 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
                     ]
                 }]
         };
-        console.log('total ' +this.cantidadTotal);
         chart.refresh();
     }
 
-    public updateTolerancia(toleranciaActual : number, chart :UIChart){
-        console.log('Actual' + toleranciaActual);
+    public updateTolerancia(toleranciaActual : number){
         this.tolerancia.next(toleranciaActual);
-        this.actualizar(chart);
     }
 
 
