@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 
@@ -23,5 +24,11 @@ export class ParametrosService extends GenericService<Parametros> {
 
     public getDefaultQueryOptions() : QueryOptions {
         return new QueryOptions();
+    }
+
+    public getClave(clave: string) : Observable<Parametros> {
+        let qo = this.getDefaultQueryOptions();
+        qo.merge({filters: {'clave': clave}});
+        return this.query(qo).map(p => p[0]);
     }
 }
