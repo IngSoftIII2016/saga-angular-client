@@ -174,7 +174,7 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
 
     private actualizar(chart : UIChart){
         this.data = {
-            labels: ['A tiempo','Tarde','Ausente'],
+            labels: ['A tiempo: ' + this.cantidadATiempo,'Tarde: ' + this.cantidadTarde,'Ausente: ' + this.cantidadAusente],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
