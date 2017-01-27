@@ -58,7 +58,7 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
         return ['nombre_usuario' , 'nombre', 'apellido', 'email']
     }
 
-    protected resetPass(){
-        this.authenticationService.reset(null);
+    protected resetPass(entity){
+        this.authenticationService.reset(entity.email);
     }
 }	
