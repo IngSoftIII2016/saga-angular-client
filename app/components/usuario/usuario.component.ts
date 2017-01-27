@@ -5,6 +5,7 @@ import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {UsuarioStore} from "../../services/usuario.store";
 import {RolService} from "../../services/rol.service";
 import {Rol} from "../../entities/rol";
+import {AuthenticationService} from "../../services/authentication.service";
 
 import { Http, Response } from '@angular/http';
 
@@ -14,7 +15,7 @@ import {CRUD} from "../../commons/crud";
     templateUrl: 'app/components/usuario/usuario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'usuario',
-    providers: [UsuarioStore, ConfirmationService, RolService]
+    providers: [UsuarioStore, ConfirmationService, RolService, AuthenticationService]
 })
 export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore>{
 
@@ -23,7 +24,7 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
       constructor(private usuarioStore: UsuarioStore,
                   private confirmationService : ConfirmationService,
                   private rolService : RolService,
-                  private http: Http) {
+                  private authenticationService: AuthenticationService) {
       super(usuarioStore, confirmationService);
     }
 
@@ -57,19 +58,7 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
         return ['nombre_usuario' , 'nombre', 'apellido', 'email']
     }
 
-    protected resetPass(entity){
-        console.log(entity);
-        var email = entity.email;
-        this.confirmationService.confirm({
-            message: 'Esta seguro que quiere generar una nueva contraseña?',
-            header: 'Confirmar ',
-            icon: 'fa ui-icon-warning',
-            accept: () => {
-                return this.http.post('http://localhost/saga/api/UsuarioEndpoint/reset_pass', ({'data':{ 'email': email}}))
-                    .map((response: Response) => {
-                        return true;
-                    });
-            }
-        });
+    protected resetPass(){
+        this.authenticationService.reset(null);
     }
 }	
