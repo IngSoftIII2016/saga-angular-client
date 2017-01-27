@@ -89,6 +89,10 @@ export class GrillaComponent implements OnInit {
 
     finSelected: Date;
 
+    llegadaSelected: Date;
+
+    isLlego: boolean = false;
+
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
@@ -99,7 +103,6 @@ export class GrillaComponent implements OnInit {
     ngOnInit(): void {
 
         var self = this;
-
 
         //this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
         this.defaultDate = moment({h: 0, m: 0, s: 0, ms: 0}).utc();
@@ -212,6 +215,7 @@ export class GrillaComponent implements OnInit {
         this.claseSelected.setFechaDate(this.fechaSelected);
         this.claseSelected.setHoraInicioDate(this.inicioSelected);
         this.claseSelected.setHoraFinDate(this.finSelected);
+        this.claseSelected.setHoraLlegada(this.llegadaSelected);
         this.claseStore.update(this.claseSelected).subscribe(editada => {
             this.schedule.refetchEvents();
             this.displayAulaDialog = false;
@@ -323,6 +327,7 @@ export class GrillaComponent implements OnInit {
                 this.fechaSelected = this.claseSelected.getFechaDate();
                 this.inicioSelected = this.claseSelected.getHoraInicioDate();
                 this.finSelected = this.claseSelected.getHoraFinDate();
+                this.llegadaSelected = this.claseSelected.getHoraLlegada();
                 this.displayAulaDialog = true;
                 break;
             case 'Evento':
@@ -347,7 +352,10 @@ export class GrillaComponent implements OnInit {
         clase.setFechaDate(event.start.toDate());
         clase.setHoraInicioDate(event.start.toDate());
         clase.setHoraFinDate(event.end.toDate());
+        clase.setHoraLlegada(event.llegada.toDate());
+        this.isLlego = event.llego;
         console.log('eventToClase');
+        console.log(this.isLlego);
         console.log(clase);
         return clase;
     }
@@ -360,7 +368,9 @@ export class GrillaComponent implements OnInit {
             resourceId: clase.aula.id,
             start: moment(clase.fecha + ' ' + clase.hora_inicio),
             end: moment(clase.fecha + ' ' + clase.hora_fin),
-            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre,
+            llegada: moment(clase.fecha + ' ' + clase.hora_llegada),
+            llego: clase.hora_llegada!=null,
+            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre ,
             color: '#60bd31'
         }
     }
@@ -386,5 +396,10 @@ export class GrillaComponent implements OnInit {
             color: '#2b35a9'
         }
     }
+
+    private toggleHora(){
+        this.isLlego= !this.isLlego;
+    }
+
 
 }
