@@ -19,9 +19,9 @@ import {UIChart} from "primeng/components/chart/chart";
     templateUrl: 'app/components/presentismo/presentismo.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'presentismo',
-    providers:[ClaseStore, ComisionService, PeriodoService]
+    providers: [ClaseStore]
 })
-export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
+export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> {
 
     @ViewChild(UIChart)
     private chart: UIChart;
@@ -34,19 +34,19 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
 
     comision: Comision;
 
-    private tolerancia= new Subject<number>();
+    private tolerancia = new Subject<number>();
 
     periodoIdFilterSubject = new Subject<number>();
 
     toleranciaActual: number = 5;
 
-    cantidadTotal : number;
+    cantidadTotal: number;
 
-    cantidadATiempo : number;
+    cantidadATiempo: number;
 
-    cantidadTarde : number;
+    cantidadTarde: number;
 
-    cantidadAusente : number;
+    cantidadAusente: number;
 
     data: any;
 
@@ -97,34 +97,36 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
             self.toleranciaActual = valor;
         });
         this.tolerancia.combineLatest(this.store.items,
-            function(tolerancia: number, clases : Clase[]) {
+            function (tolerancia: number, clases: Clase[]) {
                 var cantidadATiempo = 0;
                 var cantidadTarde = 0;
                 var cantidadAusente = 0;
-                for (let clase of clases ){
+                for (let clase of clases) {
                     if (clase.hora_llegada == null)
-                     cantidadAusente = cantidadAusente + 1;
-                     else {
-                     var min= Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
-                     if( min <= tolerancia)
-                     cantidadATiempo = cantidadATiempo + 1 ;
-                     else
-                     cantidadTarde = cantidadTarde + 1;
-                     }
+                        cantidadAusente = cantidadAusente + 1;
+                    else {
+                        var min = Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
+                        if (min <= tolerancia)
+                            cantidadATiempo = cantidadATiempo + 1;
+                        else
+                            cantidadTarde = cantidadTarde + 1;
+                    }
                 }
-                return {cantidadATiempo : cantidadATiempo,
+                return {
+                    cantidadATiempo: cantidadATiempo,
                     cantidadTarde: cantidadTarde,
                     cantidadAusente: cantidadAusente,
-                    cantidadTotal: clases.length};
+                    cantidadTotal: clases.length
+                };
             }).subscribe(cant => {
-                self.cantidadATiempo = cant.cantidadATiempo;
-                self.cantidadTarde = cant.cantidadTarde;
-                self.cantidadAusente = cant.cantidadAusente;
-                self.cantidadTotal = cant.cantidadTotal;
+            self.cantidadATiempo = cant.cantidadATiempo;
+            self.cantidadTarde = cant.cantidadTarde;
+            self.cantidadAusente = cant.cantidadAusente;
+            self.cantidadTotal = cant.cantidadTotal;
             self.actualizar(self.chart);
-            });
+        });
         this.data = {
-            labels: ['A tiempo','Tarde','Ausente'],
+            labels: ['A tiempo', 'Tarde', 'Ausente'],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
@@ -155,8 +157,9 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
     }
 
     protected getSearchFields(): string[] {
-        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
+        return ['aula.nombre', 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
     }
+
     protected onOpenDialog(clase: Clase): void {
     }
 
@@ -164,7 +167,7 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
         return clase;
     }
 
-   public filtrarComision() : void {
+    public filtrarComision(): void {
         this.filter('horario.comision.id', this.comision.id);
     }
 
@@ -172,9 +175,9 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
         this.periodoIdFilterSubject.next(periodoId);
     }
 
-    private actualizar(chart : UIChart){
+    private actualizar(chart: UIChart) {
         this.data = {
-            labels: ['A tiempo: ' + this.cantidadATiempo,'Tarde: ' + this.cantidadTarde,'Ausente: ' + this.cantidadAusente],
+            labels: ['A tiempo: ' + this.cantidadATiempo, 'Tarde: ' + this.cantidadTarde, 'Ausente: ' + this.cantidadAusente],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
@@ -193,7 +196,7 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
         chart.refresh();
     }
 
-    public updateTolerancia(toleranciaActual : number){
+    public updateTolerancia(toleranciaActual: number) {
         this.tolerancia.next(toleranciaActual);
     }
 

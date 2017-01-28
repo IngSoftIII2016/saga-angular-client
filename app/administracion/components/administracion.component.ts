@@ -25,38 +25,33 @@ export class AdministracionComponent {
 
     displayLayout: string;
 
-    usuario: Usuario;
+    usuario: Usuario = null;
 
-    nombre_apellido: string;
+    isInvitado : boolean = true;
 
     constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
-        //this.usuario = JSON.parse(localStorage.getItem('Usuario')) as Usuario;
     }
 
     ngOnInit() {
         let self = this;
         this.authService.usuario.subscribe(function (usuario) {
-            console.log('usuario OnInit')
-            console.log(usuario);
             self.usuario = usuario;
-            self.nombre_apellido = usuario.nombre + ' ' + usuario.apellido;
+            self.isInvitado = usuario.isInvitado();
         });
-        this.authService.getUsuario().subscribe();
+        this.authService.getUsuario().subscribe(res => res);
     }
 
     ngAfterViewInit() {
         Ultima.init(this.el.nativeElement);
     }
 
-    isInvitado(): Observable<boolean> {
-        return this.authService.getUsuario().map(user => user.isInvitado());
-    }
 
     login(): void {
         this.router.navigate(['../login']);
     }
 
     logout(): void {
-        this.authService.logout();
+        console.log('logout');
+        this.authService.logout().subscribe(res => this.router.navigate(['/']));
     }
 }

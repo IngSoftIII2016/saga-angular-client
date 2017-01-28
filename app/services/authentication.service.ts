@@ -19,7 +19,7 @@ export class AuthenticationService {
 
         this.usuario = this.subjectUsuario.asObservable();
 
-        this.getUsuario();
+        this.getUsuario().subscribe(res => res);
     }
 
     /**
