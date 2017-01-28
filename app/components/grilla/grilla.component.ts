@@ -89,9 +89,9 @@ export class GrillaComponent implements OnInit {
 
     finSelected: Date;
 
-    llegadaSelected: Date;
+    llegadaSelected: Date = null;
 
-    isLlego: boolean = false;
+    esHoy: boolean;
 
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
@@ -154,7 +154,10 @@ export class GrillaComponent implements OnInit {
                 console.log('updateCalendar');
                 console.log(fecha)
             })
-            .subscribe(fecha => this.fechaCalendar = fecha);
+            .subscribe(fecha => {
+                this.fechaCalendar = fecha;
+                this.esHoy = moment().isSame(this.fechaCalendar, 'day');
+            });
 
         this.events = this.claseStore.items
             .map(function (clases: Clase[]) {
@@ -278,43 +281,28 @@ export class GrillaComponent implements OnInit {
     }
 
     onEventMouseover(event): void {
-        //console.log(event);
     }
 
     onEventMouseout(event): void {
-        //console.log(event);
     }
 
     onEventDragStart(event): void {
-        //console.log(event);
     }
 
     onEventDragStop(event): void {
-        //console.log(event);
-        //this.eventSelected = event.event;
-        //this.selectEvent(event.event);
     }
 
     onEventDrop(event): void {
-        // console.log('droped'); console.log(event);
         this.selectEvent(event.event);
     }
 
     onEventResizeStart(event): void {
-        //console.log(event);
-        //console.log("onEventResizeStart");
     }
 
     onEventResizeStop(event): void {
-        //console.log(event);
-        //console.log("onEventResizeStop");
-        //this.eventSelected = event.event;
-        //this.selectEvent(event.event);
     }
 
     onEventResize(event): void {
-        //console.log(event);
-        //console.log("onEventResize");
         this.selectEvent(event.event);
     }
 
@@ -352,11 +340,6 @@ export class GrillaComponent implements OnInit {
         clase.setFechaDate(event.start.toDate());
         clase.setHoraInicioDate(event.start.toDate());
         clase.setHoraFinDate(event.end.toDate());
-        clase.setHoraLlegada(event.llegada.toDate());
-        this.isLlego = event.llego;
-        console.log('eventToClase');
-        console.log(this.isLlego);
-        console.log(clase);
         return clase;
     }
 
@@ -368,8 +351,6 @@ export class GrillaComponent implements OnInit {
             resourceId: clase.aula.id,
             start: moment(clase.fecha + ' ' + clase.hora_inicio),
             end: moment(clase.fecha + ' ' + clase.hora_fin),
-            llegada: moment(clase.fecha + ' ' + clase.hora_llegada),
-            llego: clase.hora_llegada!=null,
             title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre ,
             color: '#60bd31'
         }
@@ -397,8 +378,12 @@ export class GrillaComponent implements OnInit {
         }
     }
 
-    private toggleHora(){
-        this.isLlego= !this.isLlego;
+    private createLlegada(): void {
+        this.llegadaSelected = new Date();
+    }
+
+    private clearLlegada(): void {
+        this.llegadaSelected = null;
     }
 
 

@@ -1,6 +1,6 @@
 import {Entity} from "../commons/entity";
 
-export class Parametros implements Entity{
+export class Parametro implements Entity {
     id: number = null;
     clave: string;
     valor: string;

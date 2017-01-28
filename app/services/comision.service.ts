@@ -3,12 +3,13 @@ import {Headers, Http, Response} from '@angular/http';
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Comision} from "../entities/comision";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class ComisionService extends GenericService<Comision> {
 
-	constructor(http: Http, router: Router) {
-		super(http, router);
+	constructor(http: Http, auth: AuthenticationService) {
+		super(http, auth);
 	}
 
 	protected valueToEntity(value: Object): Comision{

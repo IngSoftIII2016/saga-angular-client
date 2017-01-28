@@ -4,18 +4,19 @@ import {Headers, Http, Response} from '@angular/http';
 
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
-import {Parametros} from "../entities/parametros";
+import {Parametro} from "../entities/parametros";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
-export class ParametrosService extends GenericService<Parametros> {
+export class ParametrosService extends GenericService<Parametro> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
 
-    protected valueToEntity(value: Object): Parametros {
-        return new Parametros(value);
+    protected valueToEntity(value: Object): Parametro {
+        return new Parametro(value);
     }
 
     protected getResourcePath(): string {
@@ -26,7 +27,7 @@ export class ParametrosService extends GenericService<Parametros> {
         return new QueryOptions();
     }
 
-    public getClave(clave: string) : Observable<Parametros> {
+    public getClave(clave: string) : Observable<Parametro> {
         let qo = this.getDefaultQueryOptions();
         qo.merge({filters: {'clave': clave}});
         return this.query(qo).map(p => p[0]);
