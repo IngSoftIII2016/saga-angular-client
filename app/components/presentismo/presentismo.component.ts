@@ -62,19 +62,21 @@ export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> 
     ngOnInit() {
         super.ngOnInit();
         var self = this;
+        /*
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
                 return {label: comision.etiqueta(), value: comision};
             });
         });
+        */
         this.periodoIdFilterSubject
             .switchMap(periodoId => {
-                if (periodoId) { //Selecciono uno distinto de 'todos'
+                //if (periodoId) { //Selecciono uno distinto de 'todos'
                     let qo = self.comisionService.getDefaultQueryOptions();
                     qo.merge({filters: {'periodo.id': periodoId}, page: -1});
                     return self.comisionService.query(qo);
-                } else //todos
-                    return self.comisionService.getAll()
+                //} else //todos
+                //    return self.comisionService.getAll()
             })
             .subscribe(comisiones => { //Actualizo las comisiones
                 self.comisiones = comisiones.map(comision => {
@@ -86,7 +88,6 @@ export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> 
             self.periodos = periodos.map(periodo => {
                 return {label: periodo.descripcion, value: periodo.id}
             });
-            self.periodos.unshift({label: 'Todos', value: null});
             self.periodo = self.periodos[0].value;
             self.filterPeriodo(this.periodos[0].value);
         });
