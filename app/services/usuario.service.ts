@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {Headers, Http, Response, RequestMethod, Request} from '@angular/http';
 
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Usuario} from "../entities/usuario";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class UsuarioService extends GenericService<Usuario> {
@@ -25,5 +26,16 @@ export class UsuarioService extends GenericService<Usuario> {
             includes : ['rol']
         });
     }
+
+    public change_password(email,oldpass , newpass): Observable<boolean> {
+        let reqOptions = this.getBaseRequestOptions();
+        reqOptions.method = RequestMethod.Post;
+        reqOptions.url = 'http://localhost/saga/api/AuthEndpoint/change_pass'
+        reqOptions.body = JSON.stringify(({'data':{ 'email': email,
+            'oldpassword' : oldpass, 'newpassword' : newpass}}));
+        let req = new Request(reqOptions)
+        return this.intercept(this.http.request(req)).map(res =>true)
+    }
+
 
 }
