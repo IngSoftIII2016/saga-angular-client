@@ -3,13 +3,14 @@ import {Entity} from "./entity";
 import {Observable} from "rxjs";
 import {RequestMethod, Request, Http} from "@angular/http";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 /**
  * Created by juan on 24/11/16.
  */
 export abstract class RelationService<T extends Entity> extends GenericService<T> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
 
     public delete(t: T): Observable<T> {

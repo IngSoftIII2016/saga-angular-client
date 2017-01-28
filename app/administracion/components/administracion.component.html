@@ -17,7 +17,7 @@
 
                     <ul class="topbar-items fadeInDown animated">
                         <li>
-                            <a *ngIf="!isInvitado()" (click)="logout()" href="#" class="ripplelink">
+                            <a *ngIf="!isInvitado" (click)="logout()" href="#" class="ripplelink">
                                 <i style="color: white; font-size: 40px;" class="material-icons">power_settings_new</i>
                             </a>
                         </li>
@@ -35,7 +35,8 @@
                 <div class="nano">
                     <div class="nano-content menu-scroll-content">
                         <div class="profile" >
-                            <i class="fa ui-icon-person"></i>  <span class="profile-name">{{nombre_apellido}}</span>
+                            <i class="fa ui-icon-person"></i>
+                            <span class="profile-name">{{ usuario }}</span>
                         </div>
                         <ul class="ultima-menu clearfix" id="main-menu">
                             <li role="menuitem"><a [routerLink]="['presentismo']"><span>Presentismo</span></a></li>

@@ -13,10 +13,10 @@
             <button type="button" pButton pTooltip="Descargar" tooltipPosition="bottom" icon="ui-icon-file-download" label="PDF" (click)="dt.exportCSV()" style="float:left"></button>
         </div>
         <div class="ui-grid-col-4" style="margin-top: 20px;padding-left: 5%; padding-right: 5%; margin-left: 25%">
-            <p-slider class="ui-grid-col-11" [(ngModel)]="toleranciaActual" [min]="5" [max]="60" [step]="5" (onChange)="updateTolerancia(toleranciaActual,chart)"></p-slider>
+            <p-slider class="ui-grid-col-11" [(ngModel)]="toleranciaActual" [min]="5" [max]="60" [step]="5" (onChange)="updateTolerancia(toleranciaActual)"></p-slider>
         </div>
     </div>
-    <p-chart #chart type="pie" #chart [data]="data"></p-chart>
+    <p-chart #chart type="pie" [data]="data"></p-chart>
     <p-dataTable #dt [value]="store.items | async" selectionMode="single"
                  [responsive]="true"  exportFilename="presentismo">
         <header><h2>Presentismo</h2>
@@ -26,14 +26,14 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
-                    <p-dropdown class="ui-grid-col-11" id="periodoFiltro" (onChange)="filtrarPeriodoGrafico(chart)"
+                    <p-dropdown class="ui-grid-col-11" id="periodoFiltro" (onChange)="filterPeriodo($event.value)"
                                 [options]="periodos"
                                 [(ngModel)]="periodo"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
                 <div class="ui-grid-col-4">
-                    <p-dropdown class="ui-grid-col-11" id="comisionFiltro" (onChange)="filtrarComisionGrafico(chart)"
+                    <p-dropdown class="ui-grid-col-11" id="comisionFiltro" (onChange)="filter('horario.comision.id', $event.value)"
                                 [options]="comisiones"
                                 [(ngModel)]="comision"
                                 [filter]="true" [style]="{width : '100%' }">

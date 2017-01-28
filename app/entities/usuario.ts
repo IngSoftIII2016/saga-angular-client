@@ -15,6 +15,10 @@ export class Usuario implements Entity {
     }
 
     isInvitado(): boolean {
-        return this.rol.id == 1;
+        return !this.rol || this.rol.id == 1;
+    }
+
+    toString(): string {
+        return this.rol.nombre + ' ' + this.apellido + ', ' + this.nombre;
     }
 }

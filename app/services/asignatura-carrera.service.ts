@@ -4,14 +4,15 @@ import {QueryOptions} from "../commons/generic.service";
 import {Http} from "@angular/http";
 import {Router} from "@angular/router";
 import {RelationService} from "../commons/relation.service";
+import {AuthenticationService} from "./authentication.service";
 /**
  * Created by juan on 24/11/16.
  */
 @Injectable()
 export class AsignaturaCarreraService extends RelationService<AsignaturaCarrera> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router)
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth)
     }
 
     protected valueToEntity(value: Object): AsignaturaCarrera {

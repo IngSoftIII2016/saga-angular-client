@@ -8,6 +8,7 @@ import {Aula} from "../entities/aula";
 import {Edificio} from "../entities/edificio";
 import {QueryOptions} from "../commons/generic.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class AulaService extends GenericService<Aula> {
@@ -15,8 +16,8 @@ export class AulaService extends GenericService<Aula> {
     private url = 'http://localhost/saga/api/aulas';
     private options = new BaseRequestOptions();
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
 
     protected valueToEntity(value: Object): Aula {

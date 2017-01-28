@@ -47,11 +47,11 @@ export class Clase implements Entity {
     }
 
     getHoraLlegada(): Date {
-        return parseMySQLTime(this.hora_llegada);
+        return this.hora_llegada ? parseMySQLTime(this.hora_llegada) : null;
     }
 
     setHoraLlegada(date: Date) {
-        this.hora_llegada = toMySQLTime(date);
+        this.hora_llegada = date ? toMySQLTime(date) : null;
     }
 
     public getFechaString(): string {

@@ -38,6 +38,12 @@
                 sortable="custom"
                 (sortFunction)="sort($event)">
         </p-column>
+        <p-column
+                field="rol.nombre"
+                header="Rol"
+                sortable="custom"
+                (sortFunction)="sort($event)">
+        </p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>

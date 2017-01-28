@@ -6,12 +6,13 @@ import {GenericService} from "../commons/generic.service";
 import {Periodo} from "../entities/periodo";
 import {QueryOptions} from "../commons/generic.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class PeriodoService extends GenericService<Periodo> {
 
-	constructor(http: Http, router: Router) {
-		super(http, router);
+	constructor(http: Http, auth: AuthenticationService) {
+		super(http, auth);
 	}
 
     protected valueToEntity(value: Object): Periodo {

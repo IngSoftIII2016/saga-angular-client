@@ -57,7 +57,7 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     }
 
     protected getSearchFields(): string[] {
-        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
+        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario', 'horario.comision.asignatura.nombre']
     }
     protected onOpenDialog(clase: Clase): void {
         this.hora_inicio = clase.getHoraInicioDate();

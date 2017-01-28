@@ -10,26 +10,20 @@ import { AuthenticationService } from '../../services/authentication.service';
     selector: 'login-component',
     templateUrl: 'app/components/login/login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 	model: any = {};
     loading = false;
     error = '';
 	public isNotLogin;
 
 
-    constructor(
-		 
-        private router: Router,
-        private authenticationService: AuthenticationService) {this.isNotLogin = false; }
-
-    ngOnInit() {
-        // reset login status
-       // this.authenticationService.logout();
+    constructor(private router: Router, private authService: AuthenticationService) {
+        this.isNotLogin = false;
     }
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authService.login(this.model.username, this.model.password)
             .subscribe(result => {
                 this.router.navigate(['/']);
             }, err => {
@@ -45,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     resetear() {
-        this.authenticationService.reset(this.model.username)
+        this.authService.reset(this.model.username)
             .subscribe(result => {
                 this.error = 'Reseteo de contraseña exitoso. Revise su correo';
             }, err => {

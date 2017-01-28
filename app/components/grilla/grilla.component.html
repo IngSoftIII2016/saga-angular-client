@@ -10,7 +10,8 @@
                 </p-dropdown>
             </div>
             <div class="ui-g-6 ui-md-6">
-                <input #gs type="text" pInputText size="50" placeholder="Buscar" (keyup)="search(gs.value); schedule.refetchEvents()">
+                <input #gs type="text" pInputText size="50" placeholder="Buscar"
+                       (keyup)="search(gs.value); schedule.refetchEvents()">
                 <i></i>
             </div>
             <div class="ui-g-12 ui-md-6 ui-lg-3">
@@ -44,14 +45,14 @@
     </div>
 
     <!-- Dialgo de edicion de CLASES -->
-    <p-dialog header="{{'Clase de ' + claseSelected.horario.comision.asignatura.nombre + ' del ' + claseSelected.fecha}}"
-              [(visible)]="displayAulaDialog"
-              [responsive]="true"
-              showEffect="fade"
-              [modal]="true"
-              *ngIf="claseSelected"
-              (onAfterHide)="schedule.refetchEvents()">
-
+    <p-dialog
+            header="{{'Clase de ' + claseSelected.horario.comision.asignatura.nombre + ' del ' + claseSelected.fecha}}"
+            [(visible)]="displayAulaDialog"
+            [responsive]="true"
+            showEffect="fade"
+            [modal]="true"
+            *ngIf="claseSelected"
+            (onAfterHide)="schedule.refetchEvents()">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
@@ -65,7 +66,8 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar [(ngModel)]="fechaSelected" [locale]="es"  id="clase-fecha" readonlyInput="readonlyInput">
+                    <p-calendar [(ngModel)]="fechaSelected" [locale]="es" id="clase-fecha"
+                                readonlyInput="readonlyInput">
                     </p-calendar>
                 </div>
             </div>
@@ -77,17 +79,45 @@
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-hora_fin">Fecha Fin</label></div>
+                <div class="ui-grid-col-4"><label for="clase-hora_fin">Hora Fin</label></div>
                 <div class="ui-grid-col-8">
                     <p-calendar [(ngModel)]="finSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
                                 id="clase-hora_fin" readonlyInput="readonlyInput"></p-calendar>
+                </div>
+            </div>
+            <div class="ui-grid-row" *ngIf="esHoy">
+                <div class="ui-grid-col-4"><label>Asistencia Docente</label></div>
+                <div *ngIf="!llegadaSelected" class="ui-grid-col-8">
+                    <div class="ui-grid-col-10">
+                        <label>Ausente</label>
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <button type="button" class="guardar" pButton pTooltip="Agregar hora de llegada"
+                                tooltipPosition="bottom" icon="ui-icon-add-circle" (click)="createLlegada()"
+                                style="float: right">
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="llegadaSelected" class="ui-grid-col-8">
+                    <div class="ui-grid-col-4"><label for="clase-hora_llegada">Hora Llegada</label></div>
+                    <div class="ui-grid-col-4">
+                        <p-calendar [(ngModel)]="llegadaSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
+                                    id="clase-hora_llegada" readonlyInput="readonlyInput"></p-calendar>
+                    </div>
+
+                    <div class="ui-grid-col-4">
+                        <button type="button" class="eliminar" pButton pTooltip="Marcar Ausente"
+                                tooltipPosition="bottom" icon="ui-icon-remove-circle" (click)="clearLlegada()"
+                                style="float: right">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
-                        (click)="saveClase()" >
+                        (click)="saveClase()">
                 </button>
                 <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
                         (click)="cancel()">
@@ -105,7 +135,8 @@
                 <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
                 <div class="ui-grid-col-8">
                     <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
-                    <p-dropdown id="evento-aula" [options]="aulasOptions" [(ngModel)]="eventoSelected.aula" [filter]="true"
+                    <p-dropdown id="evento-aula" [options]="aulasOptions" [(ngModel)]="eventoSelected.aula"
+                                [filter]="true"
                                 class="ui-grid-col-12" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
@@ -141,7 +172,7 @@
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                 <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
-                        (click)="saveEvento()" >
+                        (click)="saveEvento()">
                 </button>
                 <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
                         (click)="cancel()">

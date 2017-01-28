@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Clase} from "../../entities/clase";
 import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {Aula} from "../../entities/aula";
@@ -12,7 +12,6 @@ import {Comision} from "../../entities/comision";
 import {ComisionService} from "../../services/comision.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
-import {setUpFormContainer} from "@angular/forms/src/directives/shared";
 import {UIChart} from "primeng/components/chart/chart";
 
 
@@ -20,9 +19,12 @@ import {UIChart} from "primeng/components/chart/chart";
     templateUrl: 'app/components/presentismo/presentismo.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'presentismo',
-    providers:[ClaseStore, ComisionService, PeriodoService]
+    providers: [ClaseStore]
 })
-export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
+export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> {
+
+    @ViewChild(UIChart)
+    private chart: UIChart;
 
     periodos: SelectItem[] = [];
 
@@ -32,17 +34,19 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
 
     comision: Comision;
 
-    private tolerancia= new Subject<number>();
+    private tolerancia = new Subject<number>();
+
+    periodoIdFilterSubject = new Subject<number>();
 
     toleranciaActual: number = 5;
 
-    cantidadTotal : number;
+    cantidadTotal: number;
 
-    cantidadATiempo : number
+    cantidadATiempo: number;
 
-    cantidadTarde : number;
+    cantidadTarde: number;
 
-    cantidadAusente : number;
+    cantidadAusente: number;
 
     data: any;
 
@@ -52,63 +56,89 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
                 private comisionService: ComisionService,
                 private periodoService: PeriodoService) {
         super(claseStore);
+        claseStore.setPage(-1);
     }
 
     ngOnInit() {
-        let self = this;
+        super.ngOnInit();
+        var self = this;
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
-                return {label: comision.asignatura.nombre, value: comision}
-            })
-            self.comision = comisiones[0];
-            self.filtrarComision();
+                return {label: comision.etiqueta(), value: comision};
+            });
         });
+        this.periodoIdFilterSubject
+            .switchMap(periodoId => {
+                if (periodoId) { //Selecciono uno distinto de 'todos'
+                    let qo = self.comisionService.getDefaultQueryOptions();
+                    qo.merge({filters: {'periodo.id': periodoId}, page: -1});
+                    return self.comisionService.query(qo);
+                } else //todos
+                    return self.comisionService.getAll()
+            })
+            .subscribe(comisiones => { //Actualizo las comisiones
+                self.comisiones = comisiones.map(comision => {
+                    return {label: comision.etiqueta(), value: comision.id};
+                });
+                self.filter('horario.comision.id', self.comisiones[0].value.id);
+            });
         this.periodoService.getAll().subscribe(periodos => {
             self.periodos = periodos.map(periodo => {
-                return {label: periodo.descripcion, value: periodo}
-            })
-            self.periodo = periodos[periodos.length - 1];
-            self.filtrarPeriodo();
+                return {label: periodo.descripcion, value: periodo.id}
+            });
+            self.periodos.unshift({label: 'Todos', value: null});
+            self.periodo = self.periodos[0].value;
+            self.filterPeriodo(this.periodos[0].value);
         });
-        this.tolerancia.subscribe(valor => self.toleranciaActual = valor);
+        this.periodoIdFilterSubject.subscribe(periodoId => {
+            self.filter('horario.comision.periodo.id', periodoId);
+        });
+        this.tolerancia.subscribe(valor => {
+            self.toleranciaActual = valor;
+        });
         this.tolerancia.combineLatest(this.store.items,
-            function(tolerancia: number, clases : Clase[]) {
+            function (tolerancia: number, clases: Clase[]) {
                 var cantidadATiempo = 0;
                 var cantidadTarde = 0;
                 var cantidadAusente = 0;
-                for (let clase of clases ){
+                for (let clase of clases) {
                     if (clase.hora_llegada == null)
-                     cantidadAusente = cantidadAusente + 1;
-                     else {
-                     var min= Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
-                     if( min <= tolerancia)
-                     cantidadATiempo = cantidadATiempo + 1 ;
-                     else
-                     cantidadTarde = cantidadTarde + 1;
-                     }
+                        cantidadAusente = cantidadAusente + 1;
+                    else {
+                        var min = Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
+                        if (min <= tolerancia)
+                            cantidadATiempo = cantidadATiempo + 1;
+                        else
+                            cantidadTarde = cantidadTarde + 1;
+                    }
                 }
-                return {cantidadATiempo : cantidadATiempo,
+                return {
+                    cantidadATiempo: cantidadATiempo,
                     cantidadTarde: cantidadTarde,
                     cantidadAusente: cantidadAusente,
-                    cantidadTotal: clases.length};
-            }).subscribe(cant => {this.cantidadATiempo = cant.cantidadATiempo,
-            this.cantidadTarde = cant.cantidadTarde,
-            this.cantidadAusente = cant.cantidadAusente,
-            this.cantidadTotal = cant.cantidadTotal});
+                    cantidadTotal: clases.length
+                };
+            }).subscribe(cant => {
+            self.cantidadATiempo = cant.cantidadATiempo;
+            self.cantidadTarde = cant.cantidadTarde;
+            self.cantidadAusente = cant.cantidadAusente;
+            self.cantidadTotal = cant.cantidadTotal;
+            self.actualizar(self.chart);
+        });
         this.data = {
-            labels: ['A tiempo','Tarde','Ausente'],
+            labels: ['A tiempo', 'Tarde', 'Ausente'],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#73ce46",
+                        "#ffc107",
+                        "#e62a10"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#73ce46",
+                        "#ffc107",
+                        "#e62a10"
                     ]
                 }]
         };
@@ -127,8 +157,9 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
     }
 
     protected getSearchFields(): string[] {
-        return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
+        return ['aula.nombre', 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
     }
+
     protected onOpenDialog(clase: Clase): void {
     }
 
@@ -136,28 +167,17 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
         return clase;
     }
 
-    public filtrarComision() : void {
+    public filtrarComision(): void {
         this.filter('horario.comision.id', this.comision.id);
     }
 
-    public filtrarPeriodo() : void {
-        this.filter('horario.comision.periodo.id', this.periodo.id);
+    filterPeriodo(periodoId: number) {
+        this.periodoIdFilterSubject.next(periodoId);
     }
 
-    public filtrarComisionGrafico(chart : UIChart) : void {
-        this.filter('horario.comision.id', this.comision.id);
-        this.actualizar(chart);
-    }
-
-    public filtrarPeriodoGrafico(chart : UIChart) : void {
-        this.filter('horario.comision.periodo.id', this.periodo.id);
-        this.actualizar(chart);
-    }
-
-
-    private actualizar(chart : UIChart){
+    private actualizar(chart: UIChart) {
         this.data = {
-            labels: ['A tiempo','Tarde','Ausente'],
+            labels: ['A tiempo: ' + this.cantidadATiempo, 'Tarde: ' + this.cantidadTarde, 'Ausente: ' + this.cantidadAusente],
             datasets: [
                 {
                     data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
@@ -173,14 +193,11 @@ export class PresentismoComponent  extends CRUD<Clase, ClaseService, ClaseStore>
                     ]
                 }]
         };
-        console.log('total ' +this.cantidadTotal);
         chart.refresh();
     }
 
-    public updateTolerancia(toleranciaActual : number, chart :UIChart){
-        console.log('Actual' + toleranciaActual);
+    public updateTolerancia(toleranciaActual: number) {
         this.tolerancia.next(toleranciaActual);
-        this.actualizar(chart);
     }
 
 

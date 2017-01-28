@@ -89,6 +89,10 @@ export class GrillaComponent implements OnInit {
 
     finSelected: Date;
 
+    llegadaSelected: Date = null;
+
+    esHoy: boolean;
+
     constructor(private route: ActivatedRoute,
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
@@ -99,7 +103,6 @@ export class GrillaComponent implements OnInit {
     ngOnInit(): void {
 
         var self = this;
-
 
         //this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
         this.defaultDate = moment({h: 0, m: 0, s: 0, ms: 0}).utc();
@@ -151,7 +154,10 @@ export class GrillaComponent implements OnInit {
                 console.log('updateCalendar');
                 console.log(fecha)
             })
-            .subscribe(fecha => this.fechaCalendar = fecha);
+            .subscribe(fecha => {
+                this.fechaCalendar = fecha;
+                this.esHoy = moment().isSame(this.fechaCalendar, 'day');
+            });
 
         this.events = this.claseStore.items
             .map(function (clases: Clase[]) {
@@ -212,6 +218,7 @@ export class GrillaComponent implements OnInit {
         this.claseSelected.setFechaDate(this.fechaSelected);
         this.claseSelected.setHoraInicioDate(this.inicioSelected);
         this.claseSelected.setHoraFinDate(this.finSelected);
+        this.claseSelected.setHoraLlegada(this.llegadaSelected);
         this.claseStore.update(this.claseSelected).subscribe(editada => {
             this.schedule.refetchEvents();
             this.displayAulaDialog = false;
@@ -274,43 +281,28 @@ export class GrillaComponent implements OnInit {
     }
 
     onEventMouseover(event): void {
-        //console.log(event);
     }
 
     onEventMouseout(event): void {
-        //console.log(event);
     }
 
     onEventDragStart(event): void {
-        //console.log(event);
     }
 
     onEventDragStop(event): void {
-        //console.log(event);
-        //this.eventSelected = event.event;
-        //this.selectEvent(event.event);
     }
 
     onEventDrop(event): void {
-        // console.log('droped'); console.log(event);
         this.selectEvent(event.event);
     }
 
     onEventResizeStart(event): void {
-        //console.log(event);
-        //console.log("onEventResizeStart");
     }
 
     onEventResizeStop(event): void {
-        //console.log(event);
-        //console.log("onEventResizeStop");
-        //this.eventSelected = event.event;
-        //this.selectEvent(event.event);
     }
 
     onEventResize(event): void {
-        //console.log(event);
-        //console.log("onEventResize");
         this.selectEvent(event.event);
     }
 
@@ -323,6 +315,7 @@ export class GrillaComponent implements OnInit {
                 this.fechaSelected = this.claseSelected.getFechaDate();
                 this.inicioSelected = this.claseSelected.getHoraInicioDate();
                 this.finSelected = this.claseSelected.getHoraFinDate();
+                this.llegadaSelected = this.claseSelected.getHoraLlegada();
                 this.displayAulaDialog = true;
                 break;
             case 'Evento':
@@ -347,8 +340,6 @@ export class GrillaComponent implements OnInit {
         clase.setFechaDate(event.start.toDate());
         clase.setHoraInicioDate(event.start.toDate());
         clase.setHoraFinDate(event.end.toDate());
-        console.log('eventToClase');
-        console.log(clase);
         return clase;
     }
 
@@ -360,7 +351,7 @@ export class GrillaComponent implements OnInit {
             resourceId: clase.aula.id,
             start: moment(clase.fecha + ' ' + clase.hora_inicio),
             end: moment(clase.fecha + ' ' + clase.hora_fin),
-            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre,
+            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre ,
             color: '#60bd31'
         }
     }
@@ -386,5 +377,14 @@ export class GrillaComponent implements OnInit {
             color: '#2b35a9'
         }
     }
+
+    private createLlegada(): void {
+        this.llegadaSelected = new Date();
+    }
+
+    private clearLlegada(): void {
+        this.llegadaSelected = null;
+    }
+
 
 }

@@ -6,12 +6,13 @@ import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Horario} from "../entities/horario";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class HorarioService extends GenericService<Horario> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
 
     protected valueToEntity(value: Object): Horario {

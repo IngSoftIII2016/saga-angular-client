@@ -79,7 +79,6 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     }
 
     protected getEntityReferencedLabel(entity): string {
-        console.log(entity);
         return 'el horario del ' + entity.toString()
             + ', comision ' + entity.comision.asignatura.nombre + ' en ' + entity.aula.nombre;
     }

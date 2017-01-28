@@ -4,12 +4,13 @@ import { Http } from '@angular/http';
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Asignatura} from "../entities/asignatura";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class AsignaturaService extends GenericService<Asignatura> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
 
     protected valueToEntity(value: Object): Asignatura {

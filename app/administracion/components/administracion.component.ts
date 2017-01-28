@@ -4,7 +4,10 @@
 import {Component, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Observable} from "rxjs";
 declare var Ultima: any;
+
 @Component({
     templateUrl: 'app/administracion/components/administracion.component.html',
     styleUrls: ['app/administracion/components/administracion.component.css'],
@@ -22,32 +25,33 @@ export class AdministracionComponent {
 
     displayLayout: string;
 
-    usuario: Usuario;
+    usuario: Usuario = null;
 
-    nombre_apellido: string;
+    isInvitado : boolean = true;
 
-    constructor(private router: Router, private el: ElementRef) {
-        this.usuario = JSON.parse(localStorage.getItem('Usuario')) as Usuario;
-        this.nombre_apellido = this.usuario.nombre + ' ' + this.usuario.apellido;
+    constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
+    }
+
+    ngOnInit() {
+        let self = this;
+        this.authService.usuario.subscribe(function (usuario) {
+            self.usuario = usuario;
+            self.isInvitado = usuario.isInvitado();
+        });
+        this.authService.getUsuario().subscribe(res => res);
     }
 
     ngAfterViewInit() {
         Ultima.init(this.el.nativeElement);
     }
 
-    isInvitado() {
-        return this.usuario.rol.id == 1;
-    }
 
     login(): void {
         this.router.navigate(['../login']);
     }
 
     logout(): void {
-        localStorage.removeItem('Authorization');
-        localStorage.removeItem('Usuario');
-        this.usuario = null;
-        this.nombre_apellido = '';
-        this.router.navigate(['']);
+        console.log('logout');
+        this.authService.logout().subscribe(res => this.router.navigate(['/']));
     }
 }
