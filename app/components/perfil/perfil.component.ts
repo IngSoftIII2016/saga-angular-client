@@ -1,8 +1,8 @@
 
 import {Component, Input} from "@angular/core";
-import {ConfirmationService} from "primeng/components/common/api";
+import {ConfirmationService, Message} from "primeng/components/common/api";
 import {Usuario} from "../../entities/usuario";
-import {AuthenticationService} from "../../services/authentication.service";
+import {UsuarioService} from "../../services/usuario.service";
 
 @Component({
     selector: 'perfil',
@@ -15,22 +15,27 @@ export class PerfilComponent  {
     oldpass : string;
     newpass : string;
     error = '';
-    constructor( private ConfirmationService: ConfirmationService,  private authenticationService: AuthenticationService) {
+    public msgs: Message[] = [];
+
+    constructor( private ConfirmationService: ConfirmationService,  private usuarioService: UsuarioService) {
 
     }
 
     change() {
-        this.authenticationService.change(this.usuario.email, this.oldpass, this.newpass)
+        this.usuarioService.change_password(this.usuario.email, this.oldpass, this.newpass)
             .subscribe(result => {
+                this.msgs.push(  {
+                    severity: 'success',
+                    summary: 'Guardada',
+                    detail: 'Contraseña cambiada con exito!'
+                })
             }, err => {
-                if (!err.json().error) {
-                    this.error = 'No se puede establecer la conexión con el servidor.';
+                    this.msgs.push(  {
+                        severity: 'failed',
+                        summary: 'Error',
+                        detail: 'No se pudo guardar la contraseña. compruebe su contraseña actual.'
+                    })
 
-                }
-                else {
-                    this.error = err.json().error.title;
-
-                }
             });
     }
 

@@ -36,13 +36,7 @@ export class AuthenticationService {
             });
     }
 
-    change(email,oldpass , newpass): Observable<boolean> {
-        return this.http.post('http://localhost/saga/api/AuthEndpoint/change_pass', ({'data':{ 'email': email,
-            'oldpassword' : oldpass, 'newpassword' : newpass}}))
-            .map((response: Response) => {
-                return true;
-            });
-    }
+
    reset(email): Observable<boolean> {
        return this.http.post('http://localhost/saga/api/AuthEndpoint/reset_pass', ({'data':{ 'email': email}}))
            .map((response: Response) => {
