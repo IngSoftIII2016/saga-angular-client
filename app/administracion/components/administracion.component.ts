@@ -4,10 +4,7 @@
 import {Component, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
-import {AuthenticationService} from "../../services/authentication.service";
-import {Observable} from "rxjs";
 declare var Ultima: any;
-
 @Component({
     templateUrl: 'app/administracion/components/administracion.component.html',
     styleUrls: ['app/administracion/components/administracion.component.css'],
@@ -28,6 +25,7 @@ export class AdministracionComponent {
     usuario: Usuario = null;
 
     isInvitado : boolean = true;
+    display_perfil : boolean;
 
     constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
     }
@@ -45,6 +43,9 @@ export class AdministracionComponent {
         Ultima.init(this.el.nativeElement);
     }
 
+    isInvitado() {
+        return this.usuario.rol.id == 1;
+    }
 
     login(): void {
         this.router.navigate(['../login']);
@@ -53,5 +54,10 @@ export class AdministracionComponent {
     logout(): void {
         console.log('logout');
         this.authService.logout().subscribe(res => this.router.navigate(['/']));
+    }
+
+    showPerfilDialog() : void {
+        this.display_perfil = false;
+        this.display_perfil = true;
     }
 }

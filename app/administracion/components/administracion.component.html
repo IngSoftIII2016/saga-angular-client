@@ -4,6 +4,7 @@
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
         <!-- Top Bar -->
         <div>
+             <perfil [usuario]="usuario" [displayDialog]="display_perfil">  </perfil> -->
 
             <div class="topbar clearfix">
                 <div class="topbar-left">
@@ -24,6 +25,11 @@
                         <li>
                             <a (click)="login()" class="ripplelink">
                                 <i style=" color: white; font-size: 40px;" class="material-icons">account_box</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a (click)="showPerfilDialog()" class="ripplelink">
+                                <i style=" color: white; font-size: 40px;" class="material-icons">settings</i>
                             </a>
                         </li>
                     </ul>
