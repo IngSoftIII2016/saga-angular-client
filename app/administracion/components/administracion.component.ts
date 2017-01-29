@@ -4,6 +4,7 @@
 import {Component, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
+import {AuthenticationService} from "../../services/authentication.service";
 declare var Ultima: any;
 @Component({
     templateUrl: 'app/administracion/components/administracion.component.html',
@@ -25,6 +26,7 @@ export class AdministracionComponent {
     usuario: Usuario = null;
 
     isInvitado : boolean = true;
+
     display_perfil : boolean;
 
     constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
@@ -41,10 +43,6 @@ export class AdministracionComponent {
 
     ngAfterViewInit() {
         Ultima.init(this.el.nativeElement);
-    }
-
-    isInvitado() {
-        return this.usuario.rol.id == 1;
     }
 
     login(): void {

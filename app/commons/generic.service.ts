@@ -25,8 +25,8 @@ export class QueryOptions {
         Object.assign(this, values);
     }
 
-    merge(values: Object = {}) {
-        Object.assign(this, values);
+    merge(values: Object = {}): QueryOptions {
+        return Object.assign(this, values);
     }
 }
 

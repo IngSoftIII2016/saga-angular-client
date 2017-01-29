@@ -6,12 +6,13 @@ import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Usuario} from "../entities/usuario";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class UsuarioService extends GenericService<Usuario> {
 
-    constructor(http: Http, router: Router) {
-        super(http, router);
+    constructor(http: Http, auth: AuthenticationService) {
+        super(http, auth);
     }
     protected valueToEntity(value: Object): Usuario {
         return new Usuario(value);
@@ -27,12 +28,12 @@ export class UsuarioService extends GenericService<Usuario> {
         });
     }
 
-    public change_password(email,oldpass , newpass): Observable<boolean> {
+    public change_password(email, oldpass , newpass): Observable<boolean> {
         let reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Post;
-        reqOptions.url = 'http://localhost/saga/api/AuthEndpoint/change_pass'
-        reqOptions.body = JSON.stringify(({'data':{ 'email': email,
-            'oldpassword' : oldpass, 'newpassword' : newpass}}));
+        reqOptions.url = 'http://localhost/saga/api/AuthEndpoint/change_pass';
+        reqOptions.body = JSON.stringify({'data':{ 'email': email,
+            'oldpassword' : oldpass, 'newpassword' : newpass}});
         let req = new Request(reqOptions)
         return this.intercept(this.http.request(req)).map(res =>true)
     }

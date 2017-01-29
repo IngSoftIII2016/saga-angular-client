@@ -4,7 +4,7 @@
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
         <!-- Top Bar -->
         <div>
-             <perfil [usuario]="usuario" [displayDialog]="display_perfil">  </perfil> -->
+            <perfil [usuario]="usuario" [displayDialog]="display_perfil"></perfil>
 
             <div class="topbar clearfix">
                 <div class="topbar-left">
@@ -40,7 +40,7 @@
             <div class="layout-menu">
                 <div class="nano">
                     <div class="nano-content menu-scroll-content">
-                        <div class="profile" >
+                        <div class="profile">
                             <i class="fa ui-icon-person"></i>
                             <span class="profile-name">{{ usuario }}</span>
                         </div>
@@ -50,7 +50,8 @@
                             <li role="menuitem"><a [routerLink]="['sedes']"><span>Sedes</span></a></li>
                             <li role="menuitem"><a [routerLink]="['edificios']"><span>Edificios</span></a></li>
                             <li role="menuitem"><a [routerLink]="['carreras']"><span>Carreras</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['asignatura-carrera']"><span>Planes de Estudio</span></a></li>
+                            <li role="menuitem"><a [routerLink]="['asignatura-carrera']"><span>Planes de Estudio</span></a>
+                            </li>
                             <li role="menuitem"><a [routerLink]="['asignaturas']"><span>Asignaturas</span></a></li>
                             <li role="menuitem"><a [routerLink]="['aulas']"><span>Aulas</span></a></li>
                             <li role="menuitem"><a [routerLink]="['clases']"><span>Clases</span></a></li>

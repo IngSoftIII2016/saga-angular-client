@@ -13,6 +13,7 @@ import {ComisionService} from "../../services/comision.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {Periodo} from "../../entities/periodo";
 import {UIChart} from "primeng/components/chart/chart";
+import {QueryOptions} from "../../commons/generic.service";
 
 
 @Component({
@@ -21,10 +22,10 @@ import {UIChart} from "primeng/components/chart/chart";
     selector: 'presentismo',
     providers: [ClaseStore]
 })
-export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> {
+export class PresentismoComponent {
 
     @ViewChild(UIChart)
-    private chart: UIChart;
+    private grafico: UIChart;
 
     periodos: SelectItem[] = [];
 
@@ -32,7 +33,9 @@ export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> 
 
     comisiones: SelectItem[] = [];
 
-    comision: Comision;
+    comision: Comision = null;
+
+    clases: Subject<Clase[]> = new Subject<Clase[]>();
 
     private tolerancia = new Subject<number>();
 
@@ -52,65 +55,51 @@ export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> 
 
     es: any = CALENDAR_LOCALE_ES;
 
-    constructor(private claseStore: ClaseStore,
+    constructor(private claseService: ClaseService,
                 private comisionService: ComisionService,
                 private periodoService: PeriodoService) {
-        super(claseStore);
-        claseStore.setPage(-1);
     }
 
     ngOnInit() {
-        super.ngOnInit();
         var self = this;
-        /*
-        this.comisionService.getAll().subscribe(comisiones => {
+
+        this.periodoIdFilterSubject
+            .switchMap(periodoId => {
+                let qo = self.comisionService.getDefaultQueryOptions();
+                qo.merge({filters: {'periodo.id': periodoId}, page: -1});
+                return self.comisionService.query(qo);
+            }).subscribe(comisiones => { //Actualizo las comisiones
             self.comisiones = comisiones.map(comision => {
                 return {label: comision.etiqueta(), value: comision};
             });
+            self.comision = self.comisiones[0].value;
+            self.filtrarComision();
         });
-        */
-        this.periodoIdFilterSubject
-            .switchMap(periodoId => {
-                //if (periodoId) { //Selecciono uno distinto de 'todos'
-                    let qo = self.comisionService.getDefaultQueryOptions();
-                    qo.merge({filters: {'periodo.id': periodoId}, page: -1});
-                    return self.comisionService.query(qo);
-                //} else //todos
-                //    return self.comisionService.getAll()
-            })
-            .subscribe(comisiones => { //Actualizo las comisiones
-                self.comisiones = comisiones.map(comision => {
-                    return {label: comision.etiqueta(), value: comision.id};
-                });
-                self.filter('horario.comision.id', self.comisiones[0].value.id);
-            });
+
         this.periodoService.getAll().subscribe(periodos => {
             self.periodos = periodos.map(periodo => {
-                return {label: periodo.descripcion, value: periodo.id}
+                return {label: periodo.descripcion, value: periodo}
             });
+
             self.periodo = self.periodos[0].value;
-            self.filterPeriodo(this.periodos[0].value);
+            self.filterPeriodo();
         });
-        this.periodoIdFilterSubject.subscribe(periodoId => {
-            self.filter('horario.comision.periodo.id', periodoId);
-        });
-        this.tolerancia.subscribe(valor => {
-            self.toleranciaActual = valor;
-        });
-        this.tolerancia.combineLatest(this.store.items,
+
+        this.tolerancia.combineLatest(this.clases,
             function (tolerancia: number, clases: Clase[]) {
-                var cantidadATiempo = 0;
-                var cantidadTarde = 0;
-                var cantidadAusente = 0;
+                console.log(tolerancia);
+                let cantidadATiempo = 0;
+                let cantidadTarde = 0;
+                let cantidadAusente = 0;
                 for (let clase of clases) {
-                    if (clase.hora_llegada == null)
-                        cantidadAusente = cantidadAusente + 1;
+                    if (!clase.hora_llegada)
+                        cantidadAusente++;
                     else {
-                        var min = Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
+                        let min = Math.floor((clase.getHoraLlegada().getTime() - clase.getHoraInicioDate().getTime()) / 60000);
                         if (min <= tolerancia)
-                            cantidadATiempo = cantidadATiempo + 1;
+                            cantidadATiempo++;
                         else
-                            cantidadTarde = cantidadTarde + 1;
+                            cantidadTarde++;
                     }
                 }
                 return {
@@ -124,81 +113,52 @@ export class PresentismoComponent extends CRUD<Clase, ClaseService, ClaseStore> 
             self.cantidadTarde = cant.cantidadTarde;
             self.cantidadAusente = cant.cantidadAusente;
             self.cantidadTotal = cant.cantidadTotal;
-            self.actualizar(self.chart);
+            self.actualizar(cant.cantidadATiempo, cant.cantidadTarde, cant.cantidadAusente);
         });
-        this.data = {
-            labels: ['A tiempo', 'Tarde', 'Ausente'],
-            datasets: [
-                {
-                    data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
-                    backgroundColor: [
-                        "#73ce46",
-                        "#ffc107",
-                        "#e62a10"
-                    ],
-                    hoverBackgroundColor: [
-                        "#73ce46",
-                        "#ffc107",
-                        "#e62a10"
-                    ]
-                }]
-        };
+
+        this.actualizar(1, 0, 0)
+        this.updateTolerancia();
     }
 
-    protected getDefaultNewEntity(): Clase {
-        return new Clase();
-    }
-
-    protected getEntityFromEvent(event: any): Clase {
-        return new Clase(event.data);
-    }
-
-    protected getEntityReferencedLabel(entity): string {
-        return 'la clase del aula ' + entity.aula.nombre + ' con fecha ' + entity.getFechaString();
-    }
-
-    protected getSearchFields(): string[] {
-        return ['aula.nombre', 'fecha', 'hora_inicio', 'hora_fin', 'comentario']
-    }
-
-    protected onOpenDialog(clase: Clase): void {
-    }
-
-    protected onSave(clase: Clase): Clase {
-        return clase;
+    filterPeriodo() {
+        this.periodoIdFilterSubject.next(this.periodo.id);
     }
 
     public filtrarComision(): void {
-        this.filter('horario.comision.id', this.comision.id);
+        console.log('filtrarComision');
+        this.claseService.query(
+            this.claseService.getDefaultQueryOptions()
+                .merge({filters: {'horario.comision.id': this.comision.id}, page: -1}))
+            .subscribe(clases => this.clases.next(clases));
     }
 
-    filterPeriodo(periodoId: number) {
-        this.periodoIdFilterSubject.next(periodoId);
+    public updateTolerancia() {
+        this.tolerancia.next(this.toleranciaActual);
     }
 
-    private actualizar(chart: UIChart) {
+    private actualizar(aTiempo: number, tarde: number, ausente: number) {
+        console.log('aTiempo:' + aTiempo);
+        console.log('tarde:' + tarde);
+        console.log('asuente:' + ausente);
         this.data = {
-            labels: ['A tiempo: ' + this.cantidadATiempo, 'Tarde: ' + this.cantidadTarde, 'Ausente: ' + this.cantidadAusente],
+            labels: ['A tiempo: ' + aTiempo, 'Tarde: ' + tarde, 'Ausente: ' + ausente],
             datasets: [
                 {
-                    data: [this.cantidadATiempo, this.cantidadTarde, this.cantidadAusente],
+                    data: [aTiempo, tarde, ausente],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#00bf00",
+                        "#ffd600",
+                        "#ff4040"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#00bf00",
+                        "#ffd600",
+                        "#ff4040"
                     ]
                 }]
         };
-        chart.refresh();
-    }
-
-    public updateTolerancia(toleranciaActual: number) {
-        this.tolerancia.next(toleranciaActual);
+        this.grafico.data = this.data;
+        this.grafico.refresh();
     }
 
 

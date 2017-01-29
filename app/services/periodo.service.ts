@@ -24,7 +24,7 @@ export class PeriodoService extends GenericService<Periodo> {
 	}
 
 	public getDefaultQueryOptions() : QueryOptions {
-		return new QueryOptions();
+		return new QueryOptions({sorts: [{field: 'fecha_inicio', order: -1}]});
 	}
 
 }
