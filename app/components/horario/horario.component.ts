@@ -18,7 +18,7 @@ import {Comision} from "../../entities/comision";
 @Component({
     templateUrl: 'app/components/horario/horario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-    selector: 'horario',
+    selector: 'horarios',
     providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService]
 })
 export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
