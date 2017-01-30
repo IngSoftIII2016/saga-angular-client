@@ -69,6 +69,8 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {PresentismoComponent} from "../components/presentismo/presentismo.component";
 import {SliderModule} from "primeng/components/slider/slider";
 import {ChartModule} from "primeng/components/chart/chart";
+import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
+import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
 
 @NgModule({
     imports: [
@@ -92,6 +94,7 @@ import {ChartModule} from "primeng/components/chart/chart";
         PasswordModule,
         SliderModule,
         ChartModule
+
     ],
     declarations: [
         AdministracionComponent,
@@ -114,7 +117,9 @@ import {ChartModule} from "primeng/components/chart/chart";
         UsuarioComponent,
         AccionRolComponent,
         PresentismoComponent,
-        PerfilComponent
+        PerfilComponent,
+        ComisionComponentAlta,
+        ComisionComponentDetalle
     ],
     providers: [
         AsignaturaService,

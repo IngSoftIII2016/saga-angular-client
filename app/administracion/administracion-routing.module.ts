@@ -26,6 +26,8 @@ import {
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
+import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
+import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
 
 const adminRoutes: Routes = [
     {
@@ -61,7 +63,11 @@ const adminRoutes: Routes = [
                 component: ClaseComponent
             }, {
                 path: 'comision',
-                component: ComisionComponent
+                component: ComisionComponent,
+                children: [
+                    { path: '', component: ComisionComponentAlta },
+                    { path: 'detalle/:id', component: ComisionComponentDetalle }
+                ]
             }, {
                 path: 'docentes',
                 component: DocenteComponent
