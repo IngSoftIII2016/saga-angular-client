@@ -23,6 +23,10 @@ import {Comision} from "../../entities/comision";
 })
 export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
 
+
+    @Input()
+    private filtersEnabled: boolean = true;
+
     hora_inicio: Date;
 
     duracion: Date;
