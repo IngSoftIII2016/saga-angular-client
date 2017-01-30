@@ -66,11 +66,7 @@ export abstract class GenericService<T extends Entity> {
     }
 
     public get(id : number, qo : QueryOptions = this.getDefaultQueryOptions()) : Observable<T> {
-        let reqOptions = this.getBaseRequestOptions();
-        reqOptions.method = RequestMethod.Get;
-        reqOptions.url += '/' + id.toString();
-        let req = new Request(reqOptions);
-        return this.intercept(this.http.request(req)).map(res => this.valueToEntity(res.json().data));
+        return this.query(qo.merge({filters:{id: id}})).map(res => res[0]);
     }
 
     private getRowsCount(): Observable<number> {
