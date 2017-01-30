@@ -1,6 +1,6 @@
 import {ComisionComponent} from "./comision.component";
 import {Component} from "@angular/core";
-import {Router} from "@angular/router";
+import {Router, Params, ActivatedRoute} from "@angular/router";
 import {Comision} from "../../entities/comision";
 import {ComisionService} from "../../services/comision.service";
 import {ComisionStore} from "../../services/comision.store";
@@ -51,13 +51,16 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
 
     protected onOpenDialog(entity): void {
         super.onOpenDialog(entity);
-        this.router.navigate([this.router.url+'/detalle/'+entity.id]);
+
+        //this.router.navigate([this.router.url+'/detalle',entity.id]);
+        this.router.navigate(['../detalle/', this.entity.id], { relativeTo: this.route });
     }
 
     constructor(private comisionStore: ComisionStore,
                 private asignaturaService: AsignaturaService,
                 private periodoService: PeriodoService,
                 private docenteService: DocenteService,
+                private route: ActivatedRoute,
                 private router: Router,
 
                 private confirmationService: ConfirmationService) {
