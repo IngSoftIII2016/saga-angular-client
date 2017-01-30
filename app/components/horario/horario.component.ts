@@ -21,11 +21,14 @@ import {Comision} from "../../entities/comision";
     selector: 'horarios',
     providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService]
 })
-export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> {
+export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> implements OnInit{
 
 
     @Input()
     private filtersEnabled: boolean = true;
+
+    @Input()
+    private comision: Comision;
 
     hora_inicio: Date;
 

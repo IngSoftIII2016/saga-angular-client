@@ -51,7 +51,7 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
 
     protected onOpenDialog(entity): void {
         super.onOpenDialog(entity);
-        this.router.navigate([this.router.url+'detalle/'+entity.id]);
+        this.router.navigate([this.router.url+'/detalle/'+entity.id]);
     }
 
     constructor(private comisionStore: ComisionStore,
