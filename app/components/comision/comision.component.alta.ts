@@ -47,13 +47,11 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
     isFilter: boolean = false;
 
 
+
+
     protected onOpenDialog(entity): void {
         super.onOpenDialog(entity);
-        console.log(this.router.url)
-        console.log("tengo la sombra borracha y la mirada perdida")
-        console.log(entity)
-        this.router.navigate(['/detalle',entity.comision.id]);
-        console.log('ewe ewew');
+        this.router.navigate([this.router.url+'detalle/'+entity.id]);
     }
 
     constructor(private comisionStore: ComisionStore,

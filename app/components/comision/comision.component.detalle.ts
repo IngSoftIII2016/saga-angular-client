@@ -13,6 +13,6 @@ import {Router} from "@angular/router";
 })
 
 export class ComisionComponentDetalle  {
-    constructor(private _router: Router) { }
+    constructor(private router: Router) { }
 
 }
