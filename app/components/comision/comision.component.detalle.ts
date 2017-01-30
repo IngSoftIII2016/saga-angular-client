@@ -46,12 +46,9 @@ export class ComisionComponentDetalle implements OnInit {
         //console.log("params: "+this.route.params['id']);
         this.route.params
         // (+) converts string 'id' to a number
-            .switchMap((params: Params) => this.comisionService.get(+this.route.params['id'], this.comisionService.getDefaultQueryOptions()))
+            .switchMap((params: Params) => this.comisionService.get(+params['id']))
             .subscribe((comision: Comision) => this.comision = comision);
-
-        console.log(this.comision.id);
-
-         }
+    }
 
 
 }

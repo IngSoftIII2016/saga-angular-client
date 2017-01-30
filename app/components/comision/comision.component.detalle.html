@@ -8,4 +8,4 @@
 
 </div>
 
-<horarios [comision]="comision" [filtersEnabled]="false"> </horarios>
+<horarios *ngIf="comision" [comision]="comision" [filtersEnabled]="false"> </horarios>
