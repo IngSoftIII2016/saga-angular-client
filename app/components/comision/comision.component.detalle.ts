@@ -34,13 +34,7 @@ export class ComisionComponentDetalle implements OnInit {
 
     comision : Comision;
 
-
-
-
-
-
-
-
+    
     ngOnInit() {
         let self = this;
         //console.log("params: "+this.route.params['id']);
