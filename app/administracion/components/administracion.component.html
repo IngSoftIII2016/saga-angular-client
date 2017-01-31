@@ -42,9 +42,9 @@
                     <div class="nano-content menu-scroll-content">
                         <div class="profile">
                             <i class="fa ui-icon-person"></i>
-                            <span class="profile-name">{{ usuario }}</span>
+                            <span class="profile-name" style="margin-top: 3%;">{{ usuario }}</span>
                         </div>
-                        <ul class="ultima-menu clearfix" id="main-menu">
+                        <ul class="ultima-menu clearfix" id="main-menu" style="margin-top: 15%;">
                             <li role="menuitem" *ngFor="let item of menuItems">
                                 <a [routerLink]="[item.path]"><span>{{item.recurso}}</span></a>
                             </li>
