@@ -22,7 +22,7 @@ export abstract class GenericStore<E extends Entity, S extends GenericService<E>
         this.queryOptions = new BehaviorSubject(this.service.getDefaultQueryOptions());
 
         this.items = this.queryOptions
-            .flatMap(qo => this.service.query(qo));
+            .flatMap(qo => this.service.query(qo)).share();
 
     }
 

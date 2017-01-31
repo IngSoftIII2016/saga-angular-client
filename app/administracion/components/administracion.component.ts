@@ -5,6 +5,12 @@ import {Component, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
 import {AuthenticationService} from "../../services/authentication.service";
+import * as menu from './administracion-menu';
+import {Accion} from "../../entities/accion";
+import {administracionMenuItems} from "./administracion-menu";
+import {getUnique} from "../../commons/utils";
+
+
 declare var Ultima: any;
 @Component({
     templateUrl: 'app/administracion/components/administracion.component.html',
@@ -29,6 +35,8 @@ export class AdministracionComponent {
 
     display_perfil : boolean;
 
+    menuItems = [];
+
     constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
     }
 
@@ -36,6 +44,14 @@ export class AdministracionComponent {
         let self = this;
         this.authService.usuario.subscribe(function (usuario) {
             self.usuario = usuario;
+            self.menuItems = [];
+            let menuRecursos = usuario.isInvitado() ? [] :
+                getUnique(usuario.rol.acciones.map(accion => accion.recurso));
+            menuRecursos.unshift('Grilla');
+            self.menuItems = menuRecursos.map(function(recurso) {
+                if([recurso])
+                    return {recurso: recurso, path: administracionMenuItems[recurso]}
+            });
             self.isInvitado = usuario.isInvitado();
         });
         this.authService.getUsuario().subscribe(res => res);

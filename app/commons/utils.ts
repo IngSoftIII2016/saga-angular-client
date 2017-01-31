@@ -30,3 +30,15 @@ export function toFechaString(date: Date): string {
 export function toHoraString(date: Date): string {
     return moment(date).format('LT')
 }
+
+export function getUnique(array: any[]){
+    let u = {}, a = [];
+    for(let i = 0, l = array.length; i < l; ++i){
+        if(u.hasOwnProperty(array[i])) {
+            continue;
+        }
+        a.push(array[i]);
+        u[array[i]] = 1;
+    }
+    return a;
+}

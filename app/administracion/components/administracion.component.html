@@ -45,6 +45,11 @@
                             <span class="profile-name">{{ usuario }}</span>
                         </div>
                         <ul class="ultima-menu clearfix" id="main-menu">
+                            <li role="menuitem" *ngFor="let item of menuItems">
+                                <a [routerLink]="[item.path]"><span>{{item.recurso}}</span></a>
+                            </li>
+
+                            <!--
                             <li role="menuitem"><a [routerLink]="['presentismo']"><span>Presentismo</span></a></li>
                             <li role="menuitem"><a [routerLink]="['localidades']"><span>Localidad</span></a></li>
                             <li role="menuitem"><a [routerLink]="['sedes']"><span>Sedes</span></a></li>
@@ -62,6 +67,7 @@
                             <li role="menuitem"><a [routerLink]="['docentes']"><span>Docentes</span></a></li>
                             <li role="menuitem"><a [routerLink]="['usuarios']"><span>Usuario</span></a></li>
                             <li role="menuitem"><a [routerLink]="['accion-rol']"><span>Permisos</span></a></li>
+                            -->
                         </ul>
                     </div>
                 </div>
