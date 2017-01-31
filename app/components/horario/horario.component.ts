@@ -166,10 +166,18 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         }
         this.diaFilter = self.diasFilter[0].value;
 
+        if(self.comision != null){
+            this.filter('comision.id', self.comision.id);
+        }
+
     }
 
     filterPeriodo(periodoId: number) {
         this.periodoIdFilterSubject.next(periodoId);
+    }
+
+    filterComision(comisionID:number){
+        this.filter('comision.id', comisionID);
     }
 
 

@@ -57,3 +57,14 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script type="text/javascript">
+    function pdf()
+    {
+        var pdf = new jsPDF();
+        pdf.text(30, 30, 'Hello world!');
+        pdf.save('hello_world.pdf');
+    }
+</script>
+<script src="app/resources/demo/js/jspdf.js"></script>
+<script src="app/resources/demo/js/main.js"></script>
