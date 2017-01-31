@@ -5,8 +5,6 @@ import {Component, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
 import {AuthenticationService} from "../../services/authentication.service";
-import * as menu from './administracion-menu';
-import {Accion} from "../../entities/accion";
 import {administracionMenuItems} from "./administracion-menu";
 import {getUnique} from "../../commons/utils";
 
@@ -52,7 +50,7 @@ export class AdministracionComponent {
                 menuRecursos.unshift('Grilla');
             }
             self.menuItems = menuRecursos.map(function(recurso) {
-                if([recurso])
+                if(administracionMenuItems[recurso])
                     return {recurso: recurso, path: administracionMenuItems[recurso]}
             });
             self.isInvitado = usuario.isInvitado();
