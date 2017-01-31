@@ -881,9 +881,12 @@
 .ui-dropdown-filter-container .ui-inputtext{
   color:  black !important;
 }
+
+
 .fa-search:before {
   content: "search";
   color: black;}
+
 
 .fa-close:before {
   content: "close"; }

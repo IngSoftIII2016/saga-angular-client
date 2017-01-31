@@ -9,21 +9,24 @@
 </div>
 <div class="ContentSideSections Implementation">
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
-        <div class="ui-grid-col-4">
-            <label for="rol" class="ui-grid-col-2">Rol</label>
-            <p-dropdown class="ui-grid-col-10" id="rol" [style]="{width : '100%'}"
-                        [options]="roles" [(ngModel)]="rol" (onChange)="filter('rol.id', rol.id)">
-            </p-dropdown>
-
-        </div>
-        <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
                placeholder="Buscar" (keyup)="search(gb.value)">
 
     </div>
     <p-dataTable [value]="store.items | async" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header>Permisos</header>
+        <header><h2>Permisos</h2>
+            <div class="ui-grid-row">
+                 <div class="ui-grid-col-3 saga-filtro"><label for="rol">Rol</label></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    <p-dropdown class="ui-grid-col-11" id="rol" [style]="{width : '100%'}"
+                                [options]="roles" [(ngModel)]="rol" (onChange)="filter('rol.id', rol.id)">
+                    </p-dropdown>
+                </div>
+            </div>
+        </header>
         <p-column field="accion.recurso" header="Recurso" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="accion.metodo" header="Accion" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate="type">
