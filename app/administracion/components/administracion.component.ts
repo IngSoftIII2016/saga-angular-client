@@ -46,12 +46,12 @@ export class AdministracionComponent {
             let menuRecursos = [];
             if(!usuario.isInvitado()) {
                 menuRecursos = getUnique(usuario.rol.acciones.map(accion => accion.recurso));
-                menuRecursos.unshift('Presentismo');
-                menuRecursos.unshift('Grilla');
-            }
-            self.menuItems = menuRecursos.map(function(recurso) {
+                menuRecursos.push('Presentismo');
+                menuRecursos.push('Grilla');
+            }else menuRecursos.push('Grilla');
+            menuRecursos.forEach(function(recurso) {
                 if(administracionMenuItems[recurso])
-                    return {recurso: recurso, path: administracionMenuItems[recurso]}
+                    self.menuItems.push({recurso: recurso, path: administracionMenuItems[recurso]});
             });
             self.isInvitado = usuario.isInvitado();
         });
