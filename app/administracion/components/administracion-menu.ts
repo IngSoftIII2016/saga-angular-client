@@ -18,6 +18,7 @@ export const administracionMenuItems =
         'Localidades': 'localidades',
         'Periodos': 'periodos',
         'Permisos': 'accion-rol',
+        'Presentismo': 'presentismo',
         'Planes de Estudio': 'asignatura-carrera',
         'Recursos': 'recursos',
         'Roles': 'roles',

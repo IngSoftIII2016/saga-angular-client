@@ -45,9 +45,12 @@ export class AdministracionComponent {
         this.authService.usuario.subscribe(function (usuario) {
             self.usuario = usuario;
             self.menuItems = [];
-            let menuRecursos = usuario.isInvitado() ? [] :
-                getUnique(usuario.rol.acciones.map(accion => accion.recurso));
-            menuRecursos.unshift('Grilla');
+            let menuRecursos = [];
+            if(!usuario.isInvitado()) {
+                menuRecursos = getUnique(usuario.rol.acciones.map(accion => accion.recurso));
+                menuRecursos.unshift('Presentismo');
+                menuRecursos.unshift('Grilla');
+            }
             self.menuItems = menuRecursos.map(function(recurso) {
                 if([recurso])
                     return {recurso: recurso, path: administracionMenuItems[recurso]}
