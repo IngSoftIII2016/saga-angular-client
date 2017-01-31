@@ -11,7 +11,6 @@
     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
         <button type="button" class="guardar" pButton pTooltip="Filtros" tooltipPosition="bottom" icon="ui-icon-filter-list" (click)="toggleFilter()"
                 style="float: left"></button>
-        <i class="fa fa-search" style="float:right;margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
                placeholder="Buscar" (keyup)="search(gb.value)">
     </div>
