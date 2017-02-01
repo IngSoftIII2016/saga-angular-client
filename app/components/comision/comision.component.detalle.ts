@@ -44,6 +44,7 @@ constructor(private comisionStore: ComisionStore,
                 private asignaturaService : AsignaturaService,
                 private comisionService : ComisionService,
                 private route: ActivatedRoute,
+                private router: Router,
                 private docenteService : DocenteService,
                 private confirmationService: ConfirmationService) {
     }
@@ -117,6 +118,8 @@ constructor(private comisionStore: ComisionStore,
             })
 
         });
+        this.router.navigate(['administracion/comisiones']);
+
     }
 
 }
