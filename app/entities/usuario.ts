@@ -19,6 +19,6 @@ export class Usuario implements Entity {
     }
 
     toString(): string {
-        return this.rol.nombre + ' ' + this.apellido + ', ' + this.nombre;
+        return `${this.nombre} (${this.rol.nombre})`;
     }
 }

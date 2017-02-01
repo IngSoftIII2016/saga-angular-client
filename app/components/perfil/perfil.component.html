@@ -6,53 +6,50 @@
     <p-growl [value]="msgs" life=3000></p-growl>
     <p-confirmDialog width="425" #cd>
         <footer>
-            <button type="button" pButton class="no" (click)="cd.accept()" icon="fa fa-close" label="No" ></button>
-            <button type="button" pButton class="yes" (click)="cd.accept()"  icon="fa fa-check" label="Si" ></button>
+            <button type="button" pButton class="no" (click)="cd.accept()" icon="fa fa-close" label="No"></button>
+            <button type="button" pButton class="yes" (click)="cd.accept()" icon="fa fa-check" label="Si"></button>
         </footer>
     </p-confirmDialog>
 </div>
 
+<p-dialog header="Perfil" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
 
+    <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
 
-
-
-    <p-dialog header="Perfil" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" >
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-6"><label>Nombre: </label></div>
-                <div class="ui-grid-col-8">{{usuario.nombre}} {{usuario.apellido}}</div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6"><label>Nombre: </label></div>
+            <div class="ui-grid-col-8">{{usuario.nombre}} {{usuario.apellido}}</div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6"><label>Email: </label></div>
+            <div class="ui-grid-col-8">{{usuario.email}}</div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6"><label for="password">Contraseña Actual: </label></div>
+            <div class="ui-grid-col-8">
+                <input type="password" id="password" pInputText autocomplete="on" class="form-control" name="password"
+                       [(ngModel)]="oldpass" #password="ngModel" required/>
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-6"><label>Email: </label></div>
-                <div class="ui-grid-col-8">{{usuario.email}}</div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6"><label for="newpassword">Contraseña Nueva: </label></div>
+            <div class="ui-grid-col-8">
+                <input type="password" [(ngModel)]="newpass" id="newpassword" pInputText autocomplete="on"
+                       class="form-control" name="password"
+                       required/>
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-6"><label for="password">Contraseña Actual: </label></div>
-                <div class="ui-grid-col-8">
-                    <input type="password" id="password" pInputText autocomplete="on" class="form-control" name="password"
-                                                  [(ngModel)]="oldpass" #password="ngModel" required/>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-6"><label for="newpassword">Contraseña Nueva: </label></div>
-                <div class="ui-grid-col-8">
-                    <input type="password" [(ngModel)]="newpass" id="newpassword" pInputText autocomplete="on" class="form-control" name="password"
-                           required/>
-                </div>
-            </div>
-
-
         </div>
 
 
+    </div>
 
-        <footer>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button  type="button" class="guardar" (click)="change()" pButton icon="fa-check" label="Cambiar Contraseña"></button>
-            </div>
-        </footer>
 
-    </p-dialog>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" class="guardar" (click)="change()" pButton icon="fa-check"
+                    label="Cambiar Contraseña"></button>
+        </div>
+    </footer>
+
+</p-dialog>
 

@@ -1,4 +1,3 @@
-
 /**
  * Created by juan on 30/01/17.
  */
@@ -12,7 +11,7 @@ export const administracionMenuItems =
         'Comisiones': 'comisiones',
         'Docentes': 'docentes',
         'Edificios': 'edificios',
-        'Eventos' : 'eventos',
+        'Eventos': 'eventos',
         'Grilla': 'grilla',
         'Horarios': 'horarios',
         'Localidades': 'localidades',

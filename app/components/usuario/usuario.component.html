@@ -9,8 +9,9 @@
     </p-confirmDialog>
 </div>
 <div class="ContentSideSections Implementation">
-     <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
-        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar">
+    <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px"
+               placeholder="Buscar">
     </div>
     <p-dataTable
             [value]="store.items | async"
@@ -45,7 +46,8 @@
         </p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
-                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
+                        label="Agregar"></button>
             </div>
         </footer>
     </p-dataTable>
@@ -69,16 +71,21 @@
                 <div class="ui-grid-col-4"><label for="apellido">Apellido*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="apellido" [(ngModel)]="entity.apellido"/></div>
             </div>
-             <div class="ui-grid-row">
+            <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="email">Email*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="entity.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
+                <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="entity.email"
+                                                  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="rol">Rol*</label></div>
-                <p-dropdown class="ui-grid-col-8" id="rol" [options]="roles"
-                            [(ngModel)]="entity.rol"
-                            [style]="{width : '100%' }">
-                </p-dropdown>
+                <div class="ui-grid-col-4">
+                    <label for="rol">Rol*</label>
+                </div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown id="rol" [options]="roles"
+                                [(ngModel)]="entity.rol"
+                                [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
             </div>
         </div>
         <footer>

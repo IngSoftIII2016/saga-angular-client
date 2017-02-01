@@ -113,6 +113,10 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     ngOnInit() {
         super.ngOnInit();
+
+        if(this.comision)
+            this.filterComision(this.comision.id);
+
         var self = this;
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
@@ -166,9 +170,6 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         }
         this.diaFilter = self.diasFilter[0].value;
 
-        if(self.comision != null){
-            this.filter('comision.id', self.comision.id);
-        }
 
     }
 

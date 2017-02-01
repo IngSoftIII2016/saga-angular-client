@@ -149,6 +149,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                         .subscribe(creada => {
                             self.entity = creada as E;
                             self.displayDialog = false;
+                            self.onAfterCreate(self.entity);
                             self.showOkCreateMessage(self.entity);
                             }, error => self.showFailCreateMessage(self.entity, error)
                         )
@@ -166,6 +167,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                     guardada => {
                         self.entity = guardada as E;
                         self.displayDialog = false;
+                        self.onAfterUpdate(self.entity);
                         self.showOkUpdateMessage(self.entity);
                     }, error => self.showFailUpdateMessage(self.entity, error)
                 );
@@ -182,6 +184,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                 borrada => {
                     self.entity = borrada as E;
                     self.displayDialog = false;
+                    self.onAfterDelete(self.entity);
                     self.showOkDeleteMessage(self.entity);
                 }, error => self.showFailDeleteMessage(self.entity, error)
             );
