@@ -84,10 +84,11 @@
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>
             </div>
-            <div class="ui-grid-row">
+            <div *ngIf=
+                         "!comision" class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="comision">Comision*</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="comision" [options]="comisiones" [(ngModel)]="entity.comision"
+                    <p-dropdown  class="ui-grid-col-12" id="comision" [options]="comisiones" [(ngModel)]="entity.comision"
                                 [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>

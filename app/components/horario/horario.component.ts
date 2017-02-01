@@ -118,6 +118,9 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             this.filterComision(this.comision.id);
 
         var self = this;
+        if(!this.comision == null) {
+            this.entity.comision = this.comision;
+        }
         this.aulaService.getAll().subscribe(aulas => {
             aulas.forEach(aula => {
                 let label = aula.nombre + ' - ' + aula.edificio.nombre;

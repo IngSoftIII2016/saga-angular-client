@@ -26,6 +26,15 @@ import {DocenteService} from "../../services/docente.service";
 
 export class ComisionComponentAlta extends CRUD<Comision, ComisionService, ComisionStore> {
 
+
+    protected onAfterCreate(entity: Comision): void {
+        console.log("save id:"+entity.id);
+        super.onAfterCreate(entity);
+        this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
+    }
+
+
+
     asignaturas: SelectItem[] = [];
 
     periodos: SelectItem[] = [];
@@ -46,14 +55,24 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
 
     isFilter: boolean = false;
 
+    isInsert: boolean = false;
 
 
 
     protected onOpenDialog(entity): void {
+
         super.onOpenDialog(entity);
 
         //this.router.navigate([this.router.url+'/detalle',entity.id]);
-        this.router.navigate(['detalle', entity.id], { relativeTo: this.route });
+        if(!this.isInsert) {
+            this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
+        }
+    }
+
+    insert() : void {
+        this.isInsert = true;
+        this.showDialogToAdd();
+        this.isInsert = false;
     }
 
     constructor(private comisionStore: ComisionStore,
