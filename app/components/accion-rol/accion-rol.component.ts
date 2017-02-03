@@ -37,11 +37,12 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     ngOnInit() {
         super.ngOnInit();
         let self = this;
-
         this.rolService.getAll().subscribe(roles => {
             self.roles = roles.map(rol => {
                 return { label: rol.nombre, value: rol}
             });
+            self.rol = roles[0];
+            self.filter('rol.id', self.rol.id);
         });
 
         this.accionService.getAll().subscribe(acciones => {
@@ -70,12 +71,11 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     }
 
     protected getSearchFields(): string[] {
-        return ['metodo', 'accion.url', 'accion.recurso']
+        return ['accion.recurso']
     }
 
     onOpenDialog(entity): void {
         entity.rol = this.rol;
-        console.log(entity);
     }
 
 
