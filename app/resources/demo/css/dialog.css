@@ -1,6 +1,17 @@
 ::-webkit-input-placeholder {
     color: white;
 }
+.grilla::-webkit-input-placeholder {
+    color: black;
+}
+.reset{
+    background-color: #243fce !important;
+    color: white !important;;
+}
+.reset:hover{
+    background-color: #243fce !important;
+    color: white !important;;
+}
 .eliminar {
     background-color: #ce0707 !important;
     color: white !important;;
