@@ -5,6 +5,7 @@ import {Message, ConfirmationService} from "primeng/components/common/api";
 import {Subject} from "rxjs";
 import {CRUD} from "../../commons/crud";
 import {SedeService} from "../../services/sede.service";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
 	templateUrl: 'app/components/sede/sede.component.html',
@@ -16,8 +17,9 @@ export class SedeComponent extends CRUD<Sede, SedeService, SedeStore>{
 
 
     constructor(private sedeStore: SedeStore,
+                messagesService: MessagesService,
     private confirmationService: ConfirmationService) {
-        super(sedeStore,confirmationService);
+        super(sedeStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

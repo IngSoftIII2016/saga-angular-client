@@ -6,6 +6,7 @@ import {ConfirmationService, Message} from "primeng/components/common/api";
 import {Subject} from "rxjs";
 import {PeriodoService} from "../../services/periodo.service";
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 
 @Component({
@@ -24,8 +25,9 @@ export class PeriodoComponent extends CRUD<Periodo, PeriodoService, PeriodoStore
 
     constructor(
         private periodoStore: PeriodoStore,
+        messagesService: MessagesService,
         private confirmationService: ConfirmationService) {
-        super(periodoStore,confirmationService);
+        super(periodoStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

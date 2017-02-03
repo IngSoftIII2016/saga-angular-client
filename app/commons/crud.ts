@@ -7,6 +7,7 @@ import {GenericStore} from "./generic.store";
 import {GenericService} from "./generic.service";
 import {Subject} from "rxjs";
 import {Message, ConfirmationService} from "primeng/components/common/api";
+import {MessagesService} from "../services/messages.service";
 
 export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST extends GenericStore<E, SV>> implements OnInit {
 
@@ -18,7 +19,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected isNew: boolean;
 
-    public msgs: Message[] = [];
+    msgs: Message[] = [];
 
     protected validaciones: Message[] = [];
 
@@ -30,7 +31,18 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected confirmDelete = true;
 
+    protected messagesService: MessagesService;
+
     protected confirmService: ConfirmationService = null;
+
+    constructor(store: ST, messagesService: MessagesService, confirmService: ConfirmationService = null) {
+        this.store = store;
+        this.entity = null;
+        this.messagesService = messagesService;
+        this.confirmService = confirmService;
+        this.displayDialog = false;
+        this.isNew = false;
+    }
 
     // primitivas
 
@@ -88,14 +100,6 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected onAfterDelete(entity: E): void {
     };
-
-    constructor(store: ST, confirmService: ConfirmationService = null) {
-        this.store = store;
-        this.entity = null;
-        this.confirmService = confirmService;
-        this.displayDialog = false;
-        this.isNew = false;
-    }
 
     ngOnInit() {
         this.searchTerms
@@ -258,18 +262,16 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     protected showOkCreateMessage(entity: E) {
-        this.msgs.push(
-            {
-                severity: 'success',
-                summary: 'Creada',
-                detail: 'Se ha agregado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
-            });
+        this.messagesService.showMessage({
+            severity: 'success',
+            summary: 'Creada',
+            detail: 'Se ha agregado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
+        });
     }
 
     protected showFailCreateMessage(entity: E, error: any) {
         let err = error.json().error;
-        this.msgs.push(
-            {
+        this.messagesService.showMessage({
                 severity: 'error',
                 summary: err.title,
                 detail: 'No se ha podido agregar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
@@ -277,7 +279,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     protected showOkUpdateMessage(entity: E) {
-        this.msgs.push(
+        this.messagesService.showMessage(
             {
                 severity: 'success',
                 summary: 'Guardada',
@@ -287,8 +289,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected showFailUpdateMessage(entity: E, error: any) {
         let err = error.json().error;
-        this.msgs.push(
-            {
+        this.messagesService.showMessage({
                 severity: 'error',
                 summary: err.title,
                 detail: 'No se ha podido modificar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
@@ -296,8 +297,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     }
 
     protected showOkDeleteMessage(entity: E) {
-        this.msgs.push(
-            {
+        this.messagesService.showMessage({
                 severity: 'success',
                 summary: 'Exito',
                 detail: 'Se ha eleminado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
@@ -307,8 +307,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     protected showFailDeleteMessage(entity: E, error) {
         let err = error.json().error;
         console.log(this);
-        this.msgs.push(
-            {
+        this.messagesService.showMessage({
                 severity: 'error',
                 summary: err.title,
                 detail: 'No se ha podido eliminar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail

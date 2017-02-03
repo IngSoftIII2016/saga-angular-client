@@ -11,6 +11,7 @@ import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
 import {AsignaturaCarreraStore} from "../../services/asignatura-carrera.store";
 import {CRUD} from "../../commons/crud";
 import {CarreraService} from "../../services/carrera.service";
+import {MessagesService} from "../../services/messages.service";
 
 
 @Component({
@@ -28,9 +29,11 @@ export class CarreraComponent extends CRUD<Carrera, CarreraService, CarreraStore
     regimenesTabla = new Array();
 
 
-    constructor(private carreraStore: CarreraStore,  private confirmationService : ConfirmationService,
+    constructor(private carreraStore: CarreraStore,
+                private confirmationService : ConfirmationService,
+                messagesService: MessagesService,
                 private asignaturaCarreraStore: AsignaturaCarreraStore) {
-        super(carreraStore,confirmationService);
+        super(carreraStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

@@ -71,6 +71,7 @@ import {SliderModule} from "primeng/components/slider/slider";
 import {ChartModule} from "primeng/components/chart/chart";
 import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
 import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
+import {MessagesService} from "../services/messages.service";
 
 @NgModule({
     imports: [
@@ -140,7 +141,8 @@ import {ComisionComponentDetalle} from "../components/comision/comision.componen
         UsuarioService,
         AccionService,
         RolService,
-        AccionRolService
+        AccionRolService,
+        MessagesService
     ]
 })
 export class AdministracionModule {}

@@ -12,12 +12,13 @@ import {Rol} from "../../entities/rol";
 import {CRUD} from "../../commons/crud";
 import {AccionRolService} from "../../services/accion-rol.service";
 import {AccionRolStore} from "../../services/accion-rol.store";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/accion-rol/accion-rol.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'accion-rol',
-    providers: [AccionRolStore, AccionService,RolService, ConfirmationService]
+    providers: [AccionRolStore, ConfirmationService]
 })
 export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, AccionRolStore> {
 
@@ -30,8 +31,9 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     constructor(private accionRolStore: AccionRolStore,
                 private accionService: AccionService,
                 private rolService: RolService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(accionRolStore, confirmationService);
+        super(accionRolStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

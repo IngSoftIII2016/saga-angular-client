@@ -7,6 +7,7 @@ import {SedeService} from "../../services/sede.service";
 import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {Sede} from "../../entities/sede";
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 //class PrimeAsignatura implements Asignatura {
 //    constructor(public id?, public nombre?, public carrera?) {}
@@ -25,8 +26,9 @@ export class LocalidadComponent extends CRUD<Localidad, LocalidadService, Locali
 
     constructor(private localidadStore: LocalidadStore,
                 private sedeService: SedeService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(localidadStore, confirmationService);
+        super(localidadStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

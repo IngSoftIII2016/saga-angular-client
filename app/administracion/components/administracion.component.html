@@ -48,26 +48,6 @@
                             <li role="menuitem" *ngFor="let item of menuItems">
                                 <a [routerLink]="[item.path]"><span>{{item.recurso}}</span></a>
                             </li>
-
-                            <!--
-                            <li role="menuitem"><a [routerLink]="['presentismo']"><span>Presentismo</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['localidades']"><span>Localidad</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['sedes']"><span>Sedes</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['edificios']"><span>Edificios</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['carreras']"><span>Carreras</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['asignatura-carrera']"><span>Planes de Estudio</span></a>
-                            </li>
-                            <li role="menuitem"><a [routerLink]="['asignaturas']"><span>Asignaturas</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['aulas']"><span>Aulas</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['clases']"><span>Clases</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['eventos']"><span>Eventos</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['periodos']"><span>Periodos</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['comision']"><span>Comision</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['horarios']"><span>Horarios</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['docentes']"><span>Docentes</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['usuarios']"><span>Usuario</span></a></li>
-                            <li role="menuitem"><a [routerLink]="['accion-rol']"><span>Permisos</span></a></li>
-                            -->
                         </ul>
                     </div>
                 </div>
@@ -75,9 +55,8 @@
         </div>
 
         <div [ngClass]="{'layout-main': true}">
-
+            <p-growl [value]="msgs" life=9000></p-growl>
             <router-outlet></router-outlet>
-
             <div class="footer">
                 <div class="card clearfix">
                     <span class="footer-text-left">SAGA</span>

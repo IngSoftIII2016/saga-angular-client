@@ -10,6 +10,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import { Http, Response } from '@angular/http';
 
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/usuario/usuario.component.html',
@@ -22,10 +23,11 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
     roles: SelectItem[] = [];
 
       constructor(private usuarioStore: UsuarioStore,
+                  messagesService: MessagesService,
                   private confirmationService : ConfirmationService,
                   private rolService : RolService,
                   private authenticationService: AuthenticationService) {
-      super(usuarioStore, confirmationService);
+      super(usuarioStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

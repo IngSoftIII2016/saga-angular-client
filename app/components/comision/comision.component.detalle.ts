@@ -13,6 +13,7 @@ import {AsignaturaService} from "../../services/asignatura.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {DocenteService} from "../../services/docente.service";
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 /**
  * Created by sandro on 30/1/2017.
@@ -24,13 +25,13 @@ import {CRUD} from "../../commons/crud";
     selector: 'comision-detalle'
 })
 
-export class ComisionComponentDetalle implements OnInit{
+export class ComisionComponentDetalle implements OnInit {
 
     asignaturas: SelectItem[] = [];
 
-periodos: SelectItem[] = [];
+    periodos: SelectItem[] = [];
 
-docentes: SelectItem[] = [];
+    docentes: SelectItem[] = [];
     error = '';
 
     asignaturasFilter: SelectItem[] = [];
@@ -39,17 +40,17 @@ docentes: SelectItem[] = [];
 
     docentesFilter: SelectItem[] = [];
 
-constructor(private comisionStore: ComisionStore,
-                private periodoService : PeriodoService,
-                private asignaturaService : AsignaturaService,
-                private comisionService : ComisionService,
+    constructor(private comisionStore: ComisionStore,
+                private periodoService: PeriodoService,
+                private asignaturaService: AsignaturaService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private docenteService : DocenteService,
-                private confirmationService: ConfirmationService) {
+                private docenteService: DocenteService,
+                private confirmationService: ConfirmationService,
+                private messagesService: MessagesService) {
     }
 
-    comision : Comision;
+    comision: Comision;
     public msgs: Message[] = [];
 
     ngOnInit() {
@@ -57,7 +58,7 @@ constructor(private comisionStore: ComisionStore,
         //console.log("params: "+this.route.params['id']);
         this.route.params
         // (+) converts string 'id' to a number
-            .switchMap((params: Params) => this.comisionService.get(+params['id']))
+            .switchMap((params: Params) => this.comisionStore.service.get(+params['id']))
             .subscribe((comision: Comision) => this.comision = comision);
 
         this.asignaturaService.getAll().subscribe(asignaturas => {
@@ -84,41 +85,38 @@ constructor(private comisionStore: ComisionStore,
         });
     }
 
-    guardar()  {
-        this.comisionService.update(this.comision).
-        subscribe(result => {
-            this.msgs.push(  {
+    guardar() {
+        this.comisionStore.update(this.comision).subscribe(result => {
+            this.messagesService.showMessage({
                 severity: 'success',
                 summary: 'Guardada',
                 detail: 'Se actualizaron los datos de la comision'
             })
         }, err => {
-            this.msgs.push(  {
+            this.messagesService.showMessage({
                 severity: 'failed',
                 summary: 'Error',
                 detail: 'No se pudo actualizar los datos de la comision.'
-            })
-
+            });
         });
     }
 
-    borrar()  {
-        this.comisionService.delete(this.comision).
-        subscribe(result => {
-            this.msgs.push(  {
+    borrar() {
+        this.comisionStore.delete(this.comision).subscribe(result => {
+            this.messagesService.showMessage({
                 severity: 'success',
                 summary: 'Eliminada',
-                detail: 'Se elimino la comision'
+                detail: 'Se elimino la comision.'
             })
         }, err => {
-            this.msgs.push(  {
+            let error = err.json().error;
+            this.messagesService.showMessage({
                 severity: 'failed',
-                summary: 'Error',
-                detail: 'No se pudo eliminar la comision, compruebe si tiene horarios asosicados.'
+                summary: error.title,
+                detail: 'No se pudo eliminar la comision. ' + error.detail
             })
-
         });
-        this.router.navigate(['administracion/comisiones']);
+        this.router.navigate(['administracion','comisiones']);
 
     }
 

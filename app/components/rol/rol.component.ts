@@ -4,6 +4,7 @@ import {CRUD} from "../../commons/crud";
 import {Rol} from "../../entities/rol";
 import {RolService} from "../../services/rol.service";
 import {RolStore} from "../../services/rol.store";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/rol/rol.component.html',
@@ -13,8 +14,8 @@ import {RolStore} from "../../services/rol.store";
 })
 export class RolComponent extends CRUD<Rol, RolService, RolStore> {
 
-    constructor(private rolStore: RolStore,  private confirmationService : ConfirmationService) {
-        super(rolStore, confirmationService);
+    constructor(private rolStore: RolStore,  messagesService: MessagesService, private confirmationService : ConfirmationService) {
+        super(rolStore, messagesService, confirmationService);
     }
 
     protected getDefaultNewEntity(): Rol {

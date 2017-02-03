@@ -19,9 +19,8 @@ import {ComisionComponentAlta} from "./comision.component.alta";
     templateUrl: 'app/components/comision/comision.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision',
-    providers: [ComisionStore, AsignaturaService, PeriodoService, DocenteService, ConfirmationService]
+    providers: [ComisionStore]
 })
 export class ComisionComponent {
-
 
 }

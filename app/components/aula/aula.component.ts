@@ -9,6 +9,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {QueryOptions} from "../../commons/generic.service";
 import {CRUD} from "../../commons/crud";
 import {AulaService} from "../../services/aula.service";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/aula/aula.component.html',
@@ -21,12 +22,11 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
 
     edificios: SelectItem[] = [];
 
-
-
     constructor(private aulaStore: AulaStore,
                 private edificioService: EdificioService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(aulaStore,confirmationService);
+        super(aulaStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

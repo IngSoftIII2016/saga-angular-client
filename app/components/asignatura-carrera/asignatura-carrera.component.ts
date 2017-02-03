@@ -12,6 +12,7 @@ import {Asignatura} from "../../entities/asignatura";
 import {CRUD} from "../../commons/crud";
 import {AsignaturaCarreraService} from "../../services/asignatura-carrera.service";
 import {AsignaturaCarrera} from "../../entities/asignatura-carrera";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/asignatura-carrera/asignatura-carrera.component.html',
@@ -46,8 +47,9 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
     constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
                 private carreraService: CarreraService,
                 private asignaturaService: AsignaturaService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(asignaturaCarreraStore, confirmationService);
+        super(asignaturaCarreraStore, messagesService, confirmationService);
     }
 
     protected toggleFilter() {

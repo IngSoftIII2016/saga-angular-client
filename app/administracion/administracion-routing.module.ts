@@ -65,8 +65,13 @@ const adminRoutes: Routes = [
                 path: 'comisiones',
                 component: ComisionComponent,
                 children: [
-                    { path: '', component: ComisionComponentAlta },
-                    { path: 'detalle/:id', component: ComisionComponentDetalle }
+                    {
+                        path: '',
+                        component: ComisionComponentAlta
+                    }, {
+                        path: 'detalle/:id',
+                        component: ComisionComponentDetalle
+                    }
                 ]
             }, {
                 path: 'docentes',

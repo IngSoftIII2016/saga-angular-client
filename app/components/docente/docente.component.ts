@@ -5,6 +5,7 @@ import {Message, ConfirmationService} from "primeng/components/common/api";
 import {Subject} from "rxjs";
 import {CRUD} from "../../commons/crud";
 import {DocenteService} from "../../services/docente.service";
+import {MessagesService} from "../../services/messages.service";
 
 /*class PrimeDocente implements Docente {
     constructor(public id?, public nombre?, public apellido?) {}
@@ -18,8 +19,8 @@ import {DocenteService} from "../../services/docente.service";
 })
 export class DocenteComponent extends CRUD<Docente, DocenteService, DocenteStore>{
 
-    constructor(private docenteStore: DocenteStore,  private confirmationService : ConfirmationService) {
-        super(docenteStore,confirmationService);
+    constructor(private docenteStore: DocenteStore, messagesService: MessagesService, private confirmationService : ConfirmationService) {
+        super(docenteStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

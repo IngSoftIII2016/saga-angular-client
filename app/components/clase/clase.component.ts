@@ -8,6 +8,7 @@ import {Subject, Timestamp} from "rxjs";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {CRUD} from "../../commons/crud";
 import {ClaseService} from "../../services/clase.service";
+import {MessagesService} from "../../services/messages.service";
 
 
 @Component({
@@ -28,8 +29,9 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
 
     constructor(private claseStore: ClaseStore,
                 private aulaService: AulaService,
+                messagesService: MessagesService,
                 private confirmationService : ConfirmationService) {
-        super(claseStore, confirmationService);
+        super(claseStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

@@ -8,6 +8,7 @@ import {Aula} from "../../entities/aula";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {EventoService} from "../../services/evento.service";
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 
 @Component({
@@ -30,8 +31,9 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
     constructor(private eventoStore: EventoStore,
                 private aulaService: AulaService,
+                messagesService: MessagesService,
                 private confirmationService : ConfirmationService) {
-        super(eventoStore, confirmationService);
+        super(eventoStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

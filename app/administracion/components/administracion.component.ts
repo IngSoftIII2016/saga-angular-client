@@ -7,6 +7,8 @@ import {Usuario} from "../../entities/usuario";
 import {AuthenticationService} from "../../services/authentication.service";
 import {administracionMenuItems} from "./administracion-menu";
 import {getUnique} from "../../commons/utils";
+import {Message} from "primeng/components/common/api";
+import {MessagesService} from "../../services/messages.service";
 
 
 declare var Ultima: any;
@@ -35,7 +37,14 @@ export class AdministracionComponent {
 
     menuItems = [];
 
-    constructor(private router: Router, private el: ElementRef, private authService: AuthenticationService) {
+    msgs: Message[] = [];
+
+    constructor(
+        private router: Router,
+        private el: ElementRef,
+        private authService: AuthenticationService,
+        private messagesService: MessagesService
+    ) {
     }
 
     ngOnInit() {
@@ -56,6 +65,8 @@ export class AdministracionComponent {
             self.isInvitado = usuario.isInvitado();
         });
         this.authService.getUsuario().subscribe(res => res);
+
+        this.messagesService.messageStream.subscribe(msg => self.msgs.push(msg));
     }
 
     ngAfterViewInit() {

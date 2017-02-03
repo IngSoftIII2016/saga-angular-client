@@ -6,6 +6,7 @@ import {Subject} from "rxjs";
 import {CALENDAR_LOCALE_ES} from "../../commons/calendar-locale-es";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {CRUD} from "../../commons/crud";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
     templateUrl: 'app/components/asignatura/asignatura.component.html',
@@ -15,8 +16,10 @@ import {CRUD} from "../../commons/crud";
 })
 export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, AsignaturaStore> {
 
-    constructor(private asignaturaStore: AsignaturaStore,  private confirmationService : ConfirmationService) {
-        super(asignaturaStore, confirmationService);
+    constructor(private asignaturaStore: AsignaturaStore,
+                messagesService: MessagesService,
+                private confirmationService : ConfirmationService) {
+        super(asignaturaStore, messagesService ,confirmationService);
     }
 
     protected getDefaultNewEntity(): Asignatura {

@@ -13,6 +13,7 @@ import {Periodo} from "../../entities/periodo";
 import {Subject} from "rxjs";
 import {QueryOptions} from "../../commons/generic.service";
 import {Comision} from "../../entities/comision";
+import {MessagesService} from "../../services/messages.service";
 
 
 @Component({
@@ -66,8 +67,9 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
                 private aulaService: AulaService,
                 private periodoService: PeriodoService,
                 private comisionService: ComisionService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(horarioStore, confirmationService);
+        super(horarioStore, messagesService, confirmationService);
     }
 
     toggleFilter() {
@@ -77,7 +79,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     protected getDefaultNewEntity(): Horario {
         return new Horario({
             aula: this.aulas[0].value as Aula,
-            comision: this.comisiones[0].value as Comision
+            comision: this.comision ? this.comision : this.comisiones[0].value as Comision
         });
     }
 

@@ -7,6 +7,7 @@ import {Subject} from "rxjs";
 import {Localidad} from "../../entities/localidad";
 import {CRUD} from "../../commons/crud";
 import {EdificioService} from "../../services/edificio.service";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
 	templateUrl: 'app/components/edificio/edificio.component.html',
@@ -20,8 +21,9 @@ export class EdificioComponent extends CRUD<Edificio, EdificioService, EdificioS
 
     constructor(private edificioStore: EdificioStore,
                 private localidadService: LocalidadService,
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(edificioStore,confirmationService);
+        super(edificioStore, messagesService, confirmationService);
     }
 
     ngOnInit() {

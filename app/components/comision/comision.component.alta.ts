@@ -12,6 +12,7 @@ import {Docente} from "../../entities/docente";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {DocenteService} from "../../services/docente.service";
+import {MessagesService} from "../../services/messages.service";
 /**
  * Created by sandro on 30/1/2017.
  */
@@ -62,8 +63,6 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
     protected onOpenDialog(entity): void {
 
         super.onOpenDialog(entity);
-
-        //this.router.navigate([this.router.url+'/detalle',entity.id]);
         if(!this.isInsert) {
             this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
         }
@@ -81,9 +80,9 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
                 private docenteService: DocenteService,
                 private route: ActivatedRoute,
                 private router: Router,
-
+                messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
-        super(comisionStore, confirmationService);
+        super(comisionStore, messagesService, confirmationService);
     }
 
 
@@ -95,7 +94,6 @@ export class ComisionComponentAlta extends CRUD<Comision, ComisionService, Comis
         super.ngOnInit();
         let self = this;
 
-        // No era necesario pagarle al backend 2 veces para armar los dos arreglos de SelectItem
         this.asignaturaService.getAll().subscribe(asignaturas => {
             asignaturas.forEach(asignatura => {
                 self.asignaturas.push({label: asignatura.nombre, value: asignatura});
