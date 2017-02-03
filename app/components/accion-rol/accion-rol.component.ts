@@ -42,6 +42,8 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
             self.roles = roles.map(rol => {
                 return { label: rol.nombre, value: rol}
             });
+            self.rol = roles[0];
+            self.filter('rol.id', self.rol.id);
         });
 
         this.accionService.getAll().subscribe(acciones => {
@@ -75,7 +77,6 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
 
     onOpenDialog(entity): void {
         entity.rol = this.rol;
-        console.log(entity);
     }
 
 

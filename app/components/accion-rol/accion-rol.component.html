@@ -57,9 +57,8 @@
                 <div class="ui-grid-col-4">
                     <label for="accion">Accion</label>
                 </div>
-
                 <div class="ui-grid-col-8">
-                    <p-dropdown id="accion" [options]="acciones" [(ngModel)]="entity.accion" [filter]="true">
+                    <p-dropdown id="accion" [options]="acciones" [(ngModel)]="entity.accion" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>
             </div>
