@@ -35,6 +35,7 @@ export class AuthenticationService {
         return this.http.post(
             'http://localhost/saga/api/AuthEndpoint/login',
             {'data': {'email': email, 'password': password}})
+            .timeout(6000)
             .map(res => res.json().body.token)
             .do(token => localStorage.setItem('token', token))
             .map(token => self.tokenToUser(token))
