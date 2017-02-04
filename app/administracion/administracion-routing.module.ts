@@ -26,8 +26,8 @@ import {
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
-import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
-import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
+import {ComisionComponentAlta} from "../components/comision/comision-maestro.component";
+import {ComisionComponentDetalle} from "../components/comision/comision-detalle.component";
 
 const adminRoutes: Routes = [
     {

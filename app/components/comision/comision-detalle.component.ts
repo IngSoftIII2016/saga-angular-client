@@ -20,12 +20,12 @@ import {MessagesService} from "../../services/messages.service";
  */
 @Component({
 
-    templateUrl: 'app/components/comision/comision.component.detalle.html',
+    templateUrl: 'comision-detalle.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision-detalle'
 })
 
-export class ComisionComponentDetalle implements OnInit {
+export class ComisionDetalleComponent implements OnInit {
 
     asignaturas: SelectItem[] = [];
 
