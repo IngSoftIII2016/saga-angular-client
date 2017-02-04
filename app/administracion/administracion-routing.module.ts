@@ -22,7 +22,8 @@ import {
     SedeComponent,
     UsuarioComponent,
     AccionRolComponent,
-    PresentismoComponent
+    PresentismoComponent,
+    ParametrosComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
@@ -103,6 +104,9 @@ const adminRoutes: Routes = [
             }, {
                 path: 'sedes',
                 component: SedeComponent
+            }, {
+                path: 'parametros',
+                component: ParametrosComponent
             }
         ]
     },

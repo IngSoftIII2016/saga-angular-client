@@ -26,7 +26,8 @@ import {
     SedeComponent,
     UsuarioComponent,
     AccionRolComponent,
-    PerfilComponent
+    PerfilComponent,
+    ParametrosComponent
 } from "../components";
 
 import {HttpModule} from "@angular/http";
@@ -72,6 +73,7 @@ import {ChartModule} from "primeng/components/chart/chart";
 import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
 import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
 import {MessagesService} from "../services/messages.service";
+import {ParametrosService} from "../services/parametros.service";
 
 @NgModule({
     imports: [
@@ -120,7 +122,8 @@ import {MessagesService} from "../services/messages.service";
         PresentismoComponent,
         PerfilComponent,
         ComisionComponentAlta,
-        ComisionComponentDetalle
+        ComisionComponentDetalle,
+        ParametrosComponent
     ],
     providers: [
         AsignaturaService,
@@ -142,7 +145,8 @@ import {MessagesService} from "../services/messages.service";
         AccionService,
         RolService,
         AccionRolService,
-        MessagesService
+        MessagesService, 
+        ParametrosService
     ]
 })
 export class AdministracionModule {}

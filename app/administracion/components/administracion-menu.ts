@@ -15,6 +15,7 @@ export const administracionMenuItems =
         'Grilla': 'grilla',
         'Horarios': 'horarios',
         'Localidades': 'localidades',
+        'Parametros' : 'parametros',
         'Periodos': 'periodos',
         'Permisos': 'accion-rol',
         'Presentismo': 'presentismo',

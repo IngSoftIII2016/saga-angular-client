@@ -22,4 +22,5 @@ export * from './usuario';
 export * from './accion-rol';
 export * from './presentismo';
 export * from './perfil';
+export * from './parametros';
 export * from './';
