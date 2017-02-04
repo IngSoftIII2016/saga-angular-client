@@ -5,8 +5,8 @@
     <div class="card">
         <div class="ui-g-12 ui-grid-row">
             <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" [style]="{width : '100%'}"
-                            (onChange)="onChangeEdificio($event)">
+                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" (onChange)="onChangeEdificio($event)"
+                            [style]="{width : '100%'}">
                 </p-dropdown>
             </div>
             <div class="ui-g-6 ui-md-6">
@@ -66,8 +66,8 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar [(ngModel)]="fechaSelected" [locale]="es" id="clase-fecha"
-                                readonlyInput="readonlyInput">
+                    <p-calendar id="clase-fecha" readonlyInput="readonlyInput"
+                                [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
                     </p-calendar>
                 </div>
             </div>
@@ -144,8 +144,9 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="evento-fecha" [(ngModel)]="eventoSelected.fechaDate" [locale]="es"
-                                readonlyInput="readonlyInput"></p-calendar>
+                    <p-calendar id="evento-fecha" readonlyInput="readonlyInput"
+                                [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
+                    </p-calendar>
                 </div>
             </div>
             <!--
@@ -157,14 +158,14 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="evento-hora_inicio" [(ngModel)]="eventoSelected.hora_inicioDate" [locale]="es"
+                    <p-calendar id="evento-hora_inicio" [(ngModel)]="inicioSelected" [locale]="es"
                                 [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="clase-hora_fin">Fecha Fin</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="evento-hora_fin" [(ngModel)]="eventoSelected.fecha_finDate" [locale]="es"
+                    <p-calendar id="evento-hora_fin" [(ngModel)]="finSelected" [locale]="es"
                                 [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
                 </div>
             </div>
