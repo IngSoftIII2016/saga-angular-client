@@ -19,13 +19,13 @@ import {MessagesService} from "../../services/messages.service";
 
 @Component({
 
-    templateUrl: 'app/components/comision/comision.component.alta.html',
+    templateUrl: 'comision-maestro.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision-alta'
 
 })
 
-export class ComisionComponentAlta extends CRUD<Comision, ComisionService, ComisionStore> {
+export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, ComisionStore> {
 
 
     protected onAfterCreate(entity: Comision): void {

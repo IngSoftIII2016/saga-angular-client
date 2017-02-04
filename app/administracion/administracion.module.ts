@@ -70,8 +70,8 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {PresentismoComponent} from "../components/presentismo/presentismo.component";
 import {SliderModule} from "primeng/components/slider/slider";
 import {ChartModule} from "primeng/components/chart/chart";
-import {ComisionComponentAlta} from "../components/comision/comision.component.alta";
-import {ComisionComponentDetalle} from "../components/comision/comision.component.detalle";
+import {ComisionComponentAlta} from "../components/comision/comision-maestro.component";
+import {ComisionComponentDetalle} from "../components/comision/comision-detalle.component";
 import {MessagesService} from "../services/messages.service";
 import {ParametrosService} from "../services/parametros.service";
 

@@ -11,8 +11,8 @@ import {Docente} from "../../entities/docente";
 import {CRUD} from "../../commons/crud";
 import {ComisionService} from "../../services/comision.service";
 import {RouterModule, Routes, Router} from '@angular/router';
-import {ComisionComponentDetalle} from "./comision.component.detalle";
-import {ComisionComponentAlta} from "./comision.component.alta";
+import {ComisionComponentDetalle} from "./comision-detalle.component";
+import {ComisionComponentAlta} from "./comision-maestro.component";
 
 
 @Component({
