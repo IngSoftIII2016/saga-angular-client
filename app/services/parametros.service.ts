@@ -20,7 +20,7 @@ export class ParametrosService extends GenericService<Parametro> {
     }
 
     protected getResourcePath(): string {
-        return 'Parametros';
+        return 'parametros';
     }
 
     public getDefaultQueryOptions() : QueryOptions {
