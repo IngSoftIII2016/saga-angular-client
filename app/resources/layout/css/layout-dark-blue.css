@@ -309,7 +309,7 @@
       font-size: 18px; }
     .dashboard .overview .overview-content .overview-badge {
       float: right;
-      color: #757575; }
+      color: #ffffff; }
     .dashboard .overview .overview-content .overview-detail {
       display: block;
       font-size: 24px;
@@ -377,7 +377,7 @@
     .dashboard .task-list ul .task-name {
       vertical-align: middle; }
     .dashboard .task-list ul i {
-      color: #757575;
+      color: #ffffff;
       float: right; }
 .dashboard .contact-form {
   overflow: hidden; }
@@ -424,7 +424,7 @@
           right: 10px;
           top: 30px;
           font-size: 14px;
-          color: #757575; }
+          color: #ffffff; }
         .dashboard .contacts ul li a:hover {
           cursor: pointer;
           background-color: #e8e8e8; }
@@ -456,7 +456,7 @@
       padding-left: 0; }
     .dashboard .activity-list li .ui-g-6:last-child {
       text-align: right;
-      color: #757575; }
+      color: #ffffff; }
 .dashboard .timeline {
   height: 100%;
   box-sizing: border-box; }
@@ -473,7 +473,7 @@
   .dashboard .timeline > .ui-g .ui-g-9 {
     padding-left: 1.5em; }
     .dashboard .timeline > .ui-g .ui-g-9 .event-text {
-      color: #757575;
+      color: #ffffff;
       font-size: 14px;
       display: block;
       padding-bottom: 20px; }
@@ -520,7 +520,7 @@
   font-size: 16px;
   width: 100%;
   text-align: center;
-  color: #757575; }
+  color: #ffffff; }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .login-body {
@@ -562,10 +562,10 @@
     .exception-body .exception-panel h1 {
       font-size: 36px;
       line-height: 36px;
-      color: #757575; }
+      color: #ffffff; }
     .exception-body .exception-panel .exception-detail {
       margin: 20px 0px 100px 0px;
-      color: #757575; }
+      color: #ffffff; }
   .exception-body .ui-button {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -662,7 +662,7 @@
   .landing-wrapper #features h3 {
     font-weight: 400; }
   .landing-wrapper #features p {
-    color: #757575; }
+    color: #ffffff; }
   .landing-wrapper #features .ui-g-12 {
     padding: 2em .5em; }
   .landing-wrapper #features .feature-icon {
@@ -705,7 +705,7 @@
       .landing-wrapper #promotion .ui-lg-4 .card h3 {
         font-weight: 400; }
       .landing-wrapper #promotion .ui-lg-4 .card p {
-        color: #757575; }
+        color: #ffffff; }
       .landing-wrapper #promotion .ui-lg-4 .card:last-child {
         margin-bottom: 0; }
 .landing-wrapper #pricing {
@@ -716,7 +716,7 @@
   .landing-wrapper #pricing h2 {
     font-weight: 400; }
   .landing-wrapper #pricing p {
-    color: #757575; }
+    color: #ffffff; }
   .landing-wrapper #pricing .pricing-box .card {
     height: 100%;
     padding: 0; }
@@ -771,7 +771,7 @@
     .landing-wrapper #video .video-content h2 {
       font-weight: 400; }
     .landing-wrapper #video .video-content p {
-      color: #757575; }
+      color: #ffffff; }
 .landing-wrapper .footer {
   background-color: #f7f7f7;
   border-top: 1px solid #dddddd; }
@@ -783,7 +783,7 @@
       float: right;
       list-style-type: none; }
       .landing-wrapper .footer .footer-content ul li a {
-        color: #757575;
+        color: #ffffff;
         -moz-transition: color 0.3s;
         -o-transition: color 0.3s;
         -webkit-transition: color 0.3s;
@@ -1249,7 +1249,7 @@ body {
   .layout-container .footer .footer-text-left {
     float: left; }
   .layout-container .footer .footer-text-right {
-    color: #757575;
+    color: #ffffff;
     float: right; }
     .layout-container .footer .footer-text-right span {
       vertical-align: middle;
