@@ -16,7 +16,7 @@ export class Clase implements Entity {
     horario: Horario = new Horario();
     aula: Aula = new Aula();
     comentario: string;
-    hora_llegada: string = '';
+    hora_llegada: string;
 
     constructor(value : Object = {}) {
         Object.assign(this, value);

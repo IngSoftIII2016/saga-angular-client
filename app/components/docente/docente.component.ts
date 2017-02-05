@@ -7,10 +7,7 @@ import {CRUD} from "../../commons/crud";
 import {DocenteService} from "../../services/docente.service";
 import {MessagesService} from "../../services/messages.service";
 
-/*class PrimeDocente implements Docente {
-    constructor(public id?, public nombre?, public apellido?) {}
-}
-*/
+
 @Component({
 	templateUrl: 'app/components/docente/docente.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
