@@ -76,7 +76,7 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         return ['accion.recurso']
     }
 
-    onOpenDialog(entity): void {
+    onOpenDialog(entity: AccionRol) {
         entity.rol = this.rol;
     }
 
