@@ -20,7 +20,7 @@ import {MessagesService} from "../../services/messages.service";
  */
 @Component({
 
-    templateUrl: 'comision-detalle.component.html',
+    templateUrl: 'app/components/comision/comision-detalle.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision-detalle'
 })

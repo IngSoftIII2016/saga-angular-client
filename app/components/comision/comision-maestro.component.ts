@@ -19,7 +19,7 @@ import {MessagesService} from "../../services/messages.service";
 
 @Component({
 
-    templateUrl: 'comision-maestro.component.html',
+    templateUrl: 'app/components/comision/comision-maestro.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'comision-alta'
 
@@ -33,8 +33,6 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
         super.onAfterCreate(entity);
         this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
     }
-
-
 
     asignaturas: SelectItem[] = [];
 

@@ -27,8 +27,8 @@ import {
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
-import {ComisionComponentAlta} from "../components/comision/comision-maestro.component";
-import {ComisionComponentDetalle} from "../components/comision/comision-detalle.component";
+import {ComisionMaestroComponent} from "../components/comision/comision-maestro.component";
+import {ComisionDetalleComponent} from "../components/comision/comision-detalle.component";
 
 const adminRoutes: Routes = [
     {
@@ -68,10 +68,10 @@ const adminRoutes: Routes = [
                 children: [
                     {
                         path: '',
-                        component: ComisionComponentAlta
+                        component: ComisionMaestroComponent
                     }, {
                         path: 'detalle/:id',
-                        component: ComisionComponentDetalle
+                        component: ComisionDetalleComponent
                     }
                 ]
             }, {

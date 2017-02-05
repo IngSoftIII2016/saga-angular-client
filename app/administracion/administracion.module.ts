@@ -7,7 +7,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-//noinspection TypeScriptCheckImport
 import {
     AsignaturaComponent,
     AsignaturaCarreraComponent,
@@ -65,14 +64,13 @@ import {AccionRolService} from "../services/accion-rol.service";
 import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.component";
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
-import {MultiSelectModule} from "primeng/components/multiselect/multiselect";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {PresentismoComponent} from "../components/presentismo/presentismo.component";
 import {SliderModule} from "primeng/components/slider/slider";
 import {ChartModule} from "primeng/components/chart/chart";
-import {ComisionComponentAlta} from "../components/comision/comision-maestro.component";
-import {ComisionComponentDetalle} from "../components/comision/comision-detalle.component";
 import {MessagesService} from "../services/messages.service";
+import {ComisionDetalleComponent} from "../components/comision/comision-detalle.component";
+import {ComisionMaestroComponent} from "../components/comision/comision-maestro.component";
 import {ParametrosService} from "../services/parametros.service";
 
 @NgModule({
@@ -121,8 +119,8 @@ import {ParametrosService} from "../services/parametros.service";
         AccionRolComponent,
         PresentismoComponent,
         PerfilComponent,
-        ComisionComponentAlta,
-        ComisionComponentDetalle,
+        ComisionDetalleComponent,
+        ComisionMaestroComponent,
         ParametrosComponent
     ],
     providers: [
@@ -145,7 +143,7 @@ import {ParametrosService} from "../services/parametros.service";
         AccionService,
         RolService,
         AccionRolService,
-        MessagesService, 
+        MessagesService,
         ParametrosService
     ]
 })

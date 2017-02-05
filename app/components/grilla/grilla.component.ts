@@ -307,8 +307,6 @@ export class GrillaComponent implements OnInit {
     }
 
     selectEvent(event) {
-        console.log('selectEvent');
-        console.log(event);
         switch (event.type) {
             case 'Clase':
                 this.claseSelected = this.eventToClase(event);
@@ -357,6 +355,8 @@ export class GrillaComponent implements OnInit {
     }
 
     eventToEvento(event: any): Evento {
+        console.log('eventToEvento');
+        console.log(event);
         let evento: Evento = new Evento(event.model);
         evento.aula = this.getAulaById(event.resourceId);
         evento.setFechaDate(event.start.toDate());
