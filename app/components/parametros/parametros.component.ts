@@ -35,7 +35,7 @@ export class ParametrosComponent extends CRUD<Parametro, ParametrosService, Para
     }
 
     protected getEntityReferencedLabel(entity): string {
-        return 'el parámetro ' + entity.clave  ;
+        return 'el parámetro ' + entity.clave;
     }
 
     protected getSearchFields(): string[] {

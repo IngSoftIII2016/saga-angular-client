@@ -30,12 +30,3 @@
     height: 35px;
     font:bold 11px "Arial";
 }
-
-.ui-growl-title {
-    padding: 4px 0 .5em 0!important;
-    display: inline-block!important;
-}
-
-.ui-growl-image {
-    display: inline-block!important;
-}
