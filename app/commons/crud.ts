@@ -222,7 +222,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return new Promise((resolve, reject) => {
             if (this.confirmCreate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea agregar ' + this.getEntityReferencedLabel(entity) + '?',
+                    message: '¿Está seguro que desea agregar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -236,7 +236,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return new Promise((resolve, reject) => {
             if (this.confirmUpdate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea modificar ' + this.getEntityReferencedLabel(entity) + '?',
+                    message: '¿Está seguro que desea modificar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -251,7 +251,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return new Promise((resolve, reject) => {
             if (this.confirmDelete && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿está seguro que desea eliminar ' + this.getEntityReferencedLabel(entity) + '?',
+                    message: '¿Está seguro que desea eliminar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
