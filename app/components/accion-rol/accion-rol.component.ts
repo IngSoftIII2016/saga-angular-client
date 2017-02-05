@@ -23,7 +23,9 @@ import {MessagesService} from "../../services/messages.service";
 export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, AccionRolStore> {
 
     roles: SelectItem[] = [];
+
     rol : Rol;
+
     acciones: SelectItem[] = [];
 
     metodoTabla = [];
@@ -46,14 +48,12 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
             self.rol = roles[0];
             self.filter('rol.id', self.rol.id);
         });
-
         this.accionService.getAll().subscribe(acciones => {
             self.acciones = acciones.map(accion => {
                     return { label: self.metodoTabla[accion.metodo] + ' de ' + accion.recurso, value: accion }
                 }
             )
         });
-
         this.metodoTabla['GET'] = 'Consulta';
         this.metodoTabla['POST'] = 'Alta';
         this.metodoTabla['PUT'] = 'Modificación';

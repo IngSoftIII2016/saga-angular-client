@@ -115,7 +115,6 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     ngOnInit() {
         super.ngOnInit();
-
         if(this.comision)
             this.filterComision(this.comision.id);
 
@@ -174,8 +173,6 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             this.diasFilter.push({label: this.es.dayNames[i], value: i});
         }
         this.diaFilter = self.diasFilter[0].value;
-
-
     }
 
     filterPeriodo(periodoId: number) {

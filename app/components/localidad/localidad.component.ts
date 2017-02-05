@@ -9,9 +9,6 @@ import {Sede} from "../../entities/sede";
 import {CRUD} from "../../commons/crud";
 import {MessagesService} from "../../services/messages.service";
 
-//class PrimeAsignatura implements Asignatura {
-//    constructor(public id?, public nombre?, public carrera?) {}
-//}
 
 @Component({
     templateUrl: 'app/components/localidad/localidad.component.html',

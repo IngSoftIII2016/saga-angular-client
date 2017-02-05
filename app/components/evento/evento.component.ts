@@ -81,9 +81,3 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
 
 }
-/**
- * Created by Federico on 17/11/2016.
- */
-/**
- * Created by Federico on 17/11/2016.
- */
