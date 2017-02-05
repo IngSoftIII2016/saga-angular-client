@@ -14,6 +14,7 @@ import {toMySQLDate} from "../../commons/utils";
 import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
 import {Message, SelectItem} from "primeng/components/common/api";
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
+import {MessagesService} from "../../services/messages.service";
 
 declare var moment: any;
 
@@ -72,8 +73,6 @@ export class GrillaComponent implements OnInit {
 
     scheduleHeader: any;
 
-    msgs: Message[] = [];
-
     eventSubscription: Subscription = null;
 
     buttonText = {
@@ -94,6 +93,7 @@ export class GrillaComponent implements OnInit {
     esHoy: boolean;
 
     constructor(private route: ActivatedRoute,
+                private messagesService: MessagesService,
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
                 private claseStore: ClaseStore,
@@ -222,14 +222,14 @@ export class GrillaComponent implements OnInit {
         this.claseStore.update(this.claseSelected).subscribe(editada => {
             this.schedule.refetchEvents();
             this.displayAulaDialog = false;
-            this.msgs.push(
+            this.messagesService.showMessage(
                 {
                     severity: 'success',
-                    summary: 'Modificida',
+                    summary: 'Modificada',
                     detail: 'Se ha modificado la clase de ' + this.claseSelected.horario.comision.asignatura.nombre + ' con exito!'
                 })
         }, error => {
-            this.msgs.push(
+            this.messagesService.showMessage(
                 {
                     severity: 'error',
                     summary: error.json().error.title,
@@ -245,14 +245,14 @@ export class GrillaComponent implements OnInit {
         this.eventoStore.update(this.eventoSelected).subscribe(editada => {
             this.schedule.refetchEvents();
             this.displayEventoDialog = false;
-            this.msgs.push(
+            this.messagesService.showMessage(
                 {
                     severity: 'success',
-                    summary: 'Modificido',
+                    summary: 'Modificado',
                     detail: 'Se ha modificado el evento ' + this.eventoSelected.motivo + ' con exito!'
                 })
         }, error => {
-            this.msgs.push(
+            this.messagesService.showMessage(
                 {
                     severity: 'error',
                     summary: error.json().error.title,

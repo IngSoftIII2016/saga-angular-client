@@ -58,12 +58,6 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
         return ['nombre' , 'capacidad', 'edificio.nombre', 'edificio.localidad.nombre']
     }
 
-    protected onSave(aula: Aula): Aula{
-        aula.ubicacion = null;
-        return aula;
-    }
-
-
 }
 /**
  * Created by Federico on 17/11/2016.

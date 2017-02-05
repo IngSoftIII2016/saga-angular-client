@@ -1,5 +1,8 @@
-<div class="layout-wrapper layout-compact">
 
+<div class="layout-wrapper layout-compact">
+    <div class="ContentSideSections">
+        <p-growl [value]="msgs" life=9000 sticky="true"></p-growl>
+    </div>
     <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
         <!-- Top Bar -->
@@ -55,7 +58,7 @@
         </div>
 
         <div [ngClass]="{'layout-main': true}">
-            <p-growl [value]="msgs" life=9000></p-growl>
+
             <router-outlet></router-outlet>
             <div class="footer">
                 <div class="card clearfix">

@@ -282,8 +282,8 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         this.messagesService.showMessage(
             {
                 severity: 'success',
-                summary: 'Guardada',
-                detail: 'Se modificado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
+                summary: 'Guardado',
+                detail: 'Se ha modificado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
             })
     }
 
@@ -299,7 +299,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
     protected showOkDeleteMessage(entity: E) {
         this.messagesService.showMessage({
                 severity: 'success',
-                summary: 'Exito',
+                summary: 'Borrado',
                 detail: 'Se ha eleminado ' + this.getEntityReferencedLabel(entity) + ' con exito!'
             })
     }
