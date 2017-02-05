@@ -70,7 +70,7 @@ export class PresentismoComponent {
                 return self.comisionService.query(qo);
             }).subscribe(comisiones => { //Actualizo las comisiones
             self.comisiones = comisiones.map(comision => {
-                return {label: comision.etiqueta(), value: comision};
+                return {label: comision.toString(), value: comision};
             });
             self.comision = self.comisiones[0].value;
             self.filtrarComision();

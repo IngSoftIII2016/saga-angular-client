@@ -7,4 +7,8 @@ export class Docente implements Entity {
     constructor(value : Object = {}) {
         Object.assign(this, value);
     }
+
+    public toString(): string {
+        return this.apellido + ', ' + this.nombre;
+    }
 }

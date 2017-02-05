@@ -38,13 +38,12 @@
         <div class="ui-grid-col-6">
             <div class="card">
                 <h1 class="centerText">Datos</h1>
-                <p-dataTable *ngIf="comision" #dt [value]="clases | async" selectionMode="single"
+                <p-dataTable *ngIf="comision" #dt [value]="clases | async"
                              [responsive]="true"  exportFilename="presentismo">
-                    <p-column field="aula.nombre" header="Aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
-                    <p-column field="fecha" header="Fecha" sortable="custom" (sortFunction)="sort($event)"></p-column>
-                    <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
-                    <p-column field="hora_llegada" header="Hora Llegada" sortable="custom" (sortFunction)="sort($event)"></p-column>
-                    <p-column field="comentario" header="Comentario" sortable="custom" (sortFunction)="sort($event)"></p-column>
+                    <p-column field="aula.nombre" header="Aula"></p-column>
+                    <p-column field="fecha" header="Fecha"></p-column>
+                    <p-column field="hora_inicio" header="Hora Inicio"></p-column>
+                    <p-column field="hora_llegada" header="Hora Llegada"></p-column>
                 </p-dataTable>
             </div>
         </div>

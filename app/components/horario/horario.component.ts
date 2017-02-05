@@ -134,7 +134,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
         this.comisionService.getAll().subscribe(comisiones => {
             self.comisiones = comisiones.map(comision => {
-                return {label: comision.etiqueta(), value: comision};
+                return {label: comision.toString(), value: comision};
             });
         });
 
@@ -149,7 +149,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             })
             .subscribe(comisiones => {
                 self.comisionesFilter = comisiones.map(comision => {
-                    return {label: comision.etiqueta(), value: comision.id};
+                    return {label: comision.toString(), value: comision.id};
                 });
                 self.comisionesFilter.unshift({label: 'Todas', value: null});
             });

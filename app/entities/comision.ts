@@ -14,7 +14,11 @@ export class Comision implements Entity {
         Object.assign(this, value);
     }
 
-    public etiqueta() {
-        return this.asignatura.nombre + ' ' + this.nombre + ', ' + this.periodo.descripcion;
+    public toString() {
+        return this.asignatura.nombre + ' ' + this.nombre;
+    }
+
+    public toFullString() {
+        return this + ', dictada por ' + this.docente + ', durante el periodo ' + this.periodo;
     }
 }
