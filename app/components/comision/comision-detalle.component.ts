@@ -32,6 +32,7 @@ export class ComisionDetalleComponent implements OnInit {
     periodos: SelectItem[] = [];
 
     docentes: SelectItem[] = [];
+
     error = '';
 
     asignaturasFilter: SelectItem[] = [];
