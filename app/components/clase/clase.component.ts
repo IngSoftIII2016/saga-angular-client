@@ -15,7 +15,7 @@ import {MessagesService} from "../../services/messages.service";
     templateUrl: 'app/components/clase/clase.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'clase',
-    providers:[ClaseStore,AulaService, ConfirmationService]
+    providers:[ClaseStore, AulaService, ConfirmationService]
 })
 export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
 
@@ -23,8 +23,11 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     aulas: SelectItem[] = [];
 
     fecha: Date;
+
     hora_inicio: Date;
+
     hora_fin: Date;
+
     es: any = CALENDAR_LOCALE_ES;
 
     constructor(private claseStore: ClaseStore,

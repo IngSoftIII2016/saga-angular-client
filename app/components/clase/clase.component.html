@@ -1,5 +1,4 @@
 <div class="ContentSideSections">
-    <p-growl [value]="msgs" life=3000></p-growl>
     <p-confirmDialog width="425" #cd>
         <footer>
             <button type="button" pButton class="no" icon="fa fa-close" label="No" (click)="cd.reject()"></button>
@@ -20,12 +19,6 @@
         <p-column field="hora_fin" header="Hora Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="horario.comision.asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="comentario" header="Comentario" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <footer>
-            <div class="ui-helper-clearfix" style="width:100%">
-                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
-                        label="Agregar"></button>
-            </div>
-        </footer>
     </p-dataTable>
     <p-paginator
             styleClass="ui-paginator-bottom"
