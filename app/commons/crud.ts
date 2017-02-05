@@ -226,7 +226,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
-                    reject: reject
+                    reject: null
                 });
             } else resolve(true);
         })
@@ -240,7 +240,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
-                    reject: reject
+                    reject: null
                 });
             } else resolve(true);
         })
@@ -255,7 +255,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: resolve,
-                    reject: reject
+                    reject: null
                 });
             } else resolve(true);
         })
