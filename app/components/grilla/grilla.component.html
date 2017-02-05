@@ -11,7 +11,7 @@
             <i></i>
         </div>
         <div class="ui-g-4 ui-xl-2 ui-lg-3 ui-md-4 ui-sm-12">
-            <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
+            <p-calendar [(ngModel)]="fechaCalendar" [locale]="es" dateFormat="dd/mm/yy"
                         readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)" [showIcon]="true">
             </p-calendar>
         </div>
