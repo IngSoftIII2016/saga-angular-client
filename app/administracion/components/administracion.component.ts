@@ -21,6 +21,10 @@ export class AdministracionComponent {
 
     layoutCompact: boolean = true;
 
+    topBarItemChange: boolean = false;
+
+    color: string = 'white';
+
     layoutMode: string = 'static';
 
     darkMenu: boolean = false;
@@ -36,6 +40,8 @@ export class AdministracionComponent {
     display_perfil : boolean;
 
     menuItems = [];
+
+
 
     msgs: Message[] = [];
 
@@ -78,8 +84,19 @@ export class AdministracionComponent {
     }
 
     logout(): void {
-        console.log('logout');
         this.authService.logout().subscribe(res => this.router.navigate(['/']));
+    }
+
+    topbar(): boolean {
+        this.colorChange();
+        return this.topBarItemChange = !this.topBarItemChange;
+    }
+
+    colorChange(){
+        if (this.color == 'white')
+            this.color= 'black';
+        else
+            this.color= 'white';
     }
 
     showPerfilDialog() : void {

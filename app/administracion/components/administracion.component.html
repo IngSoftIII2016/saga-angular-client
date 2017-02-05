@@ -8,37 +8,39 @@
         <!-- Top Bar -->
         <div>
             <perfil [usuario]="usuario" [displayDialog]="display_perfil"></perfil>
-
             <div class="topbar clearfix">
                 <div class="topbar-left">
                     <a [routerLink]="['/']" id="logo"></a>
                 </div>
-
                 <div class="topbar-right">
                     <a id="menu-button">
                         <i></i>
                     </a>
-
-                    <ul class="topbar-items fadeInDown animated">
+                    <a id="topbar-menu-button"  (click)="topbar()">
+                        <i class="material-icons" style="    cursor: pointer;"></i>
+                    </a>
+                    <ul class="topbar-items fadeInDown animated" [ngClass]="{'topbar-items-visible':topBarItemChange}">
                         <li>
-                            <a *ngIf="!isInvitado" (click)="logout()" href="#" class="ripplelink">
-                                <i style="color: white; font-size: 40px;" class="material-icons">power_settings_new</i>
+                            <a *ngIf="!isInvitado" (click)="logout()" href="#" class="ripplelink" style="cursor: pointer;">
+                                <i [ngStyle]="{'color':color}" style="font-size: 40px; " class="material-icons">power_settings_new</i>
+                                <span class="topbar-item-name">Salir</span>
                             </a>
                         </li>
                         <li>
-                            <a (click)="login()" class="ripplelink">
-                                <i style=" color: white; font-size: 40px;" class="material-icons">account_box</i>
+                            <a (click)="login()" class="ripplelink" style="cursor: pointer;">
+                                <i [ngStyle]="{'color':color}" style="font-size: 40px;" class="material-icons">account_box</i>
+                                <span class="topbar-item-name">Login</span>
                             </a>
                         </li>
                         <li>
-                            <a (click)="showPerfilDialog()" class="ripplelink">
-                                <i style=" color: white; font-size: 40px;" class="material-icons">settings</i>
+                            <a (click)="showPerfilDialog()" class="ripplelink" style="cursor: pointer;">
+                                <i [ngStyle]="{'color':color}" style="font-size: 40px;" class="material-icons">settings</i>
+                                <span class="topbar-item-name">Perfil</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-
             <!-- Menu -->
             <div class="layout-menu">
                 <div class="nano">
@@ -56,9 +58,7 @@
                 </div>
             </div>
         </div>
-
         <div [ngClass]="{'layout-main': true}">
-
             <router-outlet></router-outlet>
             <div class="footer">
                 <div class="card clearfix">
