@@ -1,181 +1,179 @@
-<div class="ui-g-12">
-    <div class="card">
-        <div class="ui-g-12 ui-grid-row">
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" (onChange)="onChangeEdificio($event)"
-                            [style]="{width : '100%'}">
+<div class="card">
+    <div class="ui-grid-row">
+        <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12">
+            <p-dropdown [options]="edificios" [(ngModel)]="edificioSelected" (onChange)="onChangeEdificio($event)"
+                        [style]="{'min-width' : '200px'}">
+            </p-dropdown>
+        </div>
+        <div class="ui-g-4 ui-xl-6 ui-lg-5 ui-md-4 ui-sm-12">
+            <input #gs type="text" class="grilla" pInputText placeholder="Buscar"
+                   (keyup)="search(gs.value); schedule.refetchEvents()">
+            <i></i>
+        </div>
+        <div class="ui-g-4 ui-xl-2 ui-lg-3 ui-md-4 ui-sm-12">
+            <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
+                        readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)" [showIcon]="true">
+            </p-calendar>
+        </div>
+    </div>
+    <timeline-day-schedule
+            #schedule
+            [header]="scheduleHeader"
+            [buttonText]="buttonText"
+            [resources]="obsResources"
+            [editable]="true"
+            [height]="500"
+            [defaultDate]="fechaCalendar"
+            [scrollTime]="scrollTime"
+            [hiddenDays]="[0]"
+            [locale]="es"
+            (onDayChanged)="getEvents($event)"
+            (onEventClick)="onEventClick($event)"
+            (onEventMouseover)="onEventMouseover($event)"
+            (onEventMouseout)="onEventMouseout($event)"
+            (onEventDragStart)="onEventDragStart($event)"
+            (onEventDragStop)="onEventDragStop($event)"
+            (onEventDrop)="onEventDrop($event)"
+            (onEventResizeStart)="onEventResizeStart($event)"
+            (onEventResizeStop)="onEventResizeStop($event)"
+            (onEventResize)="onEventResize($event)">
+    </timeline-day-schedule>
+</div>
+
+<!-- Dialgo de edicion de CLASES -->
+<p-dialog
+        header="{{'Clase de ' + claseSelected.horario.comision.asignatura.nombre + ' del ' + claseSelected.fecha}}"
+        [(visible)]="displayAulaDialog"
+        [responsive]="true"
+        showEffect="fade"
+        [modal]="true"
+        *ngIf="claseSelected"
+        (onAfterHide)="schedule.refetchEvents()">
+    <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
+            <div class="ui-grid-col-8">
+                <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
+                <p-dropdown [options]="aulasOptions" [(ngModel)]="claseSelected.aula" [filter]="true"
+                            id="clase-aula" class="ui-grid-col-12" [style]="{width : '100%' }">
                 </p-dropdown>
             </div>
-            <div class="ui-g-6 ui-md-6">
-                <input #gs type="text" class="grilla" pInputText size="50" placeholder="Buscar"
-                       (keyup)="search(gs.value); schedule.refetchEvents()">
-                <i></i>
-            </div>
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <p-calendar [(ngModel)]="fechaCalendar" [locale]="es"
-                            readonlyInput="readonlyInput" (onSelect)="schedule.gotoDate($event)" [showIcon]="true">
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar id="clase-fecha" readonlyInput="readonlyInput"
+                            [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
                 </p-calendar>
             </div>
         </div>
-        <timeline-day-schedule
-                #schedule
-                [header]="scheduleHeader"
-                [buttonText]="buttonText"
-                [resources]="obsResources"
-                [editable]="true"
-                [height]="500"
-                [defaultDate]="fechaCalendar"
-                [scrollTime]="scrollTime"
-                [hiddenDays]="[0]"
-                [locale]="es"
-                (onDayChanged)="getEvents($event)"
-                (onEventClick)="onEventClick($event)"
-                (onEventMouseover)="onEventMouseover($event)"
-                (onEventMouseout)="onEventMouseout($event)"
-                (onEventDragStart)="onEventDragStart($event)"
-                (onEventDragStop)="onEventDragStop($event)"
-                (onEventDrop)="onEventDrop($event)"
-                (onEventResizeStart)="onEventResizeStart($event)"
-                (onEventResizeStop)="onEventResizeStop($event)"
-                (onEventResize)="onEventResize($event)">
-        </timeline-day-schedule>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar [(ngModel)]="inicioSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
+                            id="clase-hora_inicio" readonlyInput="readonlyInput"></p-calendar>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-hora_fin">Hora Fin</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar [(ngModel)]="finSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
+                            id="clase-hora_fin" readonlyInput="readonlyInput"></p-calendar>
+            </div>
+        </div>
+        <div class="ui-grid-row">  <!-- *ngIf="esHoy" -->
+            <div class="ui-grid-col-4"><label>Asistencia Docente</label></div>
+            <div *ngIf="!llegadaSelected" class="ui-grid-col-8">
+                <div class="ui-grid-col-10">
+                    <label>Ausente</label>
+                </div>
+                <div class="ui-grid-col-2">
+                    <button type="button" class="guardar" pButton pTooltip="Agregar hora de llegada"
+                            tooltipPosition="bottom" icon="ui-icon-add-circle" (click)="createLlegada()"
+                            style="float: right">
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="llegadaSelected" class="ui-grid-col-8">
+                <div class="ui-grid-col-4"><label for="clase-hora_llegada">Hora Llegada</label></div>
+                <div class="ui-grid-col-4">
+                    <p-calendar [(ngModel)]="llegadaSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
+                                id="clase-hora_llegada" readonlyInput="readonlyInput"></p-calendar>
+                </div>
+
+                <div class="ui-grid-col-4">
+                    <button type="button" class="eliminar" pButton pTooltip="Marcar Ausente"
+                            tooltipPosition="bottom" icon="ui-icon-remove-circle" (click)="clearLlegada()"
+                            style="float: right">
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
+                    (click)="saveClase()">
+            </button>
+            <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
+                    (click)="cancel()">
+            </button>
+        </div>
+    </footer>
+</p-dialog>
 
-    <!-- Dialgo de edicion de CLASES -->
-    <p-dialog
-            header="{{'Clase de ' + claseSelected.horario.comision.asignatura.nombre + ' del ' + claseSelected.fecha}}"
-            [(visible)]="displayAulaDialog"
-            [responsive]="true"
-            showEffect="fade"
-            [modal]="true"
-            *ngIf="claseSelected"
-            (onAfterHide)="schedule.refetchEvents()">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
-                <div class="ui-grid-col-8">
-                    <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
-                    <p-dropdown [options]="aulasOptions" [(ngModel)]="claseSelected.aula" [filter]="true"
-                                id="clase-aula" class="ui-grid-col-12" [style]="{width : '100%' }">
-                    </p-dropdown>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar id="clase-fecha" readonlyInput="readonlyInput"
-                                [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
-                    </p-calendar>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar [(ngModel)]="inicioSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
-                                id="clase-hora_inicio" readonlyInput="readonlyInput"></p-calendar>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-hora_fin">Hora Fin</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar [(ngModel)]="finSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
-                                id="clase-hora_fin" readonlyInput="readonlyInput"></p-calendar>
-                </div>
-            </div>
-            <div class="ui-grid-row" >  <!-- *ngIf="esHoy" -->
-                <div class="ui-grid-col-4"><label>Asistencia Docente</label></div>
-                <div *ngIf="!llegadaSelected" class="ui-grid-col-8">
-                    <div class="ui-grid-col-10">
-                        <label>Ausente</label>
-                    </div>
-                    <div class="ui-grid-col-2">
-                        <button type="button" class="guardar" pButton pTooltip="Agregar hora de llegada"
-                                tooltipPosition="bottom" icon="ui-icon-add-circle" (click)="createLlegada()"
-                                style="float: right">
-                        </button>
-                    </div>
-                </div>
-                <div *ngIf="llegadaSelected" class="ui-grid-col-8">
-                    <div class="ui-grid-col-4"><label for="clase-hora_llegada">Hora Llegada</label></div>
-                    <div class="ui-grid-col-4">
-                        <p-calendar [(ngModel)]="llegadaSelected" [locale]="es" [timeOnly]="true" [hourFormat]="24"
-                                    id="clase-hora_llegada" readonlyInput="readonlyInput"></p-calendar>
-                    </div>
+<!-- Dialgo de edicion de EVENTOS -->
+<p-dialog [header]="eventoSelected.title" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
+          [modal]="true" *ngIf="eventoSelected" (onAfterHide)="schedule.refetchEvents()">
+    <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
 
-                    <div class="ui-grid-col-4">
-                        <button type="button" class="eliminar" pButton pTooltip="Marcar Ausente"
-                                tooltipPosition="bottom" icon="ui-icon-remove-circle" (click)="clearLlegada()"
-                                style="float: right">
-                        </button>
-                    </div>
-                </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
+            <div class="ui-grid-col-8">
+                <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
+                <p-dropdown id="evento-aula" [options]="aulasOptions" [(ngModel)]="eventoSelected.aula"
+                            [filter]="true"
+                            class="ui-grid-col-12" [style]="{width : '100%' }">
+                </p-dropdown>
             </div>
         </div>
-        <footer>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
-                        (click)="saveClase()">
-                </button>
-                <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
-                        (click)="cancel()">
-                </button>
-            </div>
-        </footer>
-    </p-dialog>
-
-    <!-- Dialgo de edicion de EVENTOS -->
-    <p-dialog [header]="eventoSelected.title" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
-              [modal]="true" *ngIf="eventoSelected" (onAfterHide)="schedule.refetchEvents()">
-        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
-                <div class="ui-grid-col-8">
-                    <!--<input pInputText id="aula" [(ngModel)]="eventSelected.aula.nombre"/>-->
-                    <p-dropdown id="evento-aula" [options]="aulasOptions" [(ngModel)]="eventoSelected.aula"
-                                [filter]="true"
-                                class="ui-grid-col-12" [style]="{width : '100%' }">
-                    </p-dropdown>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar id="evento-fecha" readonlyInput="readonlyInput"
-                                [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
-                    </p-calendar>
-                </div>
-            </div>
-            <!--
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
-                <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="eventSelected.start"/></div>
-            </div>
-            -->
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar id="evento-hora_inicio" [(ngModel)]="inicioSelected" [locale]="es"
-                                [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
-                </div>
-            </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="clase-hora_fin">Fecha Fin</label></div>
-                <div class="ui-grid-col-8">
-                    <p-calendar id="evento-hora_fin" [(ngModel)]="finSelected" [locale]="es"
-                                [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
-                </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar id="evento-fecha" readonlyInput="readonlyInput"
+                            [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
+                </p-calendar>
             </div>
         </div>
-        <footer>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
-                        (click)="saveEvento()">
-                </button>
-                <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
-                        (click)="cancel()">
-                </button>
+        <!--
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
+            <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="eventSelected.start"/></div>
+        </div>
+        -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar id="evento-hora_inicio" [(ngModel)]="inicioSelected" [locale]="es"
+                            [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
             </div>
-        </footer>
-    </p-dialog>
-</div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="clase-hora_fin">Fecha Fin</label></div>
+            <div class="ui-grid-col-8">
+                <p-calendar id="evento-hora_fin" [(ngModel)]="finSelected" [locale]="es"
+                            [hourFormat]="24" [timeOnly]="true" readonlyInput="readonlyInput"></p-calendar>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
+                    (click)="saveEvento()">
+            </button>
+            <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
+                    (click)="cancel()">
+            </button>
+        </div>
+    </footer>
+</p-dialog>

@@ -4919,8 +4919,7 @@ body .fc .fc-button-group .ui-icon-circle-triangle-e {
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
   /* Support for IE. */
-  font-feature-settings: 'liga';
-  margin-top: .25em; }
+  font-feature-settings: 'liga'; }
   body .fc .fc-button-group .ui-icon-circle-triangle-e:before {
     content: "play_circle_outline"; }
 body .fc .fc-button-group .ui-icon-circle-triangle-w {
@@ -4951,8 +4950,7 @@ body .fc .fc-button-group .ui-icon-circle-triangle-w {
   -moz-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  margin-top: .25em; }
+  transform: rotate(180deg); }
   body .fc .fc-button-group .ui-icon-circle-triangle-w:before {
     content: "play_circle_outline"; }
 body .fc .fc-button-group .ui-state-active {
@@ -5795,3 +5793,5 @@ body .ui-inplace .ui-inplace-display {
     background-color: #e8e8e8; }
 body .ui-terminal .ui-terminal-input {
   font-size: 16px; }
+
+/*# sourceMappingURL=theme-cyan.css.map */
