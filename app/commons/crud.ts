@@ -254,7 +254,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
                     message: '¿está seguro que desea eliminar ' + this.getEntityReferencedLabel(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
-                    accept: resolve,
+                    accept: () => resolve(true),
                     reject: null
                 });
             } else resolve(true);

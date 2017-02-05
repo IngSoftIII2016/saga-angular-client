@@ -92,9 +92,10 @@ export class ComisionDetalleComponent implements OnInit {
                 summary: 'Guardada',
                 detail: 'Se actualizaron los datos de la comision'
             })
+            this.router.navigate(['administracion','comisiones']);
         }, err => {
             this.messagesService.showMessage({
-                severity: 'failed',
+                severity: 'error',
                 summary: 'Error',
                 detail: 'No se pudo actualizar los datos de la comision.'
             });
@@ -108,15 +109,16 @@ export class ComisionDetalleComponent implements OnInit {
                 summary: 'Eliminada',
                 detail: 'Se elimino la comision.'
             })
+            this.router.navigate(['administracion','comisiones']);
         }, err => {
             let error = err.json().error;
             this.messagesService.showMessage({
-                severity: 'failed',
+                severity: 'error',
                 summary: error.title,
                 detail: 'No se pudo eliminar la comision. ' + error.detail
             })
         });
-        this.router.navigate(['administracion','comisiones']);
+
 
     }
 
