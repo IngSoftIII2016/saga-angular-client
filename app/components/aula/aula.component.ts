@@ -59,6 +59,3 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
     }
 
 }
-/**
- * Created by Federico on 17/11/2016.
- */
