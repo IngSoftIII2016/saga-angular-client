@@ -242,23 +242,52 @@ export class GrillaComponent implements OnInit {
         this.eventoSelected.setFechaDate(this.fechaSelected);
         this.eventoSelected.setHoraInicioDate(this.inicioSelected);
         this.eventoSelected.setHoraFinDate(this.finSelected);
-        this.eventoStore.update(this.eventoSelected).subscribe(editada => {
-            this.schedule.refetchEvents();
-            this.displayEventoDialog = false;
-            this.messagesService.showMessage(
-                {
-                    severity: 'success',
-                    summary: 'Modificado',
-                    detail: 'Se ha modificado el evento ' + this.eventoSelected.motivo + ' con exito!'
-                })
-        }, error => {
-            this.messagesService.showMessage(
-                {
-                    severity: 'error',
-                    summary: error.json().error.title,
-                    detail: error.json().error.detail
-                });
-        });
+        if (this.eventoSelected.id) {
+            this.eventoStore.update(this.eventoSelected).subscribe(editada => {
+                this.schedule.refetchEvents();
+                this.displayEventoDialog = false;
+                this.messagesService.showMessage(
+                    {
+                        severity: 'success',
+                        summary: 'Modificado',
+                        detail: 'Se ha modificado el evento ' + this.eventoSelected.motivo + ' con exito!'
+                    })
+            }, error => {
+                this.messagesService.showMessage(
+                    {
+                        severity: 'error',
+                        summary: error.json().error.title,
+                        detail: error.json().error.detail
+                    });
+            });
+        }else {
+            this.eventoStore.create(this.eventoSelected).subscribe(creado => {
+                this.schedule.refetchEvents();
+                this.displayEventoDialog = false;
+                this.messagesService.showMessage(
+                    {
+                        severity: 'success',
+                        summary: 'Creado',
+                        detail: 'Se ha creado el evento ' + this.eventoSelected.motivo + ' con exito!'
+                    })
+            }, error => {
+                this.messagesService.showMessage(
+                    {
+                        severity: 'error',
+                        summary: error.json().error.title,
+                        detail: error.json().error.detail
+                    });
+            });
+        }
+    }
+
+    addEvento() {
+        this.eventoSelected = new Evento();
+        this.eventoSelected.aula = this.aulasOptions[0].value;
+        this.fechaSelected = new Date();
+        this.inicioSelected = new Date();
+        this.finSelected = moment(this.inicioSelected).add(1, 'h').toDate();
+        this.displayEventoDialog = true;
     }
 
 
@@ -349,7 +378,7 @@ export class GrillaComponent implements OnInit {
             resourceId: clase.aula.id,
             start: moment(clase.fecha + ' ' + clase.hora_inicio),
             end: moment(clase.fecha + ' ' + clase.hora_fin),
-            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre ,
+            title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre,
             color: '#60bd31'
         }
     }

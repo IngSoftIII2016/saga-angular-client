@@ -1,3 +1,12 @@
 .match_event {
     box-shadow: 1px 4px 2px black;
 }
+
+#add-event-button {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    z-index: 1;
+    color: #ffffff;
+    background: #c20000;
+}

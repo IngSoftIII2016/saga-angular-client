@@ -38,7 +38,9 @@
             (onEventResizeStop)="onEventResizeStop($event)"
             (onEventResize)="onEventResize($event)">
     </timeline-day-schedule>
+    <button id="add-event-button" (click)="addEvento()" md-fab mdTooltip="Crear Evento"><md-icon>add</md-icon></button>
 </div>
+
 
 <!-- Dialgo de edicion de CLASES -->
 <p-dialog
@@ -126,7 +128,10 @@
 <p-dialog [header]="eventoSelected.title" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
           [modal]="true" *ngIf="eventoSelected" (onAfterHide)="schedule.refetchEvents()">
     <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
-
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="motivo">Motivo</label></div>
+            <div class="ui-grid-col-8"><input id="motivo" pInputText [(ngModel)]="eventoSelected.motivo" required/></div>
+        </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="clase-aula">Aula</label></div>
             <div class="ui-grid-col-8">

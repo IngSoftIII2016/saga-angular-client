@@ -42,6 +42,10 @@
                 <p-messages [value]="validaciones"></p-messages>
             </div>
             <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="motivo">Motivo*</label></div>
+                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="entity.motivo" required/></div>
+            </div>
+            <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas" [(ngModel)]="entity.aula"
@@ -69,10 +73,7 @@
                     <p-calendar  id="hora_fin" [(ngModel)]="hora_fin"  [timeOnly]="true" hourFormat="24"></p-calendar>
                 </div>
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="motivo">Motivo*</label></div>
-                <div class="ui-grid-col-8"><input pInputText id="motivo" [(ngModel)]="entity.motivo" required/></div>
-            </div>
+
         </div>
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

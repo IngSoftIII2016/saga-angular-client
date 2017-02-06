@@ -14,7 +14,7 @@ import {MessagesService} from "../../services/messages.service";
     selector: 'asignatura',
     providers: [AsignaturaStore, ConfirmationService]
 })
-export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, AsignaturaStore> {
+export class AsignaturaComponent extends CRUD<Asignatura, AsignaturaService, AsignaturaStore> {
 
     constructor(private asignaturaStore: AsignaturaStore,
                 messagesService: MessagesService,

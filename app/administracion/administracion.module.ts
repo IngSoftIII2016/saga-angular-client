@@ -6,6 +6,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {MdButtonModule, MdIconModule, MdTooltipModule} from '@angular/material';
 
 import {
     AsignaturaComponent,
@@ -57,7 +58,6 @@ import {HorarioService} from "../services/horario.service";
 import {LocalidadService} from "../services/localidad.service";
 import {PeriodoService} from "../services/periodo.service";
 import {SedeService} from "../services/sede.service";
-import {ConfirmationService} from "primeng/components/common/api";
 import {UsuarioService} from "../services/usuario.service";
 import {AccionService} from "../services/accion.service";
 import {AccionRolService} from "../services/accion-rol.service";
@@ -96,7 +96,10 @@ import {InputMaskModule} from "primeng/components/inputmask/inputmask";
         PasswordModule,
         SliderModule,
         ChartModule,
-        InputMaskModule
+        InputMaskModule,
+        MdButtonModule,
+        MdIconModule,
+        MdTooltipModule
 
     ],
     declarations: [

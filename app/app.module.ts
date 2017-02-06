@@ -33,6 +33,7 @@ import {AuthenticationService} from "./services/authentication.service";
 
 import {AppRoutingModule} from "./app-routing.module";
 import {AdministracionModule} from "./administracion/administracion.module";
+import {MaterialModule} from "@angular/material";
 
 @NgModule({
   imports: [
@@ -53,7 +54,9 @@ import {AdministracionModule} from "./administracion/administracion.module";
       ConfirmDialogModule,
       MessagesModule,
       RadioButtonModule,
-      PasswordModule
+      PasswordModule,
+      MaterialModule.forRoot(),
+
   ],
   declarations: [
       AppComponent,
