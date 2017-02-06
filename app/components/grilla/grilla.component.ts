@@ -170,7 +170,7 @@ export class GrillaComponent implements OnInit {
             ).combineLatest(self.searchTerms,
                 function (events, terms) {
                     return events.map(function (e) {
-                        if (terms.length > 0 && e.title.search(terms) != -1)
+                        if (terms.length > 0 && e.title.toLowerCase().search(terms.toLowerCase()) != -1)
                             e.color = '#7f0000';
                         return e;
                     });
