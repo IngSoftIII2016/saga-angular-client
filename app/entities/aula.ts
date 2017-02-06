@@ -3,7 +3,7 @@ import {Entity} from "../commons/entity";
 
 export class Aula implements Entity {
     id: number = null;
-    nombre: string = "";
+    nombre: string;
     capacidad: number = 20;
     ubicacion: number = 0;
     edificio: Edificio = new Edificio();
