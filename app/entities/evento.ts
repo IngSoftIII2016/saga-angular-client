@@ -14,7 +14,7 @@ export class Evento implements Entity {
     hora_inicio: string = '09:00:00';
     hora_fin: string = '10:00:00';
     aula: Aula = new Aula();
-    motivo: string = "";
+    motivo: string;
 
     constructor(value: Object = {}) {
         Object.assign(this, value);
