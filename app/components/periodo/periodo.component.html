@@ -18,8 +18,16 @@
             [rows]="10" [responsive]="true">
         <header><h2>Periodos</h2></header>
         <p-column field="descripcion" header="Descripción" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="fecha_inicio" header="Fecha Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="fecha_fin" header="Fecha Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="fecha_inicio" header="Fecha Inicio" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate="type">
+                <span>{{h.getFechaInicioDate() | date: 'dd/MM/yyyy'}}</span>
+            </template>
+        </p-column>
+        <p-column field="fecha_fin" header="Fecha Fin" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate="type">
+                <span>{{h.getFechaFinDate() | date: 'dd/MM/yyyy'}}</span>
+            </template>
+        </p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"

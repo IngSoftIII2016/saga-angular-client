@@ -41,7 +41,11 @@
                 <p-dataTable *ngIf="comision" #dt [value]="clases | async"
                              [responsive]="true"  exportFilename="presentismo">
                     <p-column field="aula.nombre" header="Aula"></p-column>
-                    <p-column field="fecha" header="Fecha"></p-column>
+                    <p-column field="fecha" header="Fecha">
+                        <template let-h="rowData" pTemplate="type">
+                            <span>{{h.getFechaDate() | date: 'dd/MM/yyyy'}}</span>
+                        </template>
+                    </p-column>
                     <p-column field="hora_inicio" header="Hora Inicio"></p-column>
                     <p-column field="hora_llegada" header="Hora Llegada"></p-column>
                 </p-dataTable>

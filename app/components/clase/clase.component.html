@@ -14,7 +14,11 @@
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
         <header><h2>Clases</h2></header>
         <p-column field="aula.nombre" header="Aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
-        <p-column field="fecha" header="Fecha" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="fecha" header="Fecha" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate="type">
+                <span>{{h.getFechaDate() | date: 'dd/MM/yyyy'}}</span>
+            </template>
+        </p-column>
         <p-column field="hora_inicio" header="Hora Inicio" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="hora_fin" header="Hora Fin" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="horario.comision.asignatura.nombre" header="Asignatura" sortable="custom" (sortFunction)="sort($event)"></p-column>
