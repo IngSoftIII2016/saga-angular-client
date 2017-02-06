@@ -4,7 +4,6 @@
         <div class="ui-grid-col-12" style="color: white; text-align: center"><h2>Comision:
             {{comision.asignatura.nombre}} {{comision.periodo.descripcion}}</h2></div>
     </div>
-
     <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="nombre">Nombre</label></div>
@@ -18,7 +17,6 @@
                 </p-dropdown>
             </div>
         </div>
-
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="asignatura">Asignatura*</label></div>
             <div class="ui-grid-col-8">
@@ -27,7 +25,6 @@
                 </p-dropdown>
             </div>
         </div>
-
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="periodo">Periodo*</label></div>
             <div class="ui-grid-col-8">
@@ -36,22 +33,15 @@
                 </p-dropdown>
             </div>
         </div>
-
         <div class="ui-grid-row">
             <div class="ui-dialog-buttonpane ui-helper-clearfix">
-
                 <button type="button" class="guardar" (click)="guardar()" pButton icon="fa-check"
                         label="Guardar"></button>
-
-
                 <button type="button" class="eliminar" (click)="borrar()" pButton icon="ui-icon-delete"
                         label="Eliminar"></button>
 
             </div>
         </div>
-
-
     </div>
-
 </div>
 <horarios *ngIf="comision" [comision]="comision" [filtersEnabled]="false"></horarios>

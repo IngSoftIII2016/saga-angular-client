@@ -21,7 +21,8 @@ import {MessagesService} from "../../services/messages.service";
 
     templateUrl: 'app/components/comision/comision-maestro.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-    selector: 'comision-alta'
+    selector: 'comision-alta',
+    providers:[ComisionStore, ConfirmationService]
 
 })
 
@@ -29,8 +30,8 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
 
 
     protected onAfterCreate(entity: Comision): void {
-        console.log("save id:"+entity.id);
         super.onAfterCreate(entity);
+        this.displayDialog = false;
         this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
     }
 
@@ -56,10 +57,11 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
 
     isInsert: boolean = false;
 
+    isVisibleMenssaje: boolean = false;
+
 
 
     protected onOpenDialog(entity): void {
-
         super.onOpenDialog(entity);
         if(!this.isInsert) {
             this.router.navigate(['detalle', entity.id], {relativeTo: this.route});
@@ -117,24 +119,6 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
             self.docentesFilter.unshift({label: 'Todos', value: null});
             self.docenteFilter = self.docentesFilter[0].value;
         });
-
-        /*
-         this.asignaturaService.getAll().subscribe(asignaturas => {
-         self.asignaturas = asignaturas.map(asignatura => {
-         return { label: asignatura.nombre, value: asignatura }
-         });
-         });
-         this.periodoService.getAll().subscribe(periodos => {
-         self.periodos = periodos.map(periodo => {
-         return { label: periodo.descripcion, value: periodo }
-         });
-         });
-         this.docenteService.getAll().subscribe(docentes => {
-         self.docentes = docentes.map(docente => {
-         return { label: docente.apellido + ', ' + docente.nombre, value: docente }
-         });
-         });
-         */
     }
 
     protected getDefaultNewEntity(): Comision {
@@ -150,7 +134,6 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
     }
 
     protected getEntityReferencedLabel(entity): string {
-        console.log(entity);
         return 'la comision ' + entity.nombre + ' para asignatura ' + entity.asignatura.nombre;
     }
 

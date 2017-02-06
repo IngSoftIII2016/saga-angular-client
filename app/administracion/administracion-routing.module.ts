@@ -104,10 +104,11 @@ const adminRoutes: Routes = [
             }, {
                 path: 'sedes',
                 component: SedeComponent
-            }, {
+            },{
                 path: 'parametros',
                 component: ParametrosComponent
             }
+
         ]
     },
 
