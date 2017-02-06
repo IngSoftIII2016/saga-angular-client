@@ -61,6 +61,18 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
     }
 
     protected resetPass(){
-        this.authenticationService.reset(this.entity.email).subscribe(result => console.log(result));
+        this.authenticationService.reset(this.entity.email).subscribe(result => {
+            this.messagesService.showMessage({
+                severity: 'success',
+                summary: 'Generada nueva contraseña',
+                detail: 'Se envio una nueva contraseña al correo del usuario'
+            })
+        }, err => {
+            this.messagesService.showMessage({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'No se pudo resetear la contraseña'
+            });
+        });
     }
 }	
