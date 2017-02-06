@@ -11,13 +11,13 @@ import {MessagesService} from "../../services/messages.service";
 	templateUrl: 'app/components/parametros/parametros.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
 	selector: 'parametros',
-	providers:[ParametrosStore]
+	providers:[ParametrosStore, ConfirmationService]
 })
 export class ParametrosComponent extends CRUD<Parametro, ParametrosService, ParametrosStore>{
 
 
     constructor(private parametrosStore: ParametrosStore,
-    private messageService: MessagesService,
+      messageService: MessagesService,
     private confirmationService: ConfirmationService) {
         super(parametrosStore, messageService, confirmationService); 
     }
