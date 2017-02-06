@@ -129,7 +129,6 @@ import {ParametrosService} from "../services/parametros.service";
         AulaService,
         CarreraService,
         ClaseService,
-        ConfirmationService,
         ComisionService,
         DocenteService,
         EdificioService,

@@ -19,10 +19,10 @@ import {MessagesService} from "../../services/messages.service";
  * Created by sandro on 30/1/2017.
  */
 @Component({
-
     templateUrl: 'app/components/comision/comision-detalle.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
-    selector: 'comision-detalle'
+    selector: 'comision-detalle',
+    providers: [ConfirmationService]
 })
 
 export class ComisionDetalleComponent implements OnInit {

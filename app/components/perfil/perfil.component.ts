@@ -6,7 +6,8 @@ import {UsuarioService} from "../../services/usuario.service";
 
 @Component({
     selector: 'perfil',
-    templateUrl: 'app/components/perfil/perfil.component.html'
+    templateUrl: 'app/components/perfil/perfil.component.html',
+    providers: [ConfirmationService]
 })
 
 export class PerfilComponent  {

@@ -2,11 +2,9 @@
  * Created by juan on 24/11/16.
  */
 import {Component} from '@angular/core';
-import {Message, ConfirmationService, SelectItem} from "primeng/components/common/api";
+import {ConfirmationService, SelectItem} from "primeng/components/common/api";
 import {AccionRol} from "../../entities/accion-rol";
 import {AccionService} from "../../services/accion.service";
-import {Accion} from "../../entities/accion";
-import {Subject} from "rxjs";
 import {RolService} from "../../services/rol.service";
 import {Rol} from "../../entities/rol";
 import {CRUD} from "../../commons/crud";
