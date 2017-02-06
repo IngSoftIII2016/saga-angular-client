@@ -17,7 +17,7 @@
             (onRowSelect)="onRowSelect($event)"
             [responsive]="true">
         <header><h2>Asignaturas</h2></header>
-        <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
+        <p-column field="nombre" header="Nombre" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <footer>
             <div class="ui-helper-clearfix" style="width:100%">
                 <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Agregar"></button>
