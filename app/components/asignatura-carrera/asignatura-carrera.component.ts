@@ -72,7 +72,7 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         });
         this.asignaturaService.getAll().subscribe(asignaturas => {
             self.asignaturas = asignaturas.map(asignatura => {
-                return {label: asignatura.nombre, value: asignatura.id}
+                return {label: asignatura.nombre, value: asignatura}
             });
         });
 
