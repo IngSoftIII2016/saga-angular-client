@@ -34,6 +34,10 @@ export class AsignaturaComponent  extends CRUD<Asignatura, AsignaturaService, As
         return 'la asignatura ' + entity.nombre ;
     }
 
+    protected getEntityName(entity): string {
+        return ' la asignatura ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre']
     }

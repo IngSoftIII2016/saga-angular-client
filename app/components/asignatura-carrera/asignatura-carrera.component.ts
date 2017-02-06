@@ -124,6 +124,10 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
             'anio']
     }
 
+    protected getEntityName(entity): string {
+        return ' el plan de estudio ' ;
+    }
+
     public filtrarCarrera() : void {
         this.filter('carrera.id', this.carrera.id);
     }

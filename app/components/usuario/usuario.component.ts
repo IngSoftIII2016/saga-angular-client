@@ -55,6 +55,9 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
     protected getEntityReferencedLabel(entity): string {
         return 'el usuario ' + entity.nombre + ' ' + entity.apellido;
     }
+    protected getEntityName(entity): string {
+        return ' el usuario ' ;
+    }
 
     protected getSearchFields(): string[] {
         return ['nombre_usuario' , 'nombre', 'apellido', 'email']

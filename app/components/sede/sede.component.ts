@@ -38,6 +38,10 @@ export class SedeComponent extends CRUD<Sede, SedeService, SedeStore>{
         return 'la sede ' + entity.nombre  ;
     }
 
+    protected getEntityName(entity): string {
+        return ' la sede ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre']
     }

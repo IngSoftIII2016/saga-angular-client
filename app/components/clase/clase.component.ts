@@ -60,6 +60,9 @@ export class ClaseComponent  extends CRUD<Clase, ClaseService, ClaseStore>{
     protected getEntityReferencedLabel(entity): string {
         return 'la clase del aula ' + entity.aula.nombre + ' con fecha ' + entity.getFechaString();
     }
+    protected getEntityName(entity): string {
+        return ' la clase ' ;
+    }
 
     protected getSearchFields(): string[] {
         return ['aula.nombre' , 'fecha', 'hora_inicio', 'hora_fin', 'comentario', 'horario.comision.asignatura.nombre']

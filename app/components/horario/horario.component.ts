@@ -101,7 +101,9 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             'duracion',
             'hora_inicio'];
     }
-
+    protected getEntityName(entity): string {
+        return ' el horario ' ;
+    }
     protected onOpenDialog(horario: Horario): void {
         this.hora_inicio = horario.getHoraInicioDate();
         this.duracion = horario.getDuracionDate();

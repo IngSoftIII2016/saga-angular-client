@@ -45,6 +45,10 @@ export class LocalidadComponent extends CRUD<Localidad, LocalidadService, Locali
         });
     }
 
+    protected getEntityName(entity): string {
+        return ' la localidad ' ;
+    }
+
     protected getEntityFromEvent(event: any): Localidad {
         return new Localidad(event.data);
     }

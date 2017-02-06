@@ -37,6 +37,10 @@ export class DocenteComponent extends CRUD<Docente, DocenteService, DocenteStore
         return 'el docente ' + entity.nombre + ' ' + entity.apellido + ' ';
     }
 
+    protected getEntityName(entity): string {
+        return ' el docente ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre', 'apellido']
     }

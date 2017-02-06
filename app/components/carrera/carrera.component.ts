@@ -56,6 +56,10 @@ export class CarreraComponent extends CRUD<Carrera, CarreraService, CarreraStore
         return 'la carrera ' + entity.nombre ;
     }
 
+    protected getEntityName(entity): string {
+        return ' la carrera ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre']
     }

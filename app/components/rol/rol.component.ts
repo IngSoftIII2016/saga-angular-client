@@ -29,6 +29,9 @@ export class RolComponent extends CRUD<Rol, RolService, RolStore> {
     protected getEntityReferencedLabel(entity): string {
         return 'el rol ' + entity.nombre  ;
     }
+    protected getEntityName(entity): string {
+        return ' el rol ' ;
+    }
 
     protected getSearchFields(): string[] {
         return ['nombre', 'descripcion']

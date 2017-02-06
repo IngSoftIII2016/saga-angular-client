@@ -74,6 +74,10 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         return ['accion.recurso']
     }
 
+    protected getEntityName(entity): string {
+        return ' el permiso ' ;
+    }
+
     onOpenDialog(entity: AccionRol) {
         entity.rol = this.rol;
     }

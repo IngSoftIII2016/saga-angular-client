@@ -52,6 +52,8 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
 
     protected abstract getEntityReferencedLabel(entity: E): string;
 
+    protected abstract getEntityName(entity: E): string;
+
     protected abstract getSearchFields(): string[];
 
     protected onSelect(entity: E): void {
@@ -222,7 +224,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return new Promise((resolve, reject) => {
             if (this.confirmCreate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿Está seguro que desea agregar ' + this.getEntityReferencedLabel(entity) + '?',
+                    message: '¿Está seguro que desea agregar ' + this.getEntityName(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -236,7 +238,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         return new Promise((resolve, reject) => {
             if (this.confirmUpdate && this.confirmService) {
                 this.confirmService.confirm({
-                    message: '¿Está seguro que desea modificar ' + this.getEntityReferencedLabel(entity) + '?',
+                    message: '¿Está seguro que desea modificar ' + this.getEntityName(entity) + '?',
                     header: 'Confirme',
                     icon: 'fa ui-icon-warning',
                     accept: () => resolve(true),
@@ -274,7 +276,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         this.messagesService.showMessage({
                 severity: 'error',
                 summary: err.title,
-                detail: 'No se ha podido agregar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
+                detail: 'No se ha podido agregar ' + this.getEntityName(entity) + ' debido a: ' + err.detail
             });
     }
 
@@ -292,7 +294,7 @@ export abstract class CRUD<E extends Entity, SV extends GenericService<E>, ST ex
         this.messagesService.showMessage({
                 severity: 'error',
                 summary: err.title,
-                detail: 'No se ha podido modificar ' + this.getEntityReferencedLabel(entity) + ' debido a: ' + err.detail
+                detail: 'No se ha podido modificar ' + this.getEntityName(entity) + ' debido a: ' + err.detail
             })
     }
 

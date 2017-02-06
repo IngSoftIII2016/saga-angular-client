@@ -51,6 +51,10 @@ export class EdificioComponent extends CRUD<Edificio, EdificioService, EdificioS
         return 'el edificio ' + entity.nombre + ' de la localidad de ' + entity.localidad.nombre + ' ';
     }
 
+    protected getEntityName(entity): string {
+        return ' el edificio ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre', 'localidad.nombre', 'localidad.sede.nombre']
     }

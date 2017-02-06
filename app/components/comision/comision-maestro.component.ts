@@ -137,6 +137,10 @@ export class ComisionMaestroComponent extends CRUD<Comision, ComisionService, Co
         return 'la comision ' + entity.nombre + ' para asignatura ' + entity.asignatura.nombre;
     }
 
+    protected getEntityName(entity): string {
+        return ' la comision ' ;
+    }
+
     protected getSearchFields(): string[] {
         return ['nombre', 'asignatura.nombre', 'periodo.descripcion', 'docente.nombre', 'docente.apellido']
     }

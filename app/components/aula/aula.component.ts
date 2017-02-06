@@ -53,6 +53,9 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
     protected getEntityReferencedLabel(entity): string {
         return 'el aula ' + entity.nombre ;
     }
+    protected getEntityName(entity): string {
+        return ' el aula ' ;
+    }
 
     protected getSearchFields(): string[] {
         return ['nombre' , 'capacidad', 'edificio.nombre', 'edificio.localidad.nombre']
