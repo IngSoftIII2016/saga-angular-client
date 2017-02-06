@@ -72,6 +72,7 @@ import {MessagesService} from "../services/messages.service";
 import {ComisionDetalleComponent} from "../components/comision/comision-detalle.component";
 import {ComisionMaestroComponent} from "../components/comision/comision-maestro.component";
 import {ParametrosService} from "../services/parametros.service";
+import {InputMaskModule} from "primeng/components/inputmask/inputmask";
 
 @NgModule({
     imports: [
@@ -94,7 +95,8 @@ import {ParametrosService} from "../services/parametros.service";
         RadioButtonModule,
         PasswordModule,
         SliderModule,
-        ChartModule
+        ChartModule,
+        InputMaskModule
 
     ],
     declarations: [
