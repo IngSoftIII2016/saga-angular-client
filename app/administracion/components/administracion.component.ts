@@ -1,7 +1,7 @@
 /**
  * Created by juan on 05/01/17.
  */
-import {Component, ElementRef} from "@angular/core";
+import {Component, ElementRef, ChangeDetectorRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/usuario";
 import {AuthenticationService} from "../../services/authentication.service";
@@ -47,7 +47,8 @@ export class AdministracionComponent {
         private router: Router,
         private el: ElementRef,
         private authService: AuthenticationService,
-        private messagesService: MessagesService
+        private messagesService: MessagesService,
+        private ref: ChangeDetectorRef
     ) {
     }
 
@@ -62,11 +63,12 @@ export class AdministracionComponent {
                 menuRecursos.unshift('Presentismo');
                 menuRecursos.unshift('Grilla');
             }else menuRecursos.push('Grilla');
-            menuRecursos.forEach(function(recurso) {
+            menuRecursos.forEach(function(recurso) { 
                 if(administracionMenuItems[recurso])
                     self.menuItems.push({recurso: recurso, path: administracionMenuItems[recurso]});
             });
             self.isInvitado = usuario.isInvitado();
+            self.ref.detectChanges();
         });
         this.authService.getUsuario().subscribe(res => res);
 
