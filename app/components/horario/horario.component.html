@@ -94,7 +94,7 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
-                    <label for="dia">Dia*</label>
+                    <label for="dia">Dia</label>
                 </div>
                 <div class="ui-grid-col-8">
                     <p-dropdown class="ui-grid-col-12" id="dia" [options]="dias" [(ngModel)]="entity.dia"
@@ -103,21 +103,21 @@
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio*</label></div>
+                <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="hora_inicio" [(ngModel)]="hora_inicio" [timeOnly]="true" hourFormat="24"></p-calendar>
+                    <p-calendar id="hora_inicio" [(ngModel)]="hora_inicio" [timeOnly]="true" hourFormat="24" required></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="duracion">Duracion*</label></div>
+                <div class="ui-grid-col-4"><label for="duracion">Hora Fin</label></div>
                 <div class="ui-grid-col-8">
-                    <p-calendar id="duracion" [(ngModel)]="duracion" [timeOnly]="true" hourFormat="24"></p-calendar>
+                    <p-calendar id="duracion" [(ngModel)]="hora_fin" [timeOnly]="true" hourFormat="24" required></p-calendar>
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
+                <div class="ui-grid-col-4"><label for="aula">Aula</label></div>
                 <div class="ui-grid-col-8">
-                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas"
+                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aulas" required
                                 [(ngModel)]="entity.aula" [filter]="true" [style]="{width : '100%' }">
                     </p-dropdown>
                 </div>

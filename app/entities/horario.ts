@@ -6,6 +6,8 @@ import {CALENDAR_LOCALE_ES} from "../commons/calendar-locale-es"
 import {parseMySQLDate, parseMySQLTime, toMySQLTime} from "../commons/utils";
 import {toHoraString} from "../commons/utils";
 
+declare var moment: any;
+
 export class Horario implements Entity {
     id: number = null;
     frecuencia_semanas: number = 1;
@@ -30,6 +32,14 @@ export class Horario implements Entity {
 
     public setHoraInicioDate(date: Date) {
         this.hora_inicio = toMySQLTime(date);
+    }
+
+    public getHoraFinDate(): Date {
+        return moment(this.getHoraInicioDate()).add(moment.duration(this.duracion)).toDate();
+    }
+
+    public setHoraFinDate(date: Date) {
+        this.setDuracionDate(moment(date).subtract(moment.duration(this.hora_inicio)));
     }
 
     public getDuracionDate(): Date {

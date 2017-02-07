@@ -15,6 +15,8 @@ import {QueryOptions} from "../../commons/generic.service";
 import {Comision} from "../../entities/comision";
 import {MessagesService} from "../../services/messages.service";
 
+declare var moment: any;
+
 
 @Component({
     templateUrl: 'app/components/horario/horario.component.html',
@@ -33,7 +35,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     hora_inicio: Date;
 
-    duracion: Date;
+    hora_fin: Date;
 
     es: any = CALENDAR_LOCALE_ES;
 
@@ -98,7 +100,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             'comision.periodo.descripcion',
             'aula.nombre',
             'aula.edificio.nombre',
-            'duracion',
+            'hora_fin',
             'hora_inicio'];
     }
     protected getEntityName(entity): string {
@@ -106,12 +108,12 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     }
     protected onOpenDialog(horario: Horario): void {
         this.hora_inicio = horario.getHoraInicioDate();
-        this.duracion = horario.getDuracionDate();
+        this.hora_fin = horario.getHoraFinDate();
     }
 
     protected onSave(horario: Horario): Horario {
         horario.setHoraInicioDate(this.hora_inicio);
-        horario.setDuracionDate(this.duracion);
+        horario.setHoraFinDate(this.hora_fin);
         return horario;
     }
 
