@@ -25,7 +25,10 @@ export class LoginComponent {
         this.loading = true;
         this.authService.login(this.model.username, this.model.password)
             .subscribe(result => {
-                this.router.navigate(['/']);
+                if(!result.isAdmin())
+                    this.router.navigate(['/']);
+                else
+                    this.router.navigate(['/administracion/parametros']);
             }, err => {
                 if (!err.json().error) {
                     this.error = 'No se puede establecer la conexión con el servidor.';
