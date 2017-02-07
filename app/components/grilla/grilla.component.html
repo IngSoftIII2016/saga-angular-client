@@ -16,7 +16,7 @@
             </p-calendar>
         </div>
     </div>
-    <timeline-day-schedule
+    <timeline-day-schedule id="schedule"
             #schedule
             [header]="scheduleHeader"
             [buttonText]="buttonText"
@@ -38,7 +38,9 @@
             (onEventResizeStop)="onEventResizeStop($event)"
             (onEventResize)="onEventResize($event)">
     </timeline-day-schedule>
-    <button id="add-event-button" (click)="addEvento()" md-fab mdTooltip="Crear Evento"><md-icon>add</md-icon></button>
+    <button id="add-event-button" (click)="addEvento()" md-fab pTooltip="Crear Evento" tooltipPosition="left">
+        <md-icon>add</md-icon>
+    </button>
 </div>
 
 

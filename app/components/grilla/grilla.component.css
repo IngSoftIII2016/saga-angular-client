@@ -2,11 +2,15 @@
     box-shadow: 1px 4px 2px black;
 }
 
+#schedule {
+    z-index: -1;
+}
+
 #add-event-button {
     position: absolute;
     bottom: 60px;
     right: 60px;
-    z-index: 1;
+    z-index: 3;
     color: #ffffff;
     background: #c20000;
 }
