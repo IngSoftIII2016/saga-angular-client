@@ -18,6 +18,10 @@ export class Usuario implements Entity {
         return !this.rol || this.rol.id == 1;
     }
 
+    isAdmin(): boolean {
+        return !this.rol || this.rol.id == 2;
+    }
+
     toString(): string {
         return `${this.nombre} (${this.rol.nombre})`;
     }
