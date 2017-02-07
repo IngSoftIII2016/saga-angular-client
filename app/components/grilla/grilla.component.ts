@@ -15,6 +15,7 @@ import {CALENDAR_LOCALE_ES} from '../../commons/calendar-locale-es';
 import {Message, SelectItem} from "primeng/components/common/api";
 import {TimelineDaySchedule} from "./timeline-day-schedule.component";
 import {MessagesService} from "../../services/messages.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 declare var moment: any;
 
@@ -97,7 +98,8 @@ export class GrillaComponent implements OnInit {
                 private edificioService: EdificioService,
                 private aulaService: AulaService,
                 private claseStore: ClaseStore,
-                private eventoStore: EventoStore) {
+                private eventoStore: EventoStore,
+                private authService: AuthenticationService) {
     }
 
     ngOnInit(): void {

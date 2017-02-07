@@ -47,7 +47,8 @@
             (onPageChange)="pageChange($event)">
     </p-paginator>
 
-    <p-dialog header="Permisos" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <p-dialog header="Permisos" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+              [style]="{'min-width': '400px'}">
         <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
             <div class="ui-grid-row">
                 <p-messages [value]="validaciones"></p-messages>

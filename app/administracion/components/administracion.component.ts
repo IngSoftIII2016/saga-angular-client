@@ -41,8 +41,6 @@ export class AdministracionComponent {
 
     menuItems = [];
 
-
-
     msgs: Message[] = [];
 
     constructor(

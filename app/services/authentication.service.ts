@@ -10,9 +10,11 @@ import {Usuario} from "../entities/usuario";
 export class AuthenticationService {
     jwtHelper: JwtHelper = new JwtHelper();
     public usuario: Observable<Usuario>;
+    public isInvitado: Observable<boolean>;
     private subjectUsuario = new Subject<Usuario>();
     constructor(private http: Http) {
         this.usuario = this.subjectUsuario.asObservable();
+        this.isInvitado = this.subjectUsuario.asObservable().map(user => user.isInvitado());
         this.getUsuario().subscribe(res => res);
     }
 
