@@ -8,9 +8,9 @@
         <!-- Top Bar -->
         <div>
             <perfil [usuario]="usuario" [displayDialog]="display_perfil"></perfil>
-            <div class="topbar clearfix">
+            <div class="topbar clearfix" [routerLink]="['/']" style="cursor: pointer">
                 <div class="topbar-left">
-                    <a [routerLink]="['/']" id="logo"></a>
+                    <a  id="logo"></a>
                 </div>
                 <div class="topbar-right">
                     <a id="menu-button">
