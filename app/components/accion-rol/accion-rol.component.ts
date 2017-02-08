@@ -11,6 +11,8 @@ import {CRUD} from "../../commons/crud";
 import {AccionRolService} from "../../services/accion-rol.service";
 import {AccionRolStore} from "../../services/accion-rol.store";
 import {MessagesService} from "../../services/messages.service";
+import {Accion} from "../../entities/accion";
+
 
 @Component({
     templateUrl: 'app/components/accion-rol/accion-rol.component.html',
@@ -59,7 +61,10 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     }
 
     protected getDefaultNewEntity(): AccionRol {
-        return new AccionRol();
+        return new AccionRol({
+            accion: this.acciones[0].value as Accion,
+            rol: this.rol
+        });
     }
 
     protected getEntityFromEvent(event: any): AccionRol {
@@ -67,7 +72,7 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     }
 
     protected getEntityReferencedLabel(entity): string {
-        return 'la acción ' + this.metodoTabla[entity.accion.metodo] + ' al rol ' + entity.rol.nombre;
+        return ' el permiso ' + this.metodoTabla[entity.accion.metodo] + ' al rol ' + entity.rol.nombre;
     }
 
     protected getSearchFields(): string[] {
@@ -78,9 +83,7 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         return ' el permiso ' ;
     }
 
-    onOpenDialog(entity: AccionRol) {
-        entity.rol = this.rol;
-    }
+
 
 
 }
