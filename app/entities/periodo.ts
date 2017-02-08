@@ -5,8 +5,8 @@ import {toMySQLDate} from "../commons/utils";
 export class Periodo implements Entity {
     id: number = null;
     fecha_inicio : string;
-    fecha_fin : string ;
-	descripcion: string;
+    fecha_fin : string;
+	descripcion: string = null;
 
 	constructor(value: Object = {}) {
 	    Object.assign(this, value);

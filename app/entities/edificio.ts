@@ -2,7 +2,7 @@ import {Localidad} from "./localidad";
 import {Entity} from "../commons/entity";
 export class Edificio implements Entity{
     id: number = null;
-    nombre: string;
+    nombre: string= null;
     localidad: Localidad = new Localidad();
 
     constructor(value: Object = {}) {

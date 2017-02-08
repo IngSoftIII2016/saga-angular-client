@@ -16,7 +16,7 @@ import {MessagesService} from "../../services/messages.service";
     templateUrl: 'app/components/usuario/usuario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'usuario',
-    providers: [UsuarioStore, ConfirmationService, RolService, AuthenticationService]
+    providers: [UsuarioStore, RolService, AuthenticationService, ConfirmationService]
 })
 export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore>{
 
@@ -32,7 +32,6 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
 
     ngOnInit() {
         super.ngOnInit();
-
         var sel = this;
         this.rolService.getAll().subscribe(roles => {
             sel.roles = roles.map(rol => {

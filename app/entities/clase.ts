@@ -10,13 +10,13 @@ import {toFechaString} from "../commons/utils";
 export class Clase implements Entity {
 
     id: number = null;
-    fecha: string;
+    fecha: string= null;
     hora_inicio: string = '09:00:00';
     hora_fin: string = '10:00:00';
     horario: Horario = new Horario();
     aula: Aula = new Aula();
     comentario: string;
-    hora_llegada: string;
+    hora_llegada: string= null;
 
     constructor(value : Object = {}) {
         Object.assign(this, value);

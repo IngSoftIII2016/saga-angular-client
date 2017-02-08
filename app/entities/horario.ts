@@ -14,7 +14,7 @@ export class Horario implements Entity {
     dia: number = 1;
     hora_inicio: string = '09:00:00';
     duracion: string = '01:00:00';
-    descripcion: string = "";
+    descripcion: string = null;
     comision: Comision = new Comision();
     aula: Aula = new Aula();
 

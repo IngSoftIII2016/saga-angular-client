@@ -2,11 +2,11 @@ import {Entity} from "../commons/entity";
 import {Rol} from "./rol";
 export class Usuario implements Entity {
     id: number = null;
-    nombre_usuario: string;
-    nombre: string = "";
-    apellido: string = "";
-    email: string = "";
-    contrasenia: string = "";
+    nombre_usuario: string= null;
+    nombre: string= null;
+    apellido: string= null;
+    email: string= null;
+    contrasenia: string;
     estado: number = 1;
     rol: Rol = new Rol();
 

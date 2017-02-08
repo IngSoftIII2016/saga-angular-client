@@ -7,8 +7,8 @@ import {Carrera} from "./carrera";
 export class AsignaturaCarrera implements Entity {
 
     id: number = null;
-    anio: number = 1;
-    regimen: string;
+    anio: number = 0;
+    regimen: string= null;
     asignatura: Asignatura = new Asignatura();
     carrera: Carrera = new Carrera();
 
