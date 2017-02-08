@@ -60,7 +60,7 @@ export class AdministracionComponent {
             if(!usuario.isInvitado()) {
                 menuRecursos = getUnique(usuario.rol.acciones.map(accion => accion.recurso));
                 if(!usuario.isAdmin()) {
-                    menuRecursos.unshift('Precentismo');
+                    menuRecursos.unshift('Presentismo');
                     menuRecursos.unshift('Grilla');
                 }
             } else {
