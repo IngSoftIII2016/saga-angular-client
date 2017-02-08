@@ -3,7 +3,7 @@ import {Accion} from "./accion";
 
 export class Rol implements Entity {
     id: number = null;
-    nombre: string;
+    nombre: string = null;
 
     acciones: Accion[] = [];
 
