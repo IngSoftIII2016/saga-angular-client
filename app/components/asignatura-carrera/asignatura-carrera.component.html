@@ -52,7 +52,12 @@
         <!--<p-column field="carrera.nombre" header="Carrera" sortable="custom" (sortFunction)="sort($event)"></p-column>-->
         <p-column field="asignatura.nombre" header="Asignatura" sortable="custom"
                   (sortFunction)="sort($event)"></p-column>
-        <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <!-- <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)"></p-column> -->
+        <p-column field="anio" header="Año" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate="type">
+                <span>{{anioTabla[h.anio]}}</span>
+            </template>
+        </p-column>
         <p-column field="regimen" header="Regimen" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate="type">
                 <span>{{regimenesTabla[h.regimen]}}</span>

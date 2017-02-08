@@ -44,6 +44,8 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
 
     anioFiltro = String;
 
+    anioTabla = [];
+
     constructor(private asignaturaCarreraStore: AsignaturaCarreraStore,
                 private carreraService: CarreraService,
                 private asignaturaService: AsignaturaService,
@@ -63,6 +65,16 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
     ngOnInit() {
         super.ngOnInit();
         let self = this;
+
+        this.anioTabla['1'] = '1° año';
+        this.anioTabla['2'] = '2° año';
+        this.anioTabla['3'] = '3° año';
+        this.anioTabla['4'] = '4° año';
+        this.anioTabla['5'] = '5° año';
+        this.anioTabla['6'] = '6° año';
+        this.anioTabla['7'] = '7° año';
+        this.anioTabla['8'] = '8° año';
+
         this.carreraService.getAll().subscribe(carreras => {
             self.carreras = carreras.map(carrera => {
                 return {label: carrera.nombre, value: carrera}
