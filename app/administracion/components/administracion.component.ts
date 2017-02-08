@@ -86,7 +86,7 @@ export class AdministracionComponent {
     }
 
     logout(): void {
-        this.authService.logout().subscribe(res => this.router.navigate(['/']));
+        this.authService.logout().subscribe(res => this.router.navigate(['../login']));
     }
 
     topbar(): boolean {
