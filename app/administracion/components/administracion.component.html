@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li>
-                            <a (click)="login()" class="ripplelink" style="cursor: pointer;">
+                            <a *ngIf="isInvitado" (click)="login()" class="ripplelink" style="cursor: pointer;">
                                 <i [ngStyle]="{'color':color}" style="font-size: 40px;" class="material-icons">account_box</i>
                                 <span class="topbar-item-name">Login</span>
                             </a>

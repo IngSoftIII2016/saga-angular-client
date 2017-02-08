@@ -59,9 +59,13 @@ export class AdministracionComponent {
             let menuRecursos = [];
             if(!usuario.isInvitado()) {
                 menuRecursos = getUnique(usuario.rol.acciones.map(accion => accion.recurso));
-            } else
+                if(!usuario.isAdmin()) {
+                    menuRecursos.unshift('Presentismo');
+                    menuRecursos.unshift('Grilla');
+                }
+            } else {
                 menuRecursos.unshift('Grilla');
-
+            }
             menuRecursos.forEach(function(recurso) {
                 if(administracionMenuItems[recurso])
                     self.menuItems.push({recurso: recurso, path: administracionMenuItems[recurso]});
@@ -82,7 +86,7 @@ export class AdministracionComponent {
     }
 
     logout(): void {
-        this.authService.logout().subscribe(res => this.router.navigate(['/']));
+        this.authService.logout().subscribe(res => this.router.navigate(['../login']));
     }
 
     topbar(): boolean {
