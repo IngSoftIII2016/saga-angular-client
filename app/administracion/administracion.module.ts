@@ -73,6 +73,11 @@ import {ComisionDetalleComponent} from "../components/comision/comision-detalle.
 import {ComisionMaestroComponent} from "../components/comision/comision-maestro.component";
 import {ParametrosService} from "../services/parametros.service";
 import {InputMaskModule} from "primeng/components/inputmask/inputmask";
+import {TipoRecursoComponent} from "../components/tipo-recurso/tipo-recurso.component";
+import {RecursoService} from "../services/recurso.service";
+import {TipoRecursoService} from "../services/tipo-recurso.service";
+import {RecursoComponent} from "../components/recurso/recurso.component";
+import {ToggleButtonModule} from "primeng/components/togglebutton/togglebutton";
 
 @NgModule({
     imports: [
@@ -84,6 +89,7 @@ import {InputMaskModule} from "primeng/components/inputmask/inputmask";
         DataTableModule,
         ButtonModule,
         DialogModule,
+        ToggleButtonModule,
         DropdownModule,
         TooltipModule,
         ScheduleModule,
@@ -126,7 +132,9 @@ import {InputMaskModule} from "primeng/components/inputmask/inputmask";
         PerfilComponent,
         ComisionDetalleComponent,
         ComisionMaestroComponent,
-        ParametrosComponent
+        ParametrosComponent,
+        RecursoComponent,
+        TipoRecursoComponent
     ],
     providers: [
         AsignaturaService,
@@ -148,7 +156,9 @@ import {InputMaskModule} from "primeng/components/inputmask/inputmask";
         RolService,
         AccionRolService,
         MessagesService,
-        ParametrosService
+        ParametrosService,
+        RecursoService,
+        TipoRecursoService
     ]
 })
 export class AdministracionModule {}

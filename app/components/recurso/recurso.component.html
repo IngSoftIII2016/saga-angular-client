@@ -1,0 +1,92 @@
+<div class="ContentSideSections">
+    <p-confirmDialog icon="fa fa-question-circle" width="425" #cd>
+        <footer>
+            <button type="button" pButton class="no" icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton class="yes" icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+        </footer>
+    </p-confirmDialog>
+</div>
+<div class="ContentSideSections Implementation">
+    <div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+        <input #gb type="text" pInputText size="50" style="float:right; color: white; max-width: 300px" placeholder="Buscar" (keyup)="search(gb.value)">
+    </div>
+    <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
+                 (onRowSelect)="onRowSelect($event)" [responsive]="true">
+        <header><h2>Recursos</h2></header>
+        <p-column field="aula.nombre" header="Aula" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="tipo_recurso.nombre" header="Tipo" sortable="custom" (sortFunction)="sort($event)"></p-column>
+        <p-column field="disponible" header="Disponible" sortable="custom" (sortFunction)="sort($event)">
+            <template let-h="rowData" pTemplate="type">
+                <span>{{disponibleTabla[h.disponible]}}</span>
+            </template>
+        </p-column>
+        <p-column field="detalles" header="Detalles" sortable="custom" (sortFunction)="sort($event)"></p-column>
+
+        <footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()"
+                        label="Agregar"></button>
+            </div>
+        </footer>
+    </p-dataTable>
+
+    <p-paginator
+            styleClass="ui-paginator-bottom"
+            rows="10"
+            totalRecords="{{store.service.totalRows | async}}"
+            [rowsPerPageOptions]="[5,10,20]"
+            (onPageChange)="pageChange($event)">
+    </p-paginator>
+    <p-dialog header="Recurso" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="entity">
+            <div class="ui-grid-row">
+                <p-messages [value]="validaciones"></p-messages>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="aula">Aula*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="aula" [options]="aula"
+                                [(ngModel)]="entity.aula" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="tipo">Tipo*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-dropdown class="ui-grid-col-12" id="tipo" [options]="tipo"
+                                [(ngModel)]="entity.tipo_recurso" [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+                </div>
+            </div>
+
+
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="disponible">Disponible*</label></div>
+                <div class="ui-grid-col-8">
+                    <p-toggleButton onLabel="Si" offLabel="No"  id="disponible" [(ngModel)]="entity.disponible"></p-toggleButton>
+                </div>
+            </div>
+
+
+
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4"><label for="detalles">Detalle</label></div>
+                <div class="ui-grid-col-8"><input pInputText type="text" id="detalles" [(ngModel)]="entity.detalles" /></div>
+            </div>
+
+
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" class="guardar" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+                <button *ngIf="!isNew" type="button" class="eliminar" pButton icon="ui-icon-delete" (click)="delete()"
+                        label="Eliminar"></button>
+            </div>
+        </footer>
+
+    </p-dialog>
+</div>

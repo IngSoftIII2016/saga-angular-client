@@ -29,6 +29,8 @@ import {AuthGuard} from "../guards/auth.guard";
 import {AdministracionComponent} from "./components/administracion.component";
 import {ComisionMaestroComponent} from "../components/comision/comision-maestro.component";
 import {ComisionDetalleComponent} from "../components/comision/comision-detalle.component";
+import {TipoRecursoComponent} from "../components/tipo-recurso/tipo-recurso.component";
+import {RecursoComponent} from "../components/recurso/recurso.component";
 
 const adminRoutes: Routes = [
     {
@@ -107,7 +109,15 @@ const adminRoutes: Routes = [
             },{
                 path: 'parametros',
                 component: ParametrosComponent
+            },{
+                path: 'tipos-recursos',
+                component: TipoRecursoComponent
+            },
+            {
+                path: 'recursos',
+                component: RecursoComponent
             }
+
 
         ]
     },
