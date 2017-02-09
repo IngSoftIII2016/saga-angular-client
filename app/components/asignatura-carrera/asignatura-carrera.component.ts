@@ -145,22 +145,4 @@ export class AsignaturaCarreraComponent extends CRUD<AsignaturaCarrera, Asignatu
         this.filter('carrera.id', this.carrera.id);
     }
 
-    public verificarAnio(entity : AsignaturaCarrera) : void {
-        let error= false;
-        if(entity.anio  < 1){
-            error = true;
-            entity.anio = 1;
-        }
-        else if(entity.anio  > 6){
-            entity.anio = 6;
-            error = true;
-        }
-        if (error)
-            this.messagesService.showMessage({
-                severity: 'error',
-                summary: 'El año no esta admitido',
-                detail: 'Ingrese un valor entre 1 y 6 incluido '
-            });
-    }
-
-}
+ }
