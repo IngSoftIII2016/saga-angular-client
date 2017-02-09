@@ -73,7 +73,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4"><label for="email">Email*</label></div>
                 <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="entity.email"
-                                                  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"/></div>
+                                                  pattern="(\W|^)[\w.+\-]*@unrn\.edu\.ar(\W|$)"/></div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
