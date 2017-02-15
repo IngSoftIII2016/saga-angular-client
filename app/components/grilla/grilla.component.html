@@ -147,7 +147,7 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="clase-fecha">Fecha</label></div>
             <div class="ui-grid-col-8">
-                <p-calendar id="evento-fecha" readonlyInput="readonlyInput"
+                <p-calendar id="evento-fecha" [minDate]="fecha_min" readonlyInput="readonlyInput"
                             [(ngModel)]="fechaSelected" [locale]="es" dateFormat="dd/mm/yy">
                 </p-calendar>
             </div>
