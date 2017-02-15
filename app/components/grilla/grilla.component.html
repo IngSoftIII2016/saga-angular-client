@@ -38,7 +38,7 @@
             (onEventResizeStop)="onEventResizeStop($event)"
             (onEventResize)="onEventResize($event)">
     </timeline-day-schedule>
-    <button *ngIf="esPasado" *ngIf="!isInvitado" id="add-event-button" (click)="addEvento()" md-fab pTooltip="Crear Evento" tooltipPosition="left">
+    <button *ngIf="esPasado && !isInvitado"  id="add-event-button" (click)="addEvento()" md-fab pTooltip="Crear Evento" tooltipPosition="left">
         <md-icon>add</md-icon>
     </button>
 </div>

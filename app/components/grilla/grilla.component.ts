@@ -95,6 +95,8 @@ export class GrillaComponent implements OnInit {
 
     esHoy: boolean;
 
+    esPasado: boolean;
+
     isInvitado: boolean = true;
 
     constructor(private route: ActivatedRoute,
@@ -165,8 +167,7 @@ export class GrillaComponent implements OnInit {
             .subscribe(fecha => {
                 this.fechaCalendar = fecha;
                 this.esHoy = moment().isSame(this.fechaCalendar, 'day');
-                this.esPasado = (new Date < this.fechaCalendar) || this.esHoy;
-                console.log(this.esPasado);
+                this.esPasado = (new Date < this.fechaCalendar) || this.esHoy;;
             });
 
         this.events = this.claseStore.items
