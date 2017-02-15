@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a (click)="showPerfilDialog()" class="ripplelink" style="cursor: pointer;">
+                            <a *ngIf="!isInvitado" (click)="showPerfilDialog()" class="ripplelink" style="cursor: pointer;">
                                 <i [ngStyle]="{'color':color}" style="font-size: 40px;" class="material-icons">settings</i>
                                 <span class="topbar-item-name">Perfil</span>
                             </a>

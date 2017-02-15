@@ -93,6 +93,8 @@ export class GrillaComponent implements OnInit {
 
     esHoy: boolean;
 
+    isInvitado: boolean = true;
+
     constructor(private route: ActivatedRoute,
                 private messagesService: MessagesService,
                 private edificioService: EdificioService,
@@ -105,6 +107,8 @@ export class GrillaComponent implements OnInit {
     ngOnInit(): void {
 
         var self = this;
+
+        this.authService.isInvitado.subscribe(isInvitado => self.isInvitado = isInvitado);
 
         //this.scrollTime = new Date(Date.now()).toTimeString().split(' ')[0];
         this.defaultDate = moment({h: 0, m: 0, s: 0, ms: 0}).utc();
@@ -202,6 +206,8 @@ export class GrillaComponent implements OnInit {
             })
 
         this.edificio.subscribe(edificio => self.edificioSelected = edificio);
+
+
 
     }
 

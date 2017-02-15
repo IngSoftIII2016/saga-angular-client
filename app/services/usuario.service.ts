@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response, RequestMethod, Request} from '@angular/http';
+import {Http, Response, RequestMethod, Request} from '@angular/http';
 
 import 'rxjs/add/operator/map'
 import {GenericService, QueryOptions} from "../commons/generic.service";
 import {Usuario} from "../entities/usuario";
-import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {AuthenticationService} from "./authentication.service";
 

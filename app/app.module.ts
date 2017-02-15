@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID } from '@angular/core';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 
+import 'hammerjs';
+
 
 import {
     InputTextModule,

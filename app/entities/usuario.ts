@@ -19,7 +19,7 @@ export class Usuario implements Entity {
     }
 
     isAdmin(): boolean {
-        return !this.rol || this.rol.id == 2;
+        return this.rol != null && this.rol.id == 2;
     }
 
     toString(): string {

@@ -21,7 +21,7 @@
             [header]="scheduleHeader"
             [buttonText]="buttonText"
             [resources]="obsResources"
-            [editable]="true"
+            [editable]="!isInvitado"
             [height]="500"
             [defaultDate]="fechaCalendar"
             [scrollTime]="scrollTime"
@@ -38,7 +38,7 @@
             (onEventResizeStop)="onEventResizeStop($event)"
             (onEventResize)="onEventResize($event)">
     </timeline-day-schedule>
-    <button id="add-event-button" (click)="addEvento()" md-fab pTooltip="Crear Evento" tooltipPosition="left">
+    <button *ngIf="!isInvitado" id="add-event-button" (click)="addEvento()" md-fab pTooltip="Crear Evento" tooltipPosition="left">
         <md-icon>add</md-icon>
     </button>
 </div>
@@ -46,7 +46,7 @@
 
 <!-- Dialgo de edicion de CLASES -->
 <p-dialog
-        header="{{'Clase de ' + claseSelected.horario.comision.asignatura.nombre + ' del ' + claseSelected.fecha}}"
+        header="{{'CLASE: ' + claseSelected.horario.comision.asignatura.nombre }}"
         [(visible)]="displayAulaDialog"
         [responsive]="true"
         showEffect="fade"
@@ -85,7 +85,7 @@
                             id="clase-hora_fin" readonlyInput="readonlyInput"></p-calendar>
             </div>
         </div>
-        <div class="ui-grid-row">  <!-- *ngIf="esHoy" -->
+        <div class="ui-grid-row" *ngIf="esHoy && !isInvitado">  <!--  -->
             <div class="ui-grid-col-4"><label>Asistencia Docente</label></div>
             <div *ngIf="!llegadaSelected" class="ui-grid-col-8">
                 <div class="ui-grid-col-10">
@@ -114,9 +114,9 @@
             </div>
         </div>
     </div>
-    <footer>
+    <footer *ngIf="!isInvitado">
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
+            <button  type="button" class="guardar" pButton icon="fa-check" label="Guardar"
                     (click)="saveClase()">
             </button>
             <button type="button" class="eliminar" pButton icon="ui-icon-cancel" label="Cancelar"
@@ -127,7 +127,7 @@
 </p-dialog>
 
 <!-- Dialgo de edicion de EVENTOS -->
-<p-dialog [header]="eventoSelected.title" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
+<p-dialog [header]="eventoSelected.motivo" [(visible)]="displayEventoDialog" [responsive]="true" showEffect="fade"
           [modal]="true" *ngIf="eventoSelected" (onAfterHide)="schedule.refetchEvents()">
     <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
         <div class="ui-grid-row">
@@ -152,12 +152,6 @@
                 </p-calendar>
             </div>
         </div>
-        <!--
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="hora_inicio">Hora Inicio</label></div>
-            <div class="ui-grid-col-8"><input type="time" id="hora_inicio" [(ngModel)]="eventSelected.start"/></div>
-        </div>
-        -->
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="clase-hora_inicio">Hora Inicio</label></div>
             <div class="ui-grid-col-8">
@@ -173,7 +167,7 @@
             </div>
         </div>
     </div>
-    <footer>
+    <footer *ngIf="!isInvitado">
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"
                     (click)="saveEvento()">

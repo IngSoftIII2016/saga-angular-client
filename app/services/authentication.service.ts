@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, BehaviorSubject} from 'rxjs';
 import 'rxjs/add/operator/map'
 import {Router} from "@angular/router";
 import {JwtHelper} from "angular2-jwt";
@@ -8,13 +8,17 @@ import {Usuario} from "../entities/usuario";
 
 @Injectable()
 export class AuthenticationService {
+
     jwtHelper: JwtHelper = new JwtHelper();
+
     public usuario: Observable<Usuario>;
     public isInvitado: Observable<boolean>;
-    private subjectUsuario = new Subject<Usuario>();
+    private subjectUsuario = new BehaviorSubject<Usuario>(null);
+
+
     constructor(private http: Http) {
         this.usuario = this.subjectUsuario.asObservable();
-        this.isInvitado = this.subjectUsuario.asObservable().map(user => user.isInvitado());
+        this.isInvitado = this.usuario.map(user => user ? user.isInvitado() : true);
         this.getUsuario().subscribe(res => res);
     }
 
