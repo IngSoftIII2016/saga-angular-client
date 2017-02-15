@@ -144,9 +144,7 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
 
     private initSchedule(resources: any[], element: any) {
 
-        //this.schedule = jQuery(element);
         this.initialized = false;
-        //console.log('initSchedule'); console.log(this.schedule);
         this.schedule.fullCalendar( 'destroy' );
         this.options = {
             theme: true,
@@ -283,7 +281,6 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
                 this.options[prop] = this.locale[prop];
             }
         }
-
         this.schedule.fullCalendar(this.options);
         this.initialized = true;
     }
@@ -314,7 +311,6 @@ export class TimelineDaySchedule implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     gotoDate(date: any) {
-        console.log('TimelineDaySchedule.gotoDate: ' + date);
         this.schedule.fullCalendar('gotoDate', date);
     }
 
