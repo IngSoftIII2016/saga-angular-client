@@ -7,7 +7,7 @@ import {RolService} from "../../services/rol.service";
 import {Rol} from "../../entities/rol";
 import {AuthenticationService} from "../../services/authentication.service";
 
-import { Http, Response } from '@angular/http';
+import {Http, Response} from '@angular/http';
 
 import {CRUD} from "../../commons/crud";
 import {MessagesService} from "../../services/messages.service";
@@ -18,16 +18,16 @@ import {MessagesService} from "../../services/messages.service";
     selector: 'usuario',
     providers: [UsuarioStore, RolService, AuthenticationService, ConfirmationService]
 })
-export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore>{
+export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore> {
 
     roles: SelectItem[] = [];
 
-      constructor(private usuarioStore: UsuarioStore,
-                  messagesService: MessagesService,
-                  private confirmationService : ConfirmationService,
-                  private rolService : RolService,
-                  private authenticationService: AuthenticationService) {
-      super(usuarioStore, messagesService, confirmationService);
+    constructor(private usuarioStore: UsuarioStore,
+                messagesService: MessagesService,
+                private confirmationService: ConfirmationService,
+                private rolService: RolService,
+                private authenticationService: AuthenticationService) {
+        super(usuarioStore, messagesService, confirmationService);
     }
 
     ngOnInit() {
@@ -43,7 +43,7 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
 
     protected getDefaultNewEntity(): Usuario {
         return new Usuario({
-            rol: this.roles[0].value as Rol
+            rol: new Rol(this.roles[0].value)
         });
     }
 
@@ -54,15 +54,16 @@ export class UsuarioComponent extends CRUD<Usuario, UsuarioService, UsuarioStore
     protected getEntityReferencedLabel(entity): string {
         return 'el usuario ' + entity.nombre + ' ' + entity.apellido;
     }
+
     protected getEntityName(entity): string {
-        return ' el usuario ' ;
+        return ' el usuario ';
     }
 
     protected getSearchFields(): string[] {
-        return ['nombre_usuario' , 'nombre', 'apellido', 'email']
+        return ['nombre_usuario', 'nombre', 'apellido', 'email']
     }
 
-    protected resetPass(){
+    protected resetPass() {
         this.confirmationService.confirm({
             message: 'Estas seguro que desea resetear el password de ' + this.entity.email + '?',
             header: 'Confirmar ',

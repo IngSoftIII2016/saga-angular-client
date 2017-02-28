@@ -295,12 +295,11 @@ export class GrillaComponent implements OnInit {
     addEvento() {
         this.eventoSelected = new Evento();
         this.eventoSelected.aula = this.aulasOptions[0].value;
-        this.fechaSelected = new Date();
+        this.fechaSelected = new Date(this.fechaCalendar.getTime());
         this.inicioSelected = new Date();
         this.finSelected = moment(this.inicioSelected).add(1, 'h').toDate();
         this.displayEventoDialog = true;
     }
-
 
     cancel(): void {
         this.displayAulaDialog = false;

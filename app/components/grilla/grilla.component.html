@@ -85,7 +85,8 @@
                             id="clase-hora_fin" readonlyInput="readonlyInput"></p-calendar>
             </div>
         </div>
-        <div class="ui-grid-row" *ngIf="esHoy && !isInvitado">  <!--  -->
+        <!--
+        <div class="ui-grid-row" *ngIf="esHoy && !isInvitado">
             <div class="ui-grid-col-4"><label>Asistencia Docente</label></div>
             <div *ngIf="!llegadaSelected" class="ui-grid-col-8">
                 <div class="ui-grid-col-10">
@@ -112,8 +113,9 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
+
     <footer *ngIf="!isInvitado">
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" class="guardar" pButton icon="fa-check" label="Guardar"

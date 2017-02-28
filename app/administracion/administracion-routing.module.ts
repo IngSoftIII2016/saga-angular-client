@@ -43,10 +43,14 @@ const adminRoutes: Routes = [
         component: AdministracionComponent,
         canActivate: [AuthGuard],
         children: [
+/*
             {
+
                 path: 'presentismo',
                 component: PresentismoComponent
-            }, {
+            },
+            */
+            {
                 path: 'accion-rol',
                 component: AccionRolComponent
             }, {

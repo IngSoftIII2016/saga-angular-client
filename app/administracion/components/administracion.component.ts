@@ -59,10 +59,10 @@ export class AdministracionComponent {
             let menuRecursos = [];
             if(!usuario.isInvitado()) {
                 menuRecursos = getUnique(usuario.rol.acciones.map(accion => accion.recurso));
-                if(usuario.rol.id == 3) {
-                    menuRecursos.unshift('Presentismo');
+                //if(usuario.rol.id == 3) {
+                //    menuRecursos.unshift('Presentismo');
                     menuRecursos.unshift('Grilla');
-                }
+
             } else {
                 menuRecursos.unshift('Grilla');
             }

@@ -17,7 +17,7 @@
             selectionMode="single"
             [globalFilter]="gb"
             (onRowSelect)="onRowSelect($event)"
-            [rows]="10" [responsive]="true">>
+            [rows]="10" [responsive]="true">
         <header><h2>Usuarios</h2></header>
         <p-column
                 field="email"
@@ -81,6 +81,7 @@
                 </div>
                 <div class="ui-grid-col-8">
                     <p-dropdown id="rol" [options]="roles"
+                                [filter]="true"
                                 [(ngModel)]="entity.rol"
                                 [style]="{width : '100%' }">
                     </p-dropdown>

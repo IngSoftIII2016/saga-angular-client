@@ -10,8 +10,9 @@ export class Usuario implements Entity {
     estado: number = 1;
     rol: Rol = new Rol();
 
-    constructor(value : Object = {}) {
+    constructor(value : any = {}) {
         Object.assign(this, value);
+        this.rol = value.rol ? new Rol(value.rol) : null;
     }
 
     isInvitado(): boolean {

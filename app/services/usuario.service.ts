@@ -30,7 +30,7 @@ export class UsuarioService extends GenericService<Usuario> {
     public change_password(email, oldpass , newpass): Observable<boolean> {
         let reqOptions = this.getBaseRequestOptions();
         reqOptions.method = RequestMethod.Post;
-        reqOptions.url = 'http://localhost/saga/api/AuthEndpoint/change_pass';
+        reqOptions.url = this.baseUrl + 'AuthEndpoint/change_pass';
         reqOptions.body = JSON.stringify({'data':{ 'email': email,
             'oldpassword' : oldpass, 'newpassword' : newpass}});
         let req = new Request(reqOptions)

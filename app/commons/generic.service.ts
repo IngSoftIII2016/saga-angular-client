@@ -3,9 +3,8 @@ import {
     RequestOptions, RequestMethod, Request, BaseRequestOptions, RequestOptionsArgs, Http,
     URLSearchParams, Response
 } from "@angular/http";
-import {Inject, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {Entity} from "./entity";
-import {Router} from "@angular/router";
 import {AuthenticationService} from "../services/authentication.service";
 
 

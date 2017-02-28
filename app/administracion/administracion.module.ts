@@ -65,7 +65,7 @@ import {TimelineDaySchedule} from "../components/grilla/timeline-day-schedule.co
 import {AdministracionComponent} from "./components/administracion.component";
 import {AdministracionRoutingModule} from "./administracion-routing.module";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
-import {PresentismoComponent} from "../components/presentismo/presentismo.component";
+//import {PresentismoComponent} from "../components/presentismo/presentismo.component";
 import {SliderModule} from "primeng/components/slider/slider";
 import {ChartModule} from "primeng/components/chart/chart";
 import {MessagesService} from "../services/messages.service";
@@ -128,7 +128,7 @@ import {ToggleButtonModule} from "primeng/components/togglebutton/togglebutton";
         TimelineDaySchedule,
         UsuarioComponent,
         AccionRolComponent,
-        PresentismoComponent,
+ //       PresentismoComponent,
         PerfilComponent,
         ComisionDetalleComponent,
         ComisionMaestroComponent,
