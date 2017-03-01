@@ -24,7 +24,7 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
 
     roles: SelectItem[] = [];
 
-    rol : Rol;
+    rol: Rol;
 
     acciones: SelectItem[] = [];
 
@@ -43,14 +43,15 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
         let self = this;
         this.rolService.getAll().subscribe(roles => {
             self.roles = roles.map(rol => {
-                return { label: rol.nombre, value: rol}
+                return {label: rol.nombre, value: rol}
             });
             self.rol = roles[0];
             self.filter('rol.id', self.rol.id);
         });
         this.accionService.getAll().subscribe(acciones => {
             self.acciones = acciones.map(accion => {
-                    return { label: self.metodoTabla[accion.metodo] + ' de ' + accion.recurso, value: accion }
+                    if (accion.id == 2) return {label: "Cambio de contraseña", value: accion}
+                    else return {label: self.metodoTabla[accion.metodo] + ' de ' + accion.recurso, value: accion}
                 }
             )
         });
@@ -80,10 +81,8 @@ export class AccionRolComponent extends CRUD<AccionRol, AccionRolService, Accion
     }
 
     protected getEntityName(entity): string {
-        return ' el permiso ' ;
+        return ' el permiso ';
     }
-
-
 
 
 }

@@ -19,9 +19,9 @@
     "@angular/core": "~2.4.8",
     "@angular/forms": "~2.4.8",
     "@angular/http": "~2.4.8",
+    "@angular/material": "^2.0.0-beta.2",
     "@angular/platform-browser": "~2.4.8",
     "@angular/platform-browser-dynamic": "~2.4.8",
-    "@angular/material": "^2.0.0-beta.2",
     "@angular/router": "~3.4.8",
     "@angular/upgrade": "^2.4.3",
     "@angular2-material/button": "^2.0.0-alpha.8-2",
@@ -40,7 +40,7 @@
     "@types/hammerjs": "^2.0.34",
     "typescript": "~2.1.5",
     "typings": "~2.1.0",
-    "webpack": "~1.14.0",
-    "webpack-dev-server": "~1.16.2"
+    "webpack": "~2.2.1",
+    "webpack-dev-server": "~2.4.1"
   }
 }

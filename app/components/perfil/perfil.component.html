@@ -1,9 +1,4 @@
 <div class="ContentSideSections">
-    <p-growl [value]="msgs" life=3000></p-growl>
-</div>
-
-<div class="ContentSideSections">
-    <p-growl [value]="msgs" life=3000></p-growl>
     <p-confirmDialog width="425" #cd>
         <footer>
             <button type="button" pButton class="no" (click)="cd.accept()" icon="fa fa-close" label="No"></button>
@@ -12,7 +7,8 @@
     </p-confirmDialog>
 </div>
 
-<p-dialog header="Perfil" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+<p-dialog #dialog header="Perfil" [(visible)]="_displayDialog" (onAfterHide)="visibleChange.emit(false)"
+          [responsive]="true" showEffect="fade" [modal]="true">
 
     <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
 
@@ -39,11 +35,7 @@
                        required/>
             </div>
         </div>
-
-
     </div>
-
-
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" class="guardar" (click)="change()" pButton icon="fa-check"

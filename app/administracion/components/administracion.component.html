@@ -7,7 +7,7 @@
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
         <!-- Top Bar -->
         <div>
-            <perfil [usuario]="usuario" [displayDialog]="display_perfil"></perfil>
+            <perfil [usuario]="usuario" [(visible)]="display_perfil"></perfil>
             <div class="topbar clearfix" [routerLink]="['/']" style="cursor: pointer">
                 <div class="topbar-left">
                     <a  id="logo"></a>

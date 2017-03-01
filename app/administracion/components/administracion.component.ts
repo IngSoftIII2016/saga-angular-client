@@ -102,7 +102,7 @@ export class AdministracionComponent {
     }
 
     showPerfilDialog() : void {
-        this.display_perfil = false;
+        // this.display_perfil = false;
         this.display_perfil = true;
     }
 }
