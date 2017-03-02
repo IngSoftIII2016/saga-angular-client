@@ -14,6 +14,8 @@ import {Subject} from "rxjs";
 import {QueryOptions} from "../../commons/generic.service";
 import {Comision} from "../../entities/comision";
 import {MessagesService} from "../../services/messages.service";
+import {DocenteService} from "../../services/docente.service";
+import {Docente} from "../../entities/docente";
 
 declare var moment: any;
 
@@ -22,7 +24,7 @@ declare var moment: any;
     templateUrl: 'app/components/horario/horario.component.html',
     styleUrls: ['app/resources/demo/css/dialog.css'],
     selector: 'horarios',
-    providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService]
+    providers: [HorarioStore, ComisionService, AulaService, PeriodoService, ConfirmationService, DocenteService]
 })
 export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore> implements OnInit{
 
@@ -45,9 +47,14 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
 
     comisiones: SelectItem[] = [];
 
+    docentes : SelectItem[] = [];
+
+
     diasFilter: SelectItem[] = [];
 
     aulasFilter: SelectItem[] = [];
+
+    docentesFilter : SelectItem[] = [];
 
     comisionesFilter: SelectItem[] = [];
 
@@ -56,6 +63,8 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     diaFilter: String;
 
     aulaFilter: Aula;
+
+    docenteFilter : Docente;
 
     comisionFilter: Comision;
 
@@ -69,6 +78,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
                 private aulaService: AulaService,
                 private periodoService: PeriodoService,
                 private comisionService: ComisionService,
+                private docenteService: DocenteService,
                 messagesService: MessagesService,
                 private confirmationService: ConfirmationService) {
         super(horarioStore, messagesService, confirmationService);
@@ -122,6 +132,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
         if(this.comision)
             this.filterComision(this.comision.id);
 
+
         var self = this;
         if(!this.comision == null) {
             this.entity.comision = this.comision;
@@ -134,6 +145,16 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
             });
             self.aulasFilter.unshift({label: 'Todas', value: null});
             self.aulaFilter = self.aulasFilter[0].value;
+        });
+
+        this.docenteService.getAll().subscribe(docentes => {
+            docentes.forEach(docente => {
+                let label = docente.nombre + ' - ' + docente.apellido;
+                self.docentes.push({label: label, value: docente});
+                self.docentesFilter.push({label: label, value: docente.id});
+            });
+            self.docentesFilter.unshift({label: 'Todas', value: null});
+            self.docenteFilter = self.docentesFilter[0].value;
         });
 
         this.comisionService.getAll().subscribe(comisiones => {
@@ -186,6 +207,7 @@ export class HorarioComponent extends CRUD<Horario, HorarioService, HorarioStore
     filterComision(comisionID:number){
         this.filter('comision.id', comisionID);
     }
+
 
 
 }
