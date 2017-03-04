@@ -1,18 +1,11 @@
-import {ComisionComponent} from "./comision.component";
 import {Component, OnInit} from "@angular/core";
 import {Comision} from "../../entities/comision";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import {ComisionStore} from "../../services/comision.store";
-import {ComisionService} from "../../services/comision.service";
-import {QueryOptions} from "../../commons/generic.service";
 import {SelectItem, ConfirmationService, Message} from "primeng/components/common/api";
-import {Asignatura} from "../../entities/asignatura";
-import {Periodo} from "../../entities/periodo";
-import {Docente} from "../../entities/docente";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {PeriodoService} from "../../services/periodo.service";
 import {DocenteService} from "../../services/docente.service";
-import {CRUD} from "../../commons/crud";
 import {MessagesService} from "../../services/messages.service";
 
 /**

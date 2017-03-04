@@ -22,7 +22,7 @@ import {
     SedeComponent,
     UsuarioComponent,
     AccionRolComponent,
-    PresentismoComponent,
+   // PresentismoComponent,
     ParametrosComponent
 } from "../components";
 import {AuthGuard} from "../guards/auth.guard";
@@ -121,8 +121,6 @@ const adminRoutes: Routes = [
                 path: 'recursos',
                 component: RecursoComponent
             }
-
-
         ]
     },
 
