@@ -390,7 +390,7 @@ export class GrillaComponent implements OnInit {
             start: moment(clase.fecha + ' ' + clase.hora_inicio),
             end: moment(clase.fecha + ' ' + clase.hora_fin),
             title: clase.horario.comision.asignatura.nombre + ' ' + clase.horario.comision.nombre,
-            color: '#60bd31'
+            color: '#00ce21'
         }
     }
 

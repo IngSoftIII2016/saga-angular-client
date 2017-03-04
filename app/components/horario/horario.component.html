@@ -49,6 +49,19 @@
                         </p-dropdown>
                     </div>
             </div>
+            <br>
+            <div class="ui-grid-row" *ngIf="filtersEnabled && isFilter">
+                <div class="ui-grid-col-3"><label for="comisionFiltro">Docente</label></div>
+
+                <div class="ui-grid-col-3">
+                    <p-dropdown class="ui-grid-col-11"  id="docenteFiltro" [options]="docentesFilter"
+                                [(ngModel)]="docenteFilter"
+                                (onChange)="filter('comision.docente.id', $event.value)"
+                                [filter]="true" [style]="{width : '100%' }">
+                    </p-dropdown>
+            </div>
+
+            </div>
         </header>
         <p-column field="dia" header="Dia" sortable="custom" (sortFunction)="sort($event)">
             <template let-h="rowData" pTemplate type="body">

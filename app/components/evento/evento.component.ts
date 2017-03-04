@@ -23,6 +23,8 @@ export class EventoComponent extends CRUD<Evento, EventoService, EventoStore>{
 
     fecha: Date;
 
+    fecha_min: Date= new Date;
+
     hora_inicio: Date;
 
     hora_fin: Date;
