@@ -12,7 +12,21 @@
     </div>
     <p-dataTable [value]="store.items | async" [globalFilter]="gb" selectionMode="single"
                  (onRowSelect)="onRowSelect($event)" [responsive]="true">
-        <header><h2>Aulas</h2></header>
+        <header><h2>Aulas</h2>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2 saga-filtro"><label for="edificio">Edificio</label></div>
+
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+                <p-dropdown class="ui-grid-col-11" id="carreraFiltro" (onChange)="filtrarEdificio()"
+                            [options]="edificios"
+                            [(ngModel)]="edificio"
+                            [filter]="true" [style]="{width : '100%' }">
+                </p-dropdown>
+            </div>
+        </div>
+        </div>
+        </header>
         <p-column field="nombre" header="Nombre" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="capacidad" header="Capacidad" sortable="custom" (sortFunction)="sort($event)"></p-column>
         <p-column field="ubicacion" header="Ubicacion" sortable="custom" (sortFunction)="sort($event)"></p-column>

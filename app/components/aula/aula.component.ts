@@ -21,7 +21,7 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
 
 
     edificios: SelectItem[] = [];
-
+    edificio: Edificio;
     constructor(private aulaStore: AulaStore,
                 private edificioService: EdificioService,
                 messagesService: MessagesService,
@@ -31,13 +31,17 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
 
     ngOnInit() {
         super.ngOnInit();
-        var sel = this;
+        var self = this;
             this.edificioService.getAll().subscribe(edificios => {
-                sel.edificios= edificios.map(edificio => {
+                self.edificios= edificios.map(edificio => {
                         return { label: edificio.nombre + ', ' + edificio.localidad.nombre, value: edificio}
                     }
                 )
+                self.edificio = edificios[0];
+                self.filtrarEdificio();
             });
+
+
     }
 
     protected getDefaultNewEntity(): Aula {
@@ -59,6 +63,10 @@ export class AulaComponent extends CRUD<Aula, AulaService, AulaStore> {
 
     protected getSearchFields(): string[] {
         return ['nombre' , 'capacidad', 'edificio.nombre', 'edificio.localidad.nombre']
+    }
+
+    public filtrarEdificio() : void {
+        this.filter('edificio.id', this.edificio.id);
     }
 
 }
